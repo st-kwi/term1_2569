@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คลังหนังสือเรียนดิจิทัล (Digital Textbook Library) — ภาคเรียนที่ 1/2569</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Prompt:wght@400;500;600;700&family=Sarabun:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --book1: #0284c7;
+      --book1-dark: #0f172a;
+      --book2: #059669;
+      --book2-dark: #064e3b;
+      --book3: #dc2626;
+      --book3-dark: #450a0a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Sarabun', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0284c7 100%);
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+      border-bottom: 4px solid #38bdf8;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.28);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 2.35rem;
+      margin: 0 0 12px;
+      font-weight: 700;
+    }
+    header p {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #e2e8f0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: -36px auto 64px;
+      padding: 0 24px;
+    }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 28px;
+    }
+    .book-card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    }
+    .book-cover {
+      padding: 32px 28px;
+      color: #fff;
+      position: relative;
+    }
+    .cover-1 { background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%); }
+    .cover-2 { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+    .cover-3 { background: linear-gradient(135deg, #450a0a 0%, #dc2626 100%); }
+    .course-code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.18);
+      padding: 4px 12px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .book-cover h2 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 1.45rem;
+      margin: 0 0 6px;
+      line-height: 1.35;
+    }
+    .book-cover .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 14px;
+    }
+    .instructor {
+      font-size: 0.88rem;
+      opacity: 0.85;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 12px;
+    }
+    .book-body {
+      padding: 24px 28px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .book-desc {
+      font-size: 0.98rem;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .topic-list {
+      margin: 0 0 24px;
+      padding-left: 20px;
+      font-size: 0.93rem;
+      color: var(--text);
+      flex: 1;
+    }
+    .topic-list li {
+      margin-bottom: 6px;
+    }
+    .format-section-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: #f8fafc;
+    }
+    .btn:hover {
+      background: #e2e8f0;
+    }
+    .btn-primary-1 { background: #0284c7; color: #fff; border-color: #0284c7; grid-column: span 2; }
+    .btn-primary-1:hover { background: #0369a1; }
+    .btn-primary-2 { background: #059669; color: #fff; border-color: #059669; grid-column: span 2; }
+    .btn-primary-2:hover { background: #047857; }
+    .btn-primary-3 { background: #dc2626; color: #fff; border-color: #dc2626; grid-column: span 2; }
+    .btn-primary-3:hover { background: #b91c1c; }
+    footer {
+      text-align: center;
+      padding: 28px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge">📚 COMPLETE SELF-STUDY TEXTBOOK SERIES • ภาคเรียนที่ 1 ปีการศึกษา 2569</div>
+    <h1>คลังหนังสือเรียนดิจิทัล (Digital Textbook Library)</h1>
+    <p>ตำราเรียนฉบับสมบูรณ์ทั้ง 3 รายวิชา อธิบายตั้งแต่พื้นฐานที่มาที่ไป (First Principles), สถาปัตยกรรม, การคำนวณ, กรณีศึกษาจริง ไปจนถึงเฉลยข้อสอบอย่างละเอียด รองรับการอ่านแบบ Interactive eBook, PDF, EPUB และ Markdown</p>
+  </header>
+
+  <main class="container">
+    <div class="books-grid">
+      <!-- Book 1: Cloud Security -->
+      <article class="book-card">
+        <div class="book-cover cover-1">
+          <span class="course-code">BOOK 01 • รหัสวิชา 070315221 (S.3)</span>
+          <h2>ความมั่นคงปลอดภัยของคลาวด์ (Cloud Security)</h2>
+          <div class="subtitle">From First Principles to Cloud-Native Defense, IAM, Secrets Management &amp; DevSecOps</div>
+        </div>
+        <div class="book-body">
+          <p class="book-desc">ปูพื้นฐานตั้งแต่ประวัติศาสตร์ยุค On-Premise สู่ Cloud-Native, Shared Responsibility Model, IAM/ABAC, KMS Envelope Encryption, VPC/WAF, DevSecOps, Terraform State Security, Auto Scaling/Load Balancing, <strong>Session 11: Zero Trust Architecture (ZTA, 8 Pillars, 5-Step DAAS/Kipling, AWS ZTAG-I &amp; Multi-Cloud Zero Trust)</strong> และเฉลยแนวข้อสอบปรนัย 41 ข้อครบทุกตัวเลือก</p>
+          <ul class="topic-list">
+            <li><strong>บทที่ 1–3:</strong> Cloud Foundations (NIST 5 Pillars), Shared Responsibility, Cloud Architecture &amp; VPC Networking (SG vs NACL)</li>
+            <li><strong>บทที่ 4–6:</strong> NIST CSF 2.0 (6 Functions), IAM &amp; JSON Policies, Threat/Vulnerability &amp; Attack Vector vs Attack Accelerator</li>
+            <li><strong>บทที่ 7–9:</strong> KMS Envelope Encryption, Secrets Manager 5 Use Cases, AWS Well-Architected 3-Tier &amp; Secure IaC (Terraform <code>.tfstate</code>)</li>
+            <li><strong>บทที่ 10–11:</strong> Auto Scaling &amp; Load Balancing (ALB/NLB) และ <strong>Zero Trust Architecture (8 Pillars, 5-Step DAAS, AWS ZTAG-I, Multi-Cloud ZTA)</strong></li>
+            <li><strong>บทที่ 12:</strong> คลังแนวข้อสอบปรนัย 41 ข้อ (ครบทุก Session 1–11) พร้อมเฉลย Best Answer วิเคราะห์ตัวลวงเจาะลึก</li>
+          </ul>
+          <div class="format-section-title">เลือกรูปแบบหนังสือ (Available Formats)</div>
+          <div class="actions-grid">
+            <a class="btn btn-primary-1" href="01_Cloud_Security_Textbook.html" target="_blank">📖 เปิดอ่าน Interactive HTML eBook</a>
+            <a class="btn" href="01_Cloud_Security_Textbook.pdf" target="_blank">📄 ดาวน์โหลด PDF</a>
+            <a class="btn" href="01_Cloud_Security_Textbook.epub" download>📱 ดาวน์โหลด EPUB</a>
+            <a class="btn" href="01_Cloud_Security_Textbook.md" target="_blank" style="grid-column: span 2;">📝 เปิดไฟล์ต้นฉบับ Markdown (.md)</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Book 2: Network Technology -->
+      <article class="book-card">
+        <div class="book-cover cover-2">
+          <span class="course-code">BOOK 02 • รหัสวิชา 070315108 (S.3)</span>
+          <h2>เทคโนโลยีเครือข่ายดิจิทัล (Digital Network Technology)</h2>
+          <div class="subtitle">Architecture, Protocols, Mathematical Foundations, Wireless/5G &amp; Complete Exam Solutions</div>
+        </div>
+        <div class="book-body">
+          <p class="book-desc">อธิบายเจาะลึกครบทั้ง 11 สัปดาห์ตามลำดับชั้นโปรโตคอล ตั้งแต่ Physical/Data Link, 4B/5B &amp; NRZI, 1D-CNN Edge Jamming, IPv4/IPv6, Dijkstra vs Bellman-Ford, TCP Congestion/RED, DNS/DASH/MQTT/ECH, 802.11/5G/Mobile IP พร้อมเฉลย Wireshark Lab 26 ข้อ และข้อสอบ Final 2026 ครบ 9 ข้อใหญ่</p>
+          <ul class="topic-list">
+            <li><strong>บทที่ 1–3:</strong> OSI 7 Layers, Delay Equations, 4B/5B + NRZI, 1D-CNN Jamming, CRC, ARQ, CSMA/CD 512-bit Proof</li>
+            <li><strong>บทที่ 4–5:</strong> IPv4 Fragmentation, Subnetting, NAT, DHCP, ทำไมข้าม IPv5, IPv6, Dijkstra, Bellman-Ford, OSPF, BGP, SDN</li>
+            <li><strong>บทที่ 6–7:</strong> TCP 3-Way Handshake, RTT/RTO Math, Flow vs Congestion Control, DECbit &amp; RED Graph Calculation</li>
+            <li><strong>บทที่ 8–9:</strong> DNS, SMTP/POP3, HTTP/1.1–HTTP/3 (QUIC), DASH Manifest, MQTT vs CoAP, ECH &amp; GREASE</li>
+            <li><strong>บทที่ 10–12:</strong> Wi-Fi RTS/CTS, SIFS vs DIFS, 1G–5G, Mobile IP, เฉลย Wireshark Lab 26 ข้อ, ข้อสอบ Final 9 ข้อ + Cheat Sheet</li>
+          </ul>
+          <div class="format-section-title">เลือกรูปแบบหนังสือ (Available Formats)</div>
+          <div class="actions-grid">
+            <a class="btn btn-primary-2" href="02_Network_Technology_Textbook.html" target="_blank">📖 เปิดอ่าน Interactive HTML eBook</a>
+            <a class="btn" href="02_Network_Technology_Textbook.pdf" target="_blank">📄 ดาวน์โหลด PDF</a>
+            <a class="btn" href="02_Network_Technology_Textbook.epub" download>📱 ดาวน์โหลด EPUB</a>
+            <a class="btn" href="02_Network_Technology_Textbook.md" target="_blank" style="grid-column: span 2;">📝 เปิดไฟล์ต้นฉบับ Markdown (.md)</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Book 3: Information Security -->
+      <article class="book-card">
+        <div class="book-cover cover-3">
+          <span class="course-code">BOOK 03 • รหัสวิชา 070315109 (S.3)</span>
+          <h2>ความมั่นคงปลอดภัยเครือข่ายดิจิทัลและสารสนเทศ</h2>
+          <div class="subtitle">CompTIA Security+ (SY0-701), Defensive Architecture, Incident Response, GRC &amp; Exam Best Answers</div>
+        </div>
+        <div class="book-body">
+          <p class="book-desc">ครอบคลุมเนื้อหา CompTIA Security+ ทั้ง 21 บทเรียนผสานกับสไลด์บรรยายพิเศษครบทุกหัวข้อ ตั้งแต่ CIA Triad, Threat Actors, Recon CLI, Cryptography/Salt/PKI, IAM/GPO, Cisco SAFE/DMZ, SIEM/SOAR, DDoS/RTBH, TPM, MDM, SQLi/XSS, PDPA/NIST 800-88, IR/Forensics, SLE/ALE, BIA/RPO/RTO พร้อมเฉลย Pre-Final ครบ 18 ข้อ</p>
+          <ul class="topic-list">
+            <li><strong>บทที่ 1–3:</strong> CIA Triad, AAA, Kill Chain, MITRE ATT&amp;CK, Malware, Recon CLI, Salt/Pepper, PKI &amp; Hybrid Encryption</li>
+            <li><strong>บทที่ 4–5:</strong> IAM, GPO, Disable vs Lockout, Impossible Travel, Cisco SAFE, VLAN/DMZ, NIDS/NIPS, SIEM/SOAR &amp; DDoS RTBH</li>
+            <li><strong>บทที่ 6–7:</strong> TPM/Secure Boot, MDM (BYOD/COBO/COPE/CYOD), WPA3, Burp Suite SQLi PoC, XSS/CSRF, SAST/DAST</li>
+            <li><strong>บทที่ 8–10:</strong> PDPA, NIST SP 800-88 Sanitization, Incident Response, Nexus One Case, Order of Volatility, SLE/ALE, BIA/RPO/RTO</li>
+            <li><strong>บทที่ 11–12:</strong> Stuxnet &amp; SolarWinds Supply Chain, Change Mgmt, Physical Security, AI Governance &amp; เฉลยอัตนัย Pre-Final 18 ข้อ</li>
+          </ul>
+          <div class="format-section-title">เลือกรูปแบบหนังสือ (Available Formats)</div>
+          <div class="actions-grid">
+            <a class="btn btn-primary-3" href="03_Information_Security_Textbook.html" target="_blank">📖 เปิดอ่าน Interactive HTML eBook</a>
+            <a class="btn" href="03_Information_Security_Textbook.pdf" target="_blank">📄 ดาวน์โหลด PDF</a>
+            <a class="btn" href="03_Information_Security_Textbook.epub" download>📱 ดาวน์โหลด EPUB</a>
+            <a class="btn" href="03_Information_Security_Textbook.md" target="_blank" style="grid-column: span 2;">📝 เปิดไฟล์ต้นฉบับ Markdown (.md)</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    คลังหนังสือเรียนดิจิทัล (Digital Textbook Series) • สร้างจากเอกสารประกอบการสอนและแนวข้อสอบในโฟลเดอร์ <code>final/</code> ทั้งหมด 98 ไฟล์ • รองรับการอ่านแบบ Offline 100%
+  </footer>
+</body>
+</html>

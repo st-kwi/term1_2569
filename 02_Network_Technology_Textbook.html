@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>เทคโนโลยีเครือข่ายดิจิทัล (Digital Network Technology) — Interactive Textbook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        
+    :root {
+        --primary: #0f766e;
+        --secondary: #115e59;
+        --accent-bg: #f0fdfa;
+        --text-main: #1e293b;
+        --text-muted: #475569;
+        --bg-body: #f8fafc;
+        --bg-paper: #ffffff;
+        --border-color: #e2e8f0;
+        --code-bg: #0f172a;
+        --code-text: #f8fafc;
+    }
+    [data-theme="dark"] {
+        --text-main: #e2e8f0;
+        --text-muted: #94a3b8;
+        --bg-body: #0b0f19;
+        --bg-paper: #111827;
+        --border-color: #1e293b;
+        --accent-bg: #1e293b;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Sarabun', 'Noto Sans Thai', 'Segoe UI', Tahoma, sans-serif;
+        color: var(--text-main);
+        background-color: var(--bg-body);
+        line-height: 1.78;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+        font-family: 'Prompt', 'Sarabun', 'Noto Sans Thai', 'Segoe UI', sans-serif;
+        line-height: 1.35;
+        color: var(--text-main);
+        margin-top: 1.6em;
+        margin-bottom: 0.65em;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 1.05em;
+        text-align: justify;
+    }
+    .sec-title {
+        font-size: 1.45rem;
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 0.35rem;
+        margin-top: 2rem;
+    }
+    .subsec-title {
+        font-size: 1.2rem;
+        color: var(--secondary);
+        border-left: 4px solid var(--primary);
+        padding-left: 0.65rem;
+        margin-top: 1.5rem;
+    }
+    .subsubsec-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-top: 1.2rem;
+    }
+    .inline-code {
+        font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+        background: rgba(15, 23, 42, 0.08);
+        color: var(--primary);
+        padding: 0.12rem 0.38rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: 600;
+    }
+    [data-theme="dark"] .inline-code {
+        background: rgba(255, 255, 255, 0.12);
+        color: #93c5fd;
+    }
+    .content-list {
+        margin: 0.6rem 0 1.2rem 0;
+        padding-left: 1.5rem;
+    }
+    .content-list li {
+        margin-bottom: 0.45rem;
+    }
+    /* Callout boxes */
+    .callout {
+        margin: 1.25rem 0;
+        border-radius: 8px;
+        border-left: 5px solid var(--primary);
+        background: var(--accent-bg);
+        padding: 1rem 1.25rem;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    .callout-title {
+        font-weight: 700;
+        font-size: 0.98rem;
+        margin-bottom: 0.45rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .callout-origin {
+        border-left-color: #0284c7;
+        background: #f0f9ff;
+    }
+    .callout-origin .callout-title { color: #0369a1; }
+    .callout-lecture {
+        border-left-color: #7c3aed;
+        background: #f5f3ff;
+    }
+    .callout-lecture .callout-title { color: #6d28d9; }
+    .callout-exam {
+        border-left-color: #d97706;
+        background: #fffbeb;
+    }
+    .callout-exam .callout-title { color: #b45309; }
+    .callout-bestanswer {
+        border-left-color: #059669;
+        background: #ecfdf5;
+    }
+    .callout-bestanswer .callout-title { color: #047857; }
+    .callout-warning {
+        border-left-color: #dc2626;
+        background: #fef2f2;
+    }
+    .callout-warning .callout-title { color: #b91c1c; }
+    [data-theme="dark"] .callout {
+        background: #1e293b;
+    }
+    .callout-body p:last-child {
+        margin-bottom: 0;
+    }
+    .callout-bullet {
+        margin: 0.25rem 0 0.25rem 0.5rem;
+    }
+    /* Diagrams & Code */
+    .diagram-box, .math-box, .code-container {
+        margin: 1.25rem 0;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    .diagram-header {
+        background: var(--primary);
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.45rem 0.9rem;
+    }
+    .diagram-pre {
+        margin: 0;
+        padding: 1rem;
+        background: #f8fafc;
+        color: #0f172a;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 0.84rem;
+        line-height: 1.45;
+        overflow-x: auto;
+        white-space: pre;
+    }
+    .math-header {
+        background: #0f766e;
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.45rem 0.9rem;
+    }
+    .math-pre {
+        margin: 0;
+        padding: 1rem;
+        background: #f0fdfa;
+        color: #134e4a;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 0.88rem;
+        line-height: 1.55;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    }
+    .code-header {
+        background: #1e293b;
+        color: #cbd5e1;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.4rem 0.9rem;
+    }
+    .code-block {
+        margin: 0;
+        padding: 0.95rem 1rem;
+        background: #0f172a;
+        color: #f8fafc;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    }
+    /* Tables */
+    .table-wrapper {
+        margin: 1.2rem 0;
+        overflow-x: auto;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+        background: var(--bg-paper);
+    }
+    .data-table th {
+        background: var(--primary);
+        color: #ffffff;
+        text-align: left;
+        padding: 0.65rem 0.85rem;
+        font-weight: 700;
+        border: 1px solid var(--primary);
+    }
+    .data-table td {
+        padding: 0.6rem 0.85rem;
+        border: 1px solid var(--border-color);
+        vertical-align: top;
+    }
+    .data-table tr:nth-child(even) td {
+        background: rgba(148, 163, 184, 0.07);
+    }
+    .chapter-card {
+        background: var(--bg-paper);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2.4rem 2.8rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .chapter-badge {
+        display: inline-block;
+        background: var(--accent-bg);
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 0.82rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 99px;
+        border: 1px solid var(--primary);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+    .chapter-main-title {
+        font-size: 1.85rem;
+        margin: 0.2rem 0 0.4rem 0;
+        color: var(--text-main);
+    }
+    .chapter-sub-title {
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .section-divider {
+        border: 0;
+        height: 1px;
+        background: var(--border-color);
+        margin: 1.8rem 0;
+    }
+    
+    /* =========================================================
+       CLOUDSEC2-STYLE FULL-WIDTH ARCHITECTURE & FLOW DIAGRAMS
+       ========================================================= */
+    .diagram-box {
+        width: 100%;
+        margin: 1.35rem 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1.5px solid #cbd5e1;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(11, 42, 91, 0.06);
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    [data-theme="dark"] .diagram-box {
+        background: #0f172a;
+        border-color: #334155;
+    }
+    .diagram-header {
+        background: linear-gradient(90deg, #0B2A5B 0%, var(--primary) 100%);
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 700;
+        padding: 0.55rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        letter-spacing: 0.2px;
+    }
+    .diagram-canvas {
+        width: 100%;
+        padding: 14px 16px;
+        background: #f8fafc;
+        color: #0f172a;
+        box-sizing: border-box;
+    }
+    [data-theme="dark"] .diagram-canvas {
+        background: #111827;
+        color: #f1f5f9;
+    }
+    .diagram-canvas svg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    /* Reusable Visual Primitives (cloudsec2 design system) */
+    .dg-banner {
+        width: 100%;
+        background: linear-gradient(135deg, #0B2A5B 0%, #1F6FEB 100%);
+        color: #ffffff;
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 6px rgba(11, 42, 91, 0.12);
+    }
+    .dg-banner.orange {
+        background: linear-gradient(135deg, #c2410c 0%, #f28c28 100%);
+    }
+    .dg-banner.teal {
+        background: linear-gradient(135deg, #064e3b 0%, #0f766e 100%);
+    }
+    .dg-banner.purple {
+        background: linear-gradient(135deg, #3730a3 0%, #6d28d9 100%);
+    }
+    .dg-banner .sub {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: #e2e8f0;
+        margin-top: 2px;
+    }
+    .dg-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
+    .dg-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
+    .dg-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+    .dg-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; }
+    .dg-card {
+        background: #ffffff;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    [data-theme="dark"] .dg-card {
+        background: #1e293b;
+        border-color: #334155;
+    }
+    .dg-card.blue { border-color: #1F6FEB; background: #EAF2FF; }
+    .dg-card.orange { border-color: #F28C28; background: #FFF4E8; }
+    .dg-card.green { border-color: #16A34A; background: #EAF7EE; }
+    .dg-card.purple { border-color: #7C3AED; background: #F5F3FF; }
+    .dg-card.red { border-color: #DC2626; background: #FDECEC; }
+    .dg-card.navy { border-color: #0B2A5B; background: #EEF1F8; }
+    .dg-card-title {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #0B2A5B;
+        margin-bottom: 5px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid rgba(11, 42, 91, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+    }
+    .dg-card.orange .dg-card-title { color: #9a3412; border-bottom-color: rgba(242, 140, 40, 0.25); }
+    .dg-card.green .dg-card-title { color: #166534; border-bottom-color: rgba(22, 163, 74, 0.25); }
+    .dg-card.purple .dg-card-title { color: #5b21b6; border-bottom-color: rgba(124, 58, 237, 0.25); }
+    .dg-card.red .dg-card-title { color: #991b1b; border-bottom-color: rgba(220, 38, 38, 0.25); }
+    .dg-card-body {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: #1e293b;
+    }
+    .dg-pill {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 99px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #ffffff;
+        background: #1F6FEB;
+        white-space: nowrap;
+    }
+    .dg-pill.orange { background: #F28C28; }
+    .dg-pill.green { background: #16A34A; }
+    .dg-pill.navy { background: #0B2A5B; }
+    .dg-pill.purple { background: #7C3AED; }
+    .dg-pill.red { background: #DC2626; }
+    /* Horizontal Chain (cloudsec2 .chain) */
+    .dg-chain {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 4px;
+        width: 100%;
+        margin: 6px 0;
+    }
+    .dg-chain-node {
+        flex: 1;
+        background: #ffffff;
+        border: 1.5px solid #93c5fd;
+        border-radius: 8px;
+        padding: 8px 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .dg-chain-node.orange { border-color: #F28C28; background: #FFF4E8; }
+    .dg-chain-node.blue { border-color: #1F6FEB; background: #EAF2FF; }
+    .dg-chain-node.green { border-color: #16A34A; background: #EAF7EE; }
+    .dg-chain-node.navy { border-color: #0B2A5B; background: #EEF1F8; }
+    .dg-chain-node.purple { border-color: #7C3AED; background: #F5F3FF; }
+    .dg-chain-node b {
+        display: block;
+        font-size: 0.86rem;
+        color: #0B2A5B;
+        margin-bottom: 3px;
+    }
+    .dg-chain-node span {
+        font-size: 0.78rem;
+        color: #334155;
+        line-height: 1.4;
+    }
+    .dg-chain-arrow {
+        flex: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 2px;
+        color: #1F6FEB;
+        font-weight: 700;
+        font-size: 0.75rem;
+    }
+    .dg-chain-arrow .arr {
+        font-size: 1.15rem;
+        line-height: 1;
+        color: #F28C28;
+    }
+    .dg-down-arrow {
+        text-align: center;
+        padding: 4px 0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #1F6FEB;
+    }
+    /* Matrix Table inside Diagram */
+    table.dg-matrix {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.83rem;
+        background: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    table.dg-matrix th {
+        background: #0B2A5B;
+        color: #ffffff;
+        padding: 7px 10px;
+        text-align: center;
+        font-weight: 700;
+        border: 1px solid #1e3a8a;
+    }
+    table.dg-matrix th:first-child {
+        text-align: left;
+    }
+    table.dg-matrix td {
+        padding: 6px 10px;
+        border: 1px solid #cbd5e1;
+        text-align: center;
+        vertical-align: middle;
+    }
+    table.dg-matrix td:first-child {
+        text-align: left;
+        font-weight: 600;
+        color: #0f172a;
+        background: #f8fafc;
+    }
+    table.dg-matrix td.csc {
+        background: #FFF4E8;
+        color: #9a3412;
+        font-weight: 700;
+    }
+    table.dg-matrix td.shared {
+        background: #F5F3FF;
+        color: #5b21b6;
+        font-weight: 700;
+    }
+    table.dg-matrix td.csp {
+        background: #EAF7EE;
+        color: #166534;
+        font-weight: 700;
+    }
+    /* Packet Header 32-bit Grid */
+    table.dg-packet {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        background: #ffffff;
+        text-align: center;
+    }
+    table.dg-packet th {
+        background: #0B2A5B;
+        color: #ffffff;
+        padding: 4px 6px;
+        font-size: 0.72rem;
+        border: 1px solid #334155;
+    }
+    table.dg-packet td {
+        padding: 7px 6px;
+        border: 1.5px solid #1F6FEB;
+        background: #EAF2FF;
+        font-weight: 700;
+        color: #0B2A5B;
+    }
+    table.dg-packet td.note {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+        color: #334155;
+        font-weight: 600;
+        text-align: left;
+        width: 34%;
+    }
+
+        .app-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            min-height: 100vh;
+        }
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: var(--bg-paper);
+            border-right: 1px solid var(--border-color);
+            padding: 1.25rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+        .book-brand {
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .book-course-pill {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.18rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 0.4rem;
+        }
+        .book-brand h2 {
+            font-size: 1.05rem;
+            margin: 0 0 0.25rem 0;
+        }
+        .book-brand p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+            text-align: left;
+        }
+        .toolbar {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .btn-tool {
+            flex: 1;
+            padding: 0.4rem 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-tool:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+        .toc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            overflow-y: auto;
+        }
+        .toc-item {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.65rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-main);
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+        }
+        .toc-item:hover {
+            background: var(--accent-bg);
+            border-left-color: var(--primary);
+        }
+        .toc-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+        .toc-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .main-reader {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 2.5rem 2.2rem 5rem 2.2rem;
+            width: 100%;
+        }
+        .hero-cover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 2.6rem 2.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .hero-cover .course-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            padding: 0.28rem 0.85rem;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        .hero-cover h1 {
+            color: #ffffff;
+            font-size: 2.1rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .hero-cover .subtitle {
+            font-size: 1.15rem;
+            opacity: 0.92;
+            margin-bottom: 1.2rem;
+        }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.22);
+            padding-top: 1rem;
+        }
+        .download-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1.25rem;
+        }
+        .download-btn {
+            background: #ffffff;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        @media (max-width: 960px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="book-brand">
+                <span class="book-course-pill">070315108</span>
+                <h2>เทคโนโลยีเครือข่ายดิจิทัล (Digital Network Technology)</h2>
+            </div>
+            <div class="toolbar">
+                <a href="index.html" class="btn-tool">📚 ชั้นหนังสือ</a>
+                <button class="btn-tool" onclick="toggleTheme()">🌓 โหมดสี</button>
+                <button class="btn-tool" onclick="adjustFont(1)">A+</button>
+                <button class="btn-tool" onclick="adjustFont(-1)">A-</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="chapterSearch" placeholder="ค้นหาบทเรียน / หัวข้อ..." oninput="filterChapters(this.value)" />
+            </div>
+            <nav class="toc-list" id="tocList">
+                <a href="#ch-01" class="toc-item" data-target="ch-01"><span class="toc-badge">บทที่ 1 (Week 1)</span><span class="toc-text">สถาปัตยกรรมเครือข่าย OSI 7 Layers, ชั้นกายภาพ (Physical Layer), การเข้ารหัส 4B/5B และการตรวจจับสัญญาณรบกวน</span></a>
+<a href="#ch-02" class="toc-item" data-target="ch-02"><span class="toc-badge">บทที่ 2 (Weeks 1–2)</span><span class="toc-text">ชั้นเชื่อมโยงข้อมูล (Data Link Layer), การตรวจจับ/กู้คืนข้อผิดพลาด (CRC &amp; ARQ) และโปรโตคอล MAC</span></a>
+<a href="#ch-03" class="toc-item" data-target="ch-03"><span class="toc-badge">บทที่ 3 (Weeks 3–4)</span><span class="toc-text">ชั้นเครือข่าย (Network Layer), IPv4 Header, การแบ่ง Subnet/CIDR, NAT, DHCP, IPv6 และปฏิบัติการ Cisco IOS</span></a>
+<a href="#ch-04" class="toc-item" data-target="ch-04"><span class="toc-badge">บทที่ 4 (Weeks 5–6)</span><span class="toc-text">อัลกอริทึมการหาเส้นทาง (Routing Algorithms), โปรโตคอล OSPF/RIP/BGP และเครือข่าย SDN</span></a>
+<a href="#ch-05" class="toc-item" data-target="ch-05"><span class="toc-badge">บทที่ 5 (Week 8)</span><span class="toc-text">ชั้นขนส่งข้อมูล (Transport Layer): UDP vs TCP, การคำนวณ RTT/RTO, Congestion Control และกลไก RED</span></a>
+<a href="#ch-06" class="toc-item" data-target="ch-06"><span class="toc-badge">บทที่ 6 (Week 9)</span><span class="toc-text">ชั้นแอปพลิเคชัน (Application Layer): DNS, Email, สตรีมมิ่ง DASH, โปรโตคอล IoT (MQTT/CoAP) และ ECH</span></a>
+<a href="#ch-07" class="toc-item" data-target="ch-07"><span class="toc-badge">บทที่ 7 (Weeks 10–11)</span><span class="toc-text">เครือข่ายไร้สาย (IEEE 802.11 Wi-Fi), วิวัฒนาการเครือข่ายเซลลูลาร์ 1G–5G และ Mobile IP</span></a>
+<a href="#ch-08" class="toc-item" data-target="ch-08"><span class="toc-badge">บทที่ 8 (Wireshark Lab IP v8.1)</span><span class="toc-text">เฉลยละเอียดปฏิบัติการ Wireshark Lab: IP v8.1 (ครบทั้ง 26 ข้อ: Basic IPv4, Fragmentation &amp; IPv6)</span></a>
+<a href="#ch-09" class="toc-item" data-target="ch-09"><span class="toc-badge">บทที่ 9 (Final Exam 2026 &amp; Cheat Sheet)</span><span class="toc-text">เฉลยข้อสอบปลายภาค (Final Exam 2026) ครบทั้ง 9 ข้อแบบ Best Answer และสรุปโพย A4 Cheat Sheet เข้าห้องสอบ</span></a>
+            </nav>
+        </aside>
+        <main class="main-reader" id="readerRoot">
+            <header class="hero-cover">
+                <div class="course-tag">TEXTBOOK &amp; EXAM GUIDE • 070315108</div>
+                <h1>เทคโนโลยีเครือข่ายดิจิทัล (Digital Network Technology)</h1>
+                <div class="subtitle">หนังสือเรียนฉบับสมบูรณ์ ครอบคลุมเนื้อหา Weeks 1–11, เฉลยแล็บ Wireshark IP v8.1 (26 ข้อ), เฉลยข้อสอบ Final 2026 (9 ข้อ) และโพย A4 Cheat Sheet</div>
+                <p style="text-align:left; opacity:0.95; margin-bottom:1rem;">ตำราเรียนด้วยตนเอง (Self-Study Textbook) รายวิชา 070315108 เทคโนโลยีเครือข่ายดิจิทัล อธิบายตั้งแต่ที่มาที่ไป (First Principles) ครบทั้ง 7 เลเยอร์ของ OSI Model: ชั้นกายภาพและการเข้ารหัส 4B/5B + NRZI แก้ปัญหา Clock Skew, งานวิจัยตรวจจับ Jamming ด้วย 1D-CNN, ชั้นเชื่อมโยงข้อมูล (Parity, CRC Polynomial, ARQ, CSMA/CD และที่มาของ Slot Size 512 bits), ชั้นเครือข่าย (IPv4, Fragmentation, Subnetting, ทำไมไม่มี IPv5, IPv6, Cisco IOS), อัลกอริทึม Routing (Dijkstra vs Bellman-Ford, OSPF, BGP, SDN &amp; OpenFlow), ชั้นขนส่งข้อมูล (UDP vs TCP, สมการ RTT/RTO, Slow Start, DECbit &amp; กราฟ RED), ชั้นแอปพลิเคชัน (DNS, SMTP/POP3, DASH Manifest, MQTT QoS vs CoAP, ECH) และเครือข่ายไร้สาย/เซลลูลาร์ 1G–5G พร้อมเฉลยละเอียด Wireshark Lab 26 ข้อ และข้อสอบ Final 2026 ครบทั้ง 9 ข้อ</p>
+                <div class="hero-meta">
+                    <span>📅 <strong>ภาคเรียน:</strong> ภาคเรียนที่ 1 ปีการศึกษา 2569 (S.3 อา. 13:00–16:00 ห้อง 31-4A04)</span>
+                    <span>📖 <strong>จำนวนบท:</strong> 9 บทเรียนครบวงจร</span>
+                </div>
+                <div class="download-bar">
+                    <a class="download-btn" href="02_Network_Technology_Textbook.pdf" target="_blank">📄 เปิดไฟล์ PDF</a>
+                    <a class="download-btn" href="02_Network_Technology_Textbook.epub" download>📱 ดาวน์โหลด EPUB (eBook)</a>
+                    <a class="download-btn" href="02_Network_Technology_Textbook.md" download>📝 ดาวน์โหลด Markdown</a>
+                </div>
+            </header>
+            <section id="ch-01" class="chapter-card"><div class="chapter-badge">บทที่ 1 (Week 1)</div><h1 class="chapter-main-title">สถาปัตยกรรมเครือข่าย OSI 7 Layers, ชั้นกายภาพ (Physical Layer), การเข้ารหัส 4B/5B และการตรวจจับสัญญาณรบกวน</h1><div class="chapter-sub-title">ที่มาของโมเดลแบบแบ่งชั้น, กระบวนการ Encapsulation, ปัญหา Clock Skew, กลไก 4B/5B + NRZI และงานวิจัย 1D-CNN Edge Jamming Detection</div><div class="chapter-body"><h2 class="sec-title">1. ที่มาที่ไป: ทำไมระบบเครือข่ายต้องแบ่งเป็นลำดับชั้น (Layered Architecture)?</h2>
+<div class="callout callout-origin"><div class="callout-title">ที่มาที่ไปและเหตุผลเชิงวิศวกรรม (Why It Exists &amp; First Principles)</div><div class="callout-body"><p>ในยุคเริ่มต้นของคอมพิวเตอร์ (ทศวรรษ 1960–1970) บริษัทผู้ผลิตแต่ละราย (เช่น IBM, DEC) สร้างระบบเครือข่ายแบบผูกขาดเฉพาะยี่ห้อ (Proprietary Monolithic Systems) ที่รวมตั้งแต่สายไฟ การแปลงสัญญาณไฟฟ้า การหาเส้นทาง ไปจนถึงตัวโปรแกรมแสดงผลไว้ด้วยกัน ทำให้คอมพิวเตอร์คนละยี่ห้อคุยกันไม่ได้เลย และหากต้องการเปลี่ยนสายสัญญาณจากสายทองแดงเป็นสายไฟเบอร์ออปติก ก็ต้องรื้อเขียนโปรแกรมใหม่ทั้งหมด!</p><p>เพื่อแก้ปัญหานี้ <strong>องค์การมาตรฐานสากล (ISO — International Organization for Standardization)</strong> จึงได้ประกาศมาตรฐาน <strong>OSI (Open Systems Interconnection) 7-Layer Model ในปี ค.ศ. 1984</strong> โดยมีปรัชญาหลักคือ <strong>"การแยกหน้าที่เป็นชั้นๆ อย่างอิสระ (Modularity &amp; Abstraction)"</strong>: แต่ละเลเยอร์ทำหน้าที่เฉพาะของตนเอง ให้บริการแก่เลเยอร์ที่อยู่เหนือขึ้นไป (Upper Layer) และเรียกใช้บริการจากเลเยอร์ที่อยู่ต่ำกว่า (Lower Layer) หากวันหนึ่งเราเปลี่ยนจากสายแลนเป็น Wi-Fi (เปลี่ยนเฉพาะ Layer 1–2) โปรแกรมเว็บเบราว์เซอร์และ TCP/IP (Layer 3–7) ก็ยังทำงานได้เหมือนเดิมโดยไม่ต้องแก้โค้ดแม้แต่บรรทัดเดียว</p></div></div>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ เปรียบเทียบโครงสร้างสถาปัตยกรรม OSI 7 Layers กับ TCP/IP Stack และหน่วยข้อมูล (PDU)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <table class="dg-matrix">
+            <thead>
+                <tr>
+                    <th style="width:12%;">ชั้นที่</th>
+                    <th style="width:24%;">ชื่อชั้นใน OSI 7-Layer Model</th>
+                    <th style="width:18%;">เทียบกับ TCP/IP</th>
+                    <th style="width:16%;">หน่วยข้อมูล (PDU)</th>
+                    <th style="width:30%;">หน้าที่หลักและโปรโตคอลสำคัญ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><b>Layer 7</b></td><td class="csc">Application Layer</td><td rowspan="3" class="shared">Application Layer</td><td>Data / Message</td><td>ติดต่อแอปผู้ใช้: <b>HTTP/3, DNS, SMTP, POP3, DASH, MQTT, CoAP</b></td></tr>
+                <tr><td><b>Layer 6</b></td><td class="csc">Presentation Layer</td><td>Data</td><td>แปลงรูปแบบข้อมูล, เข้ารหัส <b>TLS/SSL</b>, บีบอัดข้อมูล, JSON/ASCII</td></tr>
+                <tr><td><b>Layer 5</b></td><td class="csc">Session Layer</td><td>Data</td><td>สร้าง รักษา และปิดจังหวะการเชื่อมต่อ (Session Management)</td></tr>
+                <tr><td><b>Layer 4</b></td><td class="shared">Transport Layer</td><td class="shared">Transport Layer</td><td><b>Segment</b> (TCP)<br/><b>Datagram</b> (UDP)</td><td>ส่งข้อมูลแบบ <b>Process-to-Process (Port)</b>, Flow &amp; Congestion Control</td></tr>
+                <tr><td><b>Layer 3</b></td><td class="csp">Network Layer</td><td class="csp">Internet Layer</td><td><b>Packet / Datagram</b></td><td>หาเส้นทางข้ามเครือข่ายต้นทางถึงปลายทาง (<b>IPv4, IPv6, ICMP, OSPF, BGP</b>)</td></tr>
+                <tr><td><b>Layer 2</b></td><td class="csc">Data Link Layer (LLC+MAC)</td><td rowspan="2" class="csc">Network Interface / Link Layer</td><td><b>Frame</b></td><td>ส่งข้อมูลระหว่างโหนดที่ติดกัน (Hop-to-Hop): <b>MAC, Ethernet, Wi-Fi, CRC-32</b></td></tr>
+                <tr><td><b>Layer 1</b></td><td class="csc">Physical Layer</td><td><b>Bits (0 / 1)</b></td><td>ส่งสัญญาณทางกายภาพผ่านสื่อกลาง: <b>NRZI, 4B/5B, คลื่นวิทยุ, ไฟเบอร์</b></td></tr>
+            </tbody>
+        </table>
+        </div></div>
+<h3 class="subsec-title">กระบวนการห่อหุ้มข้อมูล (Encapsulation) และการแกะห่อข้อมูล (Decapsulation)</h3>
+<p>เมื่อแอปพลิเคชันส่งข้อมูลลงมาตามลำดับชั้น แต่ละเลเยอร์จะแปะหัวจดหมาย (<strong>Header</strong>) ของตัวเองเข้าไปข้างหน้าข้อมูล (และที่ Layer 2 จะแปะหาง <strong>Trailer / FCS</strong> สำหรับตรวจจับบิตผิดพลาดด้วย):</p>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ กระบวนการห่อหุ้มข้อมูลจากบนลงล่าง (Data Encapsulation Across Protocol Layers)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-card blue" style="margin-bottom:6px;">
+            <div class="dg-card-title"><span>Layer 7–5 (Application)</span><span class="dg-pill">PDU: Data / Message</span></div>
+            <div class="dg-chain"><div class="dg-chain-node"><b>[ ข้อมูลแอปพลิเคชันต้นฉบับ (Application Data / Payload) ]</b></div></div>
+        </div>
+        <div class="dg-down-arrow">⬇️ แปะหัวจดหมายชั้นขนส่งข้อมูล (TCP / UDP Header: ระบุ Source Port &amp; Destination Port)</div>
+        <div class="dg-card orange" style="margin-bottom:6px;">
+            <div class="dg-card-title"><span>Layer 4 (Transport)</span><span class="dg-pill orange">PDU: Segment / Datagram</span></div>
+            <div class="dg-chain">
+                <div class="dg-chain-node orange" style="flex:1;"><b>TCP / UDP Header</b></div>
+                <div class="dg-chain-node" style="flex:3;"><b>Application Data</b></div>
+            </div>
+        </div>
+        <div class="dg-down-arrow">⬇️ แปะหัวจดหมายชั้นเครือข่าย (IP Header 20 Bytes: ระบุ Source IP &amp; Destination IP)</div>
+        <div class="dg-card purple" style="margin-bottom:6px;">
+            <div class="dg-card-title"><span>Layer 3 (Network)</span><span class="dg-pill purple">PDU: Packet / IP Datagram</span></div>
+            <div class="dg-chain">
+                <div class="dg-chain-node purple" style="flex:1;"><b>IP Header</b></div>
+                <div class="dg-chain-node orange" style="flex:1;"><b>TCP / UDP Hdr</b></div>
+                <div class="dg-chain-node" style="flex:2.5;"><b>Application Data</b></div>
+            </div>
+        </div>
+        <div class="dg-down-arrow">⬇️ แปะหัวจดหมาย MAC (Ethernet Header) ข้างหน้า และแปะหางตรวจจับบิตผิดพลาด (FCS / CRC-32) ข้างหลัง</div>
+        <div class="dg-card green">
+            <div class="dg-card-title"><span>Layer 2 (Data Link) ➜ Layer 1 (Physical Bits)</span><span class="dg-pill green">PDU: Frame ➜ Bits (0/1)</span></div>
+            <div class="dg-chain">
+                <div class="dg-chain-node green" style="flex:1;"><b>Ethernet Hdr</b></div>
+                <div class="dg-chain-node purple" style="flex:1;"><b>IP Hdr</b></div>
+                <div class="dg-chain-node orange" style="flex:1;"><b>TCP Hdr</b></div>
+                <div class="dg-chain-node" style="flex:2;"><b>Application Data</b></div>
+                <div class="dg-chain-node red" style="flex:0.8;"><b>FCS (CRC)</b></div>
+            </div>
+        </div>
+        </div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">2. ทฤษฎีชั้นกายภาพ (Physical Layer): ความสูญเสียของสัญญาณและประเภทของสัญญาณรบกวน (Noise)</h2>
+<p>ในการส่งสัญญาณจากต้นทางไปยังปลายทางผ่านสื่อกลาง (สายทองแดง UTP, สายใยแก้วนำแสง Fiber Optic หรือคลื่นวิทยุไร้สาย) สัญญาณจะถูกลดทอนคุณภาพจากปัจจัยทางฟิสิกส์ 3 ประการ:</p>
+<ol class="content-list ordered"><li><strong>Attenuation (การลดทอนความแรงของสัญญาณ):</strong> พลังงานของคลื่นลดลงตามระยะทางที่เพิ่มขึ้น จึงต้องมีตัวทวนสัญญาณ (Repeater / Amplifier)</li><li><strong>Delay Distortion (ความเพี้ยนเนื่องจากความเร็วเฟสต่างกัน):</strong> ความถี่องค์ประกอบต่างๆ ของสัญญาณเดินทางในสายด้วยความเร็วไม่เท่ากัน ทำให้รูปคลื่นบิดเบี้ยวเมื่อถึงปลายทาง</li><li><strong>Noise (สัญญาณรบกวน — จุดเน้นสำคัญจากเลคเชอร์!):</strong> เป็นสาเหตุหลักที่ทำให้จุดสัญญาณคลาดเคลื่อนไปจากตำแหน่งที่ควรจะเป็นในแผนภาพกลุ่มดาว (<strong>Constellation Diagram</strong>) จนผู้รับแปลค่าบิตผิดเพี้ยนจาก <code class="inline-code">0</code> เป็น <code class="inline-code">1</code> หรือจาก <code class="inline-code">1</code> เป็น <code class="inline-code">0</code> (<strong>Bit Error</strong>) โดยอาจารย์ได้จำแนก Noise ออกเป็น 2 ประเภทหลัก:</li></ol>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ประเภทของสัญญาณรบกวน</th><th>สาเหตุการเกิดในธรรมชาติ</th><th>ลักษณะความเสียหายต่อข้อมูล (Error Pattern)</th></tr></thead><tbody><tr><td><strong>1. White Noise (Thermal Noise)</strong></td><td>เกิดจากการเคลื่อนที่ด้วยความร้อนของอิเล็กตรอนในตัวนำไฟฟ้า เกิดขึ้นตลอดเวลาอย่างสม่ำเสมอในทุกความถี่</td><td>มักทำให้เกิดความผิดพลาดแบบบิตเดี่ยว (<strong>Single-bit Error</strong> คือผิดเพี้ยนเพียง 1–2 บิตกระจัดกระจาย)</td></tr><tr><td><strong>2. Impulse Noise (Color Noise)</strong></td><td>เกิดขึ้นเป็นจังหวะกระโชกช่วงสั้นๆ แต่รุนแรง เช่น สัญญาณรบกวนจากเตาไมโครเวฟ มอเตอร์ไฟฟ้า หรือฟ้าผ่า</td><td>ทำให้เกิด <strong>Burst Error (ข้อมูลผิดพลาดติดต่อกันเป็นชุดยาวหลายบิต)</strong> ซึ่ง <strong>ยิ่งระบบมีความเร็วการส่งข้อมูล (Data Rate) สูงเท่าใด ช่วงเวลา 1 วินาทีที่เกิด Impulse Noise ก็จะยิ่งทำลายจำนวนบิตเสียหายมากขึ้นเท่านั้น!</strong></td></tr></tbody></table></div>
+<hr class="section-divider" />
+<h2 class="sec-title">3. ปัญหา Clock Skew และกลไกการเข้ารหัสสัญญาณ 4B/5B ร่วมกับ NRZI (เนื้อหาเน้นย้ำจากเลคเชอร์!)</h2>
+<div class="callout callout-lecture"><div class="callout-title">ประเด็นเน้นย้ำในห้องเรียนโดยอาจารย์ผู้สอน (Classroom Lecture Insight)</div><div class="callout-body"><p>ในการบรรยายสัปดาห์ที่ 1 ได้อธิบายที่มาที่ไปของ <strong>Line Coding แบบ 4B/5B ร่วมกับ NRZI</strong> อย่างละเอียด:</p><p class="callout-bullet">• <strong>ต้นตอของปัญหา (Clock Skew Problem):</strong> ในการส่งข้อมูลดิจิทัล ฝั่งผู้ส่งและฝั่งผู้รับมีนาฬิกา (Clock) คนละเรือน หากเราส่งสัญญาณแบบตรงไปตรงมา (เช่น บิต <code class="inline-code">0</code> แทนด้วยแรงดัน <code class="inline-code">0V</code> และบิต <code class="inline-code">1</code> แทนด้วย <code class="inline-code">+5V</code>) แล้วบังเอิญข้อมูลที่จะส่งมีเลข <code class="inline-code">0</code> ติดต่อกันยาว 100 ตัว (<code class="inline-code">0000000...</code>) สัญญาณบนสายจะเป็นเส้นตรงนิ่งสนิท! เมื่อไม่มีการเปลี่ยนแปลงระดับแรงดัน (<strong>No Signal Transition</strong>) นาฬิกาของฝั่งผู้รับจะเริ่มเดินคลาดเคลื่อน (<strong>Clock Skew / Loss of Synchronization</strong>) จนไม่รู้ว่ามีเลข <code class="inline-code">0</code> ผ่านไปกี่ตัวแล้ว (เช่น ส่งมา 100 ตัว แต่อาจอ่านได้ 98 หรือ 102 ตัว)</p><p class="callout-bullet">• <strong>ทำไม NRZI อย่างเดียวแก้ได้แค่ครึ่งเดียว?</strong> การเข้ารหัสแบบ <strong>NRZI (Non-Return-to-Zero Inverted)</strong> มีกฎว่า: <strong>"ถ้าเจอบิต <code class="inline-code">1</code> ให้สลับระดับสัญญาณ (Transition) แต่ถ้าเจอบิต <code class="inline-code">0</code> ให้คงระดับสัญญาณเดิมไว้ (No Transition)"</strong> ดังนั้น NRZI จึงแก้ปัญหาบิต <code class="inline-code">1</code> ติดกันยาวๆ ได้แล้ว (เพราะสลับขึ้นลงตลอด) <strong>แต่ถ้าเจอบิต <code class="inline-code">0</code> ติดกันยาวๆ สัญญาณก็ยังนิ่งเป็นเส้นตรงเหมือนเดิม!</strong></p></div></div>
+<h3 class="subsec-title">ทางออกอัจฉริยะ: การแปลงรหัส 4B/5B ก่อนส่งให้ NRZI</h3>
+<p>เพื่อกำจัดไม่ให้มีเลข <code class="inline-code">0</code> ติดกันยาวๆ ก่อนส่งเข้า NRZI วิศวกรจึงคิดค้นตารางแปลงรหัส <strong>4B/5B (4-Bit to 5-Bit Encoding)</strong>:</p>
+<ol class="content-list ordered"><li><strong>หลักการทำงาน:</strong> นำข้อมูลต้นฉบับทีละ <strong>4 บิต</strong> (ซึ่งมีรูปแบบที่เป็นไปได้ทั้งหมด $2^4 = 16$ รูปแบบ ตั้งแต่ <code class="inline-code">0000</code> ถึง <code class="inline-code">1111</code>) ไปเปิดตารางแปลงเป็นรหัสใหม่ขนาด <strong>5 บิต</strong> (ซึ่งมีทั้งหมด $2^5 = 32$ รูปแบบ)</li><li><strong>กฎการคัดเลือกรหัส 5 บิต:</strong> คัดเลือกเฉพาะรหัส 5 บิตที่ <strong>มีเลข <code class="inline-code">0</code> นำหน้าไม่เกิน 1 ตัว และมีเลข <code class="inline-code">0</code> ปิดท้ายไม่เกิน 2 ตัว</strong> ดังนั้นเมื่อนำรหัส 5 บิตมาวางต่อกัน จะรับประกันได้ 100% ว่า <strong>จะไม่มีทางเกิดเลข <code class="inline-code">0</code> ติดต่อกันเกิน 3 ตัวในสายสัญญาณ (ในเลคเชอร์สรุปว่าป้องกันไม่ให้มีเลข <code class="inline-code">0</code> ติดกันเกิน 2–3 ตัว)</strong> ทำให้เมื่อส่งต่อเข้าวงจร <strong>NRZI</strong> จะเกิดการเปลี่ยนสถานะของสัญญาณ (Transition) อย่างสม่ำเสมอตลอดเวลา ปลายทางจึงซิงค์สัญญาณนาฬิกา (Clock Recovery) ได้อย่างแม่นยำ!</li><li><strong>การคำนวณประสิทธิภาพ (Efficiency):</strong></li></ol>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">สูตรการคำนวณประสิทธิภาพของรหัส 4B/5B:
+  เนื่องจากทุกๆ 5 บิตที่ถูกส่งออกไปบนสายสัญญาณ จะบรรจุข้อมูลจริง (Useful Data) อยู่ 4 บิต (และเป็น Overhead 1 บิต)
+  ดังนั้น:
+    Efficiency = (จำนวนบิตข้อมูลจริง / จำนวนบิตที่ส่งจริง) × 100%
+               = (4 / 5) × 100% = 80%
+  (หมายเหตุ: รหัส 5 บิตที่เหลืออีก 32 - 16 = 16 รูปแบบ จะถูกนำไปใช้เป็นรหัสควบคุม Control Symbols เช่น Start/End of Frame หรือ Idle และรหัสที่ห้ามใช้เพื่อตรวจจับ Error)</pre></div>
+<hr class="section-divider" />
+<h2 class="sec-title">4. กรณีศึกษางานวิจัย: การตรวจจับและจำแนกสัญญาณรบกวน (Jamming) บนอุปกรณ์ Edge ด้วยโมเดล 1D-CNN</h2>
+<p>ในชั้นเรียนมีการอภิปรายงานวิจัยสมัยใหม่เรื่องการรักษาความมั่นคงปลอดภัยในระดับ Physical/Wireless Layer ต่อการโจมตีด้วยการปล่อยคลื่นรบกวน (<strong>Jamming Attack</strong>) ซึ่งมีประเด็นสำคัญดังนี้:</p>
+<ol class="content-list ordered"><li><strong>ประเภทของสัญญาณรบกวน (Jammer Types):</strong></li></ol>
+<ul class="content-list"><li><strong>Constant Jammer (รบกวนต่อเนื่อง):</strong> ปล่อยคลื่นพลังงานรบกวนออกมาตลอดเวลา ทำให้ค่าความแรงสัญญาณรับ (<strong>RSS — Received Signal Strength</strong>) สูงค้างผิดปกติตลอดเวลา จึง <strong>ตรวจจับได้ง่ายที่สุด</strong></li><li><strong>Periodic Jammer (รบกวนเป็นจังหวะสลับช่วงพัก):</strong> ปล่อยสัญญาณรบกวนสลับกับหยุดพักเป็นคาบเวลา ทำให้ในช่วงที่หยุดพัก ค่า RSS จะดูคล้ายกับสัญญาณปกติมาก จึงเป็น <strong>โจทย์ที่ท้าทายที่สุดในการจำแนก</strong></li></ul>
+<ol class="content-list ordered"><li><strong>ช่องว่างของงานวิจัยเดิม (Research Gaps):</strong> งานวิจัยในอดีตมักใช้เพียงข้อมูลจำลองในคอมพิวเตอร์ (Simulation) ไม่ได้ทดสอบกับฮาร์ดแวร์จริง, บอกได้แค่ว่าถูกรบกวนหรือไม่แต่แยกประเภท Jammer ไม่ได้ และยังไม่เคยนำไปรันบนอุปกรณ์พกพาขนาดเล็ก (<strong>Edge Device</strong>) แบบเรียลไทม์</li><li><strong>สถาปัตยกรรมการทดลองและโมเดล 1D-CNN:</strong></li></ol>
+<ul class="content-list"><li><strong>ฮาร์ดแวร์จริง:</strong> ใช้อุปกรณ์รับสัญญาณวิทยุ <strong>HackRF SDR</strong> ที่ความถี่ Wi-Fi ช่องที่ 1 (<strong>2.412 GHz</strong>) ต่อเข้ากับบอร์ดประมวลผลขนาดเล็ก <strong>Raspberry Pi 3</strong></li><li><strong>ชุดข้อมูลจริง (Open-source Dataset):</strong> เก็บข้อมูลสัญญาณจริงจำนวน <strong>1,230 ชุด</strong> แบ่งเป็น 3 สถานะ คือ <code class="inline-code">Normal</code> (ปกติ), <code class="inline-code">Constant Jammer</code> และ <code class="inline-code">Periodic Jammer</code></li><li><strong>ทำไมต้องใช้ 1D-CNN (1-Dimensional Convolutional Neural Network)?</strong> เพราะข้อมูลค่าความแรงสัญญาณ RSS ตามเวลาเป็นข้อมูลอนุกรมเวลา 1 มิติ (<strong>Time-Series Data</strong>) โมเดล 1D-CNN จึงสกัดคุณลักษณะเด่น (Feature Extraction) ได้ตรงจุด มีขนาดไฟล์โมเดลเล็ก ประมวลผลเร็ว และกินทรัพยากรบน Raspberry Pi ต่ำมาก</li></ul>
+<ol class="content-list ordered"><li><strong>ผลการทดลองและแนวทางพัฒนาต่อ:</strong></li></ol>
+<ul class="content-list"><li>ความแม่นยำรวมบนอุปกรณ์ Edge แบบ Real-time อยู่ที่ <strong>86.3%</strong></li><li>จำแนก <strong>Constant Jammer ได้แม่นยำ 100%</strong></li><li>จำแนก <strong>Periodic Jammer ได้ 72%</strong> (เนื่องจากช่วงพักมีความคล้ายคลึงกับสัญญาณปกติมาก จึงควรพัฒนาต่อด้วยการใช้เทคนิค Signal Processing / Denoising ช่วยกรองสัญญาณ, เพิ่มความหลากหลายของข้อมูลเพื่อแก้ปัญหา Overfitting และทดสอบกับอุปกรณ์เคลื่อนที่จริง เช่น โดรน หรือ Internet of Vehicles)</li></ul></div></section>
+<section id="ch-02" class="chapter-card"><div class="chapter-badge">บทที่ 2 (Weeks 1–2)</div><h1 class="chapter-main-title">ชั้นเชื่อมโยงข้อมูล (Data Link Layer), การตรวจจับ/กู้คืนข้อผิดพลาด (CRC &amp; ARQ) และโปรโตคอล MAC</h1><div class="chapter-sub-title">Parity Check, การหารยาว CRC Polynomial, กลไก ARQ (Stop-and-Wait, Go-Back-N, Selective Repeat), CSMA/CD และที่มาของ Slot Size 512 bits</div><div class="chapter-body"><h2 class="sec-title">1. บทบาทหน้าที่ของชั้นเชื่อมโยงข้อมูล (Data Link Layer - Layer 2)</h2>
+<p>หากชั้น Network Layer (Layer 3) มีหน้าที่วางแผนการเดินทางข้ามโลกจากกรุงเทพฯ ไปนิวยอร์ก ชั้น <strong>Data Link Layer (Layer 2)</strong> ก็คือผู้ที่รับผิดชอบการขนส่งเฟรมข้อมูล <strong>ระหว่างอุปกรณ์สองตัวที่เชื่อมติดกันในลิงก์เดียว (Node-to-Node / Hop-to-Hop Delivery)</strong> โดยแบ่งออกเป็น 2 ชั้นย่อย (Sublayers):</p>
+<ol class="content-list ordered"><li><strong>LLC (Logical Link Control):</strong> ดูแลเรื่องการควบคุมการไหลของข้อมูล (<strong>Flow Control</strong>) และการตรวจจับ/กู้คืนข้อผิดพลาด (<strong>Error Detection &amp; Recovery</strong>)</li><li><strong>MAC (Media Access Control):</strong> ดูแลเรื่องที่อยู่ทางกายภาพ (<strong>MAC Address 48-bit Hexadecimal</strong> เช่น <code class="inline-code">00:1A:2B:3C:4D:5E</code>) และการบริหารจัดการสิทธิ์ว่าใครจะได้ส่งข้อมูลลงบนสื่อกลางที่ใช้ร่วมกัน (<strong>Shared Broadcast Medium</strong>) เพื่อป้องกันข้อมูลชนกัน</li></ol>
+<hr class="section-divider" />
+<h2 class="sec-title">2. กลไกการตรวจจับข้อผิดพลาด (Error Detection): Parity Check vs CRC</h2>
+<p>เมื่อคลื่นสัญญาณถูกรบกวนด้วย Noise ในชั้น Physical Layer จนบิตเพี้ยน ฝั่งผู้รับจะรู้ได้อย่างไรว่าข้อมูลที่ได้รับมานั้นถูกต้องหรือเสียหาย? หลักการพื้นฐานคือฝั่งผู้ส่งต้องคำนวณและเติม <strong>บิตตรวจสอบส่วนเกิน (Redundant Bits / Error-Detecting Code)</strong> ต่อท้ายข้อมูลไปให้ฝั่งผู้รับตรวจสอบ:</p>
+<h3 class="subsec-title">2.1 Parity Check (การตรวจสอบภาวะคู่-คี่)</h3>
+<ul class="content-list"><li><strong>หลักการ:</strong> เติมบิตพิเศษเข้าไปเพียง <strong>1 บิต (Parity Bit)</strong> ต่อท้ายข้อมูล:</li><li><strong>Even Parity (พาริตีคู่):</strong> เติม <code class="inline-code">0</code> หรือ <code class="inline-code">1</code> เพื่อให้ผลรวมจำนวนเลข <code class="inline-code">1</code> ทั้งหมดในก้อนข้อมูลเป็น <strong>เลขคู่</strong> (เช่น ข้อมูล <code class="inline-code">1011001</code> มีเลข 1 อยู่ 4 ตัวซึ่งเป็นเลขคู่อยู่แล้ว จึงเติม Parity Bit = <code class="inline-code">0</code> กลายเป็น <code class="inline-code">10110010</code>)</li><li><strong>Odd Parity (พาริตีคี่):</strong> เติม <code class="inline-code">0</code> หรือ <code class="inline-code">1</code> เพื่อให้ผลรวมจำนวนเลข <code class="inline-code">1</code> ทั้งหมดเป็น <strong>เลขคี่</strong></li><li><strong>ข้อจำกัดร้ายแรง (จุดเน้นจากเลคเชอร์):</strong></li></ul>
+<ol class="content-list ordered"><li><strong>ตรวจจับได้เฉพาะกรณีที่บิตเพี้ยนเป็นจำนวนคี่บิต (1, 3, 5 บิต):</strong> หากเกิด Impulse Noise ทำให้บิตเพี้ยนพร้อมกัน <strong>2 บิต (จำนวนคู่)</strong> จำนวนเลข <code class="inline-code">1</code> จะยังคงเป็นเลขคู่เหมือนเดิม ทำให้ <strong>Parity Check ตรวจไม่พบความผิดพลาดเลย (ตรวจจับได้เพียง 50% ของกรณีทั้งหมด)</strong></li><li><strong>ไม่สามารถระบุตำแหน่งบิตที่ผิด และแก้ไขข้อมูลเองไม่ได้</strong> (ต้องขอให้ส่งใหม่สถานเดียว)</li></ol>
+<h3 class="subsec-title">2.2 Cyclic Redundancy Check (CRC — มาตรฐานหลักใน Ethernet LAN และ Wi-Fi)</h3>
+<p>เพื่อแก้จุดอ่อนของ Parity Check เครือข่ายจริงจึงใช้ <strong>CRC (เช่น CRC-32 ใน Ethernet ที่ใช้ 32 บิตต่อท้ายเฟรมในช่อง FCS — Frame Check Sequence)</strong> ซึ่งมีความแม่นยำสูงมาก สามารถตรวจจับ Burst Error ได้เกือบ 100%</p>
+<div class="callout callout-origin"><div class="callout-title">ที่มาที่ไปและเหตุผลเชิงวิศวกรรม (Why It Exists &amp; First Principles)</div><div class="callout-body"><p><strong>หลักการทางคณิตศาสตร์ของ CRC (Binary Polynomial Modulo-2 Division):</strong> ต้นทางและปลายทางจะตกลงกันเลือก <strong>ตัวหารร่วมกัน 1 ตัว เรียกว่า Generator / Divisor ($G$)</strong> ที่มีความยาว $r+1$ บิต เป้าหมายคือการสร้างบิตส่วนเติมท้าย $R$ (ขนาด $r$ บิต) นำไปต่อท้ายข้อมูล $D$ เพื่อให้ก้อนข้อมูลทั้งหมดเมื่อนำไปหารแบบ Modulo-2 (การหารเลขฐานสองที่ใช้การ <strong>XOR</strong> แทนการลบ โดยไม่มีการยืมหลัก) ด้วยตัวหาร $G$ แล้ว <strong>ลงตัวพอดี (เศษเป็น 0)</strong>!</p></div></div>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">ขั้นตอนการคำนวณ CRC ทีละสเต็ป (ฝึกคิดตามเพื่อใช้ในห้องสอบ):
+สมมติข้อมูลต้นฉบับ D = 101110 (6 บิต) และตกลงใช้ตัวหาร G = 1001 (4 บิต -&gt; ดังนั้น r = 4 - 1 = 3 บิต)
+
+ขั้นที่ 1: เติมเลข 0 จำนวน r = 3 ตัว ต่อท้ายข้อมูล D ได้ตัวตั้งคือ: 101110000
+ขั้นที่ 2: ตั้งหารยาวแบบใช้ XOR (บิตเหมือนกันได้ 0, บิตต่างกันได้ 1) ด้วยตัวหาร G = 1001:
+
+          101011  (ผลหาร Quotient - ไม่ได้ใช้ส่ง)
+        ----------------
+   1001 | 101110000
+        ⊕ 1001|||||
+          ---------
+           01010|||
+         ⊕ 0000|||
+           --------
+            1010|||
+          ⊕ 1001|||
+            -------
+             01100|
+           ⊕ 0000|
+             ------
+              1100|
+            ⊕ 1001|
+              -----
+               1010
+             ⊕ 1001
+               ----
+                011  &lt;-- เศษจากการหาร (Remainder R = 011 ขนาด 3 บิต)
+
+ขั้นที่ 3: นำเศษ R = 011 ไปแทนที่เลข 0 สามตัวท้ายสุดของข้อมูล จะได้เฟรมที่ส่งออกไปคือ:
+        Transmitted Frame T = 101110011
+
+ขั้นที่ 4 (การตรวจสอบที่ฝั่งผู้รับ):
+        เมื่อผู้รับได้รับ 101110011 จะนำมาตั้งหารด้วยตัวหารตัวเดิม G = 1001:
+        • ถ้าหารแล้วได้เศษ = 000 แปลว่า &quot;ข้อมูลถูกต้องสมบูรณ์ ไม่มี Error&quot;
+        • ถ้าหารแล้วเหลือเศษไม่เป็นศูนย์ (Non-zero Remainder) แปลว่า &quot;เกิด Bit Error ระหว่างทาง&quot; ผู้รับจะทิ้งเฟรมนั้นทันที!</pre></div>
+<hr class="section-divider" />
+<h2 class="sec-title">3. กลไกการควบคุมการไหลและการกู้คืนข้อผิดพลาด (Flow Control &amp; ARQ Error Recovery)</h2>
+<p>เมื่อฝั่งผู้รับตรวจพบด้วย CRC ว่าเฟรมเสียหาย (หรือเฟรมสูญหายกลางทาง) ชั้น Data Link (และชั้น Transport) จะใช้กลไก <strong>ARQ (Automatic Repeat Request)</strong> ร่วมกับ <strong>Flow Control</strong> (การป้องกันไม่ให้ผู้ส่งส่งข้อมูลเร็วเกินกว่าที่บัฟเฟอร์ของผู้รับจะรับไหว) ซึ่งมีวิวัฒนาการ 3 รูปแบบ:</p>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ เปรียบเทียบกลไกควบคุมความผิดพลาด ARQ ทั้ง 3 รูปแบบ (Stop-and-Wait, Go-Back-N, Selective Repeat)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-grid-3">
+            <div class="dg-card blue">
+                <div class="dg-card-title"><span>1. Stop-and-Wait ARQ</span><span class="dg-pill">ทีละ 1 เฟรม</span></div>
+                <div class="dg-card-body">
+                    • <b>Sender ส่ง Frame 0</b> ➜ หยุดรอจนกว่าจะได้รับ <code>ACK 0</code> จึงส่ง Frame 1 ต่อได้<br/>
+                    • หาก <b>Frame 1 สูญหาย</b> จะรอจน <b>Timeout</b> แล้วส่ง Frame 1 ซ้ำ<br/>
+                    • <b>ข้อสังเกต:</b> เข้าใจง่ายแต่ท่อส่งข้อมูลว่างเปล่าขณะรอ ACK
+                </div>
+            </div>
+            <div class="dg-card orange">
+                <div class="dg-card-title"><span>2. Go-Back-N ARQ</span><span class="dg-pill orange">ส่งใหม่ยกชุด</span></div>
+                <div class="dg-card-body">
+                    • ส่งต่อเนื่องได้ <b>N เฟรม</b> โดยไม่ต้องหยุดรอทีละตัว<br/>
+                    • <b>ผู้รับไม่มี Buffer เก็บเฟรมข้ามลำดับ:</b> หาก <b>Frame 1 เสีย</b> แม้ Frame 2, 3 จะมาถึงดี ผู้รับจะ <b>โยน Frame 2, 3 ทิ้งทั้งหมด!</b><br/>
+                    • ผู้ส่งต้องย้อนกลับไปส่งใหม่ยกชุดตั้งแต่ <b>Frame 1, 2, 3</b>
+                </div>
+            </div>
+            <div class="dg-card green">
+                <div class="dg-card-title"><span>3. Selective Repeat ARQ</span><span class="dg-pill green">ขอซ้ำเฉพาะตัวเสีย</span></div>
+                <div class="dg-card-body">
+                    • <b>ผู้รับมี Buffer เก็บเฟรมที่มาก่อนลำดับ:</b> หาก <b>Frame 1 เสีย</b> แต่ Frame 2 มาถึงดี ผู้รับจะ <b>เก็บ Frame 2 ไว้ใน Buffer</b><br/>
+                    • ส่งคำขอซ้ำเฉพาะเฟรมที่เสียตัวเดียว (<code>SREJ 1</code>)<br/>
+                    • <b>ประหยัดแบนด์วิดท์สูงสุด!</b>
+                </div>
+            </div>
+        </div>
+        </div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">4. โปรโตคอลควบคุมการเข้าถึงสื่อกลาง (MAC Protocols) และคำถามสำคัญ: "ทำไม Slot Size ต้องเท่ากับ 512 bits?"</h2>
+<p>เมื่อคอมพิวเตอร์หลายเครื่องเชื่อมต่ออยู่บนสื่อกลางที่ใช้ร่วมกัน (Broadcast Shared Medium เช่น สายแลน Coaxial/Hub ในอดีต หรือคลื่นวิทยุ Wi-Fi/Cellular) หากสองเครื่องส่งข้อมูลพร้อมกัน สัญญาณจะผสมปนเปกันจนพังทั้งคู่ เรียกว่า <strong>การชนกันของข้อมูล (Collision)</strong> โปรโตคอล MAC จึงถูกแบ่งออกเป็น 3 ตระกูลใหญ่:</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ตระกูลของโปรโตคอล MAC</th><th>หลักการแบ่งใช้ช่องสัญญาณ</th><th>ตัวอย่างโปรโตคอลสำคัญ</th></tr></thead><tbody><tr><td><strong>1. Channel Partitioning</strong>&lt;br&gt;(การแบ่งซอยช่องสัญญาณตายตัว)</td><td>แบ่งช่องสัญญาณออกเป็นส่วนย่อยๆ ให้แต่ละคนถือครองแยกกัน จึง <strong>ไม่มีวันเกิด Collision</strong> และรับประกันแบนด์วิดท์คงที่ แต่ถ้าใครไม่ส่งข้อมูล ช่องของคนนั้นจะว่างเปล่าสูญเปล่า</td><td>• <strong>FDMA:</strong> แบ่งตามแถบความถี่ (Frequency)&lt;br&gt;• <strong>TDMA:</strong> แบ่งตามสล็อตเวลา (Time Slot)&lt;br&gt;• <strong>CDMA:</strong> แบ่งด้วยการคูณรหัสตั้งฉาก (Orthogonal Code) ส่งพร้อมกันบนความถี่เดียวกันได้</td></tr><tr><td><strong>2. Taking Turns</strong>&lt;br&gt;(การผลัดกันส่งตามคิว)</td><td>มีหัวหน้าคอยเรียกถามทีละเครื่อง หรือส่งไม้ผลัด (Token) วนไปรอบวง ใครถือ Token จึงมีสิทธิ์ส่ง</td><td>• <strong>Polling Protocol</strong> (Master-Slave, Bluetooth)&lt;br&gt;• <strong>Token Ring / FDDI</strong></td></tr><tr><td><strong>3. Random Access</strong>&lt;br&gt;(การแย่งกันส่งแบบสุ่ม)</td><td>ไม่มีการจองล่วงหน้า ใครมีข้อมูลให้ส่งด้วยความเร็วเต็มช่องสัญญาณ หากชนกันค่อยสุ่มเวลารอส่งใหม่ เหมาะกับทราฟฟิกคอมพิวเตอร์ที่มาเป็นพักๆ (Bursty Traffic)</td><td>• <strong>Pure ALOHA</strong> (ส่งทันทีที่อยากส่ง, ประสิทธิภาพสูงสุดเพียง 18%)&lt;br&gt;• <strong>Slotted ALOHA</strong> (ส่งต้นสล็อตเวลา, ประสิทธิภาพเพิ่มเป็น 37%)&lt;br&gt;• <strong>CSMA/CD</strong> (ใช้ใน Ethernet แบบสาย)&lt;br&gt;• <strong>CSMA/CA</strong> (ใช้ใน Wireless LAN 802.11)</td></tr></tbody></table></div>
+<h3 class="subsec-title">เจาะลึก CSMA/CD ใน Ethernet และที่มาของขนาดเฟรมขั้นต่ำ 512 บิต (64 ไบต์)</h3>
+<p>ในโปรโตคอล <strong>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong> ของ Ethernet มีกฎ 3 ข้อคือ: <strong>1. ฟังก่อนส่ง (Carrier Sense - Listen before talk)</strong>, <strong>2. ขณะส่งก็ฟังไปด้วยว่ามีสัญญาณสวนมาชนหรือไม่ (Collision Detection - Listen while talking)</strong> และ <strong>3. หากตรวจพบการชน ให้หยุดส่งทันที ส่งสัญญาณเตือน (Jam Signal) แล้วสุ่มเวลารอแบบ Binary Exponential Backoff</strong></p>
+<div class="callout callout-lecture"><div class="callout-title">ประเด็นเน้นย้ำในห้องเรียนโดยอาจารย์ผู้สอน (Classroom Lecture Insight)</div><div class="callout-body"><p><strong>คำถามชวนคิดที่ เน้นย้ำในห้องเรียน:</strong> <em>"ทำไมมาตรฐาน Ethernet (IEEE 802.3) จึงบังคับว่าทุกเฟรมต้องมีขนาดขั้นต่ำ (Minimum Frame Size / Slot Size) เท่ากับ <strong>512 bits (หรือ 64 bytes)</strong>? ถ้าข้อมูลมีแค่ 10 ไบต์ ทำไมต้องยัดบิตเติม (Padding) ให้ครบ 64 ไบต์ก่อนส่ง?"</em></p><p><strong>คำอธิบายที่มาที่ไปอย่างละเอียด:</strong> กลไก Collision Detection ของ CSMA/CD จะทำงานได้ถูกต้องก็ต่อเมื่อ <strong>"เครื่องผู้ส่ง (A) ต้องได้รับสัญญาณที่สะท้อนกลับมาจากเหตุการณ์ชนกัน ก่อนที่เครื่อง A จะส่งบิตสุดท้ายของเฟรมนั้นจบ!"</strong> เพราะถ้าเฟรมสั้นเกินไป เครื่อง A ส่งเฟรมจบไปแล้วและเข้าใจผิดว่าส่งสำเร็จแล้ว แต่สัญญาณเพิ่งวิ่งไปชนกับเครื่อง B ที่อยู่ปลายสายอีกฝั่งหนึ่ง เครื่อง A จะไม่รู้ตัวเลยว่าเฟรมนั้นพังและจะไม่ทำการส่งซ้ำ!</p><p>ในกรณีเลวร้ายที่สุด (Worst-case Scenario): เครื่อง A อยู่มุมซ้ายสุด และเครื่อง B อยู่มุมขวาสุด ห่างกันเป็นระยะทางสูงสุด $d_{\max}$ (เวลาที่สัญญาณเดินทางจาก A ไป B คือ $\tau = d_{\max}/v$) สมมติว่า A เริ่มส่งที่เวลา $t=0$ และในเสี้ยววินาทีสุดท้ายก่อนที่สัญญาณของ A จะไปถึง B (เวลา $t = \tau - \epsilon$) เครื่อง B เห็นว่าสายยังว่างจึงเริ่มส่งออกมาพอดี เกิดการชนกันที่หน้าบ้าน B แล้วคลื่นการชนต้องวิ่งย้อนกลับมาหา A อีก $\tau$ วินาที รวมเวลาไป-กลับสูงสุดเท่ากับ <strong>$2\tau$ (Round-Trip Propagation Delay)</strong></p></div></div>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">สมการพิสูจน์ขนาดเฟรมขั้นต่ำ (Minimum Frame Size / Slot Time):
+  เวลาในการปล่อยเฟรม (Transmission Time: T_trans = L / R) ต้องมากกว่าหรือเท่ากับเวลาเดินทางไป-กลับสูงสุด (2 * τ):
+    L / R  &gt;=  2 * τ     ==&gt;     L_min  =  2 * τ * R  =  2 * (d_max / v) * R
+
+  ในมาตรฐาน 10 Mbps Ethernet (R = 10 × 10^6 bps):
+  กำหนดเวลาเดินทางไป-กลับสูงสุดในสายแลนที่ผ่าน Repeater (Slot Time: 2τ) = 51.2 microseconds (51.2 × 10^-6 วินาที)
+  ดังนั้น:
+    L_min = (10 × 10^6 bits/sec) × (51.2 × 10^-6 sec)
+          = 512 bits  (หาร 8 บิตต่อไบต์ = 64 Bytes พอดี!)</pre></div></div></section>
+<section id="ch-03" class="chapter-card"><div class="chapter-badge">บทที่ 3 (Weeks 3–4)</div><h1 class="chapter-main-title">ชั้นเครือข่าย (Network Layer), IPv4 Header, การแบ่ง Subnet/CIDR, NAT, DHCP, IPv6 และปฏิบัติการ Cisco IOS</h1><div class="chapter-sub-title">โครงสร้าง IPv4 Datagram, การคำนวณ IP Fragmentation, วิธีคิด Subnetting, ทำไมไม่มี IPv5, โครงสร้าง IPv6 และคำสั่ง Cisco Router</div><div class="chapter-body"><h2 class="sec-title">1. โครงสร้าง IPv4 Header และการแยกส่วนแพ็กเก็ต (IP Fragmentation)</h2>
+<p>ชั้น <strong>Network Layer (Layer 3)</strong> มีหน้าที่หลักในการส่งแพ็กเก็ตจากเครื่องต้นทางไปยังเครื่องปลายทางข้ามหลายเครือข่าย (<strong>Host-to-Host / End-to-End Delivery</strong>) โดยใช้โปรโตคอลหลักคือ <strong>IP (Internet Protocol)</strong> ซึ่งโครงสร้างส่วนหัวของ <strong>IPv4 Header มีขนาดมาตรฐาน 20 Bytes</strong> (หากไม่มี Options; และสูงสุดไม่เกิน 60 Bytes) โดยมีฟิลด์สำคัญที่ออกสอบในแล็บ Wireshark และข้อสอบปลายภาคดังนี้:</p>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ โครงสร้างหัวจดหมาย IPv4 Header มาตรฐาน 20 Bytes (5 แถว × 32 บิต)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <table class="dg-packet">
+            <thead>
+                <tr>
+                    <th style="width:11%;">Bits 0–3</th>
+                    <th style="width:11%;">Bits 4–7</th>
+                    <th style="width:16%;">Bits 8–15 (1 Byte)</th>
+                    <th style="width:28%;">Bits 16–31 (2 Bytes)</th>
+                    <th style="width:34%;">ความหมายและหน้าที่สำคัญ (รวม 20 Bytes พื้นฐาน)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Version (4b)</td>
+                    <td>IHL (4b)</td>
+                    <td>Type of Service / DiffServ (8b)</td>
+                    <td>Total Length (16 bits)</td>
+                    <td class="note"><b>แถวที่ 1 (4 Bytes):</b> ระบุ IPv4 (=4), ความยาว Header, และขนาดรวมทั้งแพ็กเก็ต</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="background:#FFF4E8; border-color:#F28C28; color:#9a3412;">Identification (16 bits)</td>
+                    <td style="background:#FFF4E8; border-color:#F28C28; color:#9a3412;">Flags (3b) + Fragment Offset (13b)</td>
+                    <td class="note"><b>แถวที่ 2 (4 Bytes):</b> ใช้ทำ <b>IP Fragmentation</b> หั่นและประกอบร่างแพ็กเก็ต</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background:#EAF7EE; border-color:#16A34A; color:#166534;">Time to Live: TTL (8b)</td>
+                    <td style="background:#EAF7EE; border-color:#16A34A; color:#166534;">Protocol (8 bits)</td>
+                    <td>Header Checksum (16 bits)</td>
+                    <td class="note"><b>แถวที่ 3 (4 Bytes):</b> TTL กันวนลูป, Protocol (ICMP=1, TCP=6, UDP=17)</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background:#EEF1F8; border-color:#0B2A5B;">Source IP Address (32 bits = 4 Bytes)</td>
+                    <td class="note"><b>แถวที่ 4 (4 Bytes):</b> หมายเลข IP Address ของเครื่องผู้ส่งต้นทาง</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background:#EEF1F8; border-color:#0B2A5B;">Destination IP Address (32 bits = 4 Bytes)</td>
+                    <td class="note"><b>แถวที่ 5 (4 Bytes):</b> หมายเลข IP Address ของเครื่องผู้รับปลายทาง</td>
+                </tr>
+            </tbody>
+        </table>
+        </div></div>
+<ul class="content-list"><li><strong>Version (4 bits):</strong> ระบุเลขเวอร์ชัน สำหรับ IPv4 มีค่าเป็น <code class="inline-code">4</code></li><li><strong>IHL / Header Length (4 bits):</strong> ความยาวของ IP Header มาตรฐานคือ <strong>20 Bytes</strong></li><li><strong>Total Length (16 bits):</strong> ความยาวรวมของทั้ง IP Datagram (<strong>Header + Payload</strong>) ดังนั้นหากต้องการหาขนาดข้อมูลข้างใน: <strong><code class="inline-code">Payload Length = Total Length - Header Length (20 bytes)</code></strong></li><li><strong>Identification (16 bits), Flags (3 bits: DF = Don't Fragment, MF = More Fragments), Fragment Offset (13 bits):</strong> ชุดฟิลด์สำหรับรองรับการหั่นแพ็กเก็ตขนาดใหญ่ (<strong>IP Fragmentation</strong>) เมื่อต้องวิ่งผ่านลิงก์ที่มีขนาด <strong>MTU (Maximum Transmission Unit)</strong> เล็กกว่าขนาดแพ็กเก็ต (เช่น Ethernet มาตรฐานมี <strong>MTU = 1,500 Bytes</strong>)</li><li><strong>Time to Live — TTL (8 bits):</strong> ตัวนับจำนวนก้าวกระโดด (Hop Counter) เพื่อ <strong>ป้องกันไม่ให้แพ็กเก็ตวิ่งวนเป็นวงกลมไม่รู้จบ (Routing Loop)</strong> โดยเราเตอร์ทุกตัวที่แพ็กเก็ตวิ่งผ่านจะต้องลดค่า TTL ลงทีละ 1 หากค่า TTL ลดลงเหลือ <code class="inline-code">0</code> เราเตอร์จะทิ้งแพ็กเก็ตนั้นทันทีและส่งข้อความแจ้งเตือน <strong>ICMP Type 11 (TTL Exceeded)</strong> กลับไปหาต้นทาง (ซึ่งโปรแกรม <code class="inline-code">traceroute</code> ใช้กลไกนี้ในการสืบค้นรายชื่อเราเตอร์ตลอดเส้นทาง!)</li><li><strong>Protocol (8 bits):</strong> ระบุว่าข้อมูลข้างใน (Payload) จะส่งต่อไปให้โปรโตคอลใดที่ Layer 4 เช่น <strong><code class="inline-code">ICMP = 1</code></strong>, <strong><code class="inline-code">TCP = 6</code></strong>, <strong><code class="inline-code">UDP = 17</code></strong></li></ul>
+<hr class="section-divider" />
+<h2 class="sec-title">2. โครงสร้าง IPv4 Address, การแบ่ง Subnet (Subnetting), CIDR, NAT และ DHCP</h2>
+<h3 class="subsec-title">2.1 โครงสร้าง IPv4 และช่วงหมายเลขพิเศษ (Special &amp; Private IP Addresses)</h3>
+<p>หมายเลข IPv4 มีขนาด <strong>32 บิต (4 ไบต์)</strong> เขียนในรูปเลขฐานสิบคั่นด้วยจุด (<strong>Dotted-Decimal Notation</strong> เช่น <code class="inline-code">192.168.1.1</code>) แบ่งออกเป็น 2 ส่วนคือ <strong>Network Prefix (รหัสเครือข่าย)</strong> และ <strong>Host ID (รหัสเครื่อง)</strong> โดยมีหมายเลขพิเศษที่ต้องจำได้แม่นยำ:</p>
+<ul class="content-list"><li><strong>Loopback Address (<code class="inline-code">127.0.0.0/8</code> หรือ <code class="inline-code">127.0.0.1</code>):</strong> ใช้สำหรับทดสอบโปรโตคอลเครือข่ายภายในเครื่องตัวเอง (<strong>Localhost</strong>) แพ็กเก็ตที่ส่งเข้าหมายเลขนี้จะไม่ถูกปล่อยออกไปที่การ์ดแลนจริง</li><li><strong>Private IP Addresses (RFC 1918):</strong> หมายเลข IP ที่องค์กรสามารถนำมาตั้งซ้ำกันภายในเครือข่ายส่วนตัวได้ฟรีโดยไม่ต้องขออนุญาต (แต่ห้ามวิ่งออกไปบนอินเทอร์เน็ตสาธารณะโดยตรง):</li><li><code class="inline-code">10.0.0.0/8</code> (<code class="inline-code">10.0.0.0</code> – <code class="inline-code">10.255.255.255</code>)</li><li><code class="inline-code">172.16.0.0/12</code> (<code class="inline-code">172.16.0.0</code> – <code class="inline-code">172.31.255.255</code>)</li><li><code class="inline-code">192.168.0.0/16</code> (<code class="inline-code">192.168.0.0</code> – <code class="inline-code">192.168.255.255</code>)</li></ul>
+<h3 class="subsec-title">2.2 ทำไมต้องแบ่ง Subnet? (Subnetting vs Flat Network จากเลคเชอร์!)</h3>
+<div class="callout callout-lecture"><div class="callout-title">ประเด็นเน้นย้ำในห้องเรียนโดยอาจารย์ผู้สอน (Classroom Lecture Insight)</div><div class="callout-body"><p>อาจารย์เปรียบเทียบเครือข่ายที่ไม่มีการแบ่ง Subnet เลย (<strong>Flat Network</strong>) เสมือน <strong>"หมู่บ้านขนาดใหญ่ที่ไม่มีการแบ่งซอยและไม่มีเลขที่บ้านเป็นหมวดหมู่"</strong> ซึ่งมีข้อเสียร้ายแรงคือ: 1. <strong>บริหารจัดการและค้นหาปัญหา (Troubleshooting) ได้ยากมาก:</strong> เมื่อมีเครื่องปล่อยทราฟฟิกผิดปกติ จะหาต้นตอไม่เจอ 2. <strong>ไม่มีขอบเขตจำกัดความเสียหาย (No Security Boundary):</strong> หากเครื่องหนึ่งติดไวรัสหรือถูกโจมตี มันจะแพร่กระจายไปทั่วทั้งองค์กรทันที และเกิด Broadcast Storm ได้ง่าย</p><p>ดังนั้น การแบ่ง <strong>Subnet</strong> (เช่น แบ่งตามตึก ตามชั้น ตามแผนก หรือแยกกลุ่มอาจารย์ นักศึกษา และ Guest) จึงช่วยให้ <strong>1. บริหารจัดการง่าย</strong>, <strong>2. กำหนดนโยบายความปลอดภัยและกักกันโรค (Quarantine) ได้ที่ระดับ Router/Firewall</strong>, และ <strong>3. ปิดบังโครงสร้างเครือข่ายภายในไม่ให้คนภายนอกเห็น</strong></p></div></div>
+<h3 class="subsec-title">2.3 สูตรการคำนวณ Subnetting และ CIDR (Classless Inter-Domain Routing)</h3>
+<p>ในอดีตมีการแบ่งขนาดเครือข่ายแบบตายตัว (<strong>Classful Addressing:</strong> Class A <code class="inline-code">/8</code>, Class B <code class="inline-code">/16</code>, Class C <code class="inline-code">/24</code>) ซึ่งไม่ยืดหยุ่นและทำให้สูญเสียหมายเลข IP โดยเปล่าประโยชน์ ปัจจุบันจึงใช้มาตรฐาน <strong>CIDR (Classless Inter-Domain Routing)</strong> ที่กำหนดความยาวของ Network Prefix กี่บิตก็ได้ตามต้องการ (เช่น <code class="inline-code">/22</code>, <code class="inline-code">/25</code>, <code class="inline-code">/26</code>, <code class="inline-code">/30</code>) และช่วยทำ <strong>Route Aggregation (Supernetting)</strong> ยุบรวมหลายเส้นทางเข้าด้วยกันเพื่อให้ตาราง Routing Table ของอินเทอร์เน็ตมีขนาดเล็กลง</p>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">สูตรการคำนวณจำนวน Host ใน Subnet (ต้องหักออก 2 IP เสมอ!):
+  กำหนดให้เครือข่ายมี Prefix Length = /n (จากทั้งหมด 32 บิตของ IPv4)
+  1. จำนวนบิตของฝั่ง Host (h) = 32 - n บิต
+  2. จำนวนหมายเลข IP ทั้งหมดในวง = 2^h หมายเลข
+  3. จำนวนเครื่องที่นำไปตั้งค่าใช้งานได้จริง (Valid Usable Hosts) = (2^h) - 2 หมายเลขเสมอ!
+     • ทำไมต้องลบ 2 เสมอ?
+       - หมายเลขแรกสุด (บิต Host เป็น 0 ทั้งหมด) จองไว้เป็น &quot;Network Address&quot; (ชื่อประจำวงเครือข่าย)
+       - หมายเลขสุดท้าย (บิต Host เป็น 1 ทั้งหมด) จองไว้เป็น &quot;Broadcast Address&quot; (ใช้ส่งกระจายให้ทุกเครื่องในวง)
+     • ข้อปฏิบัติในแล็บ: นิยมจอง Valid Host ตัวแรกสุด (เช่น .1) หรือตัวสุดท้าย (เช่น .254) ไว้เป็น Default Gateway ของ Router
+
+ตัวอย่างการคำนวณ: วง 192.168.10.0/26
+  • n = 26  ==&gt;  จำนวนบิต Host (h) = 32 - 26 = 6 บิต
+  • จำนวน IP ทั้งหมดต่อวง = 2^6 = 64 หมายเลข (ขนาดบล็อกทีละ 64)
+  • จำนวน Valid Hosts ที่ใช้ได้จริง = 64 - 2 = 62 เครื่อง
+  • Subnet ที่ 1: Network = 192.168.10.0 | Valid Hosts = 192.168.10.1 ถึง .62 | Broadcast = 192.168.10.63</pre></div>
+<h3 class="subsec-title">2.4 เทคโนโลยียืดอายุ IPv4: NAT และ DHCP</h3>
+<p>แม้หมายเลข IPv4 ทั้งโลกจะมีเพียง $2^{32} \approx 4.29$ พันล้านหมายเลขและถูกจัดสรรหมดไปแล้ว แต่เรายังใช้งาน IPv4 ได้จนถึงทุกวันนี้เพราะ 2 เทคโนโลยีคู่บุญ:</p>
+<ol class="content-list ordered"><li><strong>DHCP (Dynamic Host Configuration Protocol):</strong> แจกจ่ายหมายเลข IP, Subnet Mask, Default Gateway และ DNS Server ให้เครื่องลูกข่ายแบบอัตโนมัติและชั่วคราว (Lease Time) ผ่านกระบวนการ 4 ขั้นตอน <strong>DORA (<code class="inline-code">DHCP Discover</code> ➔ <code class="inline-code">DHCP Offer</code> ➔ <code class="inline-code">DHCP Request</code> ➔ <code class="inline-code">DHCP ACK</code>)</strong> ทำให้ไม่ต้องล็อกหมายเลข IP ทิ้งไว้กับเครื่องที่ปิดอยู่</li><li><strong>NAT (Network Address Translation / NAPT):</strong> ให้เครื่องภายในองค์กรนับพันเครื่องใช้หมายเลข <strong>Private IP</strong> แล้วเมื่อต้องการออกสู่อินเทอร์เน็ต เราเตอร์ตัวหน้าบ้านจะแปลง Private IP เหล่านั้นให้ใช้ <strong>Public IP เพียงหมายเลขเดียวร่วมกัน (Many-to-One Mapping)</strong> โดยใช้ <strong>หมายเลขพอร์ต (Port Number 16-bit)</strong> ในตาราง NAT Translation Table เป็นตัวแยกแยะว่าคำตอบที่วิ่งกลับมานั้นเป็นของเครื่องใดภายในบ้าน</li></ol>
+<hr class="section-divider" />
+<h2 class="sec-title">3. วิวัฒนาการสู่ IPv6 และคำถามสำคัญ: "ทำไมจึงข้ามจาก IPv4 ไปเป็น IPv6 โดยไม่มี IPv5?"</h2>
+<div class="callout callout-lecture"><div class="callout-title">ประเด็นเน้นย้ำในห้องเรียนโดยอาจารย์ผู้สอน (Classroom Lecture Insight)</div><div class="callout-body"><p><strong>เฉลยคำถามชวนคิด ในห้องเรียน:</strong> <em>"ทำไมเราจึงเปลี่ยนจาก IPv4 ข้ามไปเป็น IPv6 เลย? IPv5 หายไปไหน?"</em></p><p class="callout-bullet">• <strong>คำตอบ:</strong> ในความเป็นจริง <strong>หมายเลขเวอร์ชัน <code class="inline-code">5</code> ในช่อง Version ของ IP Header ถูกจองและใช้งานไปแล้วตั้งแต่ปี ค.ศ. 1979 สำหรับโปรโตคอลทดลองชื่อว่า ST (Internet Stream Protocol — RFC 1190 / RFC 1819)</strong> ซึ่งออกแบบมาเพื่อทดลองส่งข้อมูลเสียงและวิดีโอแบบสตรีมมิ่งตามเวลาจริงแต่ไม่ได้ถูกนำมาใช้แทน IPv4 ดังนั้นเมื่อคณะทำงาน IETF ออกแบบโปรโตคอลรุ่นใหม่เพื่อแก้ปัญหา IP หมดอย่างถาวรในทศวรรษ 1990 จึงต้องข้ามเลข 5 ที่ถูกจองไปแล้ว ไปใช้หมายเลข <strong><code class="inline-code">6</code> (IPv6)</strong> นั่นเอง!</p></div></div>
+<h3 class="subsec-title">จุดเด่นและการเปลี่ยนแปลงเชิงสถาปัตยกรรมของ IPv6 (เปรียบเทียบกับ IPv4)</h3>
+<ol class="content-list ordered"><li><strong>ขนาดที่อยู่ใหญ่มหาศาล (128 bits):</strong> เพิ่มจาก 32 บิตใน IPv4 เป็น <strong>128 บิต</strong> ($2^{128} \approx 3.4 \times 10^{38}$ หมายเลข) เขียนในรูป <strong>เลขฐานสิบหก (Hexadecimal) จำนวน 8 กลุ่ม กลุ่มละ 4 ตัวอักษร คั่นด้วยเครื่องหมายโคลอน (<code class="inline-code">:</code>)</strong> เช่น <code class="inline-code">2601:0193:8302:4620:215c:f5ae:8b40:a27a</code></li></ol>
+<ul class="content-list"><li><em>กฎการย่อรูป IPv6:</em> สามารถตัดเลข <code class="inline-code">0</code> นำหน้าของแต่ละกลุ่มออกได้ (เช่น <code class="inline-code">0193</code> ย่อเป็น <code class="inline-code">193</code>) และหากมีกลุ่มที่เป็น <code class="inline-code">0000</code> ติดกันหลายกลุ่ม สามารถยุบรวมเป็นเครื่องหมาย <strong><code class="inline-code">::</code> (Double Colon) ได้เพียง 1 ครั้งในที่อยู่นั้น</strong> (เช่น <code class="inline-code">fe80:0000:0000:0000:1085:6434:0583:0e79</code> ย่อเป็น <code class="inline-code">fe80::1085:6434:583:e79</code>)</li></ul>
+<ol class="content-list ordered"><li><strong>ส่วนหัวขนาดคงที่ 40 Bytes (Fixed 40-Byte Header) เพื่อการประมวลผลความเร็วสูง:</strong></li></ol>
+<ul class="content-list"><li><strong>ตัด Header Checksum ทิ้ง:</strong> เพื่อไม่ต้องให้เราเตอร์ทุกตัวเสียเวลาคำนวณ Checksum ใหม่ทุกครั้งที่ลดค่า Hop Limit (ปล่อยให้ Layer 2 CRC และ Layer 4 TCP/UDP Checksum ดูแลแทน)</li><li><strong>ตัดการทำ Fragmentation โดยเราเตอร์ระหว่างทางทิ้ง:</strong> เราเตอร์ IPv6 จะไม่หั่นแพ็กเก็ตกลางทางอีกต่อไป (ทำได้ที่เครื่องต้นทางเท่านั้น) เพื่อเพิ่มความเร็วการส่งต่อแพ็กเก็ต</li><li><strong>เพิ่มฟิลด์ <code class="inline-code">Flow Label</code> (20 bits):</strong> สำหรับระบุกระแสข้อมูลพิเศษที่ต้องการคุณภาพการให้บริการ (QoS / Real-time streaming) และใช้ฟิลด์ <strong><code class="inline-code">Next Header</code></strong> แทนฟิลด์ Protocol เดิม</li></ul>
+<hr class="section-divider" />
+<h2 class="sec-title">4. สรุปคำสั่งปฏิบัติการ Cisco IOS &amp; Packet Tracer Lab (Weeks 4 &amp; 6)</h2>
+<p>ในการตั้งค่าอุปกรณ์เราเตอร์และสวิตช์ของ Cisco ในแล็บ Packet Tracer ผู้เรียนต้องเข้าใจโหมดการทำงานและคำสั่งพื้นฐานดังนี้:</p>
+<div class="code-container"><div class="code-header">Code / Configuration (BASH)</div><pre class="code-block"><code># 1. ลำดับโหมดการทำงานของ Cisco IOS (IOS Modes)
+Router&gt; enable                                # จาก User EXEC Mode เข้าสู่ Privileged EXEC Mode
+Router# configure terminal                    # เข้าสู่ Global Configuration Mode
+
+# 2. การตั้งชื่อเครื่อง รหัสผ่าน และป้ายแจ้งเตือน (Basic Hardening)
+Router(config)# hostname R1                   # ตั้งชื่อเราเตอร์เป็น R1
+R1(config)# enable secret class               # ตั้งรหัสผ่านเข้ารหัสสำหรับเข้าโหมด Privileged EXEC
+R1(config)# banner motd #Authorized Access Only!#  # ตั้งข้อความเตือนหน้าล็อกอิน
+
+# 3. การตั้งค่า IP Address บนพอร์ตเชื่อมต่อ (Interface Configuration)
+R1(config)# interface gigabitEthernet 0/0     # เข้าไปที่พอร์ต LAN
+R1(config-if)# ip address 192.168.1.1 255.255.255.0   # กำหนด IP และ Subnet Mask
+R1(config-if)# no shutdown                    # สั่งเปิดพอร์ตให้ทำงาน (ค่าเริ่มต้นพอร์ต Router จะปิดอยู่!)
+R1(config-if)# exit
+
+# 4. การตั้งค่าเส้นทางแบบคงที่ (Static Route) และตรวจสอบสถานะ
+R1(config)# ip route 192.168.2.0 255.255.255.0 10.0.0.2   # ip route [ปลายทาง] [Mask] [Next-Hop IP]
+R1# copy running-config startup-config        # บันทึกค่าจาก RAM ลง NVRAM ไม่ให้หายตอนไฟดับ
+R1# show ip route                             # แสดงตาราง Routing Table (C = Connected, S = Static, R = RIP, O = OSPF)
+R1# show ip interface brief                   # ตรวจสอบสถานะพอร์ตและ IP ทั้งหมดแบบสรุป
+R1# show cdp neighbors                        # ใช้ Cisco Discovery Protocol ดูอุปกรณ์ Cisco ที่ต่อติดกันโดยตรง</code></pre></div></div></section>
+<section id="ch-04" class="chapter-card"><div class="chapter-badge">บทที่ 4 (Weeks 5–6)</div><h1 class="chapter-main-title">อัลกอริทึมการหาเส้นทาง (Routing Algorithms), โปรโตคอล OSPF/RIP/BGP และเครือข่าย SDN</h1><div class="chapter-sub-title">Forwarding vs Control Plane, Link-State (Dijkstra) vs Distance-Vector (Bellman-Ford), Intra/Inter-AS และ SDN / OpenFlow</div><div class="chapter-body"><h2 class="sec-title">1. การแยกหน้าที่สำคัญของ Network Layer: Forwarding vs Control Plane</h2>
+<p>ในการทำงานของเราเตอร์ทุกตัว จะมีหน้าที่หลัก 2 ส่วนที่ต้องแยกให้ออก:</p>
+<ol class="content-list ordered"><li><strong>Forwarding (Data Plane — การส่งต่อแพ็กเก็ตในระดับท้องถิ่น):</strong> เมื่อแพ็กเก็ตวิ่งเข้ามาที่พอร์ตขาเข้า เราเตอร์จะเปิดดูตาราง <strong>Forwarding Table</strong> ในเครื่องตัวเองแล้วส่งแพ็กเก็ตออกไปยังพอร์ตขาออกที่ถูกต้องทันที (ใช้เวลาระดับนาโนวินาที ทำด้วยฮาร์ดแวร์)</li><li><strong>Routing (Control Plane — มันสมองในการคำนวณเส้นทางระดับเครือข่าย):</strong> กระบวนการที่คำนวณว่าจากต้นทางไปปลายทางควรวิ่งผ่านเราเตอร์ตัวใดบ้างจึงจะสั้นและดีที่สุด แล้วนำผลลัพธ์ที่ได้ไปเขียนลงใน Forwarding Table โดยสถาปัตยกรรมของ Control Plane แบ่งออกเป็น 2 ยุค:</li></ol>
+<ul class="content-list"><li><strong>ยุคที่ 1 — Per-Router Control Plane (Distributed / Traditional Routing):</strong> เราเตอร์ทุกตัวมีสมองของตัวเอง รันอัลกอริทึมแลกเปลี่ยนข้อมูลกับเราเตอร์ตัวอื่นเพื่อคำนวณตารางเส้นทางของใครของมัน (เช่น RIP, OSPF, EIGRP, BGP)</li><li><strong>ยุคที่ 2 — Logically Centralized Control Plane (Software-Defined Networking - SDN):</strong> แยก "มันสมอง" ออกจากตัวเราเตอร์ ไปรวมศูนย์ไว้ที่เซิร์ฟเวอร์กลางที่เรียกว่า <strong>SDN Controller</strong> เพียงจุดเดียว ส่วนสวิตช์/เราเตอร์ทำหน้าที่เป็นเพียงอุปกรณ์ส่งต่อข้อมูลตามคำสั่ง</li></ul>
+<hr class="section-divider" />
+<h2 class="sec-title">2. ทฤษฎีกราฟและการเปรียบเทียบ Link-State (Dijkstra) vs Distance-Vector (Bellman-Ford)</h2>
+<p>ในมุมมองคณิตศาสตร์ เครือข่ายคอมพิวเตอร์คือ <strong>กราฟ $G = (N, E)$</strong> โดยเซตของโหนด $N$ คือเราเตอร์ทั้งหมด และเซตของเส้นเชื่อม $E$ คือลิงก์เชื่อมต่อที่มีค่าใช้จ่าย (<strong>Cost / Metric</strong> เช่น ระยะทาง, เวลาหน่วง Delay, หรือส่วนกลับของแบนด์วิดท์) อัลกอริทึมการหาเส้นทางที่สั้นที่สุดแบ่งออกเป็น 2 ค่ายหลัก:</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ประเด็นเปรียบเทียบ</th><th>Link-State (LS) Routing Algorithm</th><th>Distance-Vector (DV) Routing Algorithm</th></tr></thead><tbody><tr><td><strong>1. อัลกอริทึมคณิตศาสตร์ที่ใช้</strong></td><td><strong>Dijkstra's Algorithm</strong> (อัลกอริทึมของไดก์สตรา)</td><td><strong>Bellman-Ford Equation</strong> (สมการของเบลแมน-ฟอร์ด)</td></tr><tr><td><strong>2. ขอบเขตการรับรู้ข้อมูลเครือข่าย</strong></td><td><strong>Global Knowledge (รู้แผนที่ทั้งเครือข่าย):</strong> เราเตอร์ทุกตัวส่งกระจายข้อมูลลิงก์ของตน (<strong>Flooding LSP — Link State Packet</strong>) ไปให้ทุกโหนดในเครือข่าย จนทุกตัวสร้างแผนผัง Topology ทั้งหมดเหมือนกัน</td><td><strong>Local / Decentralized Knowledge (รู้เฉพาะจากคำบอกเล่าของเพื่อนบ้าน):</strong> เราเตอร์แลกเปลี่ยนตารางระยะทางกับ <strong>"เพื่อนบ้านที่ติดกัน (Directly Connected Neighbors)"</strong> เท่านั้น ไม่เห็นแผนที่ทั้งหมด</td></tr><tr><td><strong>3. ความเร็วในการลู่เข้า (Convergence)</strong></td><td><strong>ลู่เข้าเร็วมาก (Fast Convergence):</strong> คำนวณรอบเดียวได้เส้นทางสั้นที่สุดไปยังทุกโหนด และไม่ค่อยเกิดปัญหา Routing Loop</td><td><strong>ลู่เข้าช้ากว่า (Slow Convergence):</strong> ข้อมูลค่อยๆ กระจายทีละทอด และเมื่อลิงก์ขาดอาจเกิดปัญหาข่าวร้ายกระจายช้า (<strong>Count-to-Infinity Problem &amp; Routing Loop</strong>)</td></tr><tr><td><strong>4. ภาระข้อมูลควบคุม (Overhead)</strong></td><td><strong>Overhead สูงในช่วงแรก</strong> เนื่องจากต้องทำการ Flood LSP ไปทั่วเครือข่าย (ใน LSP มี Node ID, Neighbor Cost, <strong>Sequence Number</strong> บอกความใหม่ และ <strong>TTL</strong> กันวนลูป)</td><td><strong>Overhead ต่ำกว่า</strong> ในเครือข่ายขนาดเล็ก เพราะส่งคุยเฉพาะกับเพื่อนบ้านที่ติดกัน</td></tr><tr><td><strong>5. โปรโตคอลมาตรฐานที่ใช้จริง</strong></td><td><strong>OSPF</strong> (Open Shortest Path First), <strong>IS-IS</strong></td><td><strong>RIP</strong> (Routing Information Protocol), <strong>EIGRP</strong> (Advanced DV)</td></tr></tbody></table></div>
+<h3 class="subsec-title">ตัวอย่างขั้นตอนการทำงานของ Dijkstra's Algorithm (Link-State)</h3>
+<ol class="content-list ordered"><li><strong>Initialization (ตั้งค่าเริ่มต้น):</strong> เริ่มจากโหนดต้นทาง $u$ กำหนดให้เซตของโหนดที่รู้เส้นทางสั้นที่สุดแน่นอนแล้ว $N' = \{u\}$ สำหรับโหนด $v$ ใดๆ ที่ต่อติดกับ $u$ โดยตรง ให้ระยะทางเริ่มต้น $D(v) = c(u,v)$ แต่ถ้าไม่ติดกันเลยให้กำหนดเป็น $\infty$ (Infinity)</li><li><strong>Loop (วนซ้ำทีละก้าว):</strong></li></ol>
+<ul class="content-list"><li>ค้นหาโหนด $w$ ที่ยังไม่อยู่ใน $N'$ ซึ่งมีค่าระยะทาง $D(w)$ <strong>น้อยที่สุด</strong> แล้วนำ $w$ เข้ามาใส่ในเซต $N'$</li><li>นำโหนด $w$ ที่เพิ่งเลือก มาอัปเดตระยะทางไปยังเพื่อนบ้าน $v$ ทุกตัวของ $w$ ตามสูตรผ่อนคลาย (Relaxation):</li></ul>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">สมการอัปเดตระยะทางของ Dijkstra:
+  D(v) = min( D(v) เดิม ,  D(w) + c(w, v) )
+  (คือเปรียบเทียบว่า: เส้นทางเดิมที่เคยรู้จัก กับ การเดินผ่านโหนด w ที่เพิ่งเลือกเข้ามา ทางไหนมี Cost น้อยกว่า ให้เลือกทางนั้น!)
+
+สมการ Bellman-Ford ของ Distance-Vector:
+  D_x(y) = min_v { c(x, v) + D_v(y) }
+  (ระยะทางที่สั้นที่สุดจาก x ไป y = ค่าต่ำสุดของ [ระยะจาก x ไปหาเพื่อนบ้าน v + ระยะที่เพื่อนบ้าน v บอกว่าเดินต่อไปถึง y ได้])</pre></div>
+<hr class="section-divider" />
+<h2 class="sec-title">3. การจัดลำดับชั้นเครือข่าย (Autonomous Systems): Intra-AS vs Inter-AS Routing</h2>
+<p>อินเทอร์เน็ตทั่วโลกมีเราเตอร์หลายร้อยล้านตัว หากให้เราเตอร์ทุกตัวต้อง Flood LSP หากันทั่วโลก ตาราง Routing Table จะระเบิดและเครือข่ายจะล่มทันที จึงต้องจัดโครงสร้างเป็นลำดับชั้น (<strong>Hierarchical Routing</strong>) โดยแบ่งเครือข่ายออกเป็นเขตปกครองตนเองที่เรียกว่า <strong>AS (Autonomous System — เครือข่ายที่อยู่ภายใต้การดูแลขององค์กรหรือ ISP เดียวกัน)</strong>:</p>
+<ol class="content-list ordered"><li><strong>Intra-AS Routing (Interior Gateway Protocols - IGP):</strong> การหาเส้นทาง <strong>ภายใน AS เดียวกัน</strong></li></ol>
+<ul class="content-list"><li><em>เป้าหมายหลัก:</em> <strong>เน้นประสิทธิภาพและความเร็วสูงสุด (Performance / Shortest Path)</strong> ไม่ต้องกังวลเรื่องนโยบายการเมืองระหว่างองค์กร</li><li><em>โปรโตคอลสำคัญ:</em></li><li><strong>RIP (Routing Information Protocol):</strong> ใช้แบบ Distance-Vector นับจำนวนก้าว (<strong>Hop Count</strong> สูงสุดไม่เกิน 15 hops ถ้าถึง 16 ถือว่าไปไม่ถึง)</li><li><strong>OSPF (Open Shortest Path First):</strong> ใช้แบบ Link-State (Dijkstra) คำนวณ Cost จากแบนด์วิดท์ของลิงก์ ($Cost = \text{Reference Bandwidth} / \text{Interface Bandwidth}$) รองรับการแบ่งเป็นลำดับชั้นย่อย (Area 0 Backbone)</li><li><strong>EIGRP:</strong> โปรโตคอลขั้นสูงที่พัฒนาโดย Cisco ผสานข้อดีของ DV และ LS เข้าด้วยกัน</li></ul>
+<ol class="content-list ordered"><li><strong>Inter-AS Routing (Exterior Gateway Protocol - EGP):</strong> การหาเส้นทาง <strong>เชื่อมระหว่าง AS ต่างองค์กรกัน</strong></li></ol>
+<ul class="content-list"><li><em>เป้าหมายหลัก:</em> <strong>เน้นเรื่องนโยบายและข้อตกลงทางธุรกิจ (Policy-Based Routing)</strong> มากกว่าความสั้นของระยะทาง เช่น <em>"ISP A ยอมให้ทราฟฟิกของลูกค้าตัวเองวิ่งผ่าน แต่ไม่ยอมเป็นทางผ่านฟรี (Transit) ให้ทราฟฟิกของคู่แข่ง"</em></li><li><em>โปรโตคอลมาตรฐานหนึ่งเดียวของอินเทอร์เน็ต:</em> <strong>BGP (Border Gateway Protocol)</strong> แบ่งเป็น <strong>eBGP</strong> (คุยข้าม AS) และ <strong>iBGP</strong> (กระจายข้อมูลเส้นทางภายนอกให้เราเตอร์ภายใน AS ตัวเองรับทราบ)</li></ul>
+<hr class="section-divider" />
+<h2 class="sec-title">4. สถาปัตยกรรมเครือข่ายสมัยใหม่: Software-Defined Networking (SDN) และ OpenFlow (จุดเน้นจากเลคเชอร์!)</h2>
+<div class="callout callout-lecture"><div class="callout-title">ประเด็นเน้นย้ำในห้องเรียนโดยอาจารย์ผู้สอน (Classroom Lecture Insight)</div><div class="callout-body"><p>จากการบรรยายของอาจารย์เรื่อง <strong>Traditional Routing vs Software-Defined Networking (SDN)</strong> อาจารย์ได้ชี้ให้เห็นข้อจำกัด 4 ประการของการทำ Routing แบบดั้งเดิม (Per-Hop Distributed): 1. <strong>ความไม่ยืดหยุ่นในการบังคับเส้นทาง (Rigidity):</strong> ในโปรโตคอลแบบเดิมอย่าง OSPF หากเราต้องการแบ่งทราฟฟิกครึ่งหนึ่งไปทางซ้าย และอีกครึ่งไปทางขวา หรือต้องการให้ทราฟฟิกแผนกบัญชีวิ่งอ้อมไปผ่าน Firewall เสมอ ทำได้ยากมาก เพราะอัลกอริทึมถูกฝังมาให้เลือกเฉพาะเส้นทางที่ Cost ต่ำสุดเพียงเส้นเดียว 2. <strong>การแพร่กระจายความผิดพลาด (Error Propagation):</strong> ใน Distance-Vector หากเราเตอร์ตัวหนึ่งตั้งค่าผิดหรือคำนวณผิด ข้อมูลที่ผิดจะแพร่กระจายไปทำลายตารางของเพื่อนบ้านทั้งเครือข่าย (เช่น Count-to-infinity) 3. <strong>การผูกขาดยี่ห้อ (Proprietary Vendor Lock-in):</strong> ฮาร์ดแวร์และซอฟต์แวร์ควบคุมถูกมัดรวมอยู่ในกล่องเราเตอร์ยี่ห้อนั้นๆ 4. <strong>เหตุผลในอดีตที่ทำ Centralized ไม่ได้:</strong> สมัยก่อนแบนด์วิดท์เครือข่ายต่ำและซีพียูช้า การส่งข้อมูลทุกอย่างมาคำนวณที่ศูนย์กลางจึงเป็นไปไม่ได้ แต่ในปัจจุบันแบนด์วิดท์และพลังประมวลผลสูงมากแล้ว จึงเกิดเป็น <strong>SDN</strong>!</p></div></div>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ สถาปัตยกรรมเครือข่ายที่กำหนดด้วยซอฟต์แวร์ (Software-Defined Networking: SDN &amp;amp; OpenFlow)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-card purple">
+            <div class="dg-card-title"><span>1. Application Layer (Management &amp; Business Applications)</span><span class="dg-pill purple">Application Plane</span></div>
+            <div class="dg-card-body">โปรแกรมบริหารจัดการจราจร (Traffic Engineering), ระบบไฟร์วอลล์อัตโนมัติ, Load Balancing และระบบตรวจจับผู้บุกรุก</div>
+        </div>
+        <div class="dg-down-arrow">↕️ สื่อสารผ่าน <b>Northbound API</b> (เช่น RESTful APIs)</div>
+        <div class="dg-card blue">
+            <div class="dg-card-title"><span>2. SDN Controller (Centralized Brain — มันสมองส่วนกลางของเครือข่าย)</span><span class="dg-pill">Control Plane</span></div>
+            <div class="dg-card-body">มองเห็นแผนที่เครือข่ายทั้งหมด (Network-wide View) คำนวณเส้นทางที่ดีที่สุดจากศูนย์กลาง แล้วสั่งติดตั้งกฎลงไปที่สวิตช์ (ระวังจุดอ่อน Single Point of Failure)</div>
+        </div>
+        <div class="dg-down-arrow">↕️ สื่อสารผ่าน <b>Southbound API</b> (โปรโตคอลมาตรฐาน <b>OpenFlow</b> ผ่านช่องทางเข้ารหัส TCP/TLS)</div>
+        <div class="dg-grid-3">
+            <div class="dg-card green"><div class="dg-card-title">SDN Switch #1</div><div class="dg-card-body"><b>Data Plane (Flow Table)</b><br/>ทำเฉพาะ <b>Match + Action</b> ด้วยความเร็วสูงตามคำสั่ง Controller</div></div>
+            <div class="dg-card green"><div class="dg-card-title">SDN Switch #2</div><div class="dg-card-body"><b>Data Plane (Flow Table)</b><br/>ทำเฉพาะ <b>Match + Action</b> (Forward, Drop, Modify)</div></div>
+            <div class="dg-card green"><div class="dg-card-title">SDN Switch #3</div><div class="dg-card-body"><b>Data Plane (Flow Table)</b><br/>แยกสมองออกจากฮาร์ดแวร์อย่างสมบูรณ์</div></div>
+        </div>
+        </div></div>
+<h3 class="subsec-title">โปรโตคอล OpenFlow และข้อควรระวังของ SDN:</h3>
+<ul class="content-list"><li><strong>OpenFlow Protocol:</strong> โปรโตคอลมาตรฐานที่ใช้สื่อสารระหว่าง <strong>SDN Controller</strong> กับตัวสวิตช์ (ซึ่งมี Control Agent - CA ขนาดเล็กคอยรับคำสั่ง) ทำงานอยู่บน TCP (เข้ารหัสด้วย TLS) แบ่งข้อความเป็น 3 ประเภทคือ:</li></ul>
+<ol class="content-list ordered"><li><em>Controller-to-Switch:</em> สั่งตั้งค่าและแก้ไขตาราง Flow Table</li><li><em>Switch-to-Controller (Asynchronous):</em> สวิตช์แจ้งสถานะพอร์ตล่ม หรือส่งแพ็กเก็ตที่ไม่รู้จัก (<code class="inline-code">Packet-In</code>) ขึ้นไปถาม Controller ว่าควรส่งไปทางไหน</li><li><em>Symmetric:</em> ข้อความทักทายตรวจสอบสถานะ (<code class="inline-code">Hello</code>, <code class="inline-code">Echo</code>)</li></ol>
+<ul class="content-list"><li><strong>ความท้าทายสำคัญของ SDN:</strong> เนื่องจากสมองรวมอยู่ที่จุดเดียว ตัว SDN Controller จึงเสี่ยงต่อการเป็น <strong>Single Point of Failure</strong> และเป็นเป้าหมายหลักของแฮกเกอร์ จึงต้องออกแบบให้มี <strong>High Availability (Distributed Controller Cluster)</strong> และวาง <strong>Security by Design ตั้งแต่วันแรก (Day One)</strong></li></ul></div></section>
+<section id="ch-05" class="chapter-card"><div class="chapter-badge">บทที่ 5 (Week 8)</div><h1 class="chapter-main-title">ชั้นขนส่งข้อมูล (Transport Layer): UDP vs TCP, การคำนวณ RTT/RTO, Congestion Control และกลไก RED</h1><div class="chapter-sub-title">3-Way Handshake, ผลกระทบของค่า RTO, Advertised vs Congestion Window, Slow Start, DECbit และการคำนวณกราฟ RED</div><div class="chapter-body"><h2 class="sec-title">1. บทบาทของ Transport Layer และการเปรียบเทียบ UDP vs TCP</h2>
+<p>ขณะที่ Network Layer ส่งข้อมูลจากเครื่องถึงเครื่อง (Host-to-Host) ชั้น <strong>Transport Layer (Layer 4)</strong> มีหน้าที่รับผิดชอบการส่งข้อมูลจาก <strong>โปรเซสของแอปพลิเคชันต้นทาง ไปยังโปรเซสของแอปพลิเคชันปลายทาง (Process-to-Process Delivery)</strong> โดยใช้ <strong>Port Number (16 bits: 0–65535)</strong> เป็นตัวระบุห้องปลายทาง โดยมีโปรโตคอลหลัก 2 ตัวที่มีปรัชญาตรงข้ามกัน:</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>คุณสมบัติเปรียบเทียบ</th><th>UDP (User Datagram Protocol)</th><th>TCP (Transmission Control Protocol)</th></tr></thead><tbody><tr><td><strong>1. รูปแบบการเชื่อมต่อ</strong></td><td><strong>Connectionless (ไร้การเชื่อมต่อ):</strong> ส่งข้อมูลออกไปทันทีโดยไม่ทักทายสร้างการเชื่อมต่อล่วงหน้า (No Handshake)</td><td><strong>Connection-Oriented:</strong> ต้องสร้างการเชื่อมต่อด้วย <strong>3-Way Handshake (<code class="inline-code">SYN</code> ➔ <code class="inline-code">SYN+ACK</code> ➔ <code class="inline-code">ACK</code>)</strong> ก่อนส่งข้อมูลเสมอ</td></tr><tr><td><strong>2. ความน่าเชื่อถือ (Reliability)</strong></td><td><strong>Unreliable (Best-Effort):</strong> ไม่รับประกันว่าข้อมูลจะถึงหรือไม่ ไม่เรียงลำดับ และไม่มีการส่งซ้ำหากสูญหาย</td><td><strong>Reliable Byte Stream:</strong> รับประกันข้อมูลถึงครบถ้วน ถูกต้อง เรียงตามลำดับด้วยหมายเลข <strong>Sequence Number</strong> และ <strong>Acknowledgement (ACK)</strong></td></tr><tr><td><strong>3. การควบคุมการไหลและความแออัด</strong></td><td><strong>ไม่มี</strong> ทั้ง Flow Control และ Congestion Control (แอปพลิเคชันอยากส่งเร็วแค่ไหนก็ปล่อยออกไปทันที)</td><td><strong>มีครบถ้วน:</strong> มีทั้ง Flow Control (<code class="inline-code">Advertised Window</code>) และ Congestion Control (<code class="inline-code">Congestion Window</code>)</td></tr><tr><td><strong>4. ขนาดส่วนหัว (Header Size)</strong></td><td>เล็กและเบามากเพียง <strong>8 Bytes</strong> (<code class="inline-code">Src Port</code>, <code class="inline-code">Dst Port</code>, <code class="inline-code">Length</code>, <code class="inline-code">Checksum</code>)</td><td>ขนาดมาตรฐาน <strong>20 Bytes</strong> (สูงสุด 60 Bytes) มี开销 (Overhead) สูงกว่า</td></tr><tr><td><strong>5. ตัวอย่างงานที่เหมาะสม</strong></td><td>DNS, DHCP, CoAP (IoT), วิดีโอคอล/เกมออนไลน์แบบ Real-time ที่ยอมให้ภาพกระตุกดีกว่าดีเลย์ค้าง</td><td>Web (HTTP/HTTPS), Email (SMTP/POP3/IMAP), โอนย้ายไฟล์ (FTP/SSH), MQTT</td></tr></tbody></table></div>
+<hr class="section-divider" />
+<h2 class="sec-title">2. การประเมินเวลา RTT และการตั้งค่า RTO (Retransmission Timeout) — ออกสอบข้อที่ 1 ในข้อสอบ Final!</h2>
+<div class="callout callout-exam"><div class="callout-title">จุดออกสอบและกับดักที่ต้องระวัง (Exam Focus &amp; Common Pitfalls)</div><div class="callout-body"><p><strong>เนื้อหาตรงกับข้อสอบ Final ข้อที่ 1 (4 คะแนน):</strong> เมื่อ TCP ส่ง Segment ออกไป มันจะเริ่มจับเวลาถอยหลังที่เรียกว่า <strong>RTO (Retransmission Timeout)</strong> หากเวลานับถอยหลังจนหมดแล้วยังไม่ได้รับ ACK ตอบกลับ TCP จะสรุปว่าแพ็กเก็ตสูญหายและทำการส่งซ้ำทันที คำถามคือ <strong>"เราควรตั้งค่า RTO เท่าไหร่จึงจะเหมาะสม?"</strong></p></div></div>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ กราฟเปรียบเทียบการตั้งค่า TCP Retransmission Timeout (RTO) เทียบกับค่า Sampled RTT จริง</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <svg viewBox="0 0 860 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="860" height="250" rx="8" fill="#ffffff"/>
+            <!-- Axes -->
+            <line x1="60" y1="20" x2="60" y2="215" stroke="#334155" stroke-width="2"/>
+            <line x1="60" y1="215" x2="830" y2="215" stroke="#334155" stroke-width="2"/>
+            <text x="20" y="30" font-size="11" font-weight="700" fill="#0B2A5B">RTT (ms)</text>
+            <text x="770" y="238" font-size="11" font-weight="700" fill="#0B2A5B">เวลา (Time)</text>
+            <!-- Y Labels -->
+            <text x="45" y="48" text-anchor="end" font-size="11" fill="#475569">8 ms</text>
+            <text x="45" y="105" text-anchor="end" font-size="11" fill="#475569">5 ms</text>
+            <text x="45" y="155" text-anchor="end" font-size="11" fill="#475569">3 ms</text>
+            <text x="45" y="215" text-anchor="end" font-size="11" fill="#475569">0</text>
+            <!-- High RTO Fixed Line (8 ms) -->
+            <line x1="60" y1="44" x2="540" y2="44" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4"/>
+            <rect x="545" y="28" width="305" height="26" rx="5" fill="#FDECEC" stroke="#DC2626"/>
+            <text x="553" y="45" font-size="10.5" font-weight="700" fill="#991B1B">❌ ตั้ง RTO สูงเกินไป (8 ms): รอนานเกินไปเมื่อแพ็กเก็ตหายจริง</text>
+            <!-- Dynamic RTO Curve (Adaptive) -->
+            <path d="M 70 115 Q 150 80, 230 95 T 390 65 T 520 90" fill="none" stroke="#16A34A" stroke-width="2.5"/>
+            <rect x="545" y="75" width="305" height="26" rx="5" fill="#EAF7EE" stroke="#16A34A"/>
+            <text x="553" y="92" font-size="10.5" font-weight="700" fill="#166534">✅ RTO ไดนามิก (EstimatedRTT + 4×DevRTT): ยืดหยุ่นพอดี</text>
+            <!-- Sampled RTT Curve -->
+            <path d="M 70 175 L 120 130 L 170 105 L 220 165 L 270 140 L 330 70 L 380 120 L 430 170 L 480 115 L 520 145" fill="none" stroke="#1F6FEB" stroke-width="3"/>
+            <text x="275" y="198" font-size="11" font-weight="700" fill="#1F6FEB">เส้นกราฟค่าจริง Sampled RTT (แกว่งตัวตามคิวใน Router)</text>
+            <!-- Low RTO Fixed Line (3 ms) -->
+            <line x1="60" y1="150" x2="540" y2="150" stroke="#D97706" stroke-width="2" stroke-dasharray="6 4"/>
+            <rect x="545" y="136" width="305" height="26" rx="5" fill="#FEF3C7" stroke="#D97706"/>
+            <text x="553" y="153" font-size="10.5" font-weight="700" fill="#92400E">⚠️ ตั้ง RTO ต่ำเกินไป (3 ms): เกิด Timeout ปลอม ส่งซ้ำฟุ่มเฟือย!</text>
+        </svg>
+        </div></div>
+<h3 class="subsec-title">สรุปผลกระทบของการตั้งค่า RTO และวิธีการกำหนดค่า RTO ที่ดี (ใช้ตอบข้อสอบข้อ 1.1, 1.2, 1.3):</h3>
+<ol class="content-list ordered"><li><strong>กรณีที่ 1 (ข้อ 1.1): หากกำหนดค่า RTO เป็นค่าคงที่ที่ต่ำเกินไป (เช่น <code class="inline-code">RTO = 3 ms</code> ซึ่งต่ำกว่าค่า Sampled RTT ในหลายช่วงเวลา) จะเกิดอะไรขึ้น?</strong></li></ol>
+<ul class="content-list"><li><strong>คำตอบ:</strong> ในช่วงที่เครือข่ายมีความหน่วงปกติทำให้ค่า Sampled RTT สูงเกินกว่า 3 ms (เช่น ใช้เวลาเดินทางจริง 4–6 ms) แพ็กเก็ตและ ACK <strong>ยังไม่ได้สูญหายแต่อย่างใด (เพียงแต่กำลังเดินทางกลับมา)</strong> แต่ตัวจับเวลา RTO ของผู้ส่งจะหมดเวลาเสียก่อน (<strong>Premature Timeout</strong>) ส่งผลให้ผู้ส่งเข้าใจผิดว่าแพ็กเก็ตหาย จึงทำการ <strong>ส่งแพ็กเก็ตซ้ำโดยไม่จำเป็น (Unnecessary / Spurious Retransmissions)</strong> ซึ่งนอกจากจะสิ้นเปลืองแบนด์วิดท์โดยเปล่าประโยชน์แล้ว ยังเป็นการเติมแพ็กเก็ตซ้ำซ้อนเข้าไปซ้ำเติมให้เครือข่ายเกิดความแออัด (<strong>Congestion</strong>) หนักขึ้น และทำให้ TCP ลดขนาด Congestion Window ลงโดยไม่จำเป็นอีกด้วย!</li></ul>
+<ol class="content-list ordered"><li><strong>กรณีที่ 2 (ข้อ 1.2): หากกำหนดค่า RTO เป็นค่าคงที่ที่สูงเกินไป (เช่น <code class="inline-code">RTO = 8 ms</code> ซึ่งสูงกว่า Sampled RTT ปกติมาก) จะเกิดอะไรขึ้น?</strong></li></ol>
+<ul class="content-list"><li><strong>คำตอบ:</strong> เมื่อเกิดเหตุการณ์ <strong>แพ็กเก็ตสูญหายจริงในเครือข่าย (Packet Loss)</strong> แทนที่ผู้ส่งจะตรวจพบและส่งซ้ำได้อย่างรวดเร็ว ผู้ส่งจะต้องนั่งรอไปจนครบเวลา 8 ms จึงจะเริ่มส่งแพ็กเก็ตซ้ำ ทำให้ <strong>การกู้คืนข้อมูลที่สูญหายล่าช้ามาก (Slow Loss Recovery / Long Idle Delay)</strong> ส่งผลให้เกิดความหน่วงสูง (High Latency) และทำให้อัตราการส่งข้อมูลรวม (<strong>Throughput</strong>) ของระบบลดต่ำลง</li></ul>
+<ol class="content-list ordered"><li><strong>กรณีที่ 3 (ข้อ 1.3): จงอธิบายวิธีการกำหนดค่า RTO ที่ดี:</strong></li></ol>
+<ul class="content-list"><li><strong>คำตอบ:</strong> ค่า RTO ที่ดี <strong>ไม่ควรตั้งเป็นค่าคงที่ตายตัว (Static)</strong> แต่ต้องปรับตัวแบบไดนามิก (<strong>Adaptive / Dynamic RTO</strong>) ตามสภาพของเครือข่ายในแต่ละ Session โดยต้องคำนวณจาก <strong>1) ค่าเฉลี่ยถ่วงน้ำหนักของเวลารอบเดินทาง (<code class="inline-code">EstimatedRTT</code>)</strong> บวกกับ <strong>2) ค่าความแปรปรวนหรือส่วนเบี่ยงเบนของ RTT (<code class="inline-code">DevRTT</code> / RTT Variance)</strong> คูณด้วยค่าคงที่ปลอดภัย (ตามสมการของ Jacobson/Karels: $\text{RTO} = \text{EstimatedRTT} + 4 \times \text{DevRTT}$) เพื่อให้ค่า RTO อยู่เหนือค่า RTT จริงเล็กน้อยเสมอและสามารถขยายตัวครอบคลุมช่วงที่ความหน่วงของเครือข่ายแกว่งตัวสูงขึ้นได้โดยไม่เกิด Premature Timeout</li></ul>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">สมการคำนวณ Adaptive RTO มาตรฐานของ TCP (RFC 6298):
+  1. คำนวณค่าเฉลี่ยถ่วงน้ำหนัก (Exponential Weighted Moving Average - EWMA, โดยปกติ α = 0.125):
+     EstimatedRTT = (1 - α) × EstimatedRTT_เดิม  +  α × SampleRTT_ล่าสุด
+
+  2. คำนวณค่าความแปรปรวน (RTT Deviation / Variance, โดยปกติ β = 0.25):
+     DevRTT = (1 - β) × DevRTT_เดิม  +  β × | SampleRTT_ล่าสุด - EstimatedRTT |
+
+  3. กำหนดค่า Timeout (RTO):
+     RTO = EstimatedRTT + 4 × DevRTT</pre></div>
+<hr class="section-divider" />
+<h2 class="sec-title">3. กลไกควบคุมการไหลและควบคุมความแออัดของ TCP (Flow Control vs Congestion Control) — ออกสอบข้อที่ 3!</h2>
+<p>ในการส่งข้อมูลของ TCP ผู้ส่งจะถูกจำกัดปริมาณข้อมูลที่ส่งออกไปได้โดยยังไม่ต้องรอ ACK ด้วยหน้าต่าง 2 บานเสมอ คือ: $$\text{Effective Window} = \min(\text{Advertised Window } [rwnd], \text{ Congestion Window } [cwnd])$$</p>
+<ol class="content-list ordered"><li><strong>Advertised Window (<code class="inline-code">rwnd</code> — Receive Window) [ออกสอบข้อ 3.1]:</strong></li></ol>
+<ul class="content-list"><li><strong>คืออะไร:</strong> คือขนาดหน้าต่างรับข้อมูลที่ <strong>ฝั่งผู้รับปลายทาง (Receiver / Destination)</strong> แจ้งกลับมาบอกฝั่งผู้ส่ง (ในช่อง Window Size ของ TCP Header) เพื่อระบุว่าขณะนี้บัฟเฟอร์หน่วยความจำของฝั่งผู้รับยังเหลือพื้นที่ว่างรองรับข้อมูลได้อีกกี่ไบต์</li><li><strong>มีไว้ทำไม:</strong> ใช้สำหรับทำ <strong>Flow Control (การควบคุมการไหล)</strong> เพื่อป้องกันไม่ให้ฝั่งผู้ส่งที่เครื่องแรงกว่า ส่งข้อมูลเร็วเกินไปจนล้นบัฟเฟอร์ของฝั่งผู้รับ (<strong>Prevent Receiver Buffer Overflow</strong>)</li></ul>
+<ol class="content-list ordered"><li><strong>Congestion Window (<code class="inline-code">cwnd</code>) และกลไก TCP Slow Start [ออกสอบข้อ 3.2]:</strong></li></ol>
+<ul class="content-list"><li><strong>Congestion Window (<code class="inline-code">cwnd</code>) คืออะไร:</strong> คือขนาดหน้าต่างที่ <strong>ฝั่งผู้ส่ง (Sender)</strong> ประเมินและคำนวณขึ้นเองเพื่อจำกัดอัตราการส่งข้อมูลไม่ให้ท่วมท้นเกินขีดความสามารถของเราเตอร์และลิงก์ในเครือข่าย (<strong>Network Congestion Control</strong>)</li><li><strong>กลไก TCP Slow Start ช่วยเพิ่มประสิทธิภาพของการส่งข้อมูลอย่างไร (คำตอบสำหรับข้อ 3.2):</strong></li><li>เมื่อเริ่มต้นการเชื่อมต่อ TCP ใหม่ ผู้ส่งยังไม่ทราบเลยว่าเครือข่ายระหว่างทางมีแบนด์วิดท์ว่างมากน้อยเพียงใด หากส่งข้อมูลก้อนใหญ่โครมเดียวทันทีอาจทำให้เราเตอร์ล่ม แต่หากค่อยๆ เพิ่มทีละ 1 MSS แบบเส้นตรง (Additive Increase) ก็จะใช้เวลานานมากในการไต่ระดับไปถึงความจุของเครือข่ายความเร็วสูง</li><li>ดังนั้น <strong>Slow Start</strong> จึงเริ่มต้นที่ค่าปลอดภัยคือ <code class="inline-code">cwnd = 1 MSS</code> แต่เมื่อได้รับ ACK กลับมาแต่ละรอบ RTT มันจะ <strong>เพิ่มขนาด <code class="inline-code">cwnd</code> แบบทวีคูณเป็น 2 เท่าทุกๆ 1 RTT (<code class="inline-code">1 ➔ 2 ➔ 4 ➔ 8 ➔ 16 ➔ 32...</code> Exponential Growth)</strong></li><li><strong>ประโยชน์:</strong> ช่วยให้ TCP สามารถสำรวจและไต่ระดับขึ้นไปถึงขีดความสามารถในการรองรับข้อมูลของเครือข่าย (<strong>Available Network Capacity / <code class="inline-code">ssthresh</code></strong>) ได้อย่าง <strong>รวดเร็วที่สุดโดยไม่สร้างภาระกระแทกเครือข่ายตั้งแต่ต้น</strong> ก่อนที่จะสลับเข้าสู่โหมด <strong>Congestion Avoidance (AIMD — เพิ่มแบบเส้นตรงทีละ 1 MSS ต่อ RTT)</strong> เพื่อให้ส่งข้อมูลได้อย่างมีเสถียรภาพ</li></ul>
+<hr class="section-divider" />
+<h2 class="sec-title">4. กลไกการหลีกเลี่ยงความแออัดโดยเราเตอร์: DECbit และ Random Early Detection (RED) — ออกสอบข้อที่ 2!</h2>
+<div class="callout callout-lecture"><div class="callout-title">ประเด็นเน้นย้ำในห้องเรียนโดยอาจารย์ผู้สอน (Classroom Lecture Insight)</div><div class="callout-body"><p>จากการบรรยายเรื่อง <strong>กลไกการควบคุมความแออัดของ TCP และเทคนิคการหลีกเลี่ยงความแออัด (Congestion Avoidance)</strong> อาจารย์ได้ชี้ให้เห็นว่า:</p><p class="callout-bullet">• ลำพังกลไกของ TCP ที่ฝั่ง Host เป็นการแก้ปัญหาแบบ <strong>"วัวหายล้อมคอก" (Reactive):</strong> คือต้องรอให้คิวในเราเตอร์เต็มจนแพ็กเก็ตถูกทิ้ง (Tail Drop) เกิดความเสียหายขึ้นแล้ว ต้นทางจึงค่อยลดความเร็วลง ทำให้กราฟความเร็วเป็นฟันเลื่อย ไม่ราบรื่น และเกิดปัญหา <strong>Global Synchronization</strong> (ทุก Session โดน Drop พร้อมกันจึงลดความเร็วพร้อมกันและเร่งกลับมาชนกันใหม่พร้อมกัน)</p><p class="callout-bullet">• เนื่องจาก <strong>Router</strong> เป็นจุดที่เห็นความยาวคิวและรับรู้สถานะความแออัดได้ดีที่สุด จึงมีการคิดค้นกลไก <strong>Active Queue Management (AQM)</strong> ให้เราเตอร์ช่วยแจ้งเตือนหรือจัดการก่อนที่คิวจะเต็มล้น 2 วิธีหลัก:</p></div></div>
+<ol class="content-list ordered"><li><strong>กลไก DECbit (Explicit Congestion Notification):</strong></li></ol>
+<ul class="content-list"><li>เราเตอร์คำนวณความยาวคิวเฉลี่ย หากเกินเกณฑ์ เราเตอร์จะตั้งค่า <strong>บิตแจ้งเตือนความแออัด (DECbit = 1)</strong> ในส่วนหัวของแพ็กเก็ต</li><li>เมื่อแพ็กเก็ตไปถึงผู้รับ ผู้รับจะคัดลอกบิตนี้ใส่ใน ACK ส่งกลับมาบอกผู้ส่ง</li><li>ผู้ส่งจะนับสัดส่วนแพ็กเก็ตที่มีบิตแจ้งเตือนในรอบ Window ที่ผ่านมา: <strong>หากน้อยกว่า 50%</strong> จะเพิ่มความเร็วทีละ 1 (Additive Increase) แต่ <strong>หากตั้งแต่ 50% ขึ้นไป</strong> จะลดขนาด Window ลงทันที (Multiplicative Decrease คูณ 0.875)</li></ul>
+<ol class="content-list ordered"><li><strong>กลไก Random Early Detection (RED):</strong></li></ol>
+<ul class="content-list"><li>แทนที่จะใช้บิตพิเศษ เราเตอร์ที่ใช้ RED จะคำนวณ <strong>ค่าเฉลี่ยถ่วงน้ำหนักตามเวลาของความยาวคิว (<code class="inline-code">AvgLen</code> — Time-Averaged Queue Length)</strong> แทนการใช้ค่าความยาวคิว ณ เสี้ยววินาทีนั้น (Snapshot) เพื่อป้องกันไม่ให้เราเตอร์ตกใจเกินจริงเมื่อมีข้อมูลพุ่งเข้ามาเพียงชั่ววูบสั้นๆ (Transient Burst)</li><li>เมื่อค่า <code class="inline-code">AvgLen</code> เริ่มสูงเกินขีดจำกัดขั้นต่ำ (<code class="inline-code">MinThreshold</code>) เราเตอร์จะเริ่ม <strong>สุ่มดรอปแพ็กเก็ต (Randomly Drop Packet)</strong> ตามความน่าจะเป็น $P_{\text{drop}}$ เพื่อส่งสัญญาณเตือนให้บาง TCP Session ค่อยๆ ลดความเร็วลงก่อนที่คิวจะเต็มจริง ช่วยให้เกิด <strong>Desynchronization</strong> (แต่ละ Session ลดความเร็วไม่พร้อมกัน ภาพรวมทราฟฟิกจึงราบรื่น) และใครที่ส่งข้อมูลเข้ามามากก็จะมีโอกาสถูกสุ่มดรอปมากกว่าตามสัดส่วน</li></ul>
+<h3 class="subsec-title">วิธีอ่านกราฟ RED และคำนวณเปอร์เซ็นต์ $P_{\text{Throughput}}$ (ตรงกับข้อสอบ Final ข้อที่ 2 เป๊ะ!)</h3>
+<p>ในข้อสอบ Final ข้อที่ 2 โจทย์กำหนดกราฟความน่าจะเป็นในการดรอปแพ็กเก็ต ($P_{\text{drop}}$ บนแกนตั้ง) เทียบกับค่าความยาวคิวเฉลี่ย ($\text{AvgLen}$ บนแกนนอน) จำนวน 2 กราฟ คือ <strong>RED-1</strong> และ <strong>RED-2</strong> โดยมีพารามิเตอร์บนกราฟดังนี้:</p>
+<ul class="content-list"><li>ขีดจำกัดเริ่มต้น ($\text{MinThreshold}$) = <strong>10 packets</strong> และขีดจำกัดสูงสุด ($\text{MaxThreshold}$) = <strong>15 packets</strong></li><li>ในกราฟ <strong>RED-1</strong>: ที่ $\text{AvgLen} = 10$ ค่า $P_{\text{drop}} = 0$ และไต่ขึ้นเป็นเส้นตรงไปถึงจุด $\text{AvgLen} = 15$ ซึ่งมีค่า $P_{\text{drop}} = 0.5$ (หรือ 50%) จากนั้นเมื่อ $\text{AvgLen} &gt; 15$ ค่า $P_{\text{drop}}$ จะกระโดดขึ้นเป็น <strong>$1.0$ (ดรอป 100%)</strong></li><li>ในกราฟ <strong>RED-2</strong>: ที่ $\text{AvgLen} = 10$ ค่า $P_{\text{drop}} = 0$ และไต่ขึ้นเป็นเส้นตรงไปถึงจุด $\text{AvgLen} = 15$ ซึ่งมีค่า $P_{\text{drop}} = 0.7$ (หรือ 70%) จากนั้นเมื่อ $\text{AvgLen} &gt; 15$ ค่า $P_{\text{drop}}$ จะกระโดดขึ้นเป็น <strong>$1.0$ (ดรอป 100%)</strong></li></ul>
+<div class="math-box"><div class="math-header">สมการและการคำนวณ (Mathematical Formulation &amp; Step-by-Step Calculation)</div><pre class="math-pre">สูตรหัวใจสำคัญในการทำข้อสอบข้อที่ 2:
+  โจทย์ถามหา P_Throughput (เปอร์เซ็นต์ของแพ็กเก็ตที่รอดชีวิตวิ่งออกจาก Router ต่อจำนวนที่เข้ามาทั้งหมด)
+  ไม่ใช่ถาม P_drop! ดังนั้นต้องลบออกจาก 1 (หรือ 100%) เสมอ:
+
+    P_Throughput = (1 - P_drop) × 100%
+
+  และในช่วงเส้นลาดเอียงระหว่าง MinTh (10) ถึง MaxTh (15) คำนวณ P_drop ด้วยสมการเส้นตรง (Linear Interpolation):
+    P_drop(AvgLen) = P_max × (AvgLen - MinTh) / (MaxTh - MinTh)
+                   = P_max × (AvgLen - 10) / (15 - 10)
+                   = P_max × (AvgLen - 10) / 5
+
+  แทนค่าทั้ง 4 ข้อย่อยของข้อสอบ:
+  • ข้อ 2.1) AvgLen = 10 packets, ใช้ RED-2:
+    ที่ AvgLen = 10 (ยังไม่เกิน MinTh) ค่า P_drop = 0
+    ดังนั้น P_Throughput = (1 - 0) × 100% = 100%
+
+  • ข้อ 2.2) AvgLen = 18 packets, ใช้ RED-1:
+    ที่ AvgLen = 18 (สูงเกิน MaxTh ที่ 15 ไปแล้ว) คิวอยู่ในโซนวิกฤต เราเตอร์จะ Drop ทุกแพ็กเก็ต (P_drop = 1.0 หรือ 100%)
+    ดังนั้น P_Throughput = (1 - 1.0) × 100% = 0%
+
+  • ข้อ 2.3) AvgLen = 13 packets, ใช้ RED-1 (ซึ่งมี P_max = 0.5 ที่จุด 15):
+    P_drop = 0.5 × (13 - 10) / (15 - 10) = 0.5 × (3 / 5) = 0.30 (ดรอป 30%)
+    ดังนั้น P_Throughput = (1 - 0.30) × 100% = 70%
+
+  • ข้อ 2.4) AvgLen = 13 packets, ใช้ RED-2 (ซึ่งมี P_max = 0.7 ที่จุด 15):
+    P_drop = 0.7 × (13 - 10) / (15 - 10) = 0.7 × (3 / 5) = 0.42 (ดรอป 42%)
+    ดังนั้น P_Throughput = (1 - 0.42) × 100% = 58%</pre></div></div></section>
+<section id="ch-06" class="chapter-card"><div class="chapter-badge">บทที่ 6 (Week 9)</div><h1 class="chapter-main-title">ชั้นแอปพลิเคชัน (Application Layer): DNS, Email, สตรีมมิ่ง DASH, โปรโตคอล IoT (MQTT/CoAP) และ ECH</h1><div class="chapter-sub-title">Client-Server vs P2P, กลไก DNS, SMTP vs POP3, บทบาทของ Manifest File ใน DASH, MQTT QoS 0/1/2 vs CoAP และงานวิจัย ECH</div><div class="chapter-body"><h2 class="sec-title">1. สถาปัตยกรรมแอปพลิเคชันเครือข่าย: Client-Server vs P2P vs Hybrid</h2>
+<p>ในการออกแบบโปรแกรมประยุกต์บนเครือข่ายที่ชั้น <strong>Application Layer (Layer 7)</strong> มีรูปแบบสถาปัตยกรรมหลัก 3 รูปแบบ:</p>
+<ol class="content-list ordered"><li><strong>Client-Server Architecture:</strong> มีเครื่องเซิร์ฟเวอร์กลางที่เปิดทำงานตลอดเวลา (<strong>Always-on Host</strong>) และมีหมายเลข IP ถาวร คอยรอรับคำขอจากเครื่องลูกข่าย (Clients) ซึ่งไม่คุยกันเองโดยตรง (ตัวอย่าง: Web HTTP, อีเมล, DNS)</li><li><strong>Pure Peer-to-Peer (P2P) Architecture:</strong> ไม่มีเซิร์ฟเวอร์กลางที่เปิดตลอดเวลา เครื่องของผู้ใช้ทั่วไปแต่ละเครื่อง (<strong>Peers</strong>) เชื่อมต่อและแลกเปลี่ยนไฟล์กันโดยตรง ข้อดีคือขยายขนาดตัวเองได้อัตโนมัติ (<strong>Self-Scalability</strong>: ยิ่งมีคนเข้ามาดาวน์โหลดมาก ก็ยิ่งมีคนช่วยอัปโหลดมากขึ้น) แต่จัดการความปลอดภัยยากเนื่องจากเครื่องเปลี่ยน IP และเข้า-ออกตลอดเวลา (ตัวอย่าง: BitTorrent, Gnutella)</li><li><strong>Hybrid Architecture (ลูกผสม Client-Server + P2P):</strong> เช่น <strong>Napster</strong> ยุคแรก หรือระบบแชต/ค้นหาที่ใช้ <strong>เซิร์ฟเวอร์กลางทำหน้าที่เฉพาะการค้นหารายชื่อ (Centralized Directory/Search)</strong> แต่เมื่อรู้ว่าไฟล์อยู่ที่ใครแล้ว การโอนย้ายไฟล์จริงจะทำแบบ <strong>P2P ระหว่างเครื่องต่อเครื่องโดยตรง</strong></li></ol>
+<hr class="section-divider" />
+<h2 class="sec-title">2. ระบบชื่อโดเมน (DNS) และโปรโตคอลอีเมล (SMTP vs POP3 vs IMAP) — ออกสอบข้อที่ 4!</h2>
+<h3 class="subsec-title">2.1 Domain Name System (DNS)</h3>
+<p>มนุษย์จดจำชื่อเว็บไซต์ (เช่น <code class="inline-code">www.kmutnb.ac.th</code>) ได้ง่ายกว่าตัวเลข IP แต่เราเตอร์ในชั้น Network Layer รู้จักเฉพาะหมายเลข IP เท่านั้น ระบบ <strong>DNS</strong> จึงทำหน้าที่เป็น <strong>ฐานข้อมูลแบบกระจายตามลำดับชั้น (Distributed Hierarchical Database)</strong> เพื่อแปลชื่อโดเมนเป็นหมายเลข IP (ทำงานบน <strong>UDP Port 53</strong> เป็นหลัก และใช้ TCP Port 53 เมื่อทำ Zone Transfer หรือข้อมูลตอบกลับใหญ่เกิน 512 bytes):</p>
+<ul class="content-list"><li><strong>ลำดับการสืบค้น (DNS Resolution Hierarchy):</strong> เครื่องเช็คไฟล์ <code class="inline-code">hosts</code> และ Local Cache ➔ ถาม <strong>Local DNS Resolver ขององค์กร/ISP</strong> ➔ ถ้ายืนยันไม่ได้จะไล่ถามตามลำดับชั้น: <strong>1. Root DNS Server (13 ตระกูลหลักของโลก)</strong> ➔ <strong>2. Top-Level Domain (TLD) DNS Server (เช่น <code class="inline-code">.com</code>, <code class="inline-code">.org</code>, <code class="inline-code">.th</code>)</strong> ➔ <strong>3. Authoritative DNS Server (เซิร์ฟเวอร์เจ้าของโดเมนจริง เช่น DNS ของ มจพ.)</strong></li><li><strong>ชนิดของระเบียนข้อมูล (DNS Resource Records):</strong></li><li><strong><code class="inline-code">A</code> Record:</strong> แปลงชื่อ Hostname เป็นหมายเลข <strong>IPv4</strong> (32-bit)</li><li><strong><code class="inline-code">AAAA</code> Record:</strong> แปลงชื่อ Hostname เป็นหมายเลข <strong>IPv6</strong> (128-bit)</li><li><strong><code class="inline-code">CNAME</code> Record:</strong> ชื่อแฝง (Alias) ชี้ไปยังชื่อจริง (Canonical Name)</li><li><strong><code class="inline-code">MX</code> Record:</strong> ระบุชื่อเซิร์ฟเวอร์รับส่งอีเมล (Mail Exchanger) ของโดเมนนั้น</li><li><strong><code class="inline-code">HTTPS</code> Record:</strong> ระเบียนยุคใหม่ที่ใช้เก็บข้อมูล ALPN (HTTP/3) และกุญแจเข้ารหัส <strong>ECH (Encrypted Client Hello)</strong></li></ul>
+<h3 class="subsec-title">2.2 โปรโตคอลระบบอีเมล (Email Protocols: SMTP, POP3, IMAP) — จุดหลอกในข้อสอบข้อ 4.3 และ 4.4!</h3>
+<p>ระบบอีเมลประกอบด้วยตัวละคร 3 ส่วนคือ User Agent (โปรแกรมอ่านเมล), Mail Server และโปรโตคอลการสื่อสาร ซึ่งต้องแยกหน้าที่ให้ชัดเจน:</p>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ ลำดับการทำงานของระบบอีเมลบน TCP: การส่งต่อด้วย SMTP (Push) และการดึงจดหมายด้วย POP3/IMAP (Pull)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-chain">
+            <div class="dg-chain-node blue"><b>1. ผู้ส่ง (Alice)</b><span>User Agent (Email Client)</span></div>
+            <div class="dg-chain-arrow"><span><b>SMTP (Push)</b></span><span class="arr">➜</span><span>TCP 25/587</span></div>
+            <div class="dg-chain-node orange"><b>2. Alice Mail Server</b><span>เข้าคิวรอส่งออก (Send Queue)</span></div>
+            <div class="dg-chain-arrow"><span><b>SMTP (Push)</b></span><span class="arr">➜</span><span>ส่งข้าม Server!</span></div>
+            <div class="dg-chain-node orange"><b>3. Bob Mail Server</b><span>เก็บในตู้จดหมาย (Mailbox)</span></div>
+            <div class="dg-chain-arrow"><span><b>POP3 / IMAP</b></span><span class="arr">➜</span><span><b>(Pull ดึงมาอ่าน)</b></span></div>
+            <div class="dg-chain-node green"><b>4. ผู้รับ (Bob)</b><span>User Agent เปิดอ่านอีเมล</span></div>
+        </div>
+        </div></div>
+<div class="callout callout-exam"><div class="callout-title">จุดออกสอบและกับดักที่ต้องระวัง (Exam Focus &amp; Common Pitfalls)</div><div class="callout-body"><p><strong>ข้อควรจำเพื่อทำข้อสอบถูก-ผิด (ข้อ 4.3 และ 4.4):</strong></p><p class="callout-bullet">• <strong>อีเมลทุกโปรโตคอล (ทั้ง SMTP, POP3, IMAP) รันอยู่บนโปรโตคอล <code class="inline-code">TCP</code> เสมอ!</strong> เพราะอีเมลยอมให้ข้อความสูญหายไม่ได้เด็ดขาด ต้องใช้บริการ Reliable Data Transfer ของ TCP (ดังนั้นข้อความ <em>"EMAIL เป็นแอปพลิเคชันที่รันอยู่บน TCP"</em> จึงเป็นข้อความที่ <strong>ถูก!</strong>)</p><p class="callout-bullet">• <strong>โปรโตคอลที่ใช้ส่งข้อมูลผลักเมล (Push) จากผู้ส่งไปหา Mail Server และส่งต่อระหว่าง Mail Server ด้วยกัน คือ <code class="inline-code">SMTP</code> (Simple Mail Transfer Protocol - TCP Port 25/587) เท่านั้น!</strong></p><p class="callout-bullet">• ส่วน <strong><code class="inline-code">POP3</code> (Post Office Protocol v3 - TCP Port 110)</strong> และ <strong><code class="inline-code">IMAP</code> (TCP Port 143)</strong> เป็นโปรโตคอลสำหรับให้เครื่องของผู้รับปลายทางใช้ <strong>"ดึงเมล (Pull/Retrieve)"</strong> จากตู้จดหมายบน Mail Server มาเปิดอ่านในเครื่องตัวเองเท่านั้น <strong>POP3 ไม่สามารถใช้ส่งเมลระหว่าง Mail Server ได้!</strong> (ดังนั้นข้อความ <em>"POP3 เป็นโปรโตคอลสำหรับใช้ส่งข้อมูลระหว่าง mail server"</em> จึงเป็นข้อความที่ <strong>ผิด!</strong>)</p></div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">3. การสตรีมวิดีโอแบบปรับตัวได้ DASH (Dynamic Adaptive Streaming over HTTP) — ออกสอบข้อที่ 5!</h2>
+<div class="callout callout-origin"><div class="callout-title">ที่มาที่ไปและเหตุผลเชิงวิศวกรรม (Why It Exists &amp; First Principles)</div><div class="callout-body"><p>หากเว็บไซต์วิดีโออย่าง YouTube หรือ Netflix เก็บไฟล์วิดีโอความละเอียดสูง 4K ไว้เป็นไฟล์เดียวขนาดใหญ่ เมื่อผู้ใช้ที่นั่งอยู่ในรถยนต์และสัญญาณมือถือดรอปลงกะทันหัน วิดีโอจะค้างหมุนติ้ว (Buffering) ทันที ในทางกลับกัน หากบีบอัดเป็นความละเอียดต่ำ 360p อย่างเดียว คนที่ใช้เน็ตไฟเบอร์ความเร็วสูงก็จะได้รับภาพที่เบลอไม่คมชัด จึงเกิดเทคโนโลยี <strong>DASH (Dynamic Adaptive Streaming over HTTP)</strong> ขึ้นมาแก้ปัญหานี้!</p></div></div>
+<h3 class="subsec-title">Manifest File ของ DASH คืออะไร และมีบทบาทอย่างไร? (คำตอบระดับ Best Answer สำหรับข้อสอบข้อที่ 5)</h3>
+<ol class="content-list ordered"><li><strong>หลักการของ DASH:</strong> บนฝั่งเซิร์ฟเวอร์ วิดีโอ 1 เรื่องจะถูกหั่นออกเป็นชิ้นย่อยๆ ตามเวลา เรียกว่า <strong>Chunks / Segments</strong> (เช่น ชิ้นละ 2–4 วินาที) และแต่ละชิ้นจะถูกเข้ารหัสบันทึกไว้ <strong>หลายระดับความละเอียดและหลายอัตราบิต (Multiple Encoding Rates / Bitrates)</strong> เช่น 360p (500 kbps), 720p (2 Mbps), 1080p (5 Mbps), 4K (15 Mbps) เก็บไว้เป็นไฟล์แยกกันบน HTTP Web Server/CDN</li><li><strong>Manifest File (<code class="inline-code">.mpd</code> — Media Presentation Description) คืออะไร:</strong></li></ol>
+<ul class="content-list"><li>คือ <strong>"ไฟล์สารบัญหรือแผนผังรายการข้อมูลเมตา (Index / Metadata File)"</strong> ที่เซิร์ฟเวอร์ส่งให้เครื่องผู้เล่น (Client) เป็นอันดับแรกสุดก่อนเริ่มเล่นวิดีโอ โดยภายใน Manifest File จะระบุรายการ <strong>URL ที่อยู่ของวิดีโอแต่ละก้อน (Chunks) ในทุกระดับความละเอียด/บิตเรต (Encoding Rates)</strong> พร้อมข้อมูลเวลาเริ่มต้น-สิ้นสุดและฟอร์แมตของแต่ละก้อน</li></ul>
+<ol class="content-list ordered"><li><strong>บทบาทสำคัญของ Manifest File ต่อการทำ Multimedia Streaming:</strong></li></ol>
+<ul class="content-list"><li>ช่วยให้ <strong>ฝั่งผู้รับ (Client) เป็นผู้มีอำนาจตัดสินใจด้วยตนเอง (Client-driven Adaptation)</strong>: ในขณะเล่นวิดีโอ เครื่อง Client จะวัดความเร็วแบนด์วิดท์ของเครือข่ายและระดับน้ำในบัฟเฟอร์ของตนเองตลอดเวลา แล้วเปิดดู <strong>Manifest File</strong> เพื่อเลือกส่งคำขอ <code class="inline-code">HTTP GET</code> ไปดึงก้อนวิดีโอชิ้นถัดไปในระดับความละเอียดที่เหมาะสมที่สุด ณ วินาทีนั้น (ถ้าเน็ตแรงก็ดึง URL ของก้อน 4K; ถ้าเน็ตตกก็สลับไปดึง URL ของก้อน 480p ในชิ้นถัดไปได้ทันทีโดยวิดีโอเล่นต่อเนื่องไม่สะดุดค้าง!)</li></ul>
+<hr class="section-divider" />
+<h2 class="sec-title">4. โปรโตคอลการสื่อสารสำหรับ IoT: MQTT vs CoAP — ออกสอบข้อที่ 4.1 และ 4.2!</h2>
+<p>จากการบรรยายเรื่อง <strong>ความรู้เบื้องต้นและโปรโตคอลการสื่อสารของ IoT</strong> อุปกรณ์เซ็นเซอร์ IoT มีข้อจำกัดด้านพลังงานแบตเตอรี่ ซีพียู และแบนด์วิดท์ต่ำ จึงมีการออกแบบโปรโตคอลน้ำหนักเบา (Lightweight Protocols) 2 ตัวหลัก:</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>คุณสมบัติเปรียบเทียบ</th><th>MQTT (Message Queuing Telemetry Transport)</th><th>CoAP (Constrained Application Protocol)</th></tr></thead><tbody><tr><td><strong>1. รูปแบบสถาปัตยกรรม</strong></td><td><strong>Publish / Subscribe (ผ่านตัวกลาง Broker):</strong> เซ็นเซอร์ทำหน้าที่ Publish ข้อมูลเข้าสู่หัวข้อ (<strong>Topic</strong> เช่น <code class="inline-code">home/livingroom/temp</code>) ที่ตัว Broker ส่วนมือถือที่กด Subscribe หัวข้อนั้นไว้จะได้รับข้อมูลจาก Broker</td><td><strong>Request / Response (เหมือน HTTP ย่อส่วน):</strong> ไคลเอ็นต์ส่งคำขอไปที่เซิร์ฟเวอร์บนเซ็นเซอร์โดยตรง โดยใช้เมธอดเหมือน HTTP ทุกประการ ได้แก่ <strong><code class="inline-code">GET</code>, <code class="inline-code">POST</code>, <code class="inline-code">PUT</code>, <code class="inline-code">DELETE</code></strong> และมีรหัสตอบกลับคล้าย HTTP (เช่น <code class="inline-code">2.05 Content</code>)</td></tr><tr><td><strong>2. โปรโตคอลชั้น Transport</strong></td><td>รันอยู่บน <strong><code class="inline-code">TCP</code></strong> (ปกติ Port 1883 / TLS 8883)</td><td>รันอยู่บน <strong><code class="inline-code">UDP</code></strong> (เพื่อให้มีส่วนหัวเล็กที่สุด仅 4 Bytes และไม่ต้องทำ 3-way handshake)</td></tr><tr><td><strong>3. การรับประกันการส่งข้อมูล (QoS)</strong></td><td><strong>มีระบบ QoS (Quality of Service) ถึง 3 ระดับ!</strong>&lt;br&gt;• <strong>QoS 0 (At most once):</strong> ส่งครั้งเดียวแล้วจบ ไม่มีการตอบรับ (Fire and forget)&lt;br&gt;• <strong>QoS 1 (At least once):</strong> ส่งซ้ำจนกว่าจะได้รับ <code class="inline-code">PUBACK</code> ยืนยัน (ถึงแน่นอนแต่อาจได้ซ้ำ)&lt;br&gt;• <strong>QoS 2 (Exactly once):</strong> ทักทาย 4 จังหวะ รับประกันว่าข้อมูลถึงปลายทาง <strong>เพียงครั้งเดียวเท่านั้น</strong></td><td>ใช้บิตระบุข้อความแบบ <strong>Confirmable (<code class="inline-code">CON</code> — ต้องตอบ <code class="inline-code">ACK</code> กลับ)</strong> หรือ <strong>Non-confirmable (<code class="inline-code">NON</code> — ไม่ต้องตอบกลับ)</strong> บน UDP</td></tr></tbody></table></div>
+<div class="callout callout-exam"><div class="callout-title">จุดออกสอบและกับดักที่ต้องระวัง (Exam Focus &amp; Common Pitfalls)</div><div class="callout-body"><p><strong>สรุปเพื่อตอบข้อสอบข้อ 4.1 และ 4.2 ทันที:</strong></p><p class="callout-bullet">• ข้อ 4.1: <em>"MQTT ไม่มีการทำ QoS"</em> ➔ <strong>ผิด!</strong> (เพราะ MQTT มีการทำ QoS 3 ระดับ คือ QoS 0, QoS 1 และ QoS 2)</p><p class="callout-bullet">• ข้อ 4.2: <em>"CoAP มีหลักการทำงานคล้าย HTTP"</em> ➔ <strong>ถูก!</strong> (เพราะ CoAP ออกแบบมาโดยย่อส่วนสถาปัตยกรรม RESTful Request/Response ของ HTTP มีคำสั่ง GET, PUT, POST, DELETE เหมือน HTTP แต่ปรับให้เบาลงและรันบน UDP)</p></div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">5. กรณีศึกษางานวิจัย: กลไกการทำงานและสถานะปัจจุบันของ Encrypted Client Hello (ECH)</h2>
+<p>ในชั้นเรียนมีการนำเสนองานวิจัยเรื่อง <strong>ECH (Encrypted Client Hello)</strong> ซึ่งเข้ามาแก้จุดอ่อนด้านความเป็นส่วนตัวของการเชื่อมต่อ HTTPS (TLS 1.3):</p>
+<ul class="content-list"><li><strong>ที่มาของปัญหา:</strong> แม้เราจะเข้าเว็บไซต์ด้วย HTTPS ที่เข้ารหัสเนื้อหาทั้งหมด แต่ในขั้นตอนแรกสุดของ TLS Handshake เครื่องไคลเอ็นต์จะต้องส่งข้อความ <code class="inline-code">ClientHello</code> ซึ่งระบุชื่อโดเมนเว็บไซต์ปลายทางไว้ในฟิลด์ <strong>SNI (Server Name Indication) เป็นข้อความธรรมดาที่ไม่ได้เข้ารหัส (Plaintext)</strong> ทำให้ผู้ให้บริการอินเทอร์เน็ต (ISP), ไฟร์วอลล์องค์กร หรือผู้ดักฟังระหว่างทางรู้ได้ทันทีว่าเรากำลังเปิดเข้าเว็บไซต์ชื่ออะไร</li><li><strong>กลไกของ ECH:</strong> ไคลเอ็นต์จะดึงกุญแจสาธารณะของ ECH มาจากระเบียน <strong><code class="inline-code">HTTPS</code> Record ของระบบ DNS</strong> แล้วนำมาเข้ารหัสส่วน <code class="inline-code">Inner ClientHello</code> (ที่เก็บชื่อเว็บจริง) จากนั้นห่อใส่ซอง <code class="inline-code">Outer ClientHello</code> ที่โชว์เฉพาะชื่อผู้ให้บริการ CDN กลาง (เช่น <code class="inline-code">cloudflare-ech.com</code>) ทำให้คนภายนอกเห็นแค่ว่าเชื่อมต่อไปยัง Cloudflare แต่ไม่รู้ว่าเข้าเว็บใดข้างใน</li><li><strong>บทบาทของ GREASE (Generate Random Extension and Sustain Extensibility):</strong> คือการที่เว็บเบราว์เซอร์ส่งส่วนขยาย <strong>ECH ปลอม (ข้อมูลสุ่ม)</strong> ออกไปเป็นประจำแม้เว็บปลายทางจะยังไม่รองรับ ECH จริง เพื่อฝึกและป้องกันไม่ให้อุปกรณ์เครือข่ายตรงกลาง (Middleboxes เช่น Firewall/Proxy รุ่นเก่า) ตกใจและบล็อกแพ็กเก็ตเมื่อมีการเปิดใช้ ECH จริงในอนาคต</li><li><strong>ผลการวิจัยและผลกระทบ:</strong> ปัจจุบันฝั่งเบราว์เซอร์ (Client) มีความพร้อมสูงมาก (พบ ECH extension ใน 59% ของทราฟฟิก QUIC แต่ส่วนใหญ่ยังเป็น GREASE) ขณะที่ฝั่ง Server/DNS ยังรองรับจำกัด (มี Cloudflare เป็นผู้นำหลัก) และความท้าทายสำคัญคือ <strong>อุปกรณ์รักษาความปลอดภัย (Firewall/IDS) จะไม่สามารถใช้ SNI ในการกรองเว็บไซต์อันตรายได้เหมือนเดิมอีกต่อไป</strong></li></ul></div></section>
+<section id="ch-07" class="chapter-card"><div class="chapter-badge">บทที่ 7 (Weeks 10–11)</div><h1 class="chapter-main-title">เครือข่ายไร้สาย (IEEE 802.11 Wi-Fi), วิวัฒนาการเครือข่ายเซลลูลาร์ 1G–5G และ Mobile IP</h1><div class="chapter-sub-title">CSMA/CA, ปัญหา Hidden Terminal &amp; RTS/CTS, เหตุผลที่ใช้ SIFS vs DIFS, ความต่างของ 1G/2G/3G/4G/5G และลำดับ Indirect Routing</div><div class="chapter-body"><h2 class="sec-title">1. เครือข่ายไร้สาย IEEE 802.11 (Wi-Fi): ทำไมต้องใช้ CSMA/CA และปัญหา Hidden Terminal — ออกสอบข้อ 6 และ 7!</h2>
+<div class="callout callout-origin"><div class="callout-title">ที่มาที่ไปและเหตุผลเชิงวิศวกรรม (Why It Exists &amp; First Principles)</div><div class="callout-body"><p>ในเครือข่ายสายแลน (Ethernet) เราใช้โปรโตคอล <strong>CSMA/CD (Collision Detection)</strong> คือส่งไปฟังไป ถ้าชนกันก็หยุดส่งทันที แต่ในเครือข่ายไร้สาย (<strong>IEEE 802.11 Wi-Fi</strong>) <strong>เราไม่สามารถใช้ Collision Detection (CD) ได้</strong> ด้วยเหตุผลทางฟิสิกส์ 2 ประการ: 1. <strong>กำลังส่งของตัวเองกลบสัญญาณอื่นมิด (Self-Signal Overwhelms Incoming Signal):</strong> ขณะที่เสาอากาศ Wi-Fi กำลังปล่อยคลื่นส่งออกไปด้วยกำลังสูง มันไม่สามารถรับฟังสัญญาณอ่อนๆ ของคนอื่นที่วิ่งสวนมาชนในเวลาเดียวกันได้เลย 2. <strong>ไม่ได้ยินกันทุกโหนด (Hidden Terminal Problem):</strong> โหนดสองตัวที่อยู่คนละฝั่งของ Access Point อาจมีสิ่งกีดขวางหรืออยู่ไกลเกินรัศมีของกันและกัน ทำให้ตรวจไม่พบว่ามีการชนกันเกิดขึ้นที่ตัว Access Point ตรงกลาง</p><p>ด้วยเหตุนี้ มาตรฐาน 802.11 จึงเปลี่ยนจาก <em>การตรวจจับการชน (CD)</em> มาเป็น <strong>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance — การหลีกเลี่ยงการชนล่วงหน้า)</strong> และต้องมีการส่งเฟรม <strong><code class="inline-code">ACK</code> (Link-layer Acknowledgement)</strong> ยืนยันกลับทุกครั้งที่รับเฟรมสำเร็จ!</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">1.1 ปัญหา Hidden Terminal คืออะไร และ 802.11 แก้ไขปัญหานี้อย่างไร? (คำตอบ Best Answer สำหรับข้อสอบข้อที่ 6!)</h3>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ ปัญหาโหนดซ่อนเร้นในเครือข่ายไร้สาย (Hidden Terminal Problem) และการชนกันที่ Access Point</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="860" height="220" rx="8" fill="#ffffff"/>
+            <!-- Coverage Circles -->
+            <ellipse cx="290" cy="105" rx="235" ry="82" fill="rgba(31, 111, 235, 0.10)" stroke="#1F6FEB" stroke-width="2" stroke-dasharray="6 4"/>
+            <ellipse cx="570" cy="105" rx="235" ry="82" fill="rgba(242, 140, 40, 0.12)" stroke="#F28C28" stroke-width="2" stroke-dasharray="6 4"/>
+            <text x="190" y="38" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1F6FEB">รัศมีคลื่นวิทยุของ โหนด A</text>
+            <text x="670" y="38" text-anchor="middle" font-size="11.5" font-weight="700" fill="#C2410C">รัศมีคลื่นวิทยุของ โหนด C</text>
+            <!-- Nodes -->
+            <rect x="90" y="80" width="120" height="50" rx="8" fill="#1F6FEB"/>
+            <text x="150" y="103" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">💻 โหนด A</text>
+            <text x="150" y="120" text-anchor="middle" font-size="9.5" fill="#DBEAFE">มองไม่เห็นโหนด C</text>
+
+            <rect x="360" y="75" width="140" height="60" rx="10" fill="#DC2626"/>
+            <text x="430" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">📡 Access Point (B)</text>
+            <text x="430" y="118" text-anchor="middle" font-size="10" font-weight="700" fill="#FEF2F2">💥 สัญญาณชนกันตรงกลาง!</text>
+
+            <rect x="650" y="80" width="120" height="50" rx="8" fill="#F28C28"/>
+            <text x="710" y="103" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">💻 โหนด C</text>
+            <text x="710" y="120" text-anchor="middle" font-size="9.5" fill="#FFF7ED">มองไม่เห็นโหนด A</text>
+
+            <!-- Arrows -->
+            <line x1="215" y1="105" x2="352" y2="105" stroke="#1F6FEB" stroke-width="3"/>
+            <polygon points="355,105 343,99 343,111" fill="#1F6FEB"/>
+            <text x="285" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#1F6FEB">ส่งข้อมูลพร้อมกัน ➜</text>
+
+            <line x1="645" y1="105" x2="508" y2="105" stroke="#F28C28" stroke-width="3"/>
+            <polygon points="505,105 517,99 517,111" fill="#F28C28"/>
+            <text x="575" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#C2410C">⬅ ส่งข้อมูลพร้อมกัน</text>
+
+            <text x="430" y="206" text-anchor="middle" font-size="11" font-weight="700" fill="#0B2A5B">วิธีแก้ปัญหา: ใช้กลไก CSMA/CA ร่วมกับการแลกเปลี่ยนเฟรมจองสื่อกลาง RTS (Request to Send) และ CTS (Clear to Send)</text>
+        </svg>
+        </div></div>
+<ol class="content-list ordered"><li><strong>ปัญหา Hidden Terminal คืออะไร:</strong></li></ol>
+<ul class="content-list"><li>คือปัญหาที่เกิดขึ้นในเครือข่ายไร้สาย เมื่อมีโหนดผู้ส่ง 2 โหนด (เช่น <strong>โหนด A</strong> และ <strong>โหนด C</strong>) ต่างก็อยู่ในรัศมีที่สามารถส่งข้อมูลไปหาโหนดผู้รับตัวเดียวกันตรงกลาง (เช่น <strong>Access Point B</strong>) ได้ <strong>แต่โหนด A และโหนด C อยู่ไกลกันเกินไปหรือมีสิ่งกีดขวางกั้น ทำให้ A และ C ไม่ได้ยินสัญญาณของกันและกัน (ซ่อนตัวจากกัน)</strong></li><li>ผลที่ตามมาคือ เมื่อโหนด A กำลังส่งข้อมูลให้ B อยู่ โหนด C ซึ่งฟังช่องสัญญาณแล้วไม่พบสัญญาณของ A จึงเข้าใจผิดว่าช่องสัญญาณว่าง (Idle) และตัดสินใจส่งข้อมูลไปหา B พร้อมกันทันที ทำให้เฟรมข้อมูลของ A และ C <strong>พุ่งเข้าชนกัน (Collision) ที่ตัวรับ B จนข้อมูลเสียหายทั้งคู่!</strong></li></ul>
+<ol class="content-list ordered"><li><strong>มาตรฐาน IEEE 802.11 แก้ไขปัญหานี้อย่างไร (กลไก RTS / CTS Handshake):</strong></li></ol>
+<ul class="content-list"><li>แก้ไขโดยใช้กลไกการจองช่องสัญญาณล่วงหน้าด้วยเฟรมควบคุมขนาดเล็กที่เรียกว่า <strong>RTS (Request to Send)</strong> และ <strong>CTS (Clear to Send)</strong> ร่วมกับตัวตั้งเวลา <strong>NAV (Network Allocation Vector)</strong>:</li></ul>
+<ol class="content-list ordered"><li>ก่อนที่ <strong>โหนด A</strong> จะส่งเฟรมข้อมูลขนาดใหญ่ มันจะส่งเฟรมสั้นๆ ที่ชื่อว่า <strong><code class="inline-code">RTS</code> (Request to Send)</strong> ซึ่งระบุระยะเวลาที่จะขอใช้ช่องสัญญาณ ไปให้ <strong>Access Point (B)</strong> ก่อน</li><li>เมื่อ <strong>Access Point (B)</strong> ได้รับ RTS จะกระจายเฟรมตอบรับ <strong><code class="inline-code">CTS</code> (Clear to Send)</strong> ออกไปให้ทุกโหนดในรัศมีของ B ได้ยิน (ซึ่ง <strong>ทั้งโหนด A และโหนด C ที่ซ่อนอยู่ จะได้ยินเฟรม CTS จาก B อย่างชัดเจน!</strong>)</li><li>เมื่อ <strong>โหนด C</strong> ได้ยินเฟรม <code class="inline-code">CTS</code> จาก B โหนด C จะรู้ทันทีว่ามีคนกำลังใช้ช่องสัญญาณอยู่และจะตั้งเวลาห้ามตัวเองส่งข้อมูล (<strong>NAV — Virtual Carrier Sensing</strong>) ตลอดช่วงเวลานั้น ส่วน <strong>โหนด A</strong> เมื่อได้รับ <code class="inline-code">CTS</code> จึงส่งเฟรม <code class="inline-code">DATA</code> จนจบและรับ <code class="inline-code">ACK</code> กลับได้อย่างปลอดภัยไร้การชน!</li></ol>
+<hr class="section-divider" />
+<h3 class="subsec-title">1.2 เหตุใด 802.11 จึงถ่วงเวลาการส่ง ACK เท่ากับ <code class="inline-code">SIFS</code> แทนที่จะรอเท่ากับ <code class="inline-code">DIFS</code>? (คำตอบ Best Answer สำหรับข้อสอบข้อที่ 7!)</h3>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ แผนภาพเวลาเปรียบเทียบ SIFS vs DIFS: เหตุผลที่ ACK ต้องรอแค่ SIFS เพื่อชิงสิทธิ์ส่งก่อนโหนดอื่น</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <svg viewBox="0 0 860 225" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="860" height="225" rx="8" fill="#ffffff"/>
+            <!-- Timelines -->
+            <text x="20" y="55" font-size="11.5" font-weight="700" fill="#0B2A5B">1. โหนดผู้ส่ง (Sender)</text>
+            <line x1="185" y1="50" x2="830" y2="50" stroke="#94A3B8" stroke-width="1.5"/>
+            <rect x="200" y="26" width="230" height="36" rx="6" fill="#1F6FEB"/>
+            <text x="315" y="49" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">ส่งเฟรมข้อมูล (DATA Frame)</text>
+
+            <text x="20" y="120" font-size="11.5" font-weight="700" fill="#16A34A">2. โหนดผู้รับ (Receiver)</text>
+            <line x1="185" y1="115" x2="830" y2="115" stroke="#94A3B8" stroke-width="1.5"/>
+            <!-- SIFS Bracket -->
+            <line x1="430" y1="50" x2="430" y2="130" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <rect x="432" y="96" width="68" height="22" rx="4" fill="#FEF2F2" stroke="#DC2626"/>
+            <text x="466" y="111" text-anchor="middle" font-size="9.5" font-weight="700" fill="#DC2626">รอแค่ SIFS!</text>
+            <rect x="502" y="91" width="95" height="36" rx="6" fill="#16A34A"/>
+            <text x="549" y="114" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">ส่ง ACK ทันที</text>
+
+            <text x="20" y="185" font-size="11.5" font-weight="700" fill="#C2410C">3. โหนดอื่นๆ ที่รอแทรก</text>
+            <line x1="185" y1="180" x2="830" y2="180" stroke="#94A3B8" stroke-width="1.5"/>
+            <line x1="597" y1="115" x2="597" y2="195" stroke="#F28C28" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <rect x="600" y="160" width="120" height="24" rx="4" fill="#FFF4E8" stroke="#F28C28"/>
+            <text x="660" y="176" text-anchor="middle" font-size="9.5" font-weight="700" fill="#B45309">ต้องรอ DIFS (ยาวกว่า)</text>
+            <rect x="724" y="156" width="100" height="34" rx="6" fill="#F28C28"/>
+            <text x="774" y="177" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">แย่งส่งเฟรมถัดไป</text>
+        </svg>
+        </div></div>
+<div class="callout callout-bestanswer"><div class="callout-title">แนวทางการตอบให้ได้คะแนนเต็ม (Best Answer Strategy)</div><div class="callout-body"><p><strong>แนวทางการตอบข้อสอบข้อที่ 7 (2 คะแนน) ให้ได้คะแนนเต็ม:</strong></p><p class="callout-bullet">• <strong>ความแตกต่างของระยะเวลา:</strong> ในมาตรฐาน 802.11 ระยะเวลา <strong>SIFS (Short Interframe Space)</strong> มีค่า <strong>สั้นกว่า</strong> ระยะเวลา <strong>DIFS (Distributed Interframe Space)</strong> เสมอ ($\text{SIFS} &lt; \text{DIFS}$) โดยโหนดทั่วไปที่ต้องการจะเริ่มต้นแย่งส่งเฟรมข้อมูลใหม่ (<code class="inline-code">DATA</code>) จะต้องฟังให้แน่ใจว่าช่องสัญญาณว่างติดต่อกันเป็นเวลาอย่างน้อยเท่ากับ <strong>DIFS</strong> เสียก่อนจึงจะมีสิทธิ์ส่งได้</p><p class="callout-bullet">• <strong>เหตุผลที่ผู้รับรอเพียง SIFS ก่อนส่ง ACK:</strong></p><p>1. <strong>เพื่อให้การส่งเฟรม <code class="inline-code">ACK</code> มีลำดับความสำคัญสูงสุด (Highest Priority) เหนือการส่งข้อมูลใหม่ของโหนดอื่น:</strong> เนื่องจากหลังจบเฟรม DATA ผู้รับรอเพียงเวลาสั้นๆ เท่ากับ <code class="inline-code">SIFS</code> ก็ส่ง <code class="inline-code">ACK</code> ออกไปทันที ในขณะที่โหนดอื่นๆ ในเครือข่ายยังต้องนั่งรอให้ครบเวลา <code class="inline-code">DIFS</code> (ซึ่งนานกว่า <code class="inline-code">SIFS</code>) 2. <strong>ป้องกันไม่ให้โหนดอื่นแทรกกลาง (Prevent Interruption / Collision with ACK):</strong> ทำให้โหนดอื่นได้ยินสัญญาณ <code class="inline-code">ACK</code> ก่อนที่เวลา <code class="inline-code">DIFS</code> ของพวกมันจะครบ จึงหยุดรอและไม่ส่งข้อมูลใหม่เข้ามาชนกับเฟรม <code class="inline-code">ACK</code> ช่วยให้ธุรกรรมการรับ-ส่งข้อมูลเดิมจบสมบูรณ์อย่างรวดเร็วและไม่ต้องเสียเวลาส่งเฟรม DATA ก้อนใหญ่ซ้ำใหม่</p></div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">2. วิวัฒนาการเครือข่ายโทรศัพท์เคลื่อนที่ 1G ถึง 5G และความต่างของ 3G vs 4G — ออกสอบข้อที่ 8!</h2>
+<p>เรื่องวิวัฒนาการของเทคโนโลยี Cellular Network ตั้งแต่อดีตจนถึงปัจจุบัน สรุปการเปลี่ยนแปลงเชิงสถาปัตยกรรมได้ดังนี้:</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ยุค (Gen)</th><th>บริการที่รองรับ</th><th>เทคโนโลยีการแบ่งช่องสัญญาณ (Multiple Access)</th><th>โครงสร้างสถาปัตยกรรมหลัก (Core Network Architecture)</th></tr></thead><tbody><tr><td><strong>1G</strong></td><td><strong>เสียงอย่างเดียว (Analog Voice Only)</strong> (เครื่องขนาดใหญ่ฉายา "กระติกน้ำ")</td><td><strong>Analog FDMA</strong> (แบ่งช่องความถี่อนาล็อก ความจุต่ำมาก)</td><td>เสา <strong>Base Station (BS)</strong> เชื่อมต่อผ่านสายไปยัง <strong>MSC (Mobile Switching Center)</strong> เข้าสู่โครงข่ายโทรศัพท์พื้นฐานสาธารณะ (PSTN) แบบสลับวงจร (Circuit-Switched)</td></tr><tr><td><strong>2G / 2.5G</strong></td><td><strong>Digital Voice + SMS</strong> (และเริ่มมีข้อมูลความเร็วต่ำ GPRS/EDGE ในยุค 2.5G)</td><td>• <strong>GSM:</strong> ผสมผสาน <strong>FDMA + TDMA</strong>&lt;br&gt;• <strong>IS-95:</strong> ใช้เทคโนโลยี <strong>CDMA</strong> (แยกรหัส)</td><td>เพิ่ม <strong>BSC (Base Station Controller)</strong> เข้ามาคุมเสา BTS หลายๆ ต้นก่อนเชื่อมเข้า MSC (คล้าย AP Controller ใน Wi-Fi) และมีการทำ Paging กับ Hand-off</td></tr><tr><td><strong>3G</strong></td><td><strong>Voice + High-speed Data (อินเทอร์เน็ตมือถือ)</strong></td><td><strong>WCDMA (Wideband CDMA)</strong> ผสาน <strong>CDMA ร่วมกับ TDMA</strong> (1 Time Slot รับได้หลายคน)</td><td><strong>สถาปัตยกรรมแบบแยก 2 เส้นทางคู่ขนาน (Hybrid Circuit + Packet Core):</strong>&lt;br&gt;• <strong>ทราฟฟิกเสียง (Voice):</strong> ยังคงวิ่งผ่านระบบโทรศัพท์แบบเดิม (<strong>Circuit-Switched ผ่าน MSC</strong>)&lt;br&gt;• <strong>ทราฟฟิกข้อมูล (Data):</strong> แยกไปวิ่งผ่านโครงข่ายแพ็กเก็ตอินเทอร์เน็ต โดยมีอุปกรณ์ใหม่คือ <strong>SGSN</strong> และ <strong>GGSN</strong></td></tr><tr><td><strong>4G (LTE)</strong></td><td><strong>Broadband Data &amp; VoLTE (All-IP)</strong></td><td><strong>OFDMA / SC-FDMA</strong> + MIMO</td><td><strong>เปลี่ยนผ่านสู่โครงข่าย All-IP (Packet-Switched Network) 100%!</strong> ยกเลิกระบบสลับวงจรแบบเดิม (ไม่มี Circuit-switched core อีกต่อไป) ทั้งข้อมูลและเสียง (VoLTE) ถูกแปลงเป็น IP Packet วิ่งผ่านโครงข่ายเดียวกันทั้งหมด (EPC: S-GW, P-GW, MME)</td></tr><tr><td><strong>5G (NR)</strong></td><td><strong>eMBB</strong> (เน็ตเร็วสูง), <strong>URLLC</strong> (หน่วงต่ำระดับ 1 ms), <strong>mMTC</strong> (IoT ล้านชิ้น/ตร.กม.)</td><td><strong>OFDMA (คลื่นความถี่สูงขึ้น mmWave)</strong> + <strong>Massive MIMO &amp; Beamforming</strong></td><td>สถาปัตยกรรมคลาวด์เนทีฟ (Service-Based Architecture), Network Slicing และ Edge Computing</td></tr></tbody></table></div>
+<div class="callout callout-bestanswer"><div class="callout-title">แนวทางการตอบให้ได้คะแนนเต็ม (Best Answer Strategy)</div><div class="callout-body"><p><strong>สรุปคำตอบเปรียบเทียบความแตกต่างระหว่าง 3G และ 4G สำหรับข้อสอบข้อที่ 8 (2 คะแนน):</strong> 1. <strong>โครงสร้างเครือข่ายแกนหลัก (Core Network Architecture):</strong></p><p class="callout-bullet">• <strong>3G Network:</strong> ใช้สถาปัตยกรรมแบบผสม (<strong>Hybrid Circuit-Switched &amp; Packet-Switched</strong>) โดยมีการแยกเส้นทางการทำงานออกจากกัน: <strong>เสียง (Voice)</strong> ยังคงวิ่งผ่านเครือข่ายโทรศัพท์แบบสลับวงจรดั้งเดิม (<strong>Circuit-Switched ผ่าน MSC</strong>) ส่วน <strong>ข้อมูล (Data)</strong> จะแยกไปวิ่งผ่านเครือข่ายแพ็กเก็ต (<strong>Packet-Switched ผ่าน SGSN และ GGSN</strong>)</p><p class="callout-bullet">• <strong>4G (LTE) Network:</strong> เปลี่ยนโครงสร้างเป็นระบบ <strong>All-IP (Unified Packet-Switched Network) ทั้งหมด 100%</strong> โดยยกเลิกระบบสลับวงจรแบบเดิมทิ้งไปทั้งหมด ไม่ว่าจะเป็นข้อมูลเว็บ วิดีโอ หรือแม้แต่เสียงสนทนา (<strong>VoLTE</strong>) ล้วนถูกส่งในรูปแบบของ <strong>IP Packets</strong> ผ่านโครงข่ายหลักชุดเดียวกันทั้งหมด</p><p>2. <strong>สถาปัตยกรรมสถานีฐาน (Radio Access Network) และความเร็ว:</strong> ใน 4G มีการยุบรวมหน้าที่ของตัวควบคุมสถานีฐาน (RNC/BSC ใน 3G) เข้าไว้ในตัวเสาสัญญาณอัจฉริยะ (<strong>eNodeB</strong>) โดยตรง ทำให้โครงสร้างแบนราบขึ้น ลดความหน่วง (Latency) และให้ความเร็วรับส่งข้อมูลสูงกว่า 3G อย่างก้าวกระโดด</p></div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">3. การจัดการความเคลื่อนที่ด้วย Mobile IP: Indirect Routing — ออกสอบข้อที่ 9!</h2>
+<p>เมื่ออุปกรณ์พกพา (<strong>Mobile Node — MN</strong>) เดินทางย้ายออกจากเครือข่ายบ้านเกิดของตนเอง (<strong>Home Network</strong> ซึ่งมี <strong>Home Agent — HA</strong> เฝ้าอยู่และมีหมายเลข <strong>Permanent IP Address</strong> ประจำตัว) ไปเชื่อมต่ออยู่ในเครือข่ายอื่นที่ไปเยือน (<strong>Visited / Foreign Network</strong> ซึ่งมี <strong>Foreign Agent — FA</strong> ดูแลอยู่) หากผู้ติดต่อ (<strong>Correspondent Node — CN</strong>) ส่งแพ็กเก็ตมาหาหมายเลข IP เดิมของ MN แพ็กเก็ตจะไปถึงมือ MN ได้อย่างไรโดยที่การเชื่อมต่อไม่หลุด?</p>
+<p>คำตอบคือการใช้กลไก <strong>Indirect Routing (Triangle Routing)</strong> ซึ่งมีลำดับเหตุการณ์ตามเวลาจริง <strong>6 ขั้นตอนเรียงลำดับ</strong> (ตรงกับตารางเรียงลำดับในข้อสอบ Final ข้อที่ 9 เป๊ะ!) ดังนี้:</p>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ ลำดับการทำงาน 6 ขั้นตอนของการหาเส้นทางทางอ้อมใน Mobile IP (Indirect Routing via Home &amp;amp; Foreign Agent)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-grid-3" style="margin-bottom:8px;">
+            <div class="dg-card orange">
+                <div class="dg-card-title"><span>ขั้นที่ 1: ลงทะเบียนที่เครือข่ายใหม่</span><span class="dg-pill orange">Step 1</span></div>
+                <div class="dg-card-body"><b>Mobile Node (MN)</b> ย้ายเข้าสู่ Foreign Network และส่งข้อความลงทะเบียนกับ <b>Foreign Agent (FA)</b></div>
+            </div>
+            <div class="dg-card orange">
+                <div class="dg-card-title"><span>ขั้นที่ 2: กำหนดหมายเลข COA</span><span class="dg-pill orange">Step 2</span></div>
+                <div class="dg-card-body"><b>Foreign Agent (FA)</b> กำหนดหมายเลขที่อยู่ชั่วคราว <b>Care-of Address (COA)</b> ให้แก่เครื่อง MN</div>
+            </div>
+            <div class="dg-card blue">
+                <div class="dg-card-title"><span>ขั้นที่ 3: แจ้ง COA กลับบ้านเกิด</span><span class="dg-pill">Step 3</span></div>
+                <div class="dg-card-body"><b>FA</b> ติดต่อแจ้งหมายเลข <b>COA</b> กลับไปลงทะเบียนไว้ที่ <b>Home Agent (HA)</b> ในเครือข่ายบ้านเกิด</div>
+            </div>
+            <div class="dg-card purple">
+                <div class="dg-card-title"><span>ขั้นที่ 4: ผู้ติดต่อส่งหา IP ถาวร</span><span class="dg-pill purple">Step 4</span></div>
+                <div class="dg-card-body"><b>Correspondent Node (CN)</b> ส่งแพ็กเก็ตไปหาหมายเลข <b>Permanent IP</b> ของ MN ที่ Home Network ตามปกติ</div>
+            </div>
+            <div class="dg-card green">
+                <div class="dg-card-title"><span>ขั้นที่ 5: HA ดักรับและห่อหุ้มซอง</span><span class="dg-pill green">Step 5</span></div>
+                <div class="dg-card-body"><b>Home Agent (HA)</b> ดักรับแพ็กเก็ตแล้วทำ <b>Encapsulation (Tunneling)</b> จ่าหน้าซองนอกไปหา <b>COA</b> ที่ FA</div>
+            </div>
+            <div class="dg-card navy">
+                <div class="dg-card-title"><span>ขั้นที่ 6: FA แกะซองส่งมอบให้ MN</span><span class="dg-pill navy">Step 6</span></div>
+                <div class="dg-card-body"><b>Foreign Agent (FA)</b> รับแพ็กเก็ตแล้วทำ <b>Decapsulation (แกะซองนอกออก)</b> ส่งข้อมูลข้างในให้ <b>MN</b> สำเร็จ!</div>
+            </div>
+        </div>
+        </div></div>
+<div class="callout callout-bestanswer"><div class="callout-title">แนวทางการตอบให้ได้คะแนนเต็ม (Best Answer Strategy)</div><div class="callout-body"><p><strong>เฉลยตารางเรียงลำดับเหตุการณ์ 1 ถึง 6 ของ Indirect Routing (สำหรับข้อสอบข้อที่ 9 — 3 คะแนน):</strong> เมื่อนำเหตุการณ์ทั้ง 6 บรรทัดในโจทย์ข้อที่ 9 มาใส่ตัวเลขลำดับที่ถูกต้องตามไทม์ไลน์การทำงานจริง จะได้คำตอบดังนี้:</p><p class="callout-bullet">• <strong>ลำดับที่ 1:</strong> <em>Mobile Node ย้ายออกจาก Home Network และมาลงทะเบียนกับ Foreign Agent (FA)</em></p><p class="callout-bullet">• <strong>ลำดับที่ 2:</strong> <em>Foreign Agent (FA) กำหนด Care-of-Address กับ Mobile Node</em></p><p class="callout-bullet">• <strong>ลำดับที่ 3:</strong> <em>Foreign Agent (FA) ติดต่อ Home Agent (HA) เพื่อแจ้ง Care-of-Address ของ Mobile Node</em></p><p class="callout-bullet">• <strong>ลำดับที่ 4:</strong> <em>Correspondent Node ต้องการติดต่อ Mobile Node จึงส่ง packet ไปที่ Home Network</em></p><p class="callout-bullet">• <strong>ลำดับที่ 5:</strong> <em>Home Agent (HA) ห่อหุ้ม (encapsulate) packet ของ Correspondent Node ที่ได้รับ และ forward ไปยัง Care-of-Address ของ Mobile Node ผ่าน Foreign Agent</em></p><p class="callout-bullet">• <strong>ลำดับที่ 6:</strong> <em>Foreign Agent (FA) decapsulate packet เพื่อส่งต่อให้ Mobile Node</em></p><p><em>(หากเขียนตัวเลขเรียงตามแถวของตารางในใบข้อสอบจากบนลงล่าง จะได้ตัวเลขเรียงเป็น: <strong><code class="inline-code">3</code> , <code class="inline-code">4</code> , <code class="inline-code">6</code> , <code class="inline-code">2</code> , <code class="inline-code">1</code> , <code class="inline-code">5</code></strong>)</em></p></div></div></div></section>
+<section id="ch-08" class="chapter-card"><div class="chapter-badge">บทที่ 8 (Wireshark Lab IP v8.1)</div><h1 class="chapter-main-title">เฉลยละเอียดปฏิบัติการ Wireshark Lab: IP v8.1 (ครบทั้ง 26 ข้อ: Basic IPv4, Fragmentation &amp; IPv6)</h1><div class="chapter-sub-title">วิเคราะห์การทำงานของ Traceroute, การแกะส่วนหัว IPv4, การคำนวณ Fragment Offset ของแพ็กเก็ต 3,000 ไบต์ และการแกะ IPv6 DNS AAAA</div><div class="chapter-body"><div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p>[!NOTE] บทนี้สรุปหลักการและเฉลยละเอียดทุกข้อ (ข้อ 1 ถึง ข้อ 26) จากไฟล์ปฏิบัติการ <strong><code class="inline-code">Network Tech Wireshark_IP_v8.1-Solution.pdf</code></strong> (อ้างอิงตำรา <em>Computer Networking: A Top-Down Approach, 8th Edition</em> โดย J.F. Kurose &amp; K.W. Ross และไฟล์ข้อมูลแพ็กเก็ต <code class="inline-code">ip-wireshark-trace1-1.pcapng</code> และ <code class="inline-code">ip-wireshark-trace2-1.pcapng</code>) เพื่อให้ผู้เรียนเข้าใจการอ่านค่าทุกฟิลด์ในส่วนหัวของ IPv4 และ IPv6 อย่างทะลุปรุโปร่ง</p></div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">ส่วนที่ 1: พื้นฐานโปรโตคอล IPv4 และการทำงานของ Traceroute (Part 1: Basic IPv4 — ข้อ 1 ถึง 12)</h2>
+<h3 class="subsec-title">หลักการทำงานของโปรแกรม <code class="inline-code">traceroute</code> ในการทดลอง:</h3>
+<p>โปรแกรม <code class="inline-code">traceroute</code> (บน Linux/MacOS ส่งเป็น <strong>UDP Segments</strong>; ส่วน <code class="inline-code">tracert</code> บน Windows ส่งเป็น <strong>ICMP Echo Requests</strong>) ใช้ตรวจสอบว่าจากเครื่องของเราไปยังเซิร์ฟเวอร์ปลายทาง (<code class="inline-code">gaia.cs.umass.edu</code> หรือ IP <code class="inline-code">128.119.245.12</code>) ต้องเดินทางผ่านเราเตอร์ตัวใดบ้าง โดยใช้วิธี:</p>
+<ul class="content-list"><li>ส่งแพ็กเก็ตชุดที่ 1 (จำนวน 3 แพ็กเก็ต) โดยตั้งค่า <strong><code class="inline-code">TTL = 1</code></strong> ➔ เมื่อไปถึงเราเตอร์ตัวที่ 1 เราเตอร์จะลดค่า TTL ลง 1 เหลือ <code class="inline-code">0</code> จึงทิ้งแพ็กเก็ตนั้นและส่งข้อความแจ้งเตือน <strong><code class="inline-code">ICMP TTL-exceeded (Type 11)</code></strong> กลับมาหาเครื่องเรา ทำให้เรารู้หมายเลข IP ของเราเตอร์ก้าวที่ 1</li><li>จากนั้นส่งชุดที่ 2 (3 แพ็กเก็ต) โดยตั้งค่า <strong><code class="inline-code">TTL = 2</code></strong> ➔ เพื่อหา IP ของเราเตอร์ก้าวที่ 2 และเพิ่มค่า TTL ขึ้นทีละ 1 ทุกๆ 3 แพ็กเก็ตจนถึงปลายทาง</li></ul>
+<h3 class="subsec-title">เฉลยคำถามข้อที่ 1 ถึง ข้อที่ 12 (Part 1: Basic IPv4):</h3>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ข้อที่</th><th>คำถามจากใบงาน Wireshark Lab</th><th>เฉลยคำตอบที่ถูกต้อง (Best Answer)</th><th>คำอธิบายที่มาและวิธีดูใน Wireshark</th></tr></thead><tbody><tr><td><strong>ข้อ 1</strong></td><td>หมายเลข IP Address ของเครื่องคอมพิวเตอร์ผู้ส่ง (Packet ที่ 44 ในไฟล์ trace) คืออะไร?</td><td><strong><code class="inline-code">192.168.86.61</code></strong></td><td>ดูจากช่อง <code class="inline-code">Source Address</code> ในส่วน Internet Protocol Version 4 ของ UDP segment แรกที่ส่งออกไปหา <code class="inline-code">128.119.245.12</code></td></tr><tr><td><strong>ข้อ 2</strong></td><td>ค่าในฟิลด์ <code class="inline-code">Time-to-Live (TTL)</code> ของ IPv4 datagram ก้อนแรกนี้มีค่าเท่าใด?</td><td><strong><code class="inline-code">TTL = 1</code></strong></td><td>เพราะเป็นแพ็กเก็ตชุดแรกสุดที่ <code class="inline-code">traceroute</code> ส่งออกไปเพื่อทดสอบเราเตอร์ตัวแรกที่อยู่ห่างออกไป 1 Hop</td></tr><tr><td><strong>ข้อ 3</strong></td><td>ค่าในฟิลด์ <code class="inline-code">Upper Layer Protocol</code> ของ IPv4 datagram นี้คืออะไร?</td><td><strong><code class="inline-code">UDP (17)</code></strong>&lt;br&gt;<em>(หมายเหตุ: ถ้าทำบน Windows <code class="inline-code">tracert</code> จะเป็น <code class="inline-code">ICMP (1)</code>)</em></td><td>ในไฟล์ trace ตัวอย่างบันทึกจากเครื่อง MacOS/Linux ซึ่งใช้ UDP ในการส่ง traceroute จึงระบุรหัสโปรโตคอลชั้นบนเป็นหมายเลข <code class="inline-code">17 (UDP)</code></td></tr><tr><td><strong>ข้อ 4</strong></td><td>ส่วนหัวของ IP Header มีขนาดกี่ไบต์?</td><td><strong><code class="inline-code">20 Bytes</code></strong></td><td>ดูจากช่อง <code class="inline-code">Header Length: 20 bytes (5)</code> ซึ่งเป็นขนาดมาตรฐานของ IPv4 Header ที่ไม่มีฟิลด์ Options</td></tr><tr><td><strong>ข้อ 5</strong></td><td>ข้อมูลบรรทุก (Payload) ของ IP datagram ก้อนนี้มีขนาดกี่ไบต์ และคำนวณได้อย่างไร?</td><td><strong><code class="inline-code">28 Bytes</code></strong></td><td>คำนวณจาก <code class="inline-code">Total Length (48 bytes) - IP Header Length (20 bytes) = 28 bytes</code> (ประกอบด้วย UDP Header 8 bytes + ข้อมูล traceroute 20 bytes)</td></tr><tr><td><strong>ข้อ 6</strong></td><td>IP datagram ก้อนนี้ถูกแยกส่วน (Fragmented) หรือไม่? ทราบได้อย่างไร?</td><td><strong>ไม่ถูก Fragment (Not Fragmented)</strong></td><td>ทราบได้เพราะในฟิลด์ Flags ค่าบิต <strong><code class="inline-code">MF (More Fragments) = 0</code></strong> (แปลว่าไม่มีชิ้นส่วนอื่นตามมา) และค่า <strong><code class="inline-code">Fragment Offset = 0</code></strong> (แปลว่าเป็นชิ้นแรกสุดและชิ้นเดียว)</td></tr><tr><td><strong>ข้อ 7</strong></td><td>เมื่อกรองดูเฉพาะชุดแพ็กเก็ต UDP ที่เครื่องเราส่งออกไปหา <code class="inline-code">128.119.245.12</code> ฟิลด์ใดใน IP Header ที่ <strong>เปลี่ยนแปลงเสมอ</strong> ในทุกแพ็กเก็ต? เพราะเหตุใด?</td><td><strong>1. <code class="inline-code">Identification</code></strong>&lt;br&gt;<strong>2. <code class="inline-code">Header Checksum</code></strong>&lt;br&gt;<strong>3. <code class="inline-code">TTL</code></strong> (เปลี่ยนทุกๆ 3 แพ็กเก็ต)</td><td>• <strong>Identification:</strong> เปลี่ยนเพราะแต่ละ IP datagram ที่ส่งออกต้องมีหมายเลข ID ประจำตัวไม่ซ้ำกัน&lt;br&gt;• <strong>TTL:</strong> เปลี่ยนเพิ่มขึ้นทีละ 1 ทุกๆ การส่งครบ 3 แพ็กเก็ตตามกลไกของ <code class="inline-code">traceroute</code>&lt;br&gt;• <strong>Header Checksum:</strong> ต้องคำนวณใหม่ทุกครั้งเพราะค่า Identification และ TTL ในส่วนหัวเปลี่ยนไป</td></tr><tr><td><strong>ข้อ 8</strong></td><td>ฟิลด์ใดในชุด IP datagrams เหล่านี้ที่มีค่า <strong>คงที่เหมือนเดิมเสมอ (Stay Constant)</strong>? เพราะเหตุใด?</td><td><strong><code class="inline-code">Version</code>, <code class="inline-code">Header Length</code>, <code class="inline-code">Differentiated Services (DS)</code>, <code class="inline-code">Total Length</code>, <code class="inline-code">Flags</code>, <code class="inline-code">Fragment Offset</code>, <code class="inline-code">Protocol</code>, <code class="inline-code">Source IP</code>, <code class="inline-code">Destination IP</code></strong></td><td>• <strong>Version (4) &amp; Header Length (20):</strong> ใช้ IPv4 มาตรฐานเดิมตลอด&lt;br&gt;• <strong>DS (0):</strong> เป็นแพ็กเก็ตปกติไม่ได้ตั้งค่า QoS พิเศษ&lt;br&gt;• <strong>Total Length (48):</strong> ขนาด IP Header (20) + UDP (8) + Payload (20) คงที่เท่าเดิม&lt;br&gt;• <strong>Protocol (17):</strong> ใช้ UDP ตลอดการรัน traceroute&lt;br&gt;• <strong>Source &amp; Destination IP:</strong> ส่งจากเครื่องเดิมไปหาปลายทางเดิมตลอด</td></tr><tr><td><strong>ข้อ 9</strong></td><td>รูปแบบการเปลี่ยนแปลงของค่าในฟิลด์ <code class="inline-code">Identification</code> ของแพ็กเก็ตที่เครื่องเราส่งออกไปเป็นอย่างไร?</td><td><strong>มีค่าเพิ่มขึ้นทีละ 1 เรียงตามลำดับ (Increments by 1)</strong></td><td>ระบบปฏิบัติการของเครื่องผู้ส่งจะบวกค่าตัวนับ IP Identification เพิ่มขึ้นทีละ 1 ทุกครั้งที่สร้าง IP datagram ก้อนใหม่ส่งออกไป</td></tr><tr><td><strong>ข้อ 10</strong></td><td>เมื่อดูแพ็กเก็ตแจ้งเตือนที่ <strong>เราเตอร์ระหว่างทางส่งกลับมาหาเครื่องเรา</strong> (<code class="inline-code">ip.dst==192.168.86.61 and icmp</code>) ฟิลด์ <code class="inline-code">Upper Layer Protocol</code> มีค่าเป็นอะไร?</td><td><strong><code class="inline-code">ICMP (1)</code></strong></td><td>เพราะเมื่อ TTL ลดเหลือ 0 เราเตอร์จะสร้างข้อความแจ้งเตือนข้อผิดพลาดด้วยโปรโตคอล <strong>ICMP</strong> (รหัสโปรโตคอล = <code class="inline-code">1</code>) ส่งกลับมาให้ผู้ส่ง</td></tr><tr><td><strong>ข้อ 11</strong></td><td>ค่าในฟิลด์ <code class="inline-code">Identification</code> ของแพ็กเก็ต ICMP ที่ส่งกลับมาจากเราเตอร์ มีพฤติกรรมเพิ่มขึ้นทีละ 1 เหมือนคำตอบข้อ 9 หรือไม่?</td><td><strong>ใช่ (Yes) — ค่า ID จะเพิ่มขึ้นทีละ 1 เฉพาะเมื่อมาจากเราเตอร์ต้นทาง (Source Router) ตัวเดียวกัน</strong></td><td>ในชุดแพ็กเก็ต ICMP 3 ก้อนที่ส่งกลับมาจากเราเตอร์ตัวเดียวกัน ค่า Identification จะเรียงเพิ่มขึ้นทีละ 1 (แต่เมื่อเปลี่ยนเป็นเราเตอร์ตัวถัดไป ก็จะเริ่มนับจากตัวนับของเราเตอร์ตัวนั้นแทน)</td></tr><tr><td><strong>ข้อ 12</strong></td><td>ค่าในฟิลด์ <code class="inline-code">TTL</code> ของแพ็กเก็ต ICMP ที่ส่งกลับมาจากเราเตอร์แต่ละตัว มีค่าเท่ากันทั้งหมดหรือไม่?</td><td><strong>ไม่เท่ากัน (No — TTL จากแต่ละ Router ถูกกำหนดค่าเริ่มต้นไว้ไม่เท่ากัน)</strong></td><td>เพราะเราเตอร์แต่ละตัวอาจใช้ระบบปฏิบัติการหรือยี่ห้อต่างกัน จึงตั้งค่า Initial TTL เริ่มต้นไม่เท่ากัน (เช่น บางตัวเริ่มที่ 64 บางตัวเริ่มที่ 255) และอยู่ห่างจากเครื่องเราไม่เท่ากัน</td></tr></tbody></table></div>
+<hr class="section-divider" />
+<h2 class="sec-title">ส่วนที่ 2: การหั่นแยกส่วนแพ็กเก็ตขนาดใหญ่ (Part 2: IP Fragmentation — ข้อ 13 ถึง 19)</h2>
+<p>ในการทดลองส่วนที่ 2 เราสั่งรันคำสั่ง <code class="inline-code">traceroute gaia.cs.umass.edu 3000</code> เพื่อบังคับส่ง UDP Segment ขนาดใหญ่ถึง <strong>3,000 Bytes</strong> ออกไปบนเครือข่าย Ethernet ซึ่งมีขีดจำกัดขนาดเฟรมสูงสุด (<strong>MTU — Maximum Transmission Unit</strong>) เพียง <strong>1,500 Bytes</strong> เท่านั้น!</p>
+<p>ทำให้ชั้น IP ของเครื่องผู้ส่งต้องหั่นแบ่ง (Fragment) ข้อมูลก้อนใหญ่นี้ออกเป็น <strong>3 IP Datagrams (Packets ที่ 179, 180 และ 181 ในไฟล์ trace)</strong> โดยมีแผนผังการหั่นดังนี้:</p>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ การหั่นแพ็กเก็ต IPv4 Fragmentation ออกเป็น 3 ชิ้นส่วนในแล็บ Wireshark IP v8.1</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-banner">ข้อมูลต้นฉบับจากชั้น UDP ขนาดรวม 3,000 Bytes ถูกส่งผ่านลิงก์ที่มีค่า MTU = 1,500 Bytes (ใส่ข้อมูลได้สูงสุดชิ้นละ 1,480 Bytes)</div>
+        <div class="dg-grid-3">
+            <div class="dg-card blue">
+                <div class="dg-card-title"><span>Fragment ที่ 1 (Packet #179)</span><span class="dg-pill">1,500 Bytes</span></div>
+                <div class="dg-card-body">
+                    • <b>โครงสร้าง:</b> <code>[IP Hdr 20B] + [Data 1,480B]</code> (ไบต์ที่ 0–1479)<br/>
+                    • <b>Identification:</b> <code>64930 (0xfda2)</code><br/>
+                    • <b>Flags (MF):</b> <b><code>MF = 1</code></b> (ยังมีชิ้นต่อไปตามมาอีก)<br/>
+                    • <b>Fragment Offset:</b> <b><code>0</code></b> (เริ่มที่ไบต์ลำดับ 0)
+                </div>
+            </div>
+            <div class="dg-card orange">
+                <div class="dg-card-title"><span>Fragment ที่ 2 (Packet #180)</span><span class="dg-pill orange">1,500 Bytes</span></div>
+                <div class="dg-card-body">
+                    • <b>โครงสร้าง:</b> <code>[IP Hdr 20B] + [Data 1,480B]</code> (ไบต์ที่ 1480–2959)<br/>
+                    • <b>Identification:</b> <code>64930 (0xfda2)</code> (เลขเดียวกันเป๊ะ)<br/>
+                    • <b>Flags (MF):</b> <b><code>MF = 1</code></b> (ยังมีชิ้นต่อไปตามมาอีก)<br/>
+                    • <b>Fragment Offset:</b> <b><code>1480</code></b> (ค่าดิบคือ 1480/8 = 185)
+                </div>
+            </div>
+            <div class="dg-card green">
+                <div class="dg-card-title"><span>Fragment ที่ 3 (Packet #181)</span><span class="dg-pill green">ชิ้นสุดท้าย!</span></div>
+                <div class="dg-card-body">
+                    • <b>โครงสร้าง:</b> <code>[IP Hdr 20B] + [ข้อมูลส่วนสุดท้ายที่เหลือ]</code> (เริ่มไบต์ที่ 2960)<br/>
+                    • <b>Identification:</b> <code>64930 (0xfda2)</code> (เลขเดียวกันเป๊ะ)<br/>
+                    • <b>Flags (MF):</b> <b><code>MF = 0</code></b> (บอกว่านี่คือชิ้นสุดท้ายแล้ว!)<br/>
+                    • <b>Fragment Offset:</b> <b><code>2960</code></b> (1480 + 1480 = 2960)
+                </div>
+            </div>
+        </div>
+        </div></div>
+<h3 class="subsec-title">เฉลยคำถามข้อที่ 13 ถึง ข้อที่ 19 (Part 2: Fragmentation):</h3>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ข้อที่</th><th>คำถามจากใบงาน Wireshark Lab</th><th>เฉลยคำตอบที่ถูกต้อง (Best Answer)</th><th>คำอธิบายละเอียด</th></tr></thead><tbody><tr><td><strong>ข้อ 13</strong></td><td>พิจารณาแพ็กเก็ตแรกของการส่งข้อมูลขนาด 3,000 ไบต์ (Packet #179) ข้อมูลนี้ถูกแยกส่วน (Fragmented) ข้ามหลาย IP datagrams ใช่หรือไม่?</td><td><strong><code class="inline-code">Yes</code> (ใช่ ถูกแยกออกเป็น 3 Fragments คือ Packet 179, 180 และ 181)</strong></td><td>เนื่องจากขนาดข้อมูล 3,000 ไบต์ ใหญ่เกินกว่าค่า MTU ของ Ethernet (1,500 ไบต์)</td></tr><tr><td><strong>ข้อ 14</strong></td><td>ข้อมูลใดในส่วนหัว IP Header ของแพ็กเก็ตแรกนี้ (Packet #179) ที่บ่งชี้ว่าแพ็กเก็ตนี้ถูกทำ Fragmentation?</td><td><strong><code class="inline-code">MF Flag = 1</code> (<code class="inline-code">More Fragments = 1</code>)</strong></td><td>บิต <code class="inline-code">More Fragments (MF)</code> ถูกตั้งค่าเป็น <code class="inline-code">1</code> ซึ่งแจ้งให้ปลายทางทราบว่าแพ็กเก็ตนี้ยังไม่ใช่ข้อมูลทั้งหมด แต่ยังมีชิ้นส่วนย่อย (Fragments) อื่นๆ ของชุดข้อมูลเดียวกันตามมาอีก</td></tr><tr><td><strong>ข้อ 15</strong></td><td>ข้อมูลใดใน IP Header ที่บ่งชี้ว่าแพ็กเก็ตนี้เป็น <strong>Fragment ชิ้นแรกสุด</strong> ไม่ใช่ชิ้นหลังๆ?</td><td><strong><code class="inline-code">Fragment Offset = 0</code> ร่วมกับ <code class="inline-code">MF Flag = 1</code></strong></td><td>การที่ <code class="inline-code">Fragment Offset = 0</code> บ่งชี้ว่าข้อมูลในแพ็กเก็ตนี้คือจุดเริ่มต้นตั้งแต่ไบต์ที่ 0 ของข้อมูลต้นฉบับ และ <code class="inline-code">MF = 1</code> บอกว่ามีชิ้นต่อไปตามมา จึงเป็นชิ้นแรกสุด</td></tr><tr><td><strong>ข้อ 16</strong></td><td>IP datagram ชิ้นแรกนี้ (Packet #179) มีขนาดรวมทั้งหมดกี่ไบต์ (รวมทั้ง Header และ Payload)?</td><td><strong><code class="inline-code">1,500 Bytes</code></strong></td><td>แบ่งเป็น IP Header 20 Bytes บวกกับ Data Payload 1,480 Bytes รวมเป็น <code class="inline-code">Total Length = 1,500 Bytes</code> พอดีกับขนาด MTU ของลิงก์</td></tr><tr><td><strong>ข้อ 17</strong></td><td>เมื่อตรวจสอบแพ็กเก็ตชิ้นที่สอง (Packet #180) ข้อมูลใดใน IP Header ที่บ่งชี้ว่านี่ <strong>ไม่ใช่</strong> Fragment ชิ้นแรก?</td><td><strong><code class="inline-code">Fragment Offset = 1480</code></strong> (มีค่ามากกว่า 0)</td><td>ค่า <code class="inline-code">Fragment Offset</code> ไม่ได้เป็น 0 แต่มีค่าเป็น <code class="inline-code">1480</code> ซึ่งระบุว่าข้อมูลในชิ้นนี้เริ่มต้นต่อจากไบต์ที่ 1,480 ของชิ้นแรก</td></tr><tr><td><strong>ข้อ 18</strong></td><td>ฟิลด์ใดใน IP Header ที่เปลี่ยนแปลงไปเมื่อเทียบระหว่าง Fragment ชิ้นที่ 1 (Packet #179) กับ Fragment ชิ้นที่ 2 (Packet #180)?</td><td><strong><code class="inline-code">Fragment Offset</code> และ <code class="inline-code">Header Checksum</code></strong></td><td><code class="inline-code">Fragment Offset</code> เปลี่ยนจาก <code class="inline-code">0</code> เป็น <code class="inline-code">1480</code> และเมื่อค่าใน Header เปลี่ยน จึงทำให้ค่า <code class="inline-code">Header Checksum</code> เปลี่ยนตามไปด้วย (ส่วน <code class="inline-code">Identification = 64930</code>, <code class="inline-code">Total Length = 1500</code> และ <code class="inline-code">MF = 1</code> ยังคงเท่าเดิม)</td></tr><tr><td><strong>ข้อ 19</strong></td><td>เมื่อตรวจสอบแพ็กเก็ตชิ้นที่สาม (Packet #181) ข้อมูลใดใน IP Header ที่บ่งชี้ว่านี่คือ <strong>Fragment ชิ้นสุดท้าย</strong> ของชุดข้อมูลนี้?</td><td><strong>1. <code class="inline-code">Identification = 64930</code> (ตรงกับ 2 ชิ้นแรก)</strong>&lt;br&gt;<strong>2. <code class="inline-code">MF Flag = 0</code> (More Fragments = 0)</strong>&lt;br&gt;<strong>3. <code class="inline-code">Fragment Offset = 2960</code> (&gt; 0)</strong></td><td>การที่มีเลข <code class="inline-code">ID = 64930</code> เดียวกันและมี <code class="inline-code">Fragment Offset = 2960</code> บอกว่าเป็นชิ้นส่วนที่นำมาต่อท้ายที่ตำแหน่ง 2,960 และการที่บิต <strong><code class="inline-code">MF = 0</code></strong> ยืนยันว่าไม่มีชิ้นส่วนอื่นตามมาอีกแล้ว (เป็นชิ้นสุดท้าย)</td></tr></tbody></table></div>
+<hr class="section-divider" />
+<h2 class="sec-title">ส่วนที่ 3: โปรโตคอล IPv6 และการสืบค้น DNS AAAA (Part 3: IPv6 — ข้อ 20 ถึง 26)</h2>
+<p>ในการทดลองส่วนที่ 3 เราเปิดไฟล์ <code class="inline-code">ip-wireshark-trace2-1.pcapng</code> แล้วพิจารณา <strong>Packet ที่ 20 (ที่เวลา <code class="inline-code">t = 3.814489</code>)</strong> ซึ่งเป็นแพ็กเก็ต <strong>DNS AAAA Request</strong> ที่บรรจุอยู่ในซอง <strong>IPv6 Datagram</strong> เพื่อถามหาหมายเลข IPv6 ของเว็บไซต์ <code class="inline-code">youtube.com</code> พร้อมทั้งดูแพ็กเก็ตตอบกลับจาก DNS Server:</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ข้อที่</th><th>คำถามจากใบงาน Wireshark Lab</th><th>เฉลยคำตอบที่ถูกต้อง (ตรงตามรูปแบบในหน้าจอ Wireshark)</th><th>คำอธิบายเพิ่มเติม</th></tr></thead><tbody><tr><td><strong>ข้อ 20</strong></td><td>หมายเลข IPv6 Address ของเครื่องคอมพิวเตอร์ที่ส่งคำขอ DNS AAAA Request (Source Address ของ Packet #20) คืออะไร?</td><td><strong><code class="inline-code">2601:193:8302:4620:215c:f5ae:8b40:a27a</code></strong></td><td>ดูจากช่อง <code class="inline-code">Source Address</code> ในส่วน Internet Protocol Version 6 ของ Packet ที่ 20</td></tr><tr><td><strong>ข้อ 21</strong></td><td>หมายเลข IPv6 Destination Address (ของ DNS Server ปลายทาง) ใน Packet #20 คืออะไร?</td><td><strong><code class="inline-code">2001:558:feed::1</code></strong></td><td>สังเกตการใช้เครื่องหมาย <code class="inline-code">::</code> เพื่อย่อกลุ่มที่เป็นเลขศูนย์ทั้งหมดที่อยู่ตรงกลางระหว่าง <code class="inline-code">feed</code> กับ <code class="inline-code">1</code></td></tr><tr><td><strong>ข้อ 22</strong></td><td>ค่าในฟิลด์ <code class="inline-code">Flow Label</code> ของ IPv6 datagram ก้อนนี้คืออะไร?</td><td><strong><code class="inline-code">0x063ed0</code></strong></td><td>ฟิลด์ <code class="inline-code">Flow Label</code> (ขนาด 20 บิต) ใช้ระบุกระแสของแพ็กเก็ตที่มาจาก Flow เดียวกันเพื่อให้เราเตอร์จัดการลำดับได้อย่างสม่ำเสมอ</td></tr><tr><td><strong>ข้อ 23</strong></td><td>ข้อมูลบรรทุก (<code class="inline-code">Payload Length</code>) ที่อยู่ใน IPv6 datagram ก้อนนี้มีขนาดกี่ไบต์?</td><td><strong><code class="inline-code">37</code> (37 Bytes)</strong></td><td>ใน IPv6 Header ขนาดส่วนหัวคงที่ที่ 40 Bytes และฟิลด์ <code class="inline-code">Payload Length</code> จะบอกขนาดของข้อมูลชั้นบน (UDP Header + DNS Query) โดยตรงซึ่งเท่ากับ 37 Bytes</td></tr><tr><td><strong>ข้อ 24</strong></td><td>โปรโตคอลชั้นบน (<code class="inline-code">Upper Layer Protocol</code>) ที่จะรับมอบ Payload ของ IPv6 datagram ก้อนนี้คือโปรโตคอลใด?</td><td><strong><code class="inline-code">Next Header: UDP (17)</code></strong></td><td>ใน IPv6 จะเปลี่ยนชื่อฟิลด์จาก <code class="inline-code">Protocol</code> มาเป็น <strong><code class="inline-code">Next Header</code></strong> ซึ่งในที่นี้มีค่าเป็น <code class="inline-code">UDP (17)</code> สำหรับส่งคำขอ DNS</td></tr><tr><td><strong>ข้อ 25</strong></td><td>เมื่อดูแพ็กเก็ตคำตอบ DNS Response ที่ตอบกลับคำขอ AAAA ของ <code class="inline-code">youtube.com</code> มีหมายเลข IPv6 ถูกส่งกลับมาทั้งหมดกี่หมายเลข?</td><td><strong><code class="inline-code">4 addresses</code> (4 หมายเลข)</strong></td><td>ในส่วน <code class="inline-code">Answers</code> ของ DNS Response จะพบระเบียนชนิด <code class="inline-code">type AAAA</code> ที่ส่งหมายเลข IPv6 ของเซิร์ฟเวอร์ YouTube กลับมาให้เลือกใช้งานทั้งหมด 4 หมายเลข</td></tr><tr><td><strong>ข้อ 26</strong></td><td>หมายเลข IPv6 ตัวแรกสุดที่ถูกส่งกลับมาใน DNS Response สำหรับ <code class="inline-code">youtube.com</code> คือหมายเลขใด?</td><td><strong><code class="inline-code">2607:f8b0:4006:806::200e</code></strong>&lt;br&gt;<em>(ในบรรทัด <code class="inline-code">youtube-ui.l.google.com: type AAAA, class IN, addr 2607:f8b0:4006:806::200e</code>)</em></td><td>เป็นหมายเลข IPv6 แรกสุดในรายการคำตอบ (และมีค่าทางตัวเลขน้อยที่สุดในชุดคำตอบนั้น)</td></tr></tbody></table></div></div></section>
+<section id="ch-09" class="chapter-card"><div class="chapter-badge">บทที่ 9 (Final Exam 2026 &amp; Cheat Sheet)</div><h1 class="chapter-main-title">เฉลยข้อสอบปลายภาค (Final Exam 2026) ครบทั้ง 9 ข้อแบบ Best Answer และสรุปโพย A4 Cheat Sheet เข้าห้องสอบ</h1><div class="chapter-sub-title">เฉลยละเอียดทีละข้อจากไฟล์ Network Tech 2026-ตัวอย่างข้อสอบ Final.pdf พร้อมแผ่นสรุปเนื้อหาเข้มข้นสำหรับคัดลอกลงกระดาษ A4 (2 หน้า)</div><div class="chapter-body"><div class="callout callout-bestanswer"><div class="callout-title">แนวทางการตอบให้ได้คะแนนเต็ม (Best Answer Strategy)</div><div class="callout-body"><p>บทนี้รวบรวม <strong>คำถามต้นฉบับและแนวคำตอบที่ดีที่สุด (Best Answer)</strong> ครบทุกข้อและทุกข้อย่อยจากไฟล์ <strong><code class="inline-code">Network Tech ตัวอย่างข้อสอบ Final</code></strong>โดยเรียบเรียงคำตอบให้กระชับ ตรงประเด็น ครบทุกคีย์เวิร์ดสำคัญที่อาจารย์ใช้ตรวจให้คะแนนเต็ม และในส่วนท้ายของบทได้จัดทำ <strong>แม่แบบสรุปโพย A4 Cheat Sheet (2 หน้า)</strong> สำหรับให้นักศึกษาคัดลอกด้วยลายมือเข้าห้องสอบตามกติกาของรายวิชา</p></div></div>
+<hr class="section-divider" />
+<h2 class="sec-title">1. เฉลยละเอียดตัวอย่างข้อสอบปลายภาค (Network Tech 2026 Final Exam — ครบทั้ง 9 ข้อ)</h2>
+<h3 class="subsec-title">ข้อที่ 1: การวิเคราะห์ค่า Sampled RTT และการกำหนดค่า RTO [4 คะแนน]</h3>
+<p><strong>โจทย์:</strong> จงพิจารณาค่า Sampled RTT ดังแสดงในภาพ (กราฟแสดงค่า Sampled RTT ที่แกว่งตัวขึ้นลงระหว่าง 1 ms ถึง 7 ms ตามเวลา)</p>
+<ul class="content-list"><li><strong>1.1) หากกำหนดให้ค่า RTO เป็นค่าคงที่เท่ากับ 3 ms จะเกิดอะไรขึ้น?</strong></li></ul>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> หากกำหนดค่า <code class="inline-code">RTO = 3 ms</code> ซึ่งต่ำกว่าค่า Sampled RTT จริงของเครือข่ายในหลายช่วงเวลา (ที่มีค่าพุ่งขึ้นไปถึง 4–7 ms) จะทำให้ตัวจับเวลาของผู้ส่ง <strong>หมดเวลาก่อนที่แพ็กเก็ต ACK จะเดินทางกลับมาถึง (Premature Timeout)</strong> ทั้งๆ ที่แพ็กเก็ตไม่ได้สูญหายจริง ส่งผลให้ TCP ทำการ <strong>ส่งแพ็กเก็ตซ้ำโดยไม่จำเป็น (Unnecessary / Spurious Retransmissions)</strong> ทำให้สิ้นเปลืองแบนด์วิดท์ เพิ่มภาระความแออัด (Congestion) ในเครือข่าย และทำให้ TCP ลดขนาดหน้าต่างการส่งข้อมูลลงโดยไม่จำเป็น</p></div></div>
+<ul class="content-list"><li><strong>1.2) หากกำหนดให้ RTO มีค่าเท่ากับ 8 ms จะเกิดอะไรขึ้น?</strong></li></ul>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> หากกำหนดค่า <code class="inline-code">RTO = 8 ms</code> ซึ่งสูงกว่าค่า Sampled RTT ปกติมากเกินไป เมื่อเกิดเหตุการณ์ <strong>แพ็กเก็ตสูญหายจริงในเครือข่าย (Packet Loss)</strong> ผู้ส่งจะต้องเสียเวลานั่งรออยู่นานจนครบ 8 ms กว่าจะตรวจพบว่าแพ็กเก็ตหายและเริ่มทำการส่งซ้ำ ส่งผลให้ <strong>กระบวนการกู้คืนข้อมูลที่สูญหายล่าช้ามาก (Slow Loss Recovery / Long Timeout Delay)</strong> ทำให้ความหน่วงรวมเพิ่มขึ้นและอัตราการส่งข้อมูล (Throughput) ลดลง</p></div></div>
+<ul class="content-list"><li><strong>1.3) จงอธิบายวิธีการกำหนดค่า RTO ที่ดี:</strong></li></ul>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> การกำหนดค่า RTO ที่ดี <strong>ต้องไม่ตั้งเป็นค่าคงที่ตายตัว</strong> แต่ต้องปรับเปลี่ยนแบบไดนามิกตามสภาพเครือข่ายในแต่ละ Session โดยคำนวณจาก <strong>1) ค่าเฉลี่ยถ่วงน้ำหนักของเวลารอบเดินทาง (<code class="inline-code">EstimatedRTT</code>)</strong> ร่วมกับ <strong>2) ค่าความแปรปรวนของ RTT ในเครือข่าย (<code class="inline-code">DevRTT</code> / RTT Variance)</strong> ตามสมการ $\text{RTO} = \text{EstimatedRTT} + 4 \times \text{DevRTT}$ เพื่อให้ค่า RTO ปรับตัวครอบคลุมความผันผวนของ RTT ได้อย่างแม่นยำ (ไม่ต่ำเกินไปจนเกิดการส่งซ้ำปลอม และไม่สูงเกินไปจนกู้คืนข้อมูลช้า)</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 2: การวิเคราะห์กราฟ Random Early Detection (RED-1 และ RED-2) [4 คะแนน]</h3>
+<p><strong>โจทย์:</strong> จงพิจารณากราฟที่ใช้ในการทำ Random Early Detection ดังต่อไปนี้ (กราฟ <code class="inline-code">RED-1</code> มีจุดเริ่มดรอปที่ $\text{AvgLen}=10$, จุดสูงสุดที่ $\text{AvgLen}=15$ มีค่า $P_{\text{drop}}=0.5$; และกราฟ <code class="inline-code">RED-2</code> มีจุดเริ่มดรอปที่ $\text{AvgLen}=10$, จุดสูงสุดที่ $\text{AvgLen}=15$ มีค่า $P_{\text{drop}}=0.7$ โดยถ้า $\text{AvgLen} &gt; 15$ ค่า $P_{\text{drop}} = 1.0$) ถ้า $P_{\text{Throughput}}$ คือเปอร์เซ็นต์ของจำนวน packet ที่ออกจาก router ต่อจำนวนที่เข้ามาทั้งหมด จงอธิบายว่า $P_{\text{Throughput}}$ ควรจะเป็นกี่เปอร์เซ็นต์ถ้า:</p>
+<ul class="content-list"><li><strong>2.1) Average queue length มีค่าเป็น 10 packets และ router ใช้ RED-2:</strong> ➔ คำตอบคือ <strong><code class="inline-code">100%</code></strong></li><li><strong>2.2) Average queue length มีค่าเป็น 18 packets และ router ใช้ RED-1:</strong> ➔ คำตอบคือ <strong><code class="inline-code">0%</code></strong></li><li><strong>2.3) Average queue length มีค่าเป็น 13 packets และ router ใช้ RED-1:</strong> ➔ คำตอบคือ <strong><code class="inline-code">70%</code></strong></li><li><strong>2.4) Average queue length มีค่าเป็น 13 packets และ router ใช้ RED-2:</strong> ➔ คำตอบคือ <strong><code class="inline-code">58%</code></strong></li></ul>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer สำหรับช่อง "อธิบายแนวคิด":</strong></p><p class="callout-bullet">• กราฟของ RED แสดงความน่าจะเป็นในการ <strong>ดรอปแพ็กเก็ตทิ้ง ($P_{\text{drop}}$)</strong> ดังนั้นสัดส่วนของแพ็กเก็ตที่รอดชีวิตวิ่งออกจากเราเตอร์ได้สำเร็จคือ <strong>$P_{\text{Throughput}} = (1 - P_{\text{drop}}) \times 100\%$</strong></p><p class="callout-bullet">• <strong>กรณี 2.1 ($\text{AvgLen} = 10$, RED-2):</strong> คิวเฉลี่ยยังอยู่ที่ขีดจำกัดเริ่มต้น ($\text{MinThreshold} = 10$) เราเตอร์จึงยังไม่ดรอปแพ็กเก็ตเลย ($P_{\text{drop}} = 0$) ดังนั้นแพ็กเก็ตออกได้ครบ <strong>$100\%$</strong></p><p class="callout-bullet">• <strong>กรณี 2.2 ($\text{AvgLen} = 18$, RED-1):</strong> คิวเฉลี่ยสูงเกินขีดจำกัดสูงสุด ($\text{MaxThreshold} = 15$) เราเตอร์จึงดรอปแพ็กเก็ตที่เข้ามาใหม่ทั้งหมด ($P_{\text{drop}} = 1.0$ หรือ $100\%$) ดังนั้น $P_{\text{Throughput}} = (1 - 1) \times 100\% =$ <strong><code class="inline-code">0%</code></strong></p><p class="callout-bullet">• <strong>กรณี 2.3 ($\text{AvgLen} = 13$, RED-1):</strong> อยู่กึ่งกลางช่วงลาดเอียง $[10, 15]$ ซึ่งใน RED-1 มีความชันถึงค่าสูงสุด $P_{\max} = 0.5$ ที่จุด 15 คำนวณความน่าจะเป็นการดรอปได้เป็น $P_{\text{drop}} = 0.5 \times \frac{13 - 10}{15 - 10} = 0.5 \times \frac{3}{5} = 0.30$ (ดรอปไป $30\%$) ดังนั้นแพ็กเก็ตที่วิ่งออกไปได้คือ $P_{\text{Throughput}} = 100\% - 30\% =$ <strong><code class="inline-code">70%</code></strong></p><p class="callout-bullet">• <strong>กรณี 2.4 ($\text{AvgLen} = 13$, RED-2):</strong> คำนวณด้วยวิธีเดียวกันแต่ใช้ค่า $P_{\max} = 0.7$ ของกราฟ RED-2 จะได้ $P_{\text{drop}} = 0.7 \times \frac{13 - 10}{15 - 10} = 0.7 \times \frac{3}{5} = 0.42$ (ดรอปไป $42\%$) ดังนั้นแพ็กเก็ตที่วิ่งออกไปได้คือ $P_{\text{Throughput}} = 100\% - 42\% =$ <strong><code class="inline-code">58%</code></strong></p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 3: กลไก Congestion Control และ Flow Control ของ TCP [2 คะแนน]</h3>
+<ul class="content-list"><li><strong>3.1) Advertised Window คืออะไร?</strong></li></ul>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> <strong>Advertised Window (<code class="inline-code">rwnd</code>)</strong> คือขนาดหน้าต่างรับข้อมูลที่ <strong>ฝั่งผู้รับปลายทาง (Destination / Receiver)</strong> แจ้งกลับมายังฝั่งผู้ส่ง (ผ่านส่วนหัวของ TCP ACK) เพื่อระบุว่าขณะนั้นบัฟเฟอร์หน่วยความจำของฝั่งผู้รับยังเหลือพื้นที่ว่างรองรับข้อมูลได้อีกเท่าใด มีวัตถุประสงค์เพื่อทำ <strong>Flow Control</strong> ป้องกันไม่ให้ผู้ส่งส่งข้อมูลเร็วเกินไปจนล้นบัฟเฟอร์ของผู้รับ</p></div></div>
+<ul class="content-list"><li><strong>3.2) Slow Start ช่วยเพิ่มประสิทธิภาพของการส่งข้อมูลของ TCP อย่างไร?</strong></li></ul>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> เมื่อเริ่มเชื่อมต่อ TCP ใหม่ ผู้ส่งยังไม่ทราบขีดความสามารถ (Capacity) ของเครือข่าย กลไก <strong>Slow Start</strong> จึงเริ่มส่งที่ขนาดหน้าต่างเล็กๆ (<code class="inline-code">cwnd = 1 MSS</code>) แล้ว <strong>เพิ่มขนาด <code class="inline-code">cwnd</code> แบบทวีคูณ (Exponential: 1, 2, 4, 8, 16...) ในทุกๆ รอบ RTT ที่ได้รับ ACK</strong> การเพิ่มแบบทวีคูณนี้ช่วยให้ TCP สามารถไต่ระดับความเร็วขึ้นไปค้นหาขีดความสามารถสูงสุดที่เครือข่ายรองรับได้ (<strong>Available Bandwidth / <code class="inline-code">ssthresh</code></strong>) อย่าง <strong>รวดเร็วมาก</strong> แทนที่จะเสียเวลาค่อยๆ เพิ่มทีละ 1 แบบเส้นตรงตั้งแต่ต้น จึงใช้ประโยชน์จากแบนด์วิดท์ของเครือข่ายได้อย่างเต็มประสิทธิภาพในเวลาอันสั้น</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 4: คำถามถูกหรือผิดเกี่ยวกับโปรโตคอลชั้น Application Layer [2 คะแนน]</h3>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ข้อย่อย</th><th>ข้อความในข้อสอบ</th><th>คำตอบที่ถูกต้อง</th><th>เหตุผลประกอบ (สำหรับทบทวนความเข้าใจ)</th></tr></thead><tbody><tr><td><strong>4.1</strong></td><td>MQTT ไม่มีการทำ QoS</td><td><strong>ผิด (X ที่ช่อง ผิด)</strong></td><td>เพราะ MQTT มีกลไก <strong>QoS (Quality of Service) ถึง 3 ระดับ</strong> ได้แก่ QoS 0 (At most once), QoS 1 (At least once) และ QoS 2 (Exactly once)</td></tr><tr><td><strong>4.2</strong></td><td>CoAP มีหลักการทำงานคล้าย HTTP</td><td><strong>ถูก (X ที่ช่อง ถูก)</strong></td><td>เพราะ CoAP ใช้สถาปัตยกรรมแบบ Request/Response และใช้คำสั่ง <code class="inline-code">GET</code>, <code class="inline-code">POST</code>, <code class="inline-code">PUT</code>, <code class="inline-code">DELETE</code> พร้อมรหัสสถานะคล้ายกับ HTTP ทุกประการ (แต่ออกแบบให้มีขนาดเล็กและรันบน UDP)</td></tr><tr><td><strong>4.3</strong></td><td>POP3 เป็นโปรโตคอลสำหรับใช้ส่งข้อมูลระหว่าง mail server</td><td><strong>ผิด (X ที่ช่อง ผิด)</strong></td><td>เพราะโปรโตคอลที่ใช้ส่งข้อมูลระหว่าง Mail Server คือ <strong>SMTP</strong> ส่วน <strong>POP3</strong> ใช้สำหรับให้เครื่องผู้ใช้ดึงเมลจาก Mail Server มาอ่านเท่านั้น</td></tr><tr><td><strong>4.4</strong></td><td>EMAIL เป็นแอปพลิเคชันที่รันอยู่บน TCP</td><td><strong>ถูก (X ที่ช่อง ถูก)</strong></td><td>เพราะโปรโตคอลอีเมลทั้งหมด (SMTP, POP3, IMAP) ต้องการความน่าเชื่อถือสูง ห้ามข้อมูลสูญหาย จึงรันอยู่บน <strong>TCP</strong> ทั้งหมด</td></tr></tbody></table></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 5: บทบาทของ Manifest File ในการทำสตรีมมิ่งด้วย DASH [3 คะแนน]</h3>
+<p><strong>โจทย์:</strong> DASH หรือ Dynamic Adaptive Streaming over HTTP เป็นแอปพลิเคชันที่ถูกออกแบบมาเพื่อทำ Multimedia Streaming จงอธิบายว่า Manifest File ของ DASH คืออะไร และมีบทบาทต่อการทำ multimedia streaming อย่างไร</p>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> 1. <strong>Manifest File คืออะไร:</strong> ในระบบ DASH ไฟล์วิดีโอบนเซิร์ฟเวอร์จะถูกแบ่งออกเป็นชิ้นย่อยๆ ตามเวลา (Chunks / Segments) และแต่ละชิ้นจะถูกเข้ารหัสไว้หลายระดับคุณภาพ/อัตราบิต (Multiple Encoding Rates / Bitrates) โดย <strong>Manifest File (<code class="inline-code">.mpd</code>)</strong> คือ <strong>ไฟล์รายการสารบัญที่เก็บที่อยู่ URL และข้อมูลความละเอียด/อัตราบิตของวิดีโอแต่ละก้อนทั้งหมด</strong> 2. <strong>บทบาทต่อการทำ Multimedia Streaming:</strong> Manifest File ช่วยให้เครื่องผู้รับ (<strong>Client</strong>) ทราบว่าวิดีโอแต่ละก้อนในแต่ละระดับความคมชัดเก็บอยู่ที่ URL ใดบ้าง ทำให้ในระหว่างที่เล่นวิดีโอ <strong>Client สามารถวัดความเร็วแบนด์วิดท์ของเครือข่ายตนเองแบบเรียลไทม์ แล้วใช้ข้อมูลจาก Manifest File เลือกร้องขอ (HTTP GET) ก้อนวิดีโอชิ้นถัดไปในระดับคุณภาพ (Encoding Rate) ที่เหมาะสมกับสภาพอินเทอร์เน็ตในขณะนั้นได้เองโดยอัตโนมัติ</strong> ช่วยให้เล่นวิดีโอได้อย่างลื่นไหลต่อเนื่องโดยไม่เกิดอาการค้าง (Stalling/Buffering) แม้ความเร็วอินเทอร์เน็ตจะแกว่งตัว</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 6: ปัญหา Hidden Terminal และวิธีแก้ไขของมาตรฐาน IEEE 802.11 [3 คะแนน]</h3>
+<p><strong>โจทย์:</strong> ปัญหา Hidden Terminal คืออะไร และ 802.11 แก้ไขปัญหานี้อย่างไร</p>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> 1. <strong>ปัญหา Hidden Terminal คือ:</strong> สถานการณ์ในเครือข่ายไร้สายที่โหนดผู้ส่ง 2 โหนด (เช่น โหนด A และ โหนด C) อยู่ห่างกันหรือมีสิ่งกีดขวางจน <strong>มองไม่เห็นและไม่ได้ยินสัญญาณของกันและกัน</strong> แต่ทั้งสองโหนดต้องการส่งข้อมูลไปหาผู้รับตัวเดียวกันตรงกลาง (เช่น Access Point B) เนื่องจาก A และ C ไม่ได้ยินกันจึงเข้าใจว่าช่องสัญญาณว่างและส่งข้อมูลออกมาพร้อมกัน ทำให้เกิด <strong>การชนกันของข้อมูล (Collision) ที่ตัวผู้รับ B</strong> 2. <strong>วิธีแก้ไขของ 802.11:</strong> ใช้กลไก <strong>CSMA/CA ร่วมกับการแลกเปลี่ยนเฟรมควบคุม <code class="inline-code">RTS</code> (Request to Send) และ <code class="inline-code">CTS</code> (Clear to Send)</strong> โดยก่อนที่โหนดผู้ส่ง (A) จะส่งข้อมูลจริง จะส่งเฟรมสั้นๆ <code class="inline-code">RTS</code> ไปขออนุญาตที่ Access Point (B) ก่อน เมื่อ B ได้รับจะส่งเฟรม <code class="inline-code">CTS</code> กระจายออกไปให้ทุกโหนดในรัศมีได้ยิน เมื่อโหนด C ที่ซ่อนอยู่ได้ยินเฟรม <code class="inline-code">CTS</code> จาก B โหนด C จะทราบว่าช่องสัญญาณถูกจองแล้วจึงระงับการส่งข้อมูลของตนเอง (ตั้งค่า NAV) จนกว่าโหนด A จะส่งข้อมูลเสร็จและได้รับ ACK เรียบร้อย</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 7: เหตุผลที่ 802.11 ใช้ระยะเวลารอ <code class="inline-code">SIFS</code> สำหรับ ACK แทนที่จะใช้ <code class="inline-code">DIFS</code> [2 คะแนน]</h3>
+<p><strong>โจทย์:</strong> เหตุใด 802.11 จึงใช้วิธี delay การส่ง ACK packet เป็นระยะเวลาเท่ากับ SIFS (Short Interframe Space) แทนที่จะรอเท่ากับ DIFS (Distributed Interframe Space)</p>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> เนื่องจากระยะเวลา <strong>SIFS มีค่าสั้นกว่า DIFS เสมอ ($\text{SIFS} &lt; \text{DIFS}$)</strong> ในขณะที่โหนดอื่นๆ ที่ต้องการจะเริ่มต้นส่งเฟรมข้อมูลใหม่จะต้องรอให้ช่องสัญญาณว่างครบระยะเวลา <strong>DIFS</strong> เสียก่อน การให้ผู้รับถ่วงเวลารอเพียงแค่ <strong>SIFS</strong> แล้วส่งเฟรม <code class="inline-code">ACK</code> ออกไปทันที จะช่วยให้ <strong>เฟรม <code class="inline-code">ACK</code> มีลำดับความสำคัญสูงสุด (Highest Priority) เหนือการส่งข้อมูลใหม่ของทุกโหนด</strong> ป้องกันไม่ให้โหนดอื่นแทรกส่งข้อมูลเข้ามาชนกับเฟรม <code class="inline-code">ACK</code> ก่อนที่กระบวนการรับ-ส่งเฟรมปัจจุบันจะเสร็จสมบูรณ์</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 8: ความแตกต่างระหว่างเครือข่าย 3G และ 4G [2 คะแนน]</h3>
+<p><strong>โจทย์:</strong> อธิบายความแตกต่างระหว่าง 3G และ 4G Network</p>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p><strong>Best Answer:</strong> ความแตกต่างทางสถาปัตยกรรมที่สำคัญที่สุดคือ:</p><p class="callout-bullet">• <strong>เครือข่าย 3G:</strong> มีโครงสร้างเครือข่ายหลักแบบผสม (<strong>Hybrid Core</strong>) ที่ยังแยกเส้นทางการทำงานออกเป็น 2 ส่วน คือ <strong>ทราฟฟิกเสียง (Voice)</strong> วิ่งผ่านเครือข่ายโทรศัพท์พื้นฐานแบบสลับวงจรเดิม (<strong>Circuit-Switched Network ผ่าน MSC</strong>) ส่วน <strong>ทราฟฟิกข้อมูลอินเทอร์เน็ต (Data)</strong> วิ่งผ่านเครือข่ายแพ็กเก็ต (<strong>Packet-Switched Network ผ่าน SGSN/GGSN</strong>)</p><p class="callout-bullet">• <strong>เครือข่าย 4G (LTE):</strong> เปลี่ยนโครงสร้างเป็นเครือข่าย <strong>All-IP (Packet-Based Network) ทั้งหมด 100%</strong> โดยยกเลิกระบบสลับวงจรแบบเดิมออกไปทั้งหมด ทำให้ทั้งข้อมูลอินเทอร์เน็ตและเสียงสนทนา (VoLTE) ถูกรวมให้วิ่งอยู่ในรูปแบบของ <strong>IP Packets</strong> บนโครงข่ายหลักชุดเดียวกัน ส่งผลให้มีความเร็วสูงขึ้นและมีความหน่วงต่ำลง</p></div></div>
+<hr class="section-divider" />
+<h3 class="subsec-title">ข้อที่ 9: การเรียงลำดับเหตุการณ์ของ Mobile IP แบบ Indirect Routing [3 คะแนน]</h3>
+<p><strong>โจทย์:</strong> จงลำดับเหตุการณ์ที่เกิดขึ้นในการจัดการ Mobility ด้วยวิธี Indirect routing (ใส่หมายเลข 1 ถึง 6 ลงในช่องหน้าเหตุการณ์ตามตารางในข้อสอบ):</p>
+<div class="table-wrapper"><table class="data-table"><thead><tr><th>ลำดับที่ต้องกรอกในตารางข้อสอบ</th><th>เหตุการณ์ในโจทย์ข้อสอบ</th></tr></thead><tbody><tr><td><strong><code class="inline-code">3</code></strong></td><td>Foreign Agent (FA) ติดต่อ Home Agent (HA) เพื่อแจ้ง Care-of-Address ของ Mobile Node</td></tr><tr><td><strong><code class="inline-code">4</code></strong></td><td>Correspondent Node ต้องการติดต่อ Mobile Node จึงส่ง packet ไปที่ Home Network</td></tr><tr><td><strong><code class="inline-code">6</code></strong></td><td>Foreign Agent (FA) decapsulate packet เพื่อส่งต่อให้ Mobile Node</td></tr><tr><td><strong><code class="inline-code">2</code></strong></td><td>Foreign Agent (FA) กำหนด Care-of-Address กับ Mobile Node</td></tr><tr><td><strong><code class="inline-code">1</code></strong></td><td>Mobile Node ย้ายออกจาก Home Network และมาลงทะเบียนกับ Foreign Agent (FA)</td></tr><tr><td><strong><code class="inline-code">5</code></strong></td><td>Home Agent (HA) ห่อหุ้ม (encapsulate) packet ของ Correspondent Node ที่ได้รับ และ forward ไปยัง Care-of-Address ของ Mobile Node ผ่าน Foreign Agent</td></tr></tbody></table></div>
+<hr class="section-divider" />
+<h2 class="sec-title">2. แม่แบบสรุปโพยเข้าห้องสอบ A4 Cheat Sheet (2 หน้า — สำหรับคัดลอกด้วยลายมือ)</h2>
+<div class="callout callout-note"><div class="callout-title">ข้อสังเกตและแนวคิดสำคัญ (Key Concept)</div><div class="callout-body"><p>[!TIP] อาจารย์อนุญาตให้นำกระดาษ A4 เข้าห้องสอบได้ <strong>1 แผ่น (เขียนได้ทั้ง 2 หน้า หน้า-หลัง) โดยต้องเป็นลายมือเขียนเองเท่านั้น (ห้ามพิมพ์)</strong> นักศึกษาสามารถคัดลอกบล็อกสรุปเข้มข้นด้านล่างนี้ลงในกระดาษ A4 หน้า 1 และหน้า 2 ได้เลย!</p></div></div>
+<div class="diagram-box"><div class="diagram-header"><span>🏗️ สรุปโพย 2 หน้ากระดาษ A4 สำหรับจดเข้าห้องสอบปลายภาค (Complete Final Exam A4 Cheat Sheet)</span><span>Architecture &amp; Flow Diagram</span></div><div class="diagram-canvas">
+        <div class="dg-grid-2">
+            <div class="dg-card blue">
+                <div class="dg-card-title"><span>📄 หน้าที่ 1: OSI, Physical, Data Link, IP &amp; Routing</span><span class="dg-pill">Page 1 / 2</span></div>
+                <div class="dg-card-body">
+                    <b>1. OSI 7 Layers &amp; PDU:</b> L7–L5 (Data) ➜ L4 Transport (Segment TCP=6 / Datagram UDP=17) ➜ L3 Network (Packet IP/ICMP=1) ➜ L2 Data Link (Frame + CRC-32) ➜ L1 Physical (Bits)<br/>
+                    <b>2. 4B/5B + NRZI:</b> แปลง 4 บิตเป็น 5 บิตเพื่อห้ามมีบิต <code>0</code> ติดกันเกิน 3 ตัว แก้ปัญหา <b>Clock Skew</b> บน NRZI (ประสิทธิภาพ = 80%)<br/>
+                    <b>3. Error Control &amp; CSMA/CD:</b> Parity ตรวจเลขคู่บิตผิดไม่เจอ; CRC ใช้การหารยาว XOR; <b>Selective Repeat ARQ</b> ประหยัด BW สุดเพราะผู้รับมี Buffer; <b>Minimum Frame 512 bits (64 Bytes)</b> มาจาก <code>L_min = 2 × tau × R</code> เพื่อให้ผู้ส่งรู้ตัวว่าชนก่อนส่งเฟรมจบ<br/>
+                    <b>4. IPv4 / Subnetting / IPv6:</b> Valid Hosts = <code>2^h - 2</code>; ข้าม <b>IPv5</b> เพราะเลข 5 ถูกจองให้โปรโตคอล ST ไปแล้ว; <b>IPv6</b> ขนาด 128 บิต Header คงที่ 40 Bytes<br/>
+                    <b>5. Routing &amp; SDN:</b> OSPF (Link-State / Dijkstra) ลู่เข้าเร็วกว่า RIP (Distance-Vector / Bellman-Ford); BGP ใช้เชื่อมระหว่าง AS; SDN แยก Control Plane ไว้ที่ Controller กลางผ่าน OpenFlow
+                </div>
+            </div>
+            <div class="dg-card green">
+                <div class="dg-card-title"><span>📄 หน้าที่ 2: TCP, RED, Application/IoT, Wi-Fi &amp; Cellular</span><span class="dg-pill green">Page 2 / 2</span></div>
+                <div class="dg-card-body">
+                    <b>6. TCP RTT &amp; RTO (ข้อสอบข้อ 1):</b> RTO ต่ำไป (3ms) = Premature Timeout ส่งซ้ำฟุ่มเฟือย; RTO สูงไป (8ms) = กู้ข้อมูลช้าเมื่อหายจริง; ต้องตั้งตาม <code>RTO = EstimatedRTT + 4 × DevRTT</code><br/>
+                    <b>7. กราฟ RED (ข้อสอบข้อ 2):</b> <code>P_Throughput = (1 - P_drop) × 100%</code> | คิว ≤ 10 รอด 100% | คิว &gt; 15 รอด 0% | คิว = 13: <code>P_drop = P_max × (13-10)/(15-10)</code> (ได้รอด 70% และ 58%)<br/>
+                    <b>8. TCP Windows (ข้อสอบข้อ 3):</b> <code>rwnd</code> ผู้รับแจ้งทำ Flow Control | <code>cwnd</code> ผู้ส่งประเมินทำ Congestion Control | <b>Slow Start</b> เพิ่ม <code>cwnd</code> แบบทวีคูณ (Exponential)<br/>
+                    <b>9. App, IoT &amp; DASH (ข้อสอบข้อ 4–5):</b> MQTT มี QoS 3 ระดับ (0,1,2); CoAP รันบน UDP คล้าย HTTP; ส่งเมลระหว่าง Server ใช้ <b>SMTP</b> (ไม่ใช่ POP3!); <b>DASH Manifest</b> เก็บ URL หลาย Bitrate<br/>
+                    <b>10. Wi-Fi, 3G/4G &amp; Mobile IP (ข้อสอบข้อ 6–9):</b> Hidden Terminal แก้ด้วย RTS/CTS; ACK รอแค่ <b>SIFS &lt; DIFS</b> เพื่อชิงส่งก่อน; 4G เป็น All-IP ล้วน; Indirect Routing เรียง <b>1 ➜ 6</b>
+                </div>
+            </div>
+        </div>
+        </div></div></div></section>
+        </main>
+    </div>
+    <script>
+        let currentFontSize = 16;
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        }
+        function adjustFont(delta) {
+            currentFontSize = Math.min(22, Math.max(13, currentFontSize + delta));
+            document.body.style.fontSize = currentFontSize + 'px';
+        }
+        function filterChapters(q) {
+            const term = q.trim().toLowerCase();
+            document.querySelectorAll('.toc-item').forEach(a => {
+                const txt = a.innerText.toLowerCase();
+                a.style.display = txt.includes(term) ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
