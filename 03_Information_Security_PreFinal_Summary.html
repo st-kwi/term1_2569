@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>สรุปเฉลยอัตนัย Pre-Final 18 ข้อ (ฉบับจำง่าย เขียนตอบได้คะแนนเต็ม) — 070315109 Information Security</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #dc2626;
+            --primary-dark: #991b1b;
+            --secondary: #1e3a8a;
+            --accent-bg: #fef2f2;
+            --mnemonic-bg: #fffbeb;
+            --mnemonic-border: #f59e0b;
+            --mnemonic-text: #92400e;
+            --answer-bg: #f0fdf4;
+            --answer-border: #16a34a;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --bg-body: #f8fafc;
+            --bg-paper: #ffffff;
+            --border-color: #e2e8f0;
+            --kw-bg: #fef08a;
+            --kw-text: #854d0e;
+        }
+        [data-theme="dark"] {
+            --primary: #f87171;
+            --primary-dark: #ef4444;
+            --secondary: #93c5fd;
+            --accent-bg: #1e293b;
+            --mnemonic-bg: #272011;
+            --mnemonic-border: #d97706;
+            --mnemonic-text: #fde68a;
+            --answer-bg: #0f291e;
+            --answer-border: #22c55e;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --bg-body: #0b0f19;
+            --bg-paper: #111827;
+            --border-color: #1e293b;
+            --kw-bg: rgba(250, 204, 21, 0.22);
+            --kw-text: #fde047;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+            line-height: 1.35;
+            margin-top: 0;
+        }
+        .app-layout {
+            display: grid;
+            grid-template-columns: 310px 1fr;
+            min-height: 100vh;
+        }
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: var(--bg-paper);
+            border-right: 1px solid var(--border-color);
+            padding: 1.15rem 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .book-brand {
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .book-course-pill {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.73rem;
+            font-weight: 700;
+            padding: 0.18rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 0.35rem;
+            font-family: 'Prompt', sans-serif;
+        }
+        .book-brand h2 {
+            font-size: 1rem;
+            margin: 0 0 0.2rem 0;
+            color: var(--text-main);
+        }
+        .book-brand p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.38rem;
+        }
+        .btn-tool {
+            padding: 0.42rem 0.5rem;
+            font-size: 0.76rem;
+            font-weight: 600;
+            font-family: 'Prompt', sans-serif;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .btn-tool:hover, .btn-tool.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--accent-bg);
+        }
+        .btn-tool.span-2 {
+            grid-column: span 2;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 0.48rem 0.7rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.84rem;
+        }
+        .toc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            overflow-y: auto;
+        }
+        .toc-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.45rem;
+            padding: 0.42rem 0.55rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-main);
+            border-left: 3px solid transparent;
+            font-size: 0.82rem;
+            line-height: 1.35;
+            transition: all 0.15s;
+        }
+        .toc-item:hover {
+            background: var(--accent-bg);
+            border-left-color: var(--primary);
+        }
+        .toc-num {
+            font-family: 'Prompt', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 36px;
+        }
+        /* Main Content */
+        .main-reader {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 2rem 5rem 2rem;
+            width: 100%;
+        }
+        .hero-cover {
+            background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 55%, #b91c1c 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 2.1rem 2.3rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 10px 24px rgba(185, 28, 28, 0.18);
+        }
+        .hero-cover .course-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.24rem 0.8rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: 'Prompt', sans-serif;
+            margin-bottom: 0.65rem;
+        }
+        .hero-cover h1 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin: 0 0 0.45rem 0;
+        }
+        .hero-cover .subtitle {
+            font-size: 1.02rem;
+            opacity: 0.94;
+            margin-bottom: 1rem;
+        }
+        .hero-tips {
+            background: rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 10px;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .hero-btn {
+            background: #ffffff;
+            color: #991b1b;
+            padding: 0.45rem 0.95rem;
+            border-radius: 8px;
+            font-family: 'Prompt', sans-serif;
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .hero-btn.secondary {
+            background: rgba(255,255,255,0.16);
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        /* Question Card */
+        .qa-card {
+            background: var(--bg-paper);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1.4rem;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+            break-inside: avoid;
+            page-break-inside: avoid;
+            transition: border-color 0.2s;
+        }
+        .qa-card:hover {
+            border-color: #cbd5e1;
+        }
+        .qa-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.8rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.7rem;
+            margin-bottom: 0.9rem;
+        }
+        .qa-title {
+            font-size: 1.18rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+        .qa-num {
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 0.3rem;
+        }
+        .qa-badge {
+            flex-shrink: 0;
+            font-family: 'Prompt', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 0.22rem 0.65rem;
+            border-radius: 99px;
+            white-space: nowrap;
+        }
+        .badge-draw {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
+        }
+        .badge-five {
+            background: #fdf2f8;
+            color: #be185d;
+            border: 1px solid #f9a8d4;
+        }
+        .badge-concept {
+            background: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        /* Memory Hook Box */
+        .memory-box {
+            background: var(--mnemonic-bg);
+            border-left: 4px solid var(--mnemonic-border);
+            border-radius: 8px;
+            padding: 0.6rem 0.95rem;
+            margin-bottom: 0.9rem;
+            font-size: 0.92rem;
+            color: var(--mnemonic-text);
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .memory-tag {
+            font-family: 'Prompt', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            background: var(--mnemonic-border);
+            color: #fff;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        /* Answer Body */
+        .answer-lead {
+            background: var(--answer-bg);
+            border-left: 4px solid var(--answer-border);
+            padding: 0.55rem 0.9rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-size: 0.94rem;
+        }
+        .concise-list {
+            margin: 0.4rem 0 0 0;
+            padding-left: 1.35rem;
+        }
+        .concise-list li {
+            margin-bottom: 0.45rem;
+            line-height: 1.6;
+        }
+        .concise-list li:last-child {
+            margin-bottom: 0;
+        }
+        .kw {
+            background: var(--kw-bg);
+            color: var(--kw-text);
+            padding: 0.05rem 0.35rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        /* Easy-to-Draw Exam Diagrams */
+        .exam-diagram {
+            border: 1.5px dashed #64748b;
+            background: rgba(241, 245, 249, 0.65);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            margin: 0.75rem 0 0.95rem 0;
+        }
+        [data-theme="dark"] .exam-diagram {
+            background: rgba(30, 41, 59, 0.65);
+            border-color: #475569;
+        }
+        .exam-diagram-title {
+            font-family: 'Prompt', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.55rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flow-row {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .flow-box {
+            flex: 1;
+            min-width: 115px;
+            background: var(--bg-paper);
+            border: 2px solid #1e3a8a;
+            border-radius: 8px;
+            padding: 0.5rem 0.6rem;
+            text-align: center;
+            font-size: 0.82rem;
+            line-height: 1.35;
+        }
+        [data-theme="dark"] .flow-box {
+            border-color: #60a5fa;
+        }
+        .flow-box b {
+            display: block;
+            font-family: 'Prompt', sans-serif;
+            color: var(--primary);
+            font-size: 0.84rem;
+            margin-bottom: 2px;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 0 2px;
+        }
+        .flow-note {
+            text-align: center;
+            font-size: 0.79rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 0.45rem;
+            padding-top: 0.35rem;
+            border-top: 1px dashed #cbd5e1;
+        }
+        /* Compact Matrix Table for Q7 */
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            background: var(--bg-paper);
+        }
+        .mini-table th {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 6px 8px;
+            border: 1px solid #1e3a8a;
+            text-align: center;
+            font-family: 'Prompt', sans-serif;
+        }
+        .mini-table th:first-child {
+            text-align: left;
+        }
+        .mini-table td {
+            padding: 5px 8px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+            font-weight: 600;
+        }
+        .mini-table td:first-child {
+            text-align: left;
+        }
+        .td-csc { background: #fef2f2; color: #991b1b; }
+        .td-csp { background: #f0fdf4; color: #166534; }
+        .td-share { background: #eff6ff; color: #1e40af; }
+        [data-theme="dark"] .td-csc { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        [data-theme="dark"] .td-csp { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+        [data-theme="dark"] .td-share { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+
+        /* Quiz / Recall Mode (Blur Answers) */
+        body.quiz-mode .qa-answer-content {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+            transition: filter 0.2s ease;
+        }
+        body.quiz-mode .qa-card.revealed .qa-answer-content {
+            filter: none;
+            user-select: auto;
+        }
+        .quiz-hint {
+            display: none;
+            font-size: 0.76rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        body.quiz-mode .quiz-hint {
+            display: block;
+        }
+
+        @media (max-width: 920px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+            .flow-row {
+                flex-direction: column;
+            }
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        @media print {
+            .sidebar, .hero-links {
+                display: none !important;
+            }
+            .app-layout {
+                display: block;
+            }
+            .main-reader {
+                max-width: 100%;
+                padding: 0;
+            }
+            .qa-card {
+                box-shadow: none;
+                border: 1px solid #94a3b8;
+                margin-bottom: 1rem;
+                padding: 1rem 1.2rem;
+            }
+            .hero-cover {
+                background: #fff !important;
+                color: #000 !important;
+                border: 2px solid #000;
+                padding: 1rem;
+                box-shadow: none;
+            }
+            .hero-cover h1, .hero-cover .course-tag, .hero-tips {
+                color: #000 !important;
+                background: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="book-brand">
+                <span class="book-course-pill">070315109 • EXAM CHEAT SHEET</span>
+                <h2>สรุปเฉลยอัตนัย Pre-Final 18 ข้อ</h2>
+                <p>ฉบับพอสังเขป จำง่าย เขียนตอบในห้องสอบ</p>
+            </div>
+            <div class="toolbar">
+                <a href="03_Information_Security_Textbook.html#ch-10" class="btn-tool">📖 ฉบับเต็ม</a>
+                <a href="index.html" class="btn-tool">📚 ชั้นหนังสือ</a>
+                <button class="btn-tool" onclick="toggleTheme()">🌓 โหมดสี</button>
+                <button class="btn-tool" onclick="window.print()">🖨️ พิมพ์/PDF</button>
+                <button class="btn-tool" onclick="adjustFont(1)">A+</button>
+                <button class="btn-tool" onclick="adjustFont(-1)">A-</button>
+                <button class="btn-tool span-2" id="quizBtn" onclick="toggleQuizMode()">🙈 โหมดฝึกจำ (ซ่อน/เปิดคำตอบ)</button>
+                <button class="btn-tool" id="filterAllBtn" onclick="filterType('all')">📋 ทั้งหมด (18)</button>
+                <button class="btn-tool" id="filterDrawBtn" onclick="filterType('draw')">🎨 ข้อวาดภาพ (6)</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="qSearch" placeholder="ค้นหาข้อสอบ / คีย์เวิร์ด..." oninput="searchQuestions(this.value)" />
+            </div>
+            <nav class="toc-list" id="tocList">
+                <a href="#q1" class="toc-item"><span class="toc-num">ข้อ 1</span><span>Host Security 5 วิธี</span></a>
+                <a href="#q2" class="toc-item"><span class="toc-num">ข้อ 2</span><span>🎨 Third-Party Risk (TPRM)</span></a>
+                <a href="#q3" class="toc-item"><span class="toc-num">ข้อ 3</span><span>หลักการทำงาน MDM</span></a>
+                <a href="#q4" class="toc-item"><span class="toc-num">ข้อ 4</span><span>Secure Mobile 5 วิธี</span></a>
+                <a href="#q5" class="toc-item"><span class="toc-num">ข้อ 5</span><span>Web App Security 5 วิธี</span></a>
+                <a href="#q6" class="toc-item"><span class="toc-num">ข้อ 6</span><span>นิยาม Cloud Computing</span></a>
+                <a href="#q7" class="toc-item"><span class="toc-num">ข้อ 7</span><span>🎨 ตาราง SSRM (CSP vs CSC)</span></a>
+                <a href="#q8" class="toc-item"><span class="toc-num">ข้อ 8</span><span>🎨 วงจรชีวิตข้อมูล (Data Life Cycle)</span></a>
+                <a href="#q9" class="toc-item"><span class="toc-num">ข้อ 9</span><span>🎨 Incident Response 4 ระยะ</span></a>
+                <a href="#q10" class="toc-item"><span class="toc-num">ข้อ 10</span><span>Eradication &amp; Recovery</span></a>
+                <a href="#q11" class="toc-item"><span class="toc-num">ข้อ 11</span><span>🎨 กระบวนการ Forensic 4 ขั้น</span></a>
+                <a href="#q12" class="toc-item"><span class="toc-num">ข้อ 12</span><span>Acquisition &amp; Volatility</span></a>
+                <a href="#q13" class="toc-item"><span class="toc-num">ข้อ 13</span><span>🎨 Risk Management (RMF)</span></a>
+                <a href="#q14" class="toc-item"><span class="toc-num">ข้อ 14</span><span>BIA, RPO, RTO, MTD + ตัวอย่าง</span></a>
+                <a href="#q15" class="toc-item"><span class="toc-num">ข้อ 15</span><span>Asset &amp; Config Management</span></a>
+                <a href="#q16" class="toc-item"><span class="toc-num">ข้อ 16</span><span>Change Control &amp; Management</span></a>
+                <a href="#q17" class="toc-item"><span class="toc-num">ข้อ 17</span><span>Physical Security 5 วิธี</span></a>
+                <a href="#q18" class="toc-item"><span class="toc-num">ข้อ 18</span><span>Secure Data Destruction</span></a>
+            </nav>
+        </aside>
+
+        <!-- Main Reader -->
+        <main class="main-reader">
+            <header class="hero-cover">
+                <div class="course-tag">CONCISE EXAM SUMMARY • รหัสวิชา 070315109</div>
+                <h1>สรุปเฉลยแบบฝึกหัดทบทวนก่อนสอบปลายภาค (Pre-Final 18 ข้อ)</h1>
+                <div class="subtitle">ฉบับพอสังเขป จำง่ายเข้าใจง่าย พร้อมสูตรจำและแผนภาพวาดตามได้ทันทีในห้องสอบอัตนัย</div>
+                <div class="hero-tips">
+                    <strong>🎯 เทคนิคเขียนตอบอัตนัยให้ได้คะแนนเต็ม:</strong><br/>
+                    1) ท่อง <strong>"สูตรจำ 1 บรรทัด"</strong> ของแต่ละข้อเพื่อตั้งหัวข้อย่อยให้ครบก่อน (อาจารย์ตรวจให้คะแนนตามหัวข้อย่อยและคีย์เวิร์ดภาษาอังกฤษ)<br/>
+                    2) ข้อที่สั่ง <strong>"จงวาดภาพและอธิบาย" (ข้อ 2, 7, 8, 9, 11, 13)</strong> ให้วาดกล่องลูกศรเรียงตามแผนภาพเส้นประด้านล่าง แล้วเขียนอธิบายสั้นๆ ข้อละ 1–2 บรรทัดตามหัวข้อในกล่อง
+                </div>
+                <div class="hero-links">
+                    <a class="hero-btn" href="03_Information_Security_Textbook.html#ch-10">📖 เปิดดูเฉลยฉบับละเอียดในเล่มหลัก</a>
+                    <button class="hero-btn secondary" onclick="toggleQuizMode()">🧠 กดเปิด/ปิดโหมดฝึกจำด้วยตัวเอง</button>
+                    <button class="hero-btn secondary" onclick="window.print()">🖨️ พิมพ์เป็นชีทสรุปพกเข้าห้องทบทวน</button>
+                </div>
+            </header>
+
+            <!-- ข้อ 1 -->
+            <article id="q1" class="qa-card" data-type="five" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 1:</span> จงระบุและอธิบายการทำงาน Host Security Solutions มา 5 วิธีการ</h2>
+                    <span class="qa-badge badge-five">✍️ ตอบ 5 วิธีการ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 5 ข้อ</span>
+                    <span><strong>"สแกนไวรัส (EDR) — กั้นพอร์ต (Firewall) — เช็กไฟล์เพี้ยน (HIDS/FIM) — เข้ารหัสดิสก์ (FDE+TPM) — ล็อกโปรแกรม/USB (Whitelist &amp; DLP)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> การป้องกันความปลอดภัยที่ตัวเครื่องปลายทาง/เซิร์ฟเวอร์โดยตรง (Defense-in-Depth) มี 5 วิธีดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>Antimalware &amp; EDR (Endpoint Detection and Response):</strong> ติดตั้ง Agent สแกนไวรัสจากลายเซ็น (Signature) และใช้ AI ตรวจจับพฤติกรรมผิดปกติ (เช่น Ransomware) พร้อมสั่งกักกันเครื่อง (Isolate) จากระยะไกลได้ทันที</li>
+                        <li><strong>Host-based Firewall (ไฟร์วอลล์ประจำเครื่อง):</strong> ซอฟต์แวร์ไฟร์วอลล์บน OS (เช่น Windows Firewall, <code class="kw">iptables</code>) คอยกรองพอร์ตและแพ็กเก็ตเข้า-ออกเฉพาะเครื่อง เพื่อป้องกันการโจมตีข้ามเครื่องในวงแลนเดียวกัน (<span class="kw">Prevent Lateral Movement</span>)</li>
+                        <li><strong>HIDS / HIPS และ File Integrity Monitoring (FIM):</strong> ตรวจจับการบุกรุกจาก Log ของเครื่อง และใช้ <span class="kw">FIM เทียบค่า Hash (SHA-256)</span> ของไฟล์ระบบสำคัญ หากถูกแอบแก้ไขหรือฝัง Rootkit จะแจ้งเตือนและบล็อกทันที</li>
+                        <li><strong>Full Disk Encryption (FDE) ร่วมกับ TPM &amp; Secure Boot:</strong> เข้ารหัสข้อมูลทั้งฮาร์ดดิสก์ (เช่น BitLocker) โดยเก็บกุญแจไว้ในชิป <span class="kw">TPM</span> ป้องกันการถอดดิสก์ไปขโมยข้อมูล และใช้ <span class="kw">UEFI Secure Boot</span> ตรวจลายเซ็นดิจิทัลของ OS ก่อนบูตเครื่อง</li>
+                        <li><strong>Application Whitelisting และ Host DLP:</strong> อนุญาตให้รันเฉพาะโปรแกรมที่อยู่ในรายชื่อที่อนุมัติเท่านั้น (บล็อกโปรแกรมแปลกปลอมทั้งหมด) และใช้ <span class="kw">Host DLP</span> บล็อกพอร์ต USB หรือการคัดลอกไฟล์ความลับออกนอกเครื่อง</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 2 -->
+            <article id="q2" class="qa-card" data-type="draw" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 2:</span> จงวาดภาพและอธิบายการทำงานของการบริหารจัดการความเสี่ยงจากบุคคลภายนอก (Third Party Risk Management)</h2>
+                    <span class="qa-badge badge-draw">🎨 วาดภาพ + อธิบาย</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 5 ขั้น</span>
+                    <span><strong>"คัดกรองก่อนจ้าง (Due Diligence) ➜ ร่างสัญญา (Contract) ➜ จำกัดสิทธิ์เข้างาน (Onboarding) ➜ ตามตรวจ Log (Monitoring) ➜ ตัดสิทธิ์เมื่อจบงาน (Offboarding)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ แผนภาพสำหรับวาดในห้องสอบ: วงจร TPRM 5 ขั้นตอน</span><span>วาดกล่อง 5 กล่องเรียงลูกศร</span></div>
+                        <div class="flow-row">
+                            <div class="flow-box"><b>1. Due Diligence</b>คัดกรอง/ประเมินความเสี่ยงก่อนจ้าง</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>2. Contracting</b>ทำสัญญา NDA, SLA, ISA, DPA</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>3. Onboarding</b>ให้สิทธิ์ Least Privilege + MFA</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>4. Monitoring</b>เฝ้าระวัง Log &amp; Audit ประจำปี</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>5. Offboarding</b>เพิกถอนสิทธิ์ทันที &amp; ทำลายข้อมูล</div>
+                        </div>
+                    </div>
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> <strong>TPRM</strong> คือกระบวนการควบคุมความเสี่ยงจากคู่ค้า/ชิปพลายเออร์ (Vendors/Outsource/Supply Chain) ไม่ให้เป็นช่องทางเจาะเข้าองค์กร มี 5 ขั้นตอน:</div>
+                    <ol class="concise-list">
+                        <li><strong>Due Diligence &amp; Risk Assessment (คัดกรองก่อนจ้าง):</strong> ตรวจสอบประวัติความปลอดภัยและมาตรฐานสากลของคู่ค้า (เช่น <span class="kw">ISO 27001, SOC 2</span>) ก่อนตัดสินใจเลือก</li>
+                        <li><strong>Contracting &amp; Agreements (ทำสัญญาผูกพันทางกฎหมาย):</strong> ระบุข้อกำหนดความปลอดภัยในสัญญา เช่น <span class="kw">NDA</span> (รักษาความลับ), <span class="kw">SLA</span> (ระดับบริการ), <span class="kw">ISA</span> (มาตรฐานเชื่อมต่อระบบ) และ <span class="kw">DPA</span> (คุ้มครองข้อมูลส่วนบุคคล)</li>
+                        <li><strong>Secure Onboarding (การเชื่อมต่อและให้สิทธิ์อย่างปลอดภัย):</strong> ให้สิทธิ์คู่ค้าเท่าที่จำเป็น (<span class="kw">Least Privilege</span>), บังคับใช้ MFA/VPN และแยกวงเครือข่ายเฉพาะคู่ค้า</li>
+                        <li><strong>Continuous Monitoring &amp; Audit (เฝ้าระวังและตรวจสอบต่อเนื่อง):</strong> บันทึกและตรวจ Log การทำงานของคู่ค้าผ่าน SIEM และใช้สิทธิ์เข้าตรวจสอบความปลอดภัยซ้ำประจำปี (<span class="kw">Right-to-Audit</span>)</li>
+                        <li><strong>Secure Offboarding (การสิ้นสุดสัญญาอย่างปลอดภัย):</strong> เมื่อจบสัญญาต้อง <span class="kw">ปิดบัญชีและเพิกถอนสิทธิ์ทั้งหมดทันที</span> เรียกคืนอุปกรณ์ และให้คู่ค้าทำลายข้อมูลองค์กรพร้อมออกใบรับรอง</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 3 -->
+            <article id="q3" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 3:</span> จงอธิบายหลักการทำงาน Mobile Device Management</h2>
+                    <span class="qa-badge badge-concept">✍️ อธิบายหลักการ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 5 ขั้น</span>
+                    <span><strong>"ลงทะเบียน (Enroll) ➜ บังคับนโยบาย (Policy) ➜ แยกตู้ข้อมูล (Container) ➜ คุมแอป/อัปเดต (App/Patch) ➜ ตรวจเครื่องแหกกฎ/สั่งลบไกล (Wipe)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>นิยามสั้น:</strong> <strong>MDM</strong> คือระบบซอฟต์แวร์ส่วนกลางสำหรับควบคุมและบังคับใช้นโยบายความปลอดภัยไปยังสมาร์ตโฟน/แท็บเล็ตที่ใช้ทำงาน (ทั้ง BYOD, COPE, COBO) ผ่านเครือข่ายไร้สาย (<span class="kw">Over-the-Air: OTA</span>) มีหลักการทำงาน 5 ส่วน:</div>
+                    <ol class="concise-list">
+                        <li><strong>Device Enrollment (การลงทะเบียนอุปกรณ์):</strong> อุปกรณ์ต้องลงทะเบียนกับเซิร์ฟเวอร์ MDM เพื่อติดตั้ง <span class="kw">Configuration Profile และใบรับรองดิจิทัล</span> สำหรับยืนยันตัวตนและรับคำสั่ง</li>
+                        <li><strong>Centralized Policy Enforcement (บังคับใช้นโยบายจากศูนย์กลาง):</strong> บังคับตั้งรหัสผ่าน/สแกนนิ้วล็อกหน้าจอ, บังคับเข้ารหัสเครื่อง, ตั้งค่า VPN อัตโนมัติ และสั่งปิดกล้องถ่ายรูปในพื้นที่หวงห้าม</li>
+                        <li><strong>Containerization (การแยกส่วนพื้นที่จัดเก็บข้อมูล):</strong> สร้างพื้นที่งานที่เข้ารหัสแยกออกจากพื้นที่ส่วนตัวของพนักงาน ป้องกันข้อมูลรั่วไหล</li>
+                        <li><strong>Application &amp; Patch Management (จัดการแอปและอัปเดต):</strong> บังคับลงเฉพาะแอปที่อนุมัติ (App Whitelisting) และบังคับอัปเดต OS ให้ปลอดภัยเสมอ</li>
+                        <li><strong>Compliance Monitoring &amp; Remote Wipe (เฝ้าระวังและสั่งลบระยะไกล):</strong> หากตรวจพบเครื่องทำ <span class="kw">Jailbreak / Root</span> จะบล็อกการเข้าถึงระบบทันที และหากเครื่องหายสามารถสั่งล็อกหรือลบข้อมูลจากระยะไกล (<span class="kw">Remote Wipe</span>) ได้ทันที</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 4 -->
+            <article id="q4" class="qa-card" data-type="five" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 4:</span> จงระบุและอธิบายการทำงาน Secure Mobile Solutions มา 5 วิธีการ</h2>
+                    <span class="qa-badge badge-five">✍️ ตอบ 5 วิธีการ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 5 ข้อ</span>
+                    <span><strong>"แยกตู้คอนเทนเนอร์ (Container) — เข้ารหัสทั้งเครื่อง (FDE) — สั่งลบระยะไกล (Remote Wipe) — ตีกรอบพิกัด GPS (Geofencing) — ล็อกชีวมิติ+VPN (Biometrics &amp; VPN)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> มาตรการรักษาความปลอดภัยให้อุปกรณ์พกพาขององค์กร (Secure Mobile Solutions) 5 วิธีการหลัก ได้แก่:</div>
+                    <ol class="concise-list">
+                        <li><strong>Containerization / Storage Segmentation (แยกพื้นที่เก็บข้อมูล):</strong> แบ่งพื้นที่ในมือถือเป็น 2 ส่วนที่แยกขาดจากกัน คือ <span class="kw">พื้นที่งานบริษัท (Corporate Container)</span> และพื้นที่ส่วนตัว โดยเข้ารหัสตู้ข้อมูลงานและห้ามคัดลอกไฟล์ข้ามไปแอปแชตส่วนตัว</li>
+                        <li><strong>Full Device Encryption — FDE (การเข้ารหัสข้อมูลทั้งอุปกรณ์):</strong> เข้ารหัสไฟล์ทั้งหมดในหน่วยความจำมือถือด้วยอัลกอริทึม AES-256 ผูกกับชิปนิรภัยของเครื่อง เพื่อป้องกันการดึงข้อมูลออกเมื่อเครื่องถูกขโมย</li>
+                        <li><strong>Remote Wipe &amp; Remote Lock (สั่งล็อกและลบข้อมูลระยะไกล):</strong> เมื่อมือถือสูญหาย แอดมินสามารถส่งคำสั่งผ่านเน็ตเพื่อล็อกหน้าจอ หรือสั่งลบข้อมูลทั้งหมด (<span class="kw">Full Wipe</span>) หรือลบเฉพาะตู้ข้อมูลบริษัท (<span class="kw">Selective Wipe</span>) โดยรูปส่วนตัวพนักงานไม่หาย</li>
+                        <li><strong>Geofencing &amp; Geolocation (การตีกรอบพิกัดภูมิศาสตร์):</strong> ใช้ GPS สร้างขอบเขตพื้นที่เสมือน (Geofence) เพื่อกำหนดนโยบายตามสถานที่ เช่น เปิดเข้าแอปฐานข้อมูลบริษัทได้เฉพาะเมื่อตัวเครื่องอยู่ในอาคารสำนักงานเท่านั้น</li>
+                        <li><strong>Biometrics, App Whitelisting &amp; Per-App VPN (ชีวมิติ คุมแอป และ VPN):</strong> บังคับปลดล็อกหน้าจอด้วยสแกนนิ้ว/ใบหน้าคู่กับ PIN, บล็อกเครื่อง Root/Jailbreak, อนุญาตเฉพาะแอปที่รับรอง และบังคับให้ทราฟฟิกของแอปงานวิ่งผ่านอุโมงค์เข้ารหัส <span class="kw">Per-App VPN</span> เสมอ</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 5 -->
+            <article id="q5" class="qa-card" data-type="five" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 5:</span> จงระบุและอธิบายการทำงาน Web Application Security มา 5 วิธีการ</h2>
+                    <span class="qa-badge badge-five">✍️ ตอบ 5 วิธีการ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 5 ข้อ</span>
+                    <span><strong>"กรอง Input + Prepared Statement (กัน SQLi/XSS) — ตั้ง WAF หน้าเว็บ — คุม Session/Cookie + CSRF Token — เข้ารหัส HTTPS/TLS — ตรวจโค้ด SAST/DAST"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> การป้องกันเว็บแอปพลิเคชันจากช่องโหว่มาตรฐานสากล (OWASP Top 10) มี 5 วิธีการหลักดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>Input Validation, Output Encoding &amp; Parameterized Queries:</strong> ตรวจสอบข้อมูลที่ผู้ใช้กรอกฝั่งเซิร์ฟเวอร์เสมอ, แปลงอักขระพิเศษก่อนแสดงผลบนหน้าเว็บเพื่อป้องกัน <span class="kw">XSS</span> และใช้ <span class="kw">Parameterized Queries (Prepared Statements)</span> แยกข้อมูลออกจากคำสั่ง SQL เพื่อป้องกัน <span class="kw">SQL Injection (SQLi)</span> 100%</li>
+                        <li><strong>Web Application Firewall (WAF):</strong> ติดตั้งไฟร์วอลล์ระดับ Layer 7 ขวางหน้าเว็บเซิร์ฟเวอร์ เพื่อตรวจจับและบล็อกคำขอ HTTP/HTTPS ที่เป็นการโจมตี เช่น SQLi, XSS, Command Injection และบอท DDoS</li>
+                        <li><strong>Strong Authentication, Secure Session &amp; Anti-CSRF Token:</strong> บังคับใช้ MFA, ตั้งค่า Cookie ให้ปลอดภัย (<code class="kw">Secure</code>, <code class="kw">HttpOnly</code> กันสคริปต์ขโมยคุกกี้, <code class="kw">SameSite</code>) และแนบ <span class="kw">Anti-CSRF Token</span> ทุกครั้งที่ส่งฟอร์มเพื่อป้องกันการหลอกทำรายการข้ามไซต์ (CSRF)</li>
+                        <li><strong>HTTPS / TLS Encryption &amp; Security Headers:</strong> เข้ารหัสการรับส่งข้อมูลระหว่างเบราว์เซอร์กับเซิร์ฟเวอร์ด้วย <span class="kw">TLS 1.2 / 1.3 (HTTPS)</span> ป้องกันการดักฟัง พร้อมตั้งค่า Header เช่น <span class="kw">HSTS</span> และ <span class="kw">CSP</span></li>
+                        <li><strong>Secure SDLC &amp; การทดสอบช่องโหว่อัตโนมัติ (SAST / DAST / Pentesting):</strong> สแกนหาช่องโหว่ในซอร์สโค้ดขณะพัฒนา (<span class="kw">SAST</span>), จำลองยิงทดสอบหน้าเว็บขณะรันจริง (<span class="kw">DAST</span>) และทำ Penetration Testing ก่อนเปิดใช้งานจริง</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 6 -->
+            <article id="q6" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 6:</span> จงอธิบายนิยามของ Cloud Computing</h2>
+                    <span class="qa-badge badge-concept">✍️ อธิบายนิยาม (สูตร 5-3-4)</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ NIST 5-3-4</span>
+                    <span><strong>"เข้าถึงผ่านเน็ตตามต้องการ จากกองทรัพยากรส่วนกลาง ขยายอัตโนมัติ จ่ายตามจริง" + จำองค์ประกอบ 5 คุณลักษณะ — 3 บริการ (IaaS/PaaS/SaaS) — 4 รูปแบบติดตั้ง</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>นิยามมาตรฐาน (NIST SP 800-145):</strong> <strong>Cloud Computing</strong> คือ รูปแบบการให้บริการทรัพยากรคอมพิวเตอร์ผ่านเครือข่าย (เช่น เซิร์ฟเวอร์, สตอเรจ, เครือข่าย, ซอฟต์แวร์) ที่ผู้ใช้สามารถจัดสรรได้เองตามต้องการจากทุกที่ (<span class="kw">On-Demand Network Access</span>) โดยดึงจากกองทรัพยากรส่วนกลางที่ใช้ร่วมกัน (<span class="kw">Shared Pool of Resources</span>) ขยายหรือลดขนาดได้รวดเร็วอัตโนมัติ และคิดค่าใช้จ่ายตามที่ใช้งานจริง</div>
+                    <ol class="concise-list">
+                        <li><strong>คุณลักษณะสำคัญ 5 ประการ (5 Essential Characteristics):</strong>
+                            <br/>• <span class="kw">On-Demand Self-Service:</span> ผู้ใช้กดสร้าง/จัดการทรัพยากรได้เองอัตโนมัติไม่ต้องรอเจ้าหน้าที่
+                            <br/>• <span class="kw">Broad Network Access:</span> เข้าใช้งานผ่านอินเทอร์เน็ตได้จากทุกที่ทุกอุปกรณ์
+                            <br/>• <span class="kw">Resource Pooling:</span> รวมทรัพยากรไว้ตรงกลางและแบ่งให้ลูกค้าหลายรายใช้ร่วมกัน (Multi-tenancy)
+                            <br/>• <span class="kw">Rapid Elasticity:</span> ขยายออก (Scale Out) และลดขนาด (Scale In) ได้รวดเร็วตามปริมาณงาน
+                            <br/>• <span class="kw">Measured Service:</span> วัดปริมาณการใช้งานและคิดเงินตามที่ใช้จริง (Pay-per-use)
+                        </li>
+                        <li><strong>รูปแบบบริการ 3 รูปแบบ (3 Service Models):</strong> <span class="kw">IaaS</span> (เช่าโครงสร้างพื้นฐาน/VM), <span class="kw">PaaS</span> (เช่าแพลตฟอร์มรันโค้ด/DB), <span class="kw">SaaS</span> (ใช้งานซอฟต์แวร์สำเร็จรูป)</li>
+                        <li><strong>รูปแบบการติดตั้ง 4 รูปแบบ (4 Deployment Models):</strong> <span class="kw">Public Cloud</span> (คลาวด์สาธารณะ), <span class="kw">Private Cloud</span> (คลาวด์ส่วนตัวองค์กรเดียว), <span class="kw">Hybrid Cloud</span> (ผสมผสาน) และ <span class="kw">Community Cloud</span> (ใช้ร่วมกันในกลุ่มองค์กรภารกิจเดียวกัน)</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 7 -->
+            <article id="q7" class="qa-card" data-type="draw" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 7:</span> จงวาดภาพและอธิบายความรับผิดชอบของ CSP และ CSC ใน Security Shared Responsibility Model (SSRM) สำหรับ On-prem, IaaS, PaaS, SaaS</h2>
+                    <span class="qa-badge badge-draw">🎨 วาดตาราง + อธิบาย</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำเข้าห้องสอบ</span>
+                    <span><strong>"CSP ดูแลตัวคลาวด์ (OF) / ลูกค้า CSC ดูแลสิ่งที่วางในคลาวด์ (IN)" — จุดตัดสำคัญ: IaaS ลูกค้าแพตช์ OS เอง | PaaS ผู้ให้บริการแพตช์ OS ให้ | SaaS ลูกค้ายังต้องดูแล Data &amp; IAM เสมอ!</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ แผนภาพตารางสำหรับวาดในห้องสอบ: Shared Responsibility Model (SSRM)</span><span>ตีตาราง 7 ชั้น × 4 โมเดล</span></div>
+                        <table class="mini-table">
+                            <thead>
+                                <tr>
+                                    <th>เลเยอร์ของระบบ (จากบนลงล่าง)</th>
+                                    <th>On-Premises</th>
+                                    <th>IaaS (เช่น EC2)</th>
+                                    <th>PaaS (เช่น RDS)</th>
+                                    <th>SaaS (เช่น M365)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1. ข้อมูล (Data &amp; Classification)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า 100%)</td></tr>
+                                <tr><td>2. บัญชีผู้ใช้และสิทธิ์ (IAM &amp; Access)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า 100%)</td></tr>
+                                <tr><td>3. แอปพลิเคชัน (Application &amp; Code)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-share">CSC / แชร์กับ CSP</td><td class="td-csp">CSP (ผู้ให้บริการ)</td></tr>
+                                <tr><td>4. ไฟร์วอลล์เสมือน (Network / SG)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-share">แชร์ร่วมกัน</td><td class="td-csp">CSP (ผู้ให้บริการ)</td></tr>
+                                <tr><td>5. ระบบปฏิบัติการ (Guest OS &amp; Patch)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csc">CSC ดูแลเอง!</td><td class="td-csp">CSP ดูแลให้!</td><td class="td-csp">CSP (ผู้ให้บริการ)</td></tr>
+                                <tr><td>6. ระบบจำลองเสมือน (Hypervisor)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csp">CSP (ผู้ให้บริการ)</td><td class="td-csp">CSP (ผู้ให้บริการ)</td><td class="td-csp">CSP (ผู้ให้บริการ)</td></tr>
+                                <tr><td>7. ฮาร์ดแวร์และศูนย์ข้อมูล (Physical)</td><td class="td-csc">CSC (ลูกค้า)</td><td class="td-csp">CSP (ผู้ให้บริการ)</td><td class="td-csp">CSP (ผู้ให้บริการ)</td><td class="td-csp">CSP (ผู้ให้บริการ)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> <strong>CSP (ผู้ให้บริการคลาวด์)</strong> รับผิดชอบความปลอดภัย <em>"ของ"</em> โครงสร้างคลาวด์ (Security OF the Cloud) ส่วน <strong>CSC (ลูกค้า)</strong> รับผิดชอบความปลอดภัยของสิ่งที่นำเข้าไปวาง <em>"ใน"</em> คลาวด์ (Security IN the Cloud) แยกตามโมเดลดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>On-Premises:</strong> <span class="kw">CSC (ลูกค้า) รับผิดชอบเอง 100% ทุกเลเยอร์</span> ตั้งแต่อาคารสถานที่ ฮาร์ดแวร์ ไปจนถึงข้อมูล</li>
+                        <li><strong>IaaS (Infrastructure as a Service):</strong> CSP ดูแลอาคาร ฮาร์ดแวร์ และ Hypervisor ส่วน <span class="kw">CSC ต้องดูแลตั้งแต่ระดับ Guest OS (รวมถึงการอัปเดต Patch OS)</span>, ตั้งค่าไฟร์วอลล์, แอปพลิเคชัน, IAM และข้อมูล</li>
+                        <li><strong>PaaS (Platform as a Service):</strong> CSP ขยายขึ้นมาดูแล Guest OS และ Database Engine ให้ทั้งหมด ส่วน <span class="kw">CSC ดูแลเฉพาะโค้ดแอปพลิเคชันที่นำมาวาง, สิทธิ์ IAM และข้อมูล</span></li>
+                        <li><strong>SaaS (Software as a Service):</strong> CSP ดูแลเกือบทั้งหมดรวมถึงตัวซอฟต์แวร์สำเร็จรูป แต่ <span class="kw">CSC ยังคงต้องรับผิดชอบ 2 ชั้นบนสุดเสมอ คือ ข้อมูลของตนเอง (Data) และการจัดการบัญชีผู้ใช้/MFA (IAM)</span></li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 8 -->
+            <article id="q8" class="qa-card" data-type="draw" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 8:</span> จงวาดภาพและอธิบายวงจรชีวิตข้อมูลส่วนบุคคล (Data Life Cycle)</h2>
+                    <span class="qa-badge badge-draw">🎨 วาดภาพ + อธิบาย</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 6 ระยะ</span>
+                    <span><strong>"เก็บ (Create/Collect) ➜ จัดชั้นความลับ/เข้ารหัสเก็บ (Store) ➜ ใช้ตามสิทธิ์ (Use) ➜ ส่งต่อปลอดภัย (Share) ➜ เก็บตามอายุ (Archive) ➜ ทำลายทิ้ง (Destroy)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ แผนภาพสำหรับวาดในห้องสอบ: Data Life Cycle 6 ระยะ</span><span>วาด 6 กล่องเรียงลูกศรตามลำดับ</span></div>
+                        <div class="flow-row">
+                            <div class="flow-box"><b>1. Collect</b>แจ้งวัตถุประสงค์ / ขอ Consent เก็บเท่าที่จำเป็น</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>2. Store</b>จำแนกชั้นความลับ + เข้ารหัส At Rest</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>3. Use</b>ใช้ตามวัตถุประสงค์ + RBAC / Masking</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>4. Share</b>เข้ารหัสส่ง TLS + ทำสัญญา DPA</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>5. Archive</b>เก็บรักษาตามกรอบเวลา (Retention)</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>6. Destroy</b>ทำลายทิ้งปลอดภัย (NIST 800-88)</div>
+                        </div>
+                    </div>
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> วงจรชีวิตข้อมูลส่วนบุคคล (Data Life Cycle) ตั้งแต่เริ่มรับเข้าองค์กรจนถึงการทำลายตามมาตรฐาน PDPA แบ่งเป็น 6 ระยะ:</div>
+                    <ol class="concise-list">
+                        <li><strong>Creation / Collection (การสร้างและเก็บรวบรวม):</strong> แจ้งวัตถุประสงค์ชัดเจน (Privacy Notice), ขอความยินยอม (Consent) ตามกฎหมาย PDPA และเก็บข้อมูลเท่าที่จำเป็นเท่านั้น (<span class="kw">Data Minimization</span>)</li>
+                        <li><strong>Storage &amp; Classification (การจำแนกชั้นความลับและจัดเก็บ):</strong> จัดหมวดหมู่ความอ่อนไหวของข้อมูล (Classification) และเข้ารหัสข้อมูลขณะจัดเก็บในฐานข้อมูล (<span class="kw">Encryption at Rest</span> เช่น AES-256)</li>
+                        <li><strong>Usage / Processing (การนำข้อมูลไปใช้งาน):</strong> ประมวลผลตามวัตถุประสงค์ที่แจ้งไว้เท่านั้น จำกัดสิทธิ์การเข้าถึงแบบ <span class="kw">Least Privilege / RBAC</span>, ทำ Data Masking บดบังข้อมูลสำคัญ และเก็บ Audit Log</li>
+                        <li><strong>Sharing / Distribution (การแบ่งปันและส่งต่อ):</strong> เข้ารหัสข้อมูลขณะส่งผ่านเครือข่าย (<span class="kw">Encryption in Transit / TLS</span>), ใช้ DLP ป้องกันข้อมูลรั่วไหล และทำสัญญา <span class="kw">DPA</span> กับผู้ประมวลผลภายนอก</li>
+                        <li><strong>Archival / Retention (การเก็บรักษาระยะยาว):</strong> ข้อมูลที่ไม่ได้ใช้ประจำวันแต่กฎหมายกำหนดให้เก็บ จะถูกย้ายไปเก็บในระบบ Archive ที่ปลอดภัยตามระยะเวลาที่กำหนด (<span class="kw">Retention Policy</span>)</li>
+                        <li><strong>Destruction / Disposal (การทำลายข้อมูลอย่างปลอดภัย):</strong> เมื่อหมดอายุการเก็บ ต้องทำลายทิ้งอย่างปลอดภัยตามมาตรฐาน <span class="kw">NIST SP 800-88 (Clear, Purge, Destroy)</span> เพื่อไม่ให้กู้คืนได้อีก</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 9 -->
+            <article id="q9" class="qa-card" data-type="draw" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 9:</span> จงวาดภาพและอธิบายกระบวนการ Incident Response</h2>
+                    <span class="qa-badge badge-draw">🎨 วาดภาพ + อธิบาย</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ NIST 4 ระยะ</span>
+                    <span><strong>"เตรียมพร้อมก่อนเกิดเหตุ (Preparation) ➜ ตรวจจับและวิเคราะห์ (Detection &amp; Analysis) ⇄ กักกัน-กำจัด-กู้คืน (Containment, Eradication &amp; Recovery) ➜ ถอดบทเรียน (Post-Incident)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ แผนภาพสำหรับวาดในห้องสอบ: NIST SP 800-61 Incident Response 4 ระยะ</span><span>อย่าลืมวาดลูกศรวนกลับ (Feedback Loop)!</span></div>
+                        <div class="flow-row">
+                            <div class="flow-box"><b>1. Preparation</b>ตั้งทีม CSIRT, ทำแผน Playbook, สำรองข้อมูล</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>2. Detection &amp; Analysis</b>ตรวจจับผ่าน SIEM/EDR, ตัด False Positive, ประเมินผล</div>
+                            <div class="flow-arrow">⇄</div>
+                            <div class="flow-box"><b>3. Containment, Eradication &amp; Recovery</b>แยกเครื่องติดเชื้อ ➜ ล้างมัลแวร์/อุดช่องโหว่ ➜ กู้คืนระบบ</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>4. Post-Incident Activity</b>ประชุมถอดบทเรียน (Lessons Learned) &amp; ทำรายงาน</div>
+                        </div>
+                        <div class="flow-note">🔄 ลูกศรย้อนกลับ: ระยะที่ 4 (Lessons Learned) นำบทเรียนกลับไปปรับปรุง ระยะที่ 1 (Preparation) เสมอ</div>
+                    </div>
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> กระบวนการตอบสนองต่อเหตุการณ์ภัยคุกคามตามมาตรฐานสากล <strong>NIST SP 800-61</strong> แบ่งออกเป็น 4 ระยะหลัก:</div>
+                    <ol class="concise-list">
+                        <li><strong>Preparation (การเตรียมความพร้อมก่อนเกิดเหตุ):</strong> จัดตั้งทีมรับมือเหตุฉุกเฉิน (<span class="kw">CSIRT</span>), จัดทำคู่มือรับมือ (<span class="kw">Playbooks</span>) และผังการติดต่อ (Call Tree), ติดตั้งเครื่องมือ SIEM/EDR, สำรองข้อมูล และซ้อมแผนจำลอง</li>
+                        <li><strong>Detection and Analysis (การตรวจจับและวิเคราะห์เหตุการณ์):</strong> ตรวจสอบการแจ้งเตือนจาก SIEM/EDR เพื่อยืนยันเหตุโจมตีจริง (คัดกรอง <span class="kw">False Positive</span> ออก), วิเคราะห์ตัวบ่งชี้การโจมตี (<span class="kw">IoCs</span>) และจัดลำดับความรุนแรง</li>
+                        <li><strong>Containment, Eradication, and Recovery (การกักกัน กำจัดต้นตอ และกู้คืน):</strong>
+                            <br/>• <span class="kw">Containment (จำกัดวง):</span> รีบแยกเครื่องติดเชื้อออกจากเครือข่ายทันที (เช่น ถอดสายแลน/ย้ายเข้า Quarantine VLAN) ไม่ให้ลุกลาม
+                            <br/>• <span class="kw">Eradication (กำจัดต้นตอ):</span> ลบมัลแวร์/Backdoor, รีเซ็ตรหัสผ่าน และอัปเดต Patch ปิดช่องโหว่ต้นเหตุ
+                            <br/>• <span class="kw">Recovery (กู้คืน):</span> กู้ข้อมูลจาก Clean Backup และนำระบบกลับเปิดใช้งานตามลำดับความสำคัญ
+                        </li>
+                        <li><strong>Post-Incident Activity / Lessons Learned (การถอดบทเรียนหลังเกิดเหตุ):</strong> ประชุมสรุปสาเหตุที่แท้จริง (<span class="kw">Root Cause Analysis</span>) จัดทำรายงาน และนำบทเรียนกลับไปปรับปรุงนโยบายและการเตรียมพร้อมในระยะที่ 1</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 10 -->
+            <article id="q10" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 10:</span> จงอธิบายกระบวนการ Incident Eradication and Recovery</h2>
+                    <span class="qa-badge badge-concept">✍️ แยกตอบ 2 ส่วนชัดเจน</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 3+3</span>
+                    <span><strong>Eradication (ถอนรากถอนโคน 3 อย่าง): ล้างมัลแวร์/ลง OS ใหม่ + รีเซ็ตรหัสผ่าน + แพตช์อุดช่องโหว่ | Recovery (กู้คืน 3 ขั้น): กู้จาก Clean Backup + ทดสอบเปิดตาม RTO + เฝ้าดู Log หลังเปิด</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> เป็นขั้นตอนในระยะที่ 3 ของการทำ Incident Response (ทำหลังจากกักกันระบบและเก็บหลักฐานแล้ว) แยกเป็น 2 กระบวนการย่อยดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>Incident Eradication (การกำจัดภัยคุกคามและต้นตออย่างถอนรากถอนโคน):</strong> เพื่อไม่ให้ผู้โจมตีหลงเหลือหรือกลับเข้ามาซ้ำได้อีก ประกอบด้วย:
+                            <br/>• <strong>ล้างมัลแวร์และลงระบบใหม่:</strong> ลบไฟล์มัลแวร์ บัญชีแปลกปลอม และ Backdoor/Rootkit (หากถูกฝังลึกให้ล้างเครื่องแล้วลง OS ใหม่จากแม่แบบที่ปลอดภัย <span class="kw">Reimage from Golden Image</span>)
+                            <br/>• <strong>รีเซ็ตข้อมูลยืนยันตัวตน:</strong> บังคับเปลี่ยนรหัสผ่านและหมุนเวียนเปลี่ยนคีย์ (Credential/Key Rotation) ทั้งหมดที่รั่วไหล
+                            <br/>• <strong>อุดช่องโหว่ต้นเหตุ:</strong> อัปเดต Security Patch, แก้ไขการตั้งค่าที่ผิดพลาด และอัปเดตกฎ Firewall/WAF
+                        </li>
+                        <li><strong>Incident Recovery (การกู้คืนระบบกลับสู่สภาวะให้บริการปกติ):</strong> เพื่อนำระบบที่สะอาดแล้วกลับมาเปิดใช้งานอย่างมั่นใจ ประกอบด้วย:
+                            <br/>• <strong>กู้คืนจากชุดสำรองที่ปลอดภัย (<span class="kw">Restore from Clean Backup</span>):</strong> นำข้อมูลสำรองช่วงก่อนติดเชื้อที่ตรวจสอบแล้วว่าปลอดมัลแวร์มากู้คืน
+                            <br/>• <strong>ทดสอบและทยอยเปิดระบบ (<span class="kw">Validation &amp; Phased Restoration</span>):</strong> ทดสอบระบบว่าทำงานปกติแล้วทยอยเปิดใช้งานตามลำดับความสำคัญ (<span class="kw">RTO</span>)
+                            <br/>• <strong>เฝ้าระวังเข้มงวดหลังกู้คืน (<span class="kw">Post-Recovery Monitoring</span>):</strong> ติดตามดู Log และทราฟฟิกเครือข่ายอย่างใกล้ชิดเพื่อยืนยันว่าไม่มีมัลแวร์หลงเหลือ
+                        </li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 11 -->
+            <article id="q11" class="qa-card" data-type="draw" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 11:</span> จงวาดภาพและอธิบายกระบวนการ Forensic Response</h2>
+                    <span class="qa-badge badge-draw">🎨 วาดภาพ + อธิบาย</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ NIST 4 ขั้น</span>
+                    <span><strong>"เก็บรวบรวมหลักฐาน (Collection) ➜ คัดกรองกู้ไฟล์บนสำเนา (Examination) ➜ วิเคราะห์ไทม์ไลน์หาคนร้าย (Analysis) ➜ เขียนรายงานส่งศาล (Reporting)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ แผนภาพสำหรับวาดในห้องสอบ: กระบวนการนิติวิทยาศาสตร์ดิจิทัล 4 ขั้นตอน (NIST SP 800-86)</span><span>วาด 4 กล่องเรียงลูกศร</span></div>
+                        <div class="flow-row">
+                            <div class="flow-box"><b>1. Collection</b>เก็บตาม Order of Volatility + Write Blocker + ค่า Hash + Chain of Custody</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>2. Examination</b>ตรวจบนสำเนาเท่านั้น! กู้ไฟล์ที่ถูกลบ &amp; คัดกรองข้อมูล</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>3. Analysis</b>เชื่อมโยงหลักฐาน สร้าง Timeline หาว่าใคร ทำอะไร เมื่อไหร่</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>4. Reporting</b>สรุปผลเป็นทางการ แนบค่า Hash &amp; Chain of Custody</div>
+                        </div>
+                    </div>
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> กระบวนการตรวจพิสูจน์พยานหลักฐานดิจิทัลตามมาตรฐาน <strong>NIST SP 800-86</strong> เพื่อใช้สืบสวนและรับฟังได้ในชั้นศาล มี 4 ขั้นตอน:</div>
+                    <ol class="concise-list">
+                        <li><strong>Collection (การเก็บรวบรวมและรักษาสภาพหลักฐาน):</strong> เก็บข้อมูลตามลำดับการสูญหายง่าย (<span class="kw">Order of Volatility</span>), ต่อผ่านอุปกรณ์กั้นการเขียนทับ (<span class="kw">Write Blocker</span>), ทำสำเนาแบบบิตต่อบิต (<span class="kw">Bit-stream Image</span>), คำนวณค่า <span class="kw">Hash (SHA-256)</span> ยืนยันความถูกต้อง และบันทึกบัญชีการรับ-ส่งมอบหลักฐาน (<span class="kw">Chain of Custody</span>)</li>
+                        <li><strong>Examination (การตรวจสอบและคัดกรองข้อมูล):</strong> นำ <strong>"ไฟล์สำเนา" (ห้ามทำบนต้นฉบับเด็ดขาด)</strong> มาใช้เครื่องมือกู้คืนไฟล์ที่ถูกลบ ถอดรหัส และคัดกรองเฉพาะไฟล์/Log ที่เกี่ยวข้องกับคดีออกมา</li>
+                        <li><strong>Analysis (การวิเคราะห์และปะติดปะต่อเหตุการณ์):</strong> นำหลักฐานจากหลายแหล่งมาเชื่อมโยงสร้างเส้นเวลา (<span class="kw">Timeline Reconstruction</span>) เพื่อตอบให้ได้ว่า <em>ใคร เจาะเข้ามาทางไหน เวลาใด ทำอะไรบ้าง และขโมยข้อมูลใดออกไป</em></li>
+                        <li><strong>Reporting (การจัดทำรายงานสรุปผลการตรวจพิสูจน์):</strong> เขียนรายงานสรุปขั้นตอน เครื่องมือที่ใช้ ผลการตรวจพิสูจน์ และข้อเสนอแนะ พร้อมแนบค่า Hash และเอกสาร Chain of Custody ส่งให้ผู้บริหารหรือศาล</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 12 -->
+            <article id="q12" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 12:</span> จงอธิบายกระบวนการ Data Acquisition and Order of Volatility</h2>
+                    <span class="qa-badge badge-concept">✍️ แยกตอบ 2 หัวข้อ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำลำดับการสลายตัว 1→6</span>
+                    <span><strong>"1. CPU/Cache ➜ 2. RAM/Network ➜ 3. Swap/Temp File ➜ 4. Hard Disk/SSD ➜ 5. Remote Log (SIEM) ➜ 6. เทปสำรอง/กระดาษ" (จำ: ยิ่งอยู่ในชิปยิ่งหายไว ต้องเก็บก่อน!)</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>1. กระบวนการเก็บสำเนาหลักฐาน (Data Acquisition):</strong> คือการดึงข้อมูลจากเครื่องเป้าหมายมาเป็นหลักฐานโดยไม่ทำให้ต้นฉบับเปลี่ยนแปลง แบ่งเป็น 2 กรณี:</div>
+                    <ul class="concise-list" style="margin-bottom: 0.8rem;">
+                        <li><strong>Live Acquisition (ขณะเครื่องยังเปิดอยู่):</strong> <span class="kw">ห้ามดึงปลั๊กไฟทันทีเด็ดขาด!</span> เพราะข้อมูลใน RAM จะหายหมด ต้องรันเครื่องมือดึงข้อมูลใน RAM (Memory Dump), โปรเซสที่กำลังรัน, สถานะเครือข่าย และกุญแจเข้ารหัสออกมาก่อน</li>
+                        <li><strong>Dead / Static Acquisition (การสำเนาฮาร์ดดิสก์):</strong> ต่อดิสก์ผ่าน <span class="kw">Hardware Write Blocker</span> แล้วคัดลอกข้อมูลระดับบิตต่อบิต (<span class="kw">Bit-stream Imaging</span>) เพื่อให้ได้ทั้งไฟล์ปกติและไฟล์ที่ถูกลบในพื้นที่ว่าง จากนั้นคำนวณค่า <span class="kw">Hash (SHA-256)</span> เทียบว่าสำเนาตรงกับต้นฉบับ 100%</li>
+                    </ul>
+                    <div class="answer-lead"><strong>2. ลำดับความเสี่ยงในการสูญหายของข้อมูล (Order of Volatility — RFC 3227):</strong> ต้องเก็บจาก <strong>สูญหายง่ายที่สุด (อันดับ 1) ไปหายากที่สุด (อันดับ 6)</strong> ดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>อันดับ 1 — CPU Registers &amp; Cache Memory (L1/L2/L3):</strong> เปลี่ยนแปลงทุกนาโนวินาที สูญหายไวที่สุด</li>
+                        <li><strong>อันดับ 2 — หน่วยความจำหลัก (RAM), Routing/ARP Table, Active Connections และ Running Processes:</strong> หายทันทีเมื่อไฟดับหรือปิดเครื่อง ต้องดัมพ์เก็บก่อนปิดเครื่องเสมอ</li>
+                        <li><strong>อันดับ 3 — Swap Space / Paging File / Temporary Files:</strong> ไฟล์พักชั่วคราวบนดิสก์ที่อาจถูกล้างเมื่อรีบูต</li>
+                        <li><strong>อันดับ 4 — Hard Disk / SSD / Flash Storage:</strong> ข้อมูลในดิสก์ยังคงอยู่เมื่อปิดเครื่อง แต่เสี่ยงถูกเขียนทับหากเปิดใช้งานต่อ</li>
+                        <li><strong>อันดับ 5 — Remote Logging &amp; Monitoring Data (SIEM):</strong> บันทึกที่ถูกส่งออกไปเก็บแยกไว้บนเซิร์ฟเวอร์ส่วนกลางแล้ว</li>
+                        <li><strong>อันดับ 6 — Archival Media / Backup Tapes / Printouts:</strong> สื่อสำรองข้อมูลออฟไลน์และเอกสารกระดาษ คงทนถาวรที่สุด เก็บเป็นลำดับสุดท้ายได้</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 13 -->
+            <article id="q13" class="qa-card" data-type="draw" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 13:</span> จงวาดภาพและอธิบายกรอบแนวคิดของการบริหารจัดการความเสี่ยง (Risk Management Framework)</h2>
+                    <span class="qa-badge badge-draw">🎨 วาดภาพ + อธิบาย</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ RMF 6 ขั้น</span>
+                    <span><strong>"กำหนดบริบท (Categorize) ➜ ระบุความเสี่ยง (Identify) ➜ วิเคราะห์คำนวณ SLE/ALE (Analyze) ➜ จัดการ 4 วิธี (Treat: ลด-โอน-เลี่ยง-รับ) ➜ ตรวจอนุมัติ (Authorize) ➜ เฝ้าระวังต่อเนื่อง (Monitor)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ แผนภาพสำหรับวาดในห้องสอบ: Risk Management Framework (RMF) 6 ขั้นตอน</span><span>วาด 6 กล่องเรียงเป็นวงจร</span></div>
+                        <div class="flow-row">
+                            <div class="flow-box"><b>1. Categorize</b>กำหนดบริบท &amp; Risk Appetite</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>2. Identify</b>หา Asset, Threat, Vuln ลง Risk Register</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>3. Analyze</b>ประเมินโอกาส×ผลกระทบ (SLE×ARO=ALE)</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>4. Treat</b>จัดการความเสี่ยง: Mitigate, Transfer, Avoid, Accept</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>5. Authorize</b>ทดสอบ Control &amp; ผู้บริหารอนุมัติ</div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>6. Monitor</b>เฝ้าระวังและทบทวนต่อเนื่อง</div>
+                        </div>
+                    </div>
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> กรอบการบริหารจัดการความเสี่ยงด้านความมั่นคงปลอดภัยสารสนเทศ (NIST RMF / ISO 31000) มี 6 ขั้นตอนต่อเนื่องดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>Context &amp; Categorize (กำหนดบริบทและจัดหมวดหมู่):</strong> กำหนดขอบเขตระบบ จัดลำดับความสำคัญตาม CIA Triad และกำหนดระดับความเสี่ยงที่องค์กรยอมรับได้ (<span class="kw">Risk Appetite</span>)</li>
+                        <li><strong>Risk Identification (การระบุความเสี่ยง):</strong> สำรวจทรัพย์สิน (Assets), ภัยคุกคาม (Threats) และช่องโหว่ (Vulnerabilities) แล้วบันทึกเข้าสู่ <span class="kw">ทะเบียนความเสี่ยง (Risk Register)</span></li>
+                        <li><strong>Risk Analysis &amp; Evaluation (การวิเคราะห์และประเมินความเสี่ยง):</strong> ประเมินทั้งเชิงคุณภาพ ($\text{โอกาสเกิด} \times \text{ผลกระทบ}$) และเชิงปริมาณตัวเงิน (<span class="kw">$\text{SLE} = \text{AV} \times \text{EF}$</span> และ <span class="kw">$\text{ALE} = \text{SLE} \times \text{ARO}$</span>) เพื่อจัดลำดับความสำคัญ</li>
+                        <li><strong>Risk Treatment (การเลือกกลยุทธ์จัดการความเสี่ยง 4 แนวทาง):</strong>
+                            <br/>• <span class="kw">Mitigate (ลดความเสี่ยง):</span> ติดตั้งมาตรการควบคุม (Controls) เช่น Firewall, MFA เพื่อลดโอกาสหรือผลกระทบ
+                            <br/>• <span class="kw">Transfer (โอนความเสี่ยง):</span> โอนภาระให้บุคคลที่สาม เช่น ทำประกันภัยไซเบอร์ หรือจ้าง Outsource
+                            <br/>• <span class="kw">Avoid (หลีกเลี่ยงความเสี่ยง):</span> ยกเลิกกิจกรรมหรือบริการที่เป็นต้นเหตุของความเสี่ยงนั้น
+                            <br/>• <span class="kw">Accept (ยอมรับความเสี่ยง):</span> ผู้บริหารลงนามยอมรับความเสี่ยงคงเหลือ (<span class="kw">Residual Risk</span>) ที่อยู่ในเกณฑ์รับได้
+                        </li>
+                        <li><strong>Assessment &amp; Authorization (การตรวจสอบและอนุมัติ):</strong> ทดสอบว่ามาตรการป้องกันทำงานได้จริง และผู้บริหารลงนามอนุมัติเปิดใช้งานระบบ (ATO)</li>
+                        <li><strong>Continuous Monitoring (การเฝ้าระวังอย่างต่อเนื่อง):</strong> ติดตามภัยคุกคามใหม่ๆ และการเปลี่ยนแปลงของระบบ พร้อมทบทวน Risk Register เป็นประจำ</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 14 -->
+            <article id="q14" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 14:</span> จงอธิบายความหมายของคำต่อไปนี้ พร้อมทั้งยกตัวอย่าง: Business Impact Analysis (BIA), Recovery Point Objective (RPO), Recovery Time Objective (RTO), Maximum Tolerable Downtime (MTD)</h2>
+                    <span class="qa-badge badge-concept">✍️ นิยาม 4 คำ + ตัวอย่าง</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำเส้นเวลา</span>
+                    <span><strong>"BIA = วิเคราะห์ระบบไหนสำคัญสุด | RPO = ย้อนหลังไปถึง Backup ล่าสุด (ยอมให้ข้อมูลหายได้กี่ ชม.) | RTO = เวลาซ่อมระบบให้ฟื้น | MTD = เวลาล่มสูงสุดก่อนบริษัทเจ๊ง (ต้องตั้ง RTO ≤ MTD เสมอ)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="exam-diagram">
+                        <div class="exam-diagram-title"><span>✏️ ภาพช่วยจำเส้นเวลา RPO vs RTO vs MTD (วาดประกอบได้คะแนนเพิ่มทันที!)</span><span>Timeline</span></div>
+                        <div class="flow-row">
+                            <div class="flow-box"><b>⬅️ RPO (ย้อนสู่อดีต)</b>จากจุด Backup ล่าสุด ถึงตอนระบบล่ม<br/><em>(ยอมให้ข้อมูลหายได้ไม่เกินเท่าใด)</em></div>
+                            <div class="flow-arrow">⚡ ระบบล่ม! ➜</div>
+                            <div class="flow-box"><b>RTO (ซ่อมสู่อนาคต) ➡️</b>จากตอนระบบล่ม จนกู้ระบบกลับมาเปิดได้<br/><em>(ต้องซ่อมให้เสร็จภายในกี่ ชม.)</em></div>
+                            <div class="flow-arrow">➜</div>
+                            <div class="flow-box"><b>🛑 MTD (เพดานสูงสุด)</b>เวลาหยุดชะงักสูงสุดที่ธุรกิจทนได้ก่อนวิกฤตถาวร<br/><em>(RTO ต้อง ≤ MTD เสมอ)</em></div>
+                        </div>
+                    </div>
+                    <ol class="concise-list">
+                        <li><strong>Business Impact Analysis (BIA — การวิเคราะห์ผลกระทบทางธุรกิจ):</strong>
+                            <br/>• <strong>ความหมาย:</strong> กระบวนการวิเคราะห์เพื่อระบุว่าระบบหรือฟังก์ชันงานใดสำคัญต่อความอยู่รอดขององค์กรมากที่สุด (<span class="kw">Mission-Critical</span>) และประเมินมูลค่าความเสียหายหากระบบนั้นล่ม เพื่อจัดลำดับความสำคัญในการกู้คืน
+                            <br/>• <strong>ตัวอย่าง:</strong> ธนาคารทำ BIA พบว่า <em>"ระบบโอนเงินพร้อมเพย์"</em> สำคัญอันดับ 1 หากล่มจะเสียหายชั่วโมงละ 5 ล้านบาท จึงต้องจัดงบทำระบบสำรองสูงสุดและกู้คืนเป็นลำดับแรก
+                        </li>
+                        <li><strong>Recovery Point Objective (RPO — เป้าหมายจุดย้อนหลังของการกู้คืนข้อมูล):</strong>
+                            <br/>• <strong>ความหมาย:</strong> ระยะเวลาย้อนหลังสูงสุดจากตอนเกิดเหตุไปยังจุดสำรองข้อมูลครั้งล่าสุด แสดงถึง <span class="kw">ปริมาณข้อมูลที่ยอมให้สูญหายได้ (วัดเป็นเวลา)</span> และเป็นตัวกำหนดความถี่ในการทำ Backup
+                            <br/>• <strong>ตัวอย่าง:</strong> บริษัทกำหนด <span class="kw">$\text{RPO} = 4\text{ ชั่วโมง}$</span> จึงต้องตั้งเวลาทำ Backup ทุกๆ 4 ชั่วโมง (หากระบบพังตอน 15:00 น. จะกู้ข้อมูลตอน 12:00 น. กลับมาได้ โดยเสียข้อมูลไป 3 ชม. ซึ่งไม่เกินเกณฑ์ RPO)
+                        </li>
+                        <li><strong>Recovery Time Objective (RTO — เป้าหมายระยะเวลาในการกู้คืนระบบ):</strong>
+                            <br/>• <strong>ความหมาย:</strong> ระยะเวลาเป้าหมายสูงสุดนับตั้งแต่ระบบล่ม จนกระทั่งทีมไอทีซ่อมแซมและกู้คืนระบบให้กลับมาเปิดใช้งานได้อีกครั้ง
+                            <br/>• <strong>ตัวอย่าง:</strong> โรงพยาบาลกำหนด <span class="kw">$\text{RTO} = 1\text{ ชั่วโมง}$</span> สำหรับระบบเวชระเบียน เมื่อเซิร์ฟเวอร์หลักล่ม ทีมงานต้องสลับไปใช้ระบบสำรองให้แพทย์เปิดดูข้อมูลผู้ป่วยได้ภายใน 1 ชั่วโมง
+                        </li>
+                        <li><strong>Maximum Tolerable Downtime (MTD — ระยะเวลาหยุดชะงักสูงสุดที่ธุรกิจทนรับได้):</strong>
+                            <br/>• <strong>ความหมาย:</strong> ระยะเวลารวมสูงสุดที่ธุรกิจสามารถหยุดชะงักได้ ก่อนจะเกิดความเสียหายร้ายแรงถาวรจนฟื้นตัวไม่ได้ (เช่น ล้มละลาย หรือถูกเพิกถอนใบอนุญาต) โดย <span class="kw">$\text{RTO} \le \text{MTD}$ เสมอ</span>
+                            <br/>• <strong>ตัวอย่าง:</strong> สายการบินประเมินว่าหากระบบเช็คอินล่มเกิน <span class="kw">$\text{MTD} = 12\text{ ชั่วโมง}$</span> สายการบินจะเป็นอัมพาตทั่วโลก จึงต้องกำหนด $\text{RTO} = 4\text{ ชั่วโมง}$ เพื่อกู้ระบบและเคลียร์ผู้โดยสารให้ทันก่อนครบ 12 ชั่วโมง
+                        </li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 15 -->
+            <article id="q15" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 15:</span> จงอธิบายหลักการของ Asset Management และ Configuration Management</h2>
+                    <span class="qa-badge badge-concept">✍️ แยกตอบ 2 หลักการ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำคู่แฝด</span>
+                    <span><strong>"Asset Management = รู้ว่าเรามีทรัพย์สินอะไรบ้าง ใครเป็นเจ้าของ (Inventory &amp; Owner) | Configuration Management = คุมการตั้งค่าให้ตรงมาตรฐานปลอดภัย ไม่ให้เพี้ยน (Baseline, CMDB &amp; Drift)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <ol class="concise-list">
+                        <li><strong>หลักการของ Asset Management (การบริหารจัดการทรัพย์สินสารสนเทศ):</strong>
+                            <br/>• <strong>แนวคิดหลัก:</strong> คือการสำรวจ รวบรวม และจัดทำบัญชีรายการทรัพย์สินทุกชนิดขององค์กร (<span class="kw">Asset Inventory</span> ทั้งฮาร์ดแวร์ ซอฟต์แวร์ คลาวด์ และข้อมูล) ตลอดวงจรชีวิต เพราะ <em>"องค์กรไม่สามารถปกป้องทรัพย์สินที่ตนเองไม่รู้ว่ามีอยู่ได้"</em>
+                            <br/>• <strong>การปฏิบัติ:</strong> ใช้เครื่องมือค้นหาทรัพย์สินอัตโนมัติ (Asset Discovery), กำหนดผู้รับผิดชอบดูแลชัดเจน (<span class="kw">Asset Owner</span>), จัดชั้นความสำคัญ/ความลับ (Classification) และติดตามตั้งแต่วันจัดซื้อจนถึงการทำลายเมื่อปลดระวาง
+                        </li>
+                        <li><strong>หลักการของ Configuration Management (การบริหารจัดการโครงแบบและการตั้งค่าระบบ):</strong>
+                            <br/>• <strong>แนวคิดหลัก:</strong> คือการกำหนด ควบคุม และตรวจสอบความถูกต้องของการตั้งค่าระบบ เวอร์ชันซอฟต์แวร์ และพอร์ตที่เปิดของอุปกรณ์ทุกชิ้น โดยจัดเก็บข้อมูลความสัมพันธ์ไว้ในฐานข้อมูล <span class="kw">CMDB (Configuration Management Database)</span>
+                            <br/>• <strong>การปฏิบัติ:</strong> กำหนดมาตรฐานการตั้งค่าที่ปลอดภัยและปิดบริการที่ไม่จำเป็นแล้ว (<span class="kw">Security Baseline / Golden Image / Hardening</span>) และคอยตรวจจับการแอบเปลี่ยนค่าที่เพี้ยนไปจากมาตรฐาน (<span class="kw">Configuration Drift Detection</span>) เพื่อดึงกลับสู่ค่าที่ปลอดภัยเสมอ
+                        </li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 16 -->
+            <article id="q16" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 16:</span> จงอธิบายหลักการของ Change Control and Change Management</h2>
+                    <span class="qa-badge badge-concept">✍️ อธิบาย 6 ขั้นตอน</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ 6 ขั้น</span>
+                    <span><strong>"ยื่นใบขอ (RFC) ➜ ประเมินความเสี่ยง (Impact) ➜ ทดสอบใน Sandbox ➜ เตรียมแผนถอยกลับ (Rollback) ➜ กรรมการอนุมัติ (CAB) ➜ ลงมือทำและจดบันทึก (Log)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> <strong>Change Control &amp; Change Management</strong> คือกระบวนการควบคุมการแก้ไขเปลี่ยนแปลงระบบใช้งานจริง (Production) อย่างเป็นทางการ เพื่อป้องกันไม่ให้การแก้ระบบโดยพลการทำให้ระบบล่ม (Downtime) หรือเกิดช่องโหว่ความปลอดภัยใหม่ มี 6 ขั้นตอนหลัก:</div>
+                    <ol class="concise-list">
+                        <li><strong>Request for Change — RFC (การยื่นคำขอเปลี่ยนแปลง):</strong> ผู้ต้องการแก้ไขระบบต้องส่งเอกสารระบุสิ่งที่ต้องการเปลี่ยน เหตุผล ผู้รับผิดชอบ และวันเวลาที่จะทำ</li>
+                        <li><strong>Risk &amp; Impact Analysis (การประเมินความเสี่ยงและผลกระทบ):</strong> วิเคราะห์ว่าการแก้ไขจะกระทบระบบใดบ้าง และกำหนดช่วงเวลาปฏิบัติงานที่กระทบผู้ใช้น้อยที่สุด (<span class="kw">Maintenance Window</span>)</li>
+                        <li><strong>Sandbox / Staging Testing (การทดสอบในระบบจำลอง):</strong> นำการเปลี่ยนแปลงไปทดสอบในสภาพแวดล้อมจำลองก่อนเสมอ เพื่อยืนยันว่าทำงานได้ปกติ</li>
+                        <li><strong>Rollback / Backout Plan (การจัดทำแผนย้อนกลับ):</strong> เตรียมขั้นตอนการกู้ระบบกลับสู่สถานะเดิมอย่างชัดเจน เผื่อกรณีอัปเดตจริงแล้วเกิดข้อผิดพลาด</li>
+                        <li><strong>CAB Approval (การอนุมัติโดยคณะกรรมการ):</strong> นำเสนอแผนทั้งหมดให้คณะกรรมการกำกับการเปลี่ยนแปลง (<span class="kw">Change Advisory Board - CAB</span>) พิจารณาอนุมัติก่อนทำจริง</li>
+                        <li><strong>Implementation &amp; Documentation (การลงมือทำและบันทึกเอกสาร):</strong> ดำเนินการตามแผน ตรวจสอบผลหลังทำ และอัปเดตเอกสารระบบพร้อมบันทึก <span class="kw">Change Log</span></li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 17 -->
+            <article id="q17" class="qa-card" data-type="five" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 17:</span> จงระบุและอธิบายหลักการป้องกัน Physical Security มา 5 วิธีการ</h2>
+                    <span class="qa-badge badge-five">✍️ ตอบ 5 วิธีการ</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำจากนอกเข้าใน</span>
+                    <span><strong>"1. รั้ว/เสากั้นรถ (Bollards) — 2. ประตู 2 ชั้นกันคนเดินตาม (Mantrap &amp; Biometrics) — 3. กล้อง/รปภ. เดินประกบ (CCTV &amp; Escort) — 4. แอร์/ก๊าซดับเพลิง (HVAC &amp; FM-200) — 5. ล็อกตู้แร็ก/ท่อร้อยสาย"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> การรักษาความมั่นคงปลอดภัยทางกายภาพของอาคารและศูนย์ข้อมูล (Data Center) มี 5 วิธีการหลัก (เรียงจากรอบนอกเข้าสู่ตัวเซิร์ฟเวอร์) ดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>Perimeter Barriers, Fencing &amp; Bollards (แนวกั้นเขตพื้นที่รอบนอก):</strong> สร้างรั้วนิรภัย จัดไฟส่องสว่างไม่ให้มีจุดอับสายตา และติดตั้ง <span class="kw">เสากั้นชนแข็งแรง (Bollards)</span> หน้าอาคารเพื่อป้องกันการใช้รถยนต์พุ่งชน</li>
+                        <li><strong>Mantrap / Access Control Vestibule &amp; Biometrics (ประตูนิรภัย 2 ชั้นและชีวมิติ):</strong> ติดตั้งห้องประตูนิรภัย 2 ชั้น (<span class="kw">Mantrap</span>) ที่ประตูแรกต้องปิดก่อนประตูที่สองจึงจะเปิด ร่วมกับการสแกนสมาร์ตการ์ดและลายนิ้วมือ/ใบหน้า เพื่อป้องกันการแอบเดินตามหลัง (<span class="kw">Tailgating / Piggybacking</span>) เข้าห้องเซิร์ฟเวอร์</li>
+                        <li><strong>CCTV, Motion Sensors &amp; Security Guards (กล้องวงจรปิดและเจ้าหน้าที่ รปภ.):</strong> ติดตั้งกล้อง CCTV และเซ็นเซอร์ตรวจจับการเคลื่อนไหวทุกจุดเข้า-ออก พร้อมมี รปภ. แลกบัตรลงทะเบียน (<span class="kw">Visitor Log</span>) และมีพนักงานเดินประกบผู้มาติดต่อตลอดเวลา (<span class="kw">Visitor Escort</span>)</li>
+                        <li><strong>HVAC &amp; Clean Agent Fire Suppression (การควบคุมอุณหภูมิและระบบดับเพลิงสารสะอาด):</strong> ควบคุมอุณหภูมิ/ความชื้นด้วยระบบ HVAC แยกช่องทางเดินลมร้อน-ลมเย็น (Hot/Cold Aisle) และใช้ระบบดับเพลิงด้วย <span class="kw">ก๊าซสะอาด (เช่น FM-200 / Inergen)</span> ที่ดับไฟได้โดยไม่ฉีดน้ำออกมาทำลายอุปกรณ์อิเล็กทรอนิกส์</li>
+                        <li><strong>Locked Server Cabinets &amp; Protected Cabling (การล็อกตู้แร็กและปกป้องสายสัญญาณ):</strong> เก็บเซิร์ฟเวอร์ไว้ในตู้แร็กที่ล็อกกุญแจแน่นหนา ใช้สายเคเบิลล็อกอุปกรณ์ และเดินสายแลน/ไฟเบอร์ไว้ในท่อร้อยสายปิดมิดชิด (<span class="kw">Protected Conduit</span>) ป้องกันการแอบตัดหรือดักฟังสาย</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ข้อ 18 -->
+            <article id="q18" class="qa-card" data-type="concept" onclick="revealCard(this)">
+                <div class="qa-header">
+                    <h2 class="qa-title"><span class="qa-num">ข้อที่ 18:</span> จงระบุและอธิบายหลักการ Secure Data Destruction</h2>
+                    <span class="qa-badge badge-concept">✍️ ตอบ 3 ระดับ (NIST 800-88)</span>
+                </div>
+                <div class="memory-box">
+                    <span class="memory-tag">💡 สูตรจำ NIST 3 ระดับ</span>
+                    <span><strong>"1. Clearing (เขียนทับด้วย 0/1 ใช้ซ้ำในองค์กร) ➜ 2. Purging (ล้างแม่เหล็ก Degaussing หรือทำลายกุญแจ Crypto-Erase สำหรับ SSD) ➜ 3. Physical Destruction (บด/เจาะ/เผาให้พังคามือ ปลอดภัย 100%)"</strong></span>
+                </div>
+                <div class="quiz-hint">👆 คลิกที่การ์ดเพื่อเปิดดูคำตอบ</div>
+                <div class="qa-answer-content">
+                    <div class="answer-lead"><strong>หลักการสรุป:</strong> การกด Delete หรือ Format ปกติลบเพียงตัวชี้ตำแหน่งไฟล์ทำให้ยังถูกกู้ข้อมูลคืนได้ ดังนั้นการทำลายข้อมูลอย่างปลอดภัยตามมาตรฐาน <strong>NIST SP 800-88 (Media Sanitization)</strong> จึงแบ่งออกเป็น 3 ระดับตามความเข้มข้นดังนี้:</div>
+                    <ol class="concise-list">
+                        <li><strong>Clearing (การล้างข้อมูลด้วยการเขียนทับด้วยซอฟต์แวร์ — Overwriting / Zero-filling):</strong>
+                            <br/>• <em>การทำงาน:</em> ใช้ซอฟต์แวร์สั่งเขียนบิต <code class="kw">0</code>, บิต <code class="kw">1</code> หรือค่าสุ่มทับลงไปบนทุกเซกเตอร์ของดิสก์ เพื่อป้องกันการใช้โปรแกรมกู้ไฟล์ทั่วไปดึงข้อมูลกลับมา เหมาะสำหรับดิสก์ที่จะ <span class="kw">นำกลับมาใช้ซ้ำภายในองค์กรเดิม (Internal Reuse)</span>
+                        </li>
+                        <li><strong>Purging (การทำให้ข้อมูลสูญสลายในระดับลึกจนกู้คืนไม่ได้แม้ใช้เครื่องมือห้องแล็บ):</strong> เหมาะสำหรับสื่อที่จะส่งออกนอกองค์กรหรือบริจาค มี 2 วิธีหลัก:
+                            <br/>• <span class="kw">Degaussing (การล้างด้วยสนามแม่เหล็กแรงสูง):</span> นำฮาร์ดดิสก์จานหมุน (HDD) หรือเทปแม่เหล็กเข้าเครื่องยิงสนามแม่เหล็กความเข้มสูงเพื่อทำลายเรียงตัวของแม่เหล็กทันที (ใช้กับ SSD ไม่ได้)
+                            <br/>• <span class="kw">Cryptographic Erase (Crypto-Shredding):</span> เหมาะสำหรับ <strong>SSD / Flash Media</strong> โดยเข้ารหัสข้อมูลทั้งลูกด้วย AES-256 แล้วทำการ <strong>ลบและทำลายกุญแจถอดรหัสทิ้งอย่างถาวร</strong> ทำให้ข้อมูลที่เหลืออ่านไม่ได้อีกต่อไป
+                        </li>
+                        <li><strong>Physical Destruction (การทำลายสื่อบันทึกข้อมูลให้สิ้นสภาพทางกายภาพ):</strong>
+                            <br/>• <em>การทำงาน:</em> ทำลายตัวดิสก์ ชิป SSD หรือเอกสารกระดาษให้พังทลายเป็นชิ้นเล็กชิ้นน้อย ได้แก่ <span class="kw">การบดสับละเอียด (Shredding / Pulverizing)</span>, การเจาะทะลุบีบอัด (Drilling/Crushing) หรือ <span class="kw">การเผาหลอมละลายด้วยความร้อนสูง (Incineration)</span> ซึ่งเป็นวิธีที่ปลอดภัยสูงสุด 100% สำหรับข้อมูลความลับสุดยอด พร้อมออก <span class="kw">ใบรับรองการทำลายข้อมูล (Certificate of Destruction)</span> เก็บเป็นหลักฐาน
+                        </li>
+                    </ol>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script>
+        let currentFontSize = 16;
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        }
+        function adjustFont(delta) {
+            currentFontSize = Math.min(22, Math.max(13, currentFontSize + delta));
+            document.body.style.fontSize = currentFontSize + 'px';
+        }
+        function toggleQuizMode() {
+            document.body.classList.toggle('quiz-mode');
+            const isQuiz = document.body.classList.contains('quiz-mode');
+            document.getElementById('quizBtn').classList.toggle('active', isQuiz);
+            if (!isQuiz) {
+                document.querySelectorAll('.qa-card').forEach(c => c.classList.remove('revealed'));
+            }
+        }
+        function revealCard(card) {
+            if (document.body.classList.contains('quiz-mode')) {
+                card.classList.toggle('revealed');
+            }
+        }
+        function filterType(type) {
+            document.getElementById('filterAllBtn').classList.toggle('active', type === 'all');
+            document.getElementById('filterDrawBtn').classList.toggle('active', type === 'draw');
+            document.querySelectorAll('.qa-card').forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        function searchQuestions(q) {
+            const term = q.trim().toLowerCase();
+            document.querySelectorAll('.qa-card').forEach(card => {
+                const txt = card.innerText.toLowerCase();
+                card.style.display = txt.includes(term) ? 'block' : 'none';
+            });
+            document.querySelectorAll('.toc-item').forEach(a => {
+                const txt = a.innerText.toLowerCase();
+                a.style.display = txt.includes(term) ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
