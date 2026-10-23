@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Network Technology — A4 Full Cheat Sheet (บท 5, 6, 7, 9) • 2 หน้าเต็ม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Prompt:wght@500;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#e5e7eb;font-family:'Sarabun',sans-serif;color:#111}
+.topbar{position:sticky;top:0;z-index:10;background:#064e3b;color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;font-family:'Prompt';font-size:.9rem}
+.topbar button{font-family:'Prompt';border:0;border-radius:8px;padding:7px 14px;cursor:pointer;background:#fff;color:#064e3b;font-weight:600}
+.topbar .st{font-size:.8rem;opacity:.9}
+.guide{max-width:210mm;margin:16px auto 0;background:#fff;border-radius:10px;padding:12px 18px;font-size:.92rem;line-height:1.6;border-left:6px solid #059669}
+.guide b{color:#064e3b}
+.pages{display:flex;flex-direction:column;align-items:center;gap:22px;padding:18px 0 40px}
+
+/* ===== A4 PAGE ===== */
+.a4{width:210mm;height:297mm;background:#fff;padding:5mm 5.5mm;box-shadow:0 6px 22px rgba(0,0,0,.18);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.a4 .ph{font-family:'Prompt';font-weight:700;text-align:center;color:#064e3b;border-bottom:1.6px solid #059669;margin-bottom:1.4mm;padding-bottom:.4mm;font-size:9.5pt;line-height:1.3;flex:0 0 auto;white-space:nowrap}
+.cols *{overflow-wrap:anywhere}
+.a4 .ph small{font-weight:500;color:#475569;font-size:.75em}
+.cols{flex:1 1 auto;column-count:3;column-gap:3mm;column-rule:.6px dashed #94a3b8;column-fill:auto;overflow:hidden;font-size:var(--f,7pt);line-height:1.24}
+.cb{break-inside:avoid;border:.7px solid #64748b;border-radius:2px;padding:.7mm 1.2mm .9mm;margin:0 0 1.3mm}
+.cb h5{margin:0 0 .5mm;font-family:'Prompt';font-weight:600;font-size:1.08em;color:#fff;background:#064e3b;padding:.15mm 1.2mm;border-radius:1.5px;line-height:1.35}
+.cb.r h5{background:#b91c1c}.cb.b h5{background:#1d4ed8}.cb.p h5{background:#7e22ce}.cb.y h5{background:#b45309}.cb.k h5{background:#334155}
+.cols ul,.cols ol{margin:0;padding-left:3mm}.cols li{margin:0}
+.cols p{margin:0 0 .4mm}
+.cols code,.m{font-family:'IBM Plex Mono',monospace;font-size:.92em;background:#f1f5f9;padding:0 .3mm;border-radius:1px}
+.f{display:block;font-family:'IBM Plex Mono',monospace;font-size:.92em;background:#f0fdf4;border:.5px dashed #16a34a;padding:.3mm .8mm;margin:.3mm 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.w{color:#b91c1c;font-weight:700}
+.g{color:#15803d;font-weight:700}
+.bl{color:#1d4ed8;font-weight:700}
+.cols table{width:100%;border-collapse:collapse;margin:.3mm 0;font-size:.95em}
+.cols th,.cols td{border:.5px solid #94a3b8;padding:.15mm .6mm;vertical-align:top;text-align:left}
+.cols th{background:#ecfdf5;font-weight:700}
+.cols sub,.cols sup{font-size:.7em}
+.star{color:#dc2626}
+.ovf{position:absolute;top:2mm;right:3mm;background:#dc2626;color:#fff;font:600 9pt 'Prompt';padding:1px 8px;border-radius:6px;display:none}
+
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff}
+  .topbar,.guide,.ovf{display:none!important}
+  .pages{padding:0;gap:0}
+  .a4{box-shadow:none;page-break-after:always;break-after:page}
+  .a4:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span>📝 Digital Network Technology — โพย A4 ฉบับเต็ม 2 หน้า (บท 5 • 6 • 7 • 9)</span>
+  <button onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF (ใช้เป็นต้นแบบ)</button>
+  <button onclick="fitAll()">↻ จัดให้เต็มหน้าใหม่</button>
+  <span class="st" id="st"></span>
+</div>
+<div class="guide">
+  <b>วิธีใช้:</b> หน้า 1 = <b>บท 5 Transport Layer + บท 6 Application Layer / IoT</b> • หน้า 2 = <b>บท 7 Wireless / Cellular / Mobile IP + บท 9 เฉลยข้อสอบตัวอย่าง & เก็งข้อสอบ</b> •
+  ตัวอักษรถูกปรับอัตโนมัติให้เต็มกระดาษพอดี • <span style="color:#b91c1c;font-weight:700">กติกาสอบ: เข้าห้องได้ A4 1 แผ่น (หน้า-หลัง) เขียนด้วยลายมือเท่านั้น ห้ามพิมพ์</span> — ใช้ไฟล์นี้เป็นต้นแบบเลย์เอาต์สำหรับคัดลอก (แนะนำปากกา 2 สี: <span class="w">แดง</span> = กับดัก/คำตอบ, ดำ = เนื้อหา)
+</div>
+
+<div class="pages">
+<!-- ============================ PAGE 1 ============================ -->
+<section class="a4" id="p1">
+  <div class="ovf">⚠ ล้น</div>
+  <div class="ph">หน้า 1 — บท 5 TRANSPORT LAYER • บท 6 APPLICATION LAYER & IoT <small>(070315108 Final 2026)</small></div>
+  <div class="cols">
+
+    <div class="cb b"><h5>5.1 Transport Service & Mux/Demux</h5>
+      <ul>
+        <li>Transport = สื่อสาร <b>process-to-process</b> (Network = host-to-host) ทำงานที่ end system เท่านั้น router ไม่ดู L4</li>
+        <li>Port 16 bit: 0–1023 well-known, 1024–49151 registered, 49152–65535 ephemeral</li>
+        <li><b>UDP demux</b> ด้วย (dstIP, dstPort) → ต่างต้นทางเข้า socket เดียวกัน</li>
+        <li><b>TCP demux</b> ด้วย <b>4-tuple</b> (srcIP, srcPort, dstIP, dstPort) → 1 connection = 1 socket (web server มีหลาย socket port 80)</li>
+      </ul>
+    </div>
+
+    <div class="cb b"><h5>5.2 UDP (RFC 768)</h5>
+      Header <b>8 bytes</b>: SrcPort | DstPort | Length | Checksum<br>
+      Checksum = ผลรวม 16-bit แบบ 1's complement แล้วกลับบิต (ตรวจผิดพลาดได้ แต่ไม่แก้/ไม่ส่งซ้ำ)<br>
+      <b>ข้อดี:</b> ไม่ต้อง handshake (ไม่มี delay ตั้ง conn), ไม่มี state, header เล็ก, <b>ไม่มี congestion control</b> → แอปคุมอัตราเอง<br>
+      <b>ใช้กับ:</b> DNS, SNMP, DHCP, VoIP, streaming สด, เกม, <b>QUIC/HTTP3</b>, <b>CoAP</b> • ถ้าต้องการ reliable ให้ทำที่ชั้นแอป
+    </div>
+
+    <div class="cb k"><h5>5.3 Reliable Data Transfer (rdt)</h5>
+      เครื่องมือ: <b>checksum</b> (ตรวจ bit error) • <b>seq#</b> (กันซ้ำ/เรียงลำดับ) • <b>ACK/NAK</b> • <b>timer</b> (จัดการ loss) • retransmit<br>
+      <b>Stop-and-Wait:</b> <span class="m">U = (L/R) / (RTT + L/R)</span> ต่ำมากบนลิงก์ไกล → ใช้ pipelining<br>
+      <table><tr><th></th><th>Go-Back-N</th><th>Selective Repeat</th></tr>
+      <tr><td>ACK</td><td>cumulative</td><td>individual</td></tr>
+      <tr><td>Timer</td><td>1 ตัว (oldest)</td><td>ทุกแพ็กเก็ต</td></tr>
+      <tr><td>หาย</td><td>ส่งซ้ำ <b>ทั้งหมด</b>ตั้งแต่ตัวหาย</td><td>ส่งซ้ำ<b>เฉพาะตัวหาย</b></td></tr>
+      <tr><td>ผู้รับ</td><td>ทิ้ง out-of-order</td><td>buffer ไว้, window ≤ seq/2</td></tr></table>
+      TCP = ลูกผสม (cumulative ACK + timer เดียว + ส่งซ้ำเฉพาะตัวหาย)
+    </div>
+
+    <div class="cb b"><h5>5.4 TCP Segment (header ≥ 20 B)</h5>
+      <span class="f">SrcPort(16) | DstPort(16)
+Sequence Number (32) = byte แรกของ segment
+Ack Number (32) = byte ถัดไปที่ต้องการ
+HLen | flags CWR ECE URG ACK PSH RST SYN FIN
+Receive Window rwnd (16) | Checksum | UrgPtr
+Options: MSS, Window Scale, SACK, Timestamp</span>
+      TCP = <b>byte-stream</b>, point-to-point, full-duplex, connection-oriented, reliable, in-order, flow + congestion control<br>
+      MSS = ข้อมูลสูงสุดต่อ segment (ไม่รวม header) เช่น 1460 B บน Ethernet (MTU 1500 − 20 IP − 20 TCP)
+    </div>
+
+    <div class="cb b"><h5>5.5 Connection Management</h5>
+      <b>3-Way Handshake:</b> ① SYN(seq=x) → ② SYN+ACK(seq=y, ack=x+1) → ③ ACK(ack=y+1) [③ ส่ง data ได้]<br>
+      ทำไม 3 ไม่ใช่ 2: ยืนยันว่า<b>ทั้งสองฝั่ง</b>รับ-ส่งได้ + sync ISN สองทาง + กัน SYN เก่าที่ค้างในเครือข่าย<br>
+      <b>ปิด (4-way):</b> FIN → ACK → FIN → ACK → ฝั่งที่ปิดก่อนรอ <b>TIME_WAIT = 2MSL</b> (เผื่อ ACK สุดท้ายหาย)<br>
+      States: CLOSED→LISTEN→SYN_RCVD→ESTABLISHED / SYN_SENT • FIN_WAIT_1→FIN_WAIT_2→TIME_WAIT • CLOSE_WAIT→LAST_ACK<br>
+      <span class="w">SYN Flood</span> = ส่ง SYN ปลอมจน half-open เต็ม → แก้ด้วย <b>SYN cookies</b> • RST = ยกเลิก conn ทันที
+    </div>
+
+    <div class="cb r"><h5>5.6 RTT & RTO — ข้อสอบ Q1 <span class="star">★★★</span></h5>
+      <span class="f">EstimatedRTT = (1−α)·EstRTT + α·SampleRTT   α=0.125
+DevRTT = (1−β)·DevRTT + β·|SampleRTT − EstRTT|  β=0.25
+<b>TimeoutInterval (RTO) = EstimatedRTT + 4·DevRTT</b></span>
+      EWMA: ค่าใหม่มีน้ำหนักมากกว่า ค่าเก่าหายแบบ exponential • DevRTT = margin ที่<b>ขยาย/หดตามความแกว่ง</b><br>
+      <span class="w">RTO ต่ำไป</span> (เช่น 3 ms เมื่อ RTT 3–7 ms) → <b>Premature timeout</b> ส่งซ้ำทั้งที่ยังไม่หาย → เปลือง BW, ข้อมูลซ้ำ, TCP คิดว่า congest ลด cwnd ผิด ๆ<br>
+      <span class="w">RTO สูงไป</span> → แพ็กเก็ตหายจริงต้องรอนาน (<b>slow loss recovery</b>) throughput ต่ำ<br>
+      <span class="g">RTO = 8 ms</span> กับ RTT 3–7 ms → ครอบคลุม ไม่ timeout เกิน ✓ (แต่ถ้าสูงมากเกินไปก็กู้ช้า)<br>
+      <b>ตั้ง RTO ที่ดี:</b> ต้องพิจารณา <b>ค่าเฉลี่ย + ความแปรปรวน (variance)</b> ของ RTT, ปรับแบบ adaptive ไม่ใช่ค่าคงที่ • สูตรเก่า <span class="m">RTO = 2×EstRTT</span> ไม่สนความแกว่ง ✗<br>
+      <b>Karn's Algorithm:</b> ไม่วัด SampleRTT จาก segment ที่ส่งซ้ำ (ไม่รู้ว่า ACK ตอบตัวไหน) + เมื่อ timeout → <b>RTO × 2</b> (exponential backoff)<br>
+      <b>ตัวอย่าง:</b> Est=5, Dev=1, Sample=7 → Est=0.875·5+0.125·7=<b>5.25</b> • Dev=0.75·1+0.25·|7−5.25|=<b>1.1875</b> • RTO=5.25+4.75=<b>10.0 ms</b> (ถ้าใช้ Est เดิมหา diff: Dev=1.25 → RTO=10.25 — เขียนสูตรกำกับ)
+    </div>
+
+    <div class="cb k"><h5>5.7 TCP Reliability Mechanisms</h5>
+      <ul>
+        <li>Cumulative ACK + <b>timer เดียว</b> (segment เก่าสุดที่ยังไม่ ACK)</li>
+        <li>Timeout → ส่งซ้ำ segment นั้น + RTO×2</li>
+        <li><b>Fast Retransmit:</b> ได้ <b>3 duplicate ACK</b> → ส่งซ้ำทันทีไม่รอ timeout</li>
+        <li>Delayed ACK: รอ ≤ 500 ms (มัก 200) เพื่อ ACK ทีเดียว 2 segment</li>
+        <li>out-of-order → ส่ง dup ACK ทันที, ช่องว่างถูกเติม → ACK ทันที</li>
+      </ul>
+    </div>
+
+    <div class="cb r"><h5>5.8 Flow Control & Advertised Window — Q3</h5>
+      <b>Advertised Window (rwnd)</b> = ผู้รับบอกพื้นที่ว่างใน receive buffer ผ่าน header ทุก segment → ผู้ส่งต้องไม่ส่งเกิน = <b>กันผู้รับล้น</b><br>
+      <span class="f">rwnd = RcvBuffer − (LastByteRcvd − LastByteRead)
+LastByteSent − LastByteAcked ≤ rwnd
+EffectiveWindow = min(rwnd, cwnd) − (LastByteSent − LastByteAcked)</span>
+      rwnd = 0 → ผู้ส่งส่ง <b>zero-window probe</b> 1 byte (persist timer) จนกว่า rwnd > 0<br>
+      Silly Window Syndrome → แก้ด้วย <b>Nagle</b> (ผู้ส่งรวมข้อมูลเล็ก) / Clark (ผู้รับไม่ประกาศ window เล็ก)
+    </div>
+
+    <div class="cb r"><h5>5.9 Congestion Control — Slow Start / AIMD</h5>
+      สาเหตุ/ผล: คิวยาว → delay ↑, packet loss → ส่งซ้ำเปลือง, upstream ส่งเปล่าเมื่อทิ้งปลายทาง<br>
+      แนวทาง: <b>End-to-end</b> (TCP เดาจาก loss/delay) vs <b>Network-assisted</b> (DECbit, ECN)<br>
+      <b>cwnd</b> = ผู้ส่งประเมินเอง (กัน<b>เครือข่าย</b>ล้น) ↔ rwnd (กัน<b>ผู้รับ</b>ล้น) • rate ≈ cwnd/RTT<br>
+      <b>Slow Start:</b> เริ่ม cwnd = 1 MSS, ทุก ACK +1 MSS → <b>×2 ทุก RTT (exponential)</b> จนถึง ssthresh/เกิด loss (ชื่อ slow เพราะเริ่มจาก 1 แต่โตเร็วมาก)<br>
+      <b>Congestion Avoidance:</b> cwnd ≥ ssthresh → <b>+1 MSS ต่อ RTT</b> (linear)<br>
+      <b>AIMD:</b> Additive Increase +1 / Multiplicative Decrease ÷2 → กราฟฟันเลื่อย (sawtooth), แบ่ง BW อย่าง <b>fair</b><br>
+      <table><tr><th>เหตุการณ์</th><th>Tahoe</th><th>Reno</th></tr>
+      <tr><td>Timeout</td><td colspan="2">ssthresh = cwnd/2, <b>cwnd = 1</b> → slow start</td></tr>
+      <tr><td>3 dup ACK</td><td>cwnd = 1</td><td>ssthresh = cwnd/2, <b>cwnd = ssthresh</b> (+3) Fast Recovery</td></tr></table>
+      <b>ไล่ค่า</b> ssthresh=16: 1→2→4→8→16 (SS) →17→18 (CA) → timeout: ssthresh=9, cwnd=1<br>
+      Avg throughput ≈ <span class="m">0.75·W/RTT</span> • TCP เป็น <b>reactive</b> ("วัวหายล้อมคอก" ต้องเกิด loss ก่อน) → ทำ <b>CBR</b> ไม่ได้ • CUBIC (Linux default), BBR (วัด BW+RTT)
+    </div>
+
+    <div class="cb y"><h5>5.10 DECbit (Congestion Avoidance แบบ router ช่วย)</h5>
+      Router ตั้ง <b>congestion bit</b> ในแพ็กเก็ตเมื่อ avg queue length ≥ 1 → ผู้รับคัดลอกใส่ ACK<br>
+      ผู้ส่งดูแพ็กเก็ตใน window ล่าสุด: <b>&lt; 50%</b> bit set → <b>cwnd + 1</b> • <b>≥ 50%</b> → <b>cwnd × 0.875</b><br>
+      ตัวอย่าง: 6/10 set, cwnd 16 → 16×0.875 = <b>14</b> • ต่อยอดเป็น <b>ECN</b>: router mark CE ใน IP header → ผู้รับตั้ง ECE ใน TCP ACK → ผู้ส่งลด cwnd + ตั้ง CWR
+    </div>
+
+    <div class="cb r"><h5>5.11 RED — Random Early Detection — Q2 <span class="star">★★★</span></h5>
+      <span class="f">AvgLen = (1−Weight)·AvgLen + Weight·SampleLen
+AvgLen &lt; MinTh        → P<sub>drop</sub> = 0  (ผ่าน 100%)
+MinTh ≤ AvgLen &lt; MaxTh → P<sub>drop</sub> = P<sub>max</sub>·(AvgLen−MinTh)/(MaxTh−MinTh)
+AvgLen ≥ MaxTh        → P<sub>drop</sub> = 1  (ทิ้ง 100%)
+P<sub>Throughput</sub> = (1 − P<sub>drop</sub>) × 100%   #ผ่าน = N·(1−P<sub>drop</sub>)</span>
+      <b>Sample:</b> MinTh=10, MaxTh=15, RED-1 P<sub>max</sub>=0.5, RED-2 P<sub>max</sub>=0.7<br>
+      Avg=10 → P=0 → <b>100%</b> ทั้งคู่ • Avg=18 → P=1 → <b>0%</b> ทั้งคู่<br>
+      Avg=13 → RED-1: 0.5×3/5=0.30 → <b>70%</b> • RED-2: 0.7×3/5=0.42 → <b>58%</b><br>
+      เก็ง: Avg=12 RED-2 → P=0.28 (ผ่าน 72%) • Avg=14, 500 pkt, RED-1 → P=0.4 ทิ้ง <b>200</b> ผ่าน <b>300</b> • ต้องการผ่าน 80% บน RED-1 → 0.2=0.5(x−10)/5 → <b>x=12</b><br>
+      <span class="w">ทำไมใช้ AvgLen (time-averaged)?</span> กรอง <b>burst ชั่วคราว</b> (รถทัวร์เข้าเซเว่น แป๊บเดียวก็ว่าง) ไม่ทิ้งเกินเหตุ แต่ตอบสนอง congestion ระยะยาว<br>
+      <span class="w">ทำไมสุ่มทิ้งก่อนเต็ม?</span> เตือน TCP แต่เนิ่น ๆ (implicit) + ป้องกัน <b>Global Synchronization</b> (Drop-tail ทิ้งทีเดียวทุก flow → ลด cwnd พร้อมกัน → link ว่างสลับแน่น) + flow ที่ส่งมากโดนทิ้งมาก (fair)<br>
+      P<sub>max</sub> สูง (RED-2) = <b>aggressive</b>: คิวสั้น delay ต่ำ แต่ throughput ลด • P<sub>max</sub> ต่ำ = throughput สูง แต่คิวยาว<br>
+      <span class="w">กับดัก:</span> โจทย์ถาม <b>drop</b> หรือ <b>throughput</b>? • Avg = MinTh → P=0 • Avg ≥ MaxTh → P=1 ไม่ใช่ P<sub>max</sub>
+    </div>
+
+    <div class="cb k"><h5>5.12 QUIC (Transport ยุคใหม่ / HTTP3)</h5>
+      วิ่งบน <b>UDP</b> แต่ทำ reliability + congestion control ที่ชั้นแอป • รวม <b>TLS 1.3</b> ในตัว → handshake <b>1-RTT / 0-RTT</b> (TCP+TLS = 2–3 RTT) • หลาย <b>stream</b> อิสระ → ไม่มี HOL blocking ข้าม stream • <b>Connection ID</b> → ย้าย Wi-Fi↔4G ไม่หลุด
+    </div>
+
+    <div class="cb p"><h5>6.1 Application Architecture & Socket</h5>
+      <b>Client-Server:</b> server always-on, IP คงที่, data center; client ไม่คุยกันตรง • scale ยาก (คอขวดที่ server)<br>
+      <b>P2P:</b> peer เป็นทั้ง client+server, <b>self-scalability</b> (peer ใหม่เพิ่มทั้ง demand และ capacity), จัดการยาก (peer เข้าออก, IP เปลี่ยน)<br>
+      <b>Socket</b> = ประตูระหว่าง process กับ transport • ระบุ process ด้วย <b>IP + Port</b><br>
+      ความต้องการของแอป: data integrity, timing, throughput, security<br>
+      <table><tr><th>แอป</th><th>Protocol</th><th>L4</th></tr>
+      <tr><td>Web</td><td>HTTP/1.1, 2 / HTTP3</td><td>TCP 80/443 / UDP</td></tr>
+      <tr><td>Email</td><td>SMTP / POP3 / IMAP</td><td>TCP 25 / 110 / 143</td></tr>
+      <tr><td>DNS</td><td>DNS</td><td><b>UDP 53</b></td></tr>
+      <tr><td>IoT</td><td>MQTT / CoAP</td><td>TCP 1883 / UDP 5683</td></tr>
+      <tr><td>VoIP/สด</td><td>RTP, SIP</td><td>UDP</td></tr></table>
+    </div>
+
+    <div class="cb p"><h5>6.2 P2P File Distribution & BitTorrent</h5>
+      <span class="f">D<sub>C-S</sub> ≥ max{ N·F/u<sub>s</sub> , F/d<sub>min</sub> }   (โตเชิงเส้นตาม N)
+D<sub>P2P</sub> ≥ max{ F/u<sub>s</sub> , F/d<sub>min</sub> , N·F/(u<sub>s</sub>+Σu<sub>i</sub>) }</span>
+      BitTorrent: ไฟล์แบ่ง <b>chunk 256 KB</b>, <b>tracker</b> บอก peer, <b>torrent</b> = กลุ่ม peer • ขอ <b>rarest first</b> • ส่งให้ <b>top-4</b> ที่ส่งให้เราเร็วสุด (<b>tit-for-tat</b>, ประเมินทุก 10 s) + optimistic unchoke สุ่มทุก 30 s
+    </div>
+
+    <div class="cb p"><h5>6.3 HTTP & Web</h5>
+      HTTP = <b>stateless</b>, request/response บน TCP • methods: GET, POST, HEAD, PUT, DELETE<br>
+      Status: <b>200</b> OK • <b>301</b> Moved • <b>304</b> Not Modified • <b>400</b> Bad Request • <b>404</b> Not Found • <b>500</b>/<b>505</b><br>
+      <b>Non-persistent (1.0):</b> 2·RTT + t<sub>trans</sub> ต่อ object (เปิด TCP ใหม่ทุกครั้ง) • <b>Persistent (1.1):</b> conn เดียว ~1 RTT/object, pipelining แต่ <b>HOL blocking</b><br>
+      <b>HTTP/2:</b> binary framing, <b>multiplex stream</b> ใน TCP เดียว, header compression (HPACK), server push, priority — แต่ยังมี HOL ที่ระดับ TCP<br>
+      <b>HTTP/3:</b> บน <b>QUIC/UDP</b> แก้ HOL ระดับ transport<br>
+      <b>Cookie</b> 4 ส่วน: Set-Cookie ใน response, Cookie ใน request, ไฟล์ใน browser, DB ฝั่ง server → เก็บ state บน HTTP<br>
+      <b>Web cache/Proxy:</b> ลด response time + ลด traffic access link • <b>Conditional GET:</b> <span class="m">If-Modified-Since</span> → <b>304</b> ถ้ายังไม่เปลี่ยน
+    </div>
+
+    <div class="cb p"><h5>6.4 Email — Q4</h5>
+      องค์ประกอบ: <b>User Agent</b> • <b>Mail Server</b> (mailbox + message queue) • <b>SMTP</b><br>
+      Alice UA →(SMTP)→ Alice server →(<b>SMTP TCP 25</b>)→ Bob server →(<b>POP3/IMAP/HTTP</b>)→ Bob UA<br>
+      SMTP: <b>push</b>, คำสั่ง HELO, MAIL FROM, RCPT TO, DATA, QUIT • ข้อความ 7-bit ASCII → ไฟล์แนบใช้ <b>MIME</b> (base64)<br>
+      <b>POP3 (110):</b> pull, download-and-delete / keep, ไม่ sync ข้ามเครื่อง, stateless ข้าม session<br>
+      <b>IMAP (143):</b> pull, เก็บเมลบน server, sync หลายอุปกรณ์, จัด folder ได้<br>
+      <span class="w">กับดัก:</span> POP3/IMAP <b>ไม่ใช่</b>โปรโตคอลส่ง • Email ทุกตัวใช้ <b>TCP</b> ไม่ใช่ UDP • HTTP = pull, SMTP = push
+    </div>
+
+    <div class="cb p"><h5>6.5 DNS</h5>
+      บริการ: hostname → IP, host aliasing (CNAME), mail server aliasing (MX), <b>load distribution</b><br>
+      ไม่รวมศูนย์ เพราะ: single point of failure, traffic มหาศาล, ไกล, ดูแลยาก → <b>distributed hierarchical DB</b><br>
+      ลำดับ: <b>Local DNS → Root → TLD (.com/.th) → Authoritative</b><br>
+      <b>Iterative:</b> local ไล่ถามเองทีละชั้น • <b>Recursive:</b> ให้ server ถัดไปถามแทน (ภาระที่ root สูง) • <b>Cache</b> ตาม TTL<br>
+      RR = (name, value, type, TTL): <span class="m">A</span> IPv4 • <span class="m">AAAA</span> IPv6 • <span class="m">NS</span> name server ของโดเมน • <span class="m">CNAME</span> alias→canonical • <span class="m">MX</span> mail server • <span class="m">HTTPS/SVCB</span> ALPN + <b>ECH key</b><br>
+      ข้อความ: ID 16-bit (จับคู่ query/reply), flags (QR, RD, RA, AA) • <b>UDP 53</b> (TCP เมื่อ response ใหญ่/zone transfer)<br>
+      ภัย: DDoS root/TLD, <b>cache poisoning</b> → DNSSEC • ความเป็นส่วนตัว → DoH/DoT
+    </div>
+
+    <div class="cb p"><h5>6.6 Video Streaming, DASH & CDN — Q5</h5>
+      <b>Spatial coding:</b> ภายใน 1 frame ส่ง "สี + จำนวนพิกเซลซ้ำ" แทนส่งทุกพิกเซล • <b>Temporal coding:</b> ส่งเฉพาะ<b>ส่วนต่าง</b>ระหว่าง frame ติดกัน → <b>VBR</b> (CBR = อัตราคงที่)<br>
+      <b>DASH</b> (Dynamic Adaptive Streaming over HTTP): server แบ่งวิดีโอเป็น <b>chunk</b> (2–10 s) เข้ารหัส<b>หลาย bitrate</b><br>
+      <b>Manifest File (MPD)</b> = ไฟล์ที่ client โหลด<b>ก่อน</b> ระบุ <b>URL ของ chunk แต่ละ bitrate/resolution</b> → เป็น "เมนู" ให้ client เลือก<br>
+      <span class="g">ความฉลาดอยู่ที่ Client:</span> วัด bandwidth/buffer → เลือก bitrate ทีละ chunk, เลือกว่าจะขอเมื่อไร และจาก server ใด → server = HTTP ธรรมดา stateless scale ง่าย, ภาพไม่ค้าง (ลดคุณภาพแทน)<br>
+      <b>Mega server ✗:</b> single point of failure, ไกล → delay, คอขวด, ส่งซ้ำวิดีโอเดิมเปลือง<br>
+      <b>CDN:</b> <b>Enter Deep</b> (Akamai วาง server จำนวนมากลึกใน access ISP ใกล้ user, ดูแลยาก) vs <b>Bring Home</b> (Limelight คลัสเตอร์ใหญ่ไม่กี่จุดที่ IXP, ดูแลง่าย delay มากกว่า) • DNS redirect ไป CDN node ใกล้สุด • Netflix ใช้ CDN ของตัวเอง (Open Connect)
+    </div>
+
+    <div class="cb p"><h5>6.7 IoT: MQTT vs CoAP — Q4 <span class="star">★★</span></h5>
+      <table><tr><th></th><th>MQTT</th><th>CoAP</th></tr>
+      <tr><td>Transport</td><td><b>TCP</b> 1883 (TLS 8883)</td><td><b>UDP</b> 5683 (DTLS 5684)</td></tr>
+      <tr><td>Model</td><td><b>Publish/Subscribe ผ่าน Broker</b></td><td><b>Request/Response</b> REST</td></tr>
+      <tr><td>Header</td><td>fixed <b>2 bytes</b></td><td>fixed <b>4 bytes</b></td></tr>
+      <tr><td>Reliability</td><td>QoS 0 / 1 / 2</td><td>CON (ต้อง ACK) / NON</td></tr>
+      <tr><td>ใช้</td><td>telemetry, many-to-many</td><td>อุปกรณ์จำกัดมาก, เว็บ-like</td></tr></table>
+      <b>MQTT:</b> CONNECT, PUBLISH, SUBSCRIBE, topic แบบชั้น <span class="m">home/room1/temp</span> wildcard <span class="m">+</span> (1 ชั้น) <span class="m">#</span> (หลายชั้น) • publisher/subscriber ไม่รู้จักกัน (decoupled) • Retained msg, Last Will (LWT), keep-alive<br>
+      <b>QoS 0</b> = <b>at most once</b> (ยิงแล้วลืม อาจหาย) • <b>QoS 1</b> = <b>at least once</b> (PUBACK, อาจซ้ำ) • <b>QoS 2</b> = <b>exactly once</b> (PUBREC/PUBREL/PUBCOMP 4-way ช้าสุด)<br>
+      <b>CoAP:</b> GET/PUT/POST/DELETE, response code แบบ <span class="m">2.05 Content</span>, <span class="m">4.04 Not Found</span> • message type CON/NON/ACK/RST • <b>Observe</b> = subscribe ค่าที่เปลี่ยน • ≈ "HTTP ย่อส่วน" แต่ <span class="w">ไม่ใช่ TCP</span><br>
+      <span class="w">กับดัก T/F:</span> "MQTT ใช้ UDP" ✗ • "CoAP บน TCP" ✗ • "QoS1 ได้รับครั้งเดียว" ✗ • "MQTT client คุยกันตรง" ✗ (ผ่าน broker)
+    </div>
+
+    <div class="cb y"><h5>สูตรสำรอง (บท 1–4)</h5>
+      d<sub>nodal</sub> = d<sub>proc</sub> + d<sub>queue</sub> + d<sub>trans</sub>(L/R) + d<sub>prop</sub>(d/s) • Traffic intensity = La/R (→1 delay พุ่ง) • Throughput = min(R<sub>i</sub>) • BDP = R × RTT • CSMA/CD frame ขั้นต่ำ = 2·d<sub>prop</sub>·R (512 bit)
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ PAGE 2 ============================ -->
+<section class="a4" id="p2">
+  <div class="ovf">⚠ ล้น</div>
+  <div class="ph">หน้า 2 — บท 7 WIRELESS • CELLULAR • MOBILE IP • บท 9 เฉลย & เก็งข้อสอบ <small>(Q1–Q10)</small></div>
+  <div class="cols">
+
+    <div class="cb b"><h5>7.1 Wireless Basics</h5>
+      องค์ประกอบ: wireless host • <b>base station</b> (AP / cell tower) • wireless link • <b>Infrastructure mode</b> (ผ่าน AP, มี handoff) vs <b>Ad hoc</b> (ไม่มี AP)<br>
+      ลักษณะลิงก์ไร้สาย: <b>path loss</b> (สัญญาณลดตามระยะ/สิ่งกีดขวาง) • <b>interference</b> (ความถี่เดียวกัน, microwave) • <b>multipath</b> (สะท้อนมาถึงไม่พร้อมกัน)<br>
+      <b>SNR ↑ → BER ↓</b> • เพิ่มกำลังส่ง → SNR ↑ (เปลืองแบต) • ระยะไกล/SNR ต่ำ → ลด bitrate (rate adaptation)
+    </div>
+
+    <div class="cb b"><h5>7.2 IEEE 802.11 (Wi-Fi)</h5>
+      <table><tr><th>มาตรฐาน</th><th>ความถี่</th><th>สูงสุด</th></tr>
+      <tr><td>802.11b</td><td>2.4 GHz</td><td>11 Mbps</td></tr>
+      <tr><td>802.11a / g</td><td>5 / 2.4 GHz</td><td>54 Mbps</td></tr>
+      <tr><td>802.11n (Wi-Fi 4)</td><td>2.4/5, MIMO</td><td>600 Mbps</td></tr>
+      <tr><td>802.11ac (Wi-Fi 5)</td><td>5 GHz</td><td>~3.5 Gbps</td></tr>
+      <tr><td>802.11ax (Wi-Fi 6)</td><td>2.4/5(/6), OFDMA</td><td>~9.6 Gbps</td></tr></table>
+      <b>BSS</b> = AP + hosts, ระบุด้วย <b>SSID</b> • 2.4 GHz ช่องไม่ซ้อนทับ <b>1, 6, 11</b><br>
+      <b>Passive scanning:</b> AP ส่ง <b>Beacon</b> (SSID, MAC) เป็นระยะ host ฟัง • <b>Active scanning:</b> host ส่ง <b>Probe Request</b> → AP ตอบ Probe Response → Association Request/Response → Authentication (WPA2/WPA3, 802.1X) → DHCP<br>
+      <span class="w">ทำไมไม่ใช้ CSMA/CD?</span> (1) ขณะส่ง สัญญาณตัวเองแรงกว่าสัญญาณรับมาก → <b>ตรวจชนขณะส่งไม่ได้</b> (2) <b>Hidden terminal</b>/fading → ผู้ส่งไม่เห็นการชนที่ผู้รับ → ใช้ <b>CSMA/CA</b> (หลีกเลี่ยงชน) + <b>link-layer ACK</b>
+    </div>
+
+    <div class="cb r"><h5>7.3 CSMA/CA, SIFS vs DIFS — Q7 <span class="star">★★</span></h5>
+      <b>ผู้ส่ง:</b> ① ช่องว่างนาน <b>DIFS</b> → ส่งทั้งเฟรม (ไม่ตรวจชนระหว่างส่ง) ② ช่องไม่ว่าง → สุ่ม <b>backoff</b>, นับถอยหลังเมื่อช่องว่าง, <b>หยุดนับ (freeze)</b> เมื่อไม่ว่าง → ถึง 0 ส่ง ③ ไม่ได้ ACK → เพิ่มช่วงสุ่ม (×2) ทำใหม่<br>
+      <b>ผู้รับ:</b> เฟรมถูกต้อง → รอ <b>SIFS</b> → ส่ง <b>ACK</b><br>
+      ลำดับ: <b>SIFS &lt; PIFS &lt; DIFS</b> (สั้น = priority สูง) • PIFS = AP ใช้ใน PCF<br>
+      <span class="w">ทำไม ACK รอ SIFS ไม่ใช่ DIFS?</span> SIFS สั้นกว่า → ACK (และ CTS) <b>ได้สิทธิ์ใช้ช่องก่อน</b> สถานีอื่นที่ต้องรอ DIFS → สถานีอื่นเห็นช่องไม่ว่าง ไม่มีใครแทรก → ACK ไม่ชน<br>
+      <span class="w">ถ้ารอ DIFS:</span> สถานีอื่นที่รอ DIFS เหมือนกันอาจส่ง DATA พร้อม ACK → ชน → ผู้ส่งไม่ได้ ACK → timeout <b>ส่ง DATA ทั้งเฟรมซ้ำ</b> เปลือง airtime
+    </div>
+
+    <div class="cb r"><h5>7.4 Hidden vs Exposed Terminal + RTS/CTS — Q6 <span class="star">★★★</span></h5>
+      <b>Hidden Terminal:</b> A และ C อยู่ในระยะ B แต่ <b>ไม่ได้ยินกันเอง</b> (ไกล/สิ่งกีดขวาง/fading) → carrier sense ว่าว่าง → ส่งพร้อมกัน → <b>ชนที่ B</b><br>
+      <span class="f">A ))))  B  ((((  C      A ✗ ได้ยิน C</span>
+      <b>แก้ด้วย RTS/CTS:</b> A ส่ง <b>RTS</b> (สั้น, มี duration) → B ตอบ <b>CTS</b> ที่ทุกคนรอบ B ได้ยิน (รวม C) → C ตั้ง <b>NAV</b> งดส่งตาม duration → A ส่ง DATA → B ACK • ถ้าชนก็ชนแค่ RTS สั้น ๆ ไม่เสียมาก • ใช้เมื่อเฟรมยาวเกิน RTS threshold<br>
+      <b>NAV</b> (Network Allocation Vector) = <b>virtual carrier sensing</b> จากฟิลด์ Duration<br>
+      <b>Exposed Terminal:</b> S1 → R1 กำลังส่ง; S2 อยู่ในระยะ S1 จึง<b>งดส่งไป R2</b> ทั้งที่ R2 อยู่นอกระยะ S1 (ส่งได้ไม่รบกวน) → เสียโอกาส<br>
+      <span class="f">R1 ← S1 )))) S2 → R2   S2 ✗ ไม่กล้าส่ง</span>
+      <b>RTS/CTS ช่วย:</b> S2 ได้ยิน <b>RTS</b> ของ S1 แต่ <b>ไม่ได้ยิน CTS</b> ของ R1 → รู้ว่าไม่ได้อยู่ใกล้ผู้รับ → ส่งได้<br>
+      <span class="g">สรุป: Hidden = ชนเพราะไม่รู้ • Exposed = เงียบโดยไม่จำเป็น</span>
+    </div>
+
+    <div class="cb b"><h5>7.5 802.11 Frame & Advanced</h5>
+      <span class="f">FrameCtrl(2) | Duration(2) | Addr1 | Addr2 | Addr3
+SeqCtrl | Addr4 | Payload 0–2312 B | CRC(4)</span>
+      Addr1 = <b>ผู้รับ</b> (AP) • Addr2 = <b>ผู้ส่ง</b> (host) • Addr3 = <b>router MAC</b> (ที่ AP ต่อ) • Addr4 = ad hoc/WDS • FrameCtrl มี type, To/From DS, retry, power mgmt<br>
+      H1 → R1: 802.11 [A1=AP, A2=H1, A3=R1] → AP แปลงเป็น 802.3 [dst=R1, src=H1]<br>
+      SeqCtrl ใช้แยกเฟรมซ้ำเมื่อ ACK หาย • ย้าย AP ในซับเน็ตเดียว: IP เดิม, switch เรียนรู้ MAC ใหม่<br>
+      <b>Power management:</b> host บอก AP ว่าจะ sleep → AP buffer เฟรม → ตื่นก่อน <b>Beacon</b> ดูรายการ (TIM) ว่ามีเฟรมรอหรือไม่<br>
+      <b>Bluetooth (802.15.1):</b> 2.4 GHz, FHSS, <b>piconet</b> = 1 master + ≤ 7 active slaves (255 parked), TDM
+    </div>
+
+    <div class="cb p"><h5>7.6 Cellular 1G → 5G — Q8 <span class="star">★★</span></h5>
+      <table><tr><th>ยุค</th><th>บริการ / จุดเด่น</th><th>Access</th><th>Core</th></tr>
+      <tr><td>1G</td><td>เสียง <b>analog</b> เท่านั้น</td><td>FDMA</td><td>BS → MSC (circuit)</td></tr>
+      <tr><td>2G</td><td>เสียง <b>digital</b> + SMS, เพิ่ม <b>BSC</b> คุม BS หลายตัว (≈ AP controller)</td><td>GSM: FDMA+TDMA • IS-95: CDMA</td><td>BS→BSC→MSC (circuit) • 2.5G GPRS</td></tr>
+      <tr><td>3G</td><td>เสียง + data เร็ว: <b>core 2 ขา</b></td><td>WCDMA (CDMA ใน TDMA slot)</td><td>Voice = <b>circuit</b> (MSC) ∥ Data = <b>packet</b> (<b>SGSN→GGSN</b>)</td></tr>
+      <tr><td>4G LTE</td><td><b>All-IP 100%</b> เสียงก็ packet (<b>VoLTE</b>)</td><td>OFDMA</td><td>EPC: MME, HSS, S-GW, P-GW</td></tr>
+      <tr><td>5G</td><td><b>eMBB</b> (เร็ว) • <b>URLLC</b> (หน่วงต่ำ ~1 ms: รถไร้คนขับ) • <b>mMTC</b> (IoT มหาศาล)</td><td>OFDM, mmWave, Massive MIMO</td><td>5GC service-based, <b>network slicing</b>, edge</td></tr></table>
+      <b>4G:</b> UE → <b>eNodeB</b> → <b>S-GW</b> → <b>P-GW</b> (gateway สู่ Internet, NAT) • <b>MME</b> = auth, mobility, tracking (control plane) • <b>HSS</b> = ข้อมูลผู้ใช้ home • data plane ใช้ GTP tunnel<br>
+      <span class="w">3G vs 4G:</span> 3G มี circuit-switched สำหรับเสียง + packet สำหรับ data (2 core) ↔ 4G packet ล้วน core เดียว IP → เร็วกว่า latency ต่ำ สถาปัตยกรรมง่าย<br>
+      <b>Handoff</b> = ย้าย BS ขณะใช้งาน (BS เดิมตัดสินใจจากสัญญาณ, เตรียม BS ใหม่ ก่อนสลับ) • <b>Paging</b> = ค้นหาเครื่องใน location area เพื่อส่งสายเข้า
+    </div>
+
+    <div class="cb b"><h5>7.7 Mobility & Mobile IP — Q9 <span class="star">★★</span></h5>
+      <b>Home network / Home Agent (HA)</b> ≈ ตม.ไทย • <b>Visited network / Foreign Agent (FA)</b> ≈ ตม.ลาว • <b>Permanent address</b> = IP ถาวร (คนอื่นใช้ติดต่อ) • <b>COA</b> (Care-of-Address) = ที่อยู่ชั่วคราวใน visited net<br>
+      ขั้นพื้นฐาน: Agent discovery (ICMP agent advertisement) → Registration (FA → HA) → Indirect routing (tunnel)<br>
+      <b>Indirect Routing 6 ขั้น:</b><br>
+      ① Mobile เข้า visited net → <b>ลงทะเบียนกับ FA</b> ได้ COA<br>
+      ② FA แจ้ง <b>COA ให้ HA</b> (registration)<br>
+      ③ Correspondent ส่งไป <b>permanent address</b> → ถึง home net<br>
+      ④ HA ดักรับ → <b>encapsulate (IP-in-IP tunnel) → COA</b><br>
+      ⑤ FA <b>decapsulate</b> → ส่งต่อให้ mobile<br>
+      ⑥ Mobile ตอบ<b>ตรง</b>ไป correspondent (src = permanent)<br>
+      ปัญหา: <span class="w">Triangle Routing</span> อ้อมผ่าน HA แม้ correspondent อยู่ใกล้ mobile • ข้อดี: <b>โปร่งใส</b>ต่อ correspondent, conn ไม่หลุดเมื่อย้าย<br>
+      <b>Direct Routing:</b> correspondent agent <b>ถาม HA ขอ COA</b> → tunnel <b>ตรง</b>ไป FA → เส้นทางสั้น แต่<b>ไม่โปร่งใส</b> + ถ้าย้ายต่อต้องใช้ <b>anchor FA</b> ส่งต่อไป FA ใหม่
+    </div>
+
+    <div class="cb y"><h5>9.0 โครงสร้างข้อสอบ & สไตล์อาจารย์</h5>
+      CLO1 (66.67%) = Q1–3, 6–9 • CLO3 (33.33%) = Q4–5, <b>Q10 (ไม่มีในตัวอย่าง! = งานที่เพื่อนพรีเซนต์ ถาม concept)</b><br>
+      "ข้อ 1–2 ออกคล้ายกันมาก แต่คำถามไม่เหมือน" → เปลี่ยนตัวเลข/สิ่งที่ถาม • ระวังโจทย์ <b>"…คืออะไร <u>และ</u> …อย่างไร"</b> ตอบให้ครบ • ช่องตอบแคบ → bullet + keyword อังกฤษ • Pattern: อ่านกราฟ, ถาม "ทำไม", ปัญหา+วิธีแก้, เปรียบเทียบ, เรียงลำดับ
+    </div>
+
+    <div class="cb r"><h5>9.1 เฉลยตัวอย่าง Q1–Q9 (ฉบับเขียนตอบ)</h5>
+      <b>Q1</b> (4) RTO 3 ms ต่ำกว่า RTT ส่วนใหญ่ → premature timeout ส่งซ้ำไม่จำเป็น + ลด cwnd ผิด • RTO 8 ms ครอบคลุม RTT สูงสุด ✓ • ตั้งดี = <span class="m">Est + 4·Dev</span> (เฉลี่ย + ความแปรปรวน)<br>
+      <b>Q2</b> (4) Avg10 → 100% • Avg18 → 0% • Avg13 → RED-1 <b>70%</b>, RED-2 <b>58%</b> (แสดงสูตร+แทนค่า)<br>
+      <b>Q3</b> (2) rwnd = พื้นที่ว่าง buffer ผู้รับ (flow control) • Slow Start = cwnd เริ่ม 1 MSS, ×2 ทุก RTT จนถึง ssthresh<br>
+      <b>Q4</b> (2) หลัก: MQTT=TCP+Pub/Sub+Broker+QoS • CoAP=UDP+REST • SMTP ส่ง / POP3-IMAP ดึง • Email=TCP<br>
+      <b>Q5</b> (3) Manifest = รายการ chunk × bitrate + URL โหลดก่อน → client วัด BW เลือก bitrate เอง (adaptive)<br>
+      <b>Q6</b> (3) Hidden = ไม่ได้ยินกัน ชนที่ผู้รับ → RTS/CTS + NAV<br>
+      <b>Q7</b> (2) SIFS สั้นกว่า DIFS → ACK มาก่อน ไม่ถูกแทรกชน<br>
+      <b>Q8</b> (2) 3G = circuit (เสียง) + packet (data) • 4G = All-IP packet ล้วน (VoLTE)<br>
+      <b>Q9</b> (3) FA ลงทะเบียน → แจ้ง HA → ส่งไป permanent → HA tunnel → FA decap → mobile ตอบตรง
+    </div>
+
+    <div class="cb r"><h5>9.2 เก็งข้อสอบพลิกแพลง (คำตอบสั้น)</h5>
+      <b>Q1′</b> ทำไม 2×EstRTT แย่กว่า? → ตัวคูณคงที่ไม่สะท้อนความแกว่ง: RTT นิ่ง margin เกิน, แกว่ง margin ไม่พอ • RTT แกว่ง 2–20 ms ตั้ง 10 ms? → ✗ timeout ก่อนเวลา<br>
+      <b>Q2′</b> ถาม P<sub>drop</sub> / จำนวนผ่าน-ทิ้ง / ย้อนหา AvgLen / ทำไม AvgLen / Global Sync / DECbit <50% +1, ≥50% ×0.875<br>
+      <b>Q3′</b> cwnd vs rwnd → ส่งได้ <b>min(rwnd, cwnd)</b> • Congestion Avoidance = +1 MSS/RTT • Timeout (cwnd=1) vs 3 dupACK (Reno cwnd/2) • ทำไม TCP ทำ CBR ไม่ได้ (reactive, sawtooth)<br>
+      <b>Q4′</b> T/F: IMAP sync หลายเครื่อง ✓ • DNS UDP 53 ✓ • QoS0 รับประกัน ✗ • CoAP ใช้ GET/PUT/POST/DELETE ✓ • HTTP/3 ใช้ TCP ✗ • P2P self-scalable ✓<br>
+      <b>Q5′</b> ความฉลาด DASH อยู่ที่ <b>client</b> • Mega server ✗ → CDN Enter Deep vs Bring Home • Spatial vs Temporal coding<br>
+      <b>Q6′</b> <b>Exposed terminal + RTS/CTS</b> (อาจารย์วาดบนกระดาน!) • ทำไมไม่ใช้ CSMA/CD • Passive vs Active scanning<br>
+      <b>Q7′</b> ถ้า ACK รอ DIFS? → ชน ต้องส่ง DATA ซ้ำ • เรียง SIFS &lt; PIFS &lt; DIFS • NAV คืออะไร<br>
+      <b>Q8′</b> 1G vs 2G (analog→digital, +BSC, TDMA/CDMA) • 2G vs 3G (+packet core SGSN/GGSN) • 5G = eMBB/URLLC/mMTC<br>
+      <b>Q9′</b> Direct vs Indirect (Triangle Routing) • บทบาท HA / FA / permanent / COA
+    </div>
+
+    <div class="cb y"><h5>9.3 Q10 — งานวิจัยที่เพื่อนพรีเซนต์ (Concept)</h5>
+      <b>① ECH (Encrypted Client Hello):</b> ปัญหา = <b>SNI</b> ใน TLS ClientHello เป็น plaintext → ISP/คนกลางรู้ว่าเข้าเว็บไหนแม้ใช้ HTTPS • ECH แบ่ง <b>Outer ClientHello</b> (SNI สาธารณะของ CDN เช่น Cloudflare) + <b>Inner ClientHello เข้ารหัส</b> (SNI จริง) ด้วย public key จาก <b>DNS HTTPS record</b> (ควรใช้คู่ DoH) • <b>GREASE</b> = client ส่ง ECH ปลอมแบบสุ่มเสมอ → middlebox แยกไม่ออก ไม่ <b>ossify</b>/บล็อก extension ใหม่ • ผลกระทบ: firewall/content filter <b>กรองด้วย SNI ไม่ได้</b><br>
+      <b>② Edge Jamming Detection ด้วย 1D-CNN:</b> jammer ส่งสัญญาณรบกวนกลบช่อง • ใช้ค่า <b>RSS</b> เป็นอนุกรมเวลา → 1D-CNN จำแนก Normal / Constant / Periodic • <b>Constant jammer</b> (AWGN ต่อเนื่อง RSS สูงตลอด) แม่น <b>100%</b> • <b>Periodic</b> (สลับส่ง/เงียบ ช่วงเงียบเหมือน normal) <b>~72%</b> • รวม <b>86.3%</b> บน Raspberry Pi + HackRF SDR • <span class="w">ทำไม Edge?</span> ถูก jam แล้ว<b>ส่งข้อมูลไป cloud ไม่ได้</b> ต้องตัดสินใจที่อุปกรณ์เอง + latency ต่ำ<br>
+      <b>③ IoT DDoS Detection ด้วย ML:</b> IoT ใช้ <b>default password</b>, ไม่ค่อย patch, ทรัพยากรน้อย → มัลแวร์ <b>Mirai/Bashlite</b> สแกน (Telnet) ยึดเครื่องเป็น <b>botnet</b> → <b>C&amp;C</b> สั่งยิง DDoS: Volumetric (UDP flood), Protocol (SYN flood), Application (HTTP flood) • <b>Signature-based ✗</b>: จับได้แค่ที่รู้จัก, traffic IoT หลากหลาย/เปลี่ยนเร็ว, ติดตั้งบนอุปกรณ์เล็กไม่ได้ → <b>ML ที่ gateway</b> (Random Forest, XGBoost, SVM, KNN) เรียนรู้ feature traffic (pkt rate, size, flag) จับ anomaly รวมถึงการโจมตีใหม่
+    </div>
+
+  </div>
+</section>
+</div>
+
+<script>
+// ปรับขนาดตัวอักษรของแต่ละหน้าให้ "เต็มหน้าพอดีที่สุดโดยไม่ล้น"
+function overflowing(c){ return c.scrollWidth > c.clientWidth + 1; }
+function fitPage(page){
+  const c = page.querySelector('.cols');
+  let lo = 5.0, hi = 10.0;
+  for (let i = 0; i < 18; i++){
+    const mid = (lo + hi) / 2;
+    c.style.setProperty('--f', mid + 'pt');
+    if (overflowing(c)) hi = mid; else lo = mid;
+  }
+  lo = Math.floor((lo - 0.03) * 100) / 100;   // เผื่อระยะเล็กน้อย กันปัดเศษแล้วล้น
+  c.style.setProperty('--f', lo + 'pt');
+  while (overflowing(c) && lo > 4.5){ lo -= 0.05; c.style.setProperty('--f', lo + 'pt'); }
+  page.querySelector('.ovf').style.display = overflowing(c) ? 'block' : 'none';
+  return lo;
+}
+function fitAll(){
+  const r = [...document.querySelectorAll('.a4')].map(fitPage);
+  document.getElementById('st').textContent = 'ขนาดตัวอักษร: หน้า 1 = ' + r[0].toFixed(2) + 'pt • หน้า 2 = ' + r[1].toFixed(2) + 'pt';
+}
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(fitAll);
+window.addEventListener('load', fitAll);
+window.addEventListener('beforeprint', fitAll);
+</script>
+</body>
+</html>
