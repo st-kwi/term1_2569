@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud Security (070315221) — A4 2-Page Cheat Sheet & Exam Guide (Sessions 6–11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-Scale: 1;
+    --bg-body: #0f172a;
+    --page-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #334155;
+    --border-color: #cbd5e1;
+    --primary: #1e3a8a;
+    --primary-bg: #eff6ff;
+    --secondary: #065f46;
+    --secondary-bg: #ecfdf5;
+    --accent: #9a3412;
+    --accent-bg: #fff7ed;
+    --purple: #5b21b6;
+    --purple-bg: #f5f3ff;
+    --danger: #991b1b;
+    --danger-bg: #fef2f2;
+    --teal: #115e59;
+    --teal-bg: #f0fdfa;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.24;
+    padding: 58px 0 40px 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  code, .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92em;
+    background: #f1f5f9;
+    padding: 0 3px;
+    border-radius: 2px;
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  /* Top Control Bar */
+  .toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    z-index: 1000;
+    color: #f8fafc;
+    font-size: 13px;
+  }
+
+  .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge-course {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .toolbar-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #e2e8f0;
+  }
+
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-tool {
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid #475569;
+    padding: 5px 11px;
+    border-radius: 6px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-tool:hover {
+    background: #334155;
+    border-color: #64748b;
+  }
+
+  .btn-tool.active {
+    background: #2563eb;
+    border-color: #3b82f6;
+    color: #ffffff;
+  }
+
+  .btn-print {
+    background: linear-gradient(135deg, #059669, #047857);
+    border-color: #10b981;
+    color: #ffffff;
+  }
+
+  .btn-print:hover {
+    background: linear-gradient(135deg, #047857, #065f46);
+  }
+
+  /* A4 Sheet Layout */
+  .sheets-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .a4-page {
+    width: 210mm;
+    height: 297mm;
+    background: var(--page-bg);
+    padding: 4.5mm 5mm;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #0f172a;
+    padding-bottom: 2px;
+    margin-bottom: 3px;
+    flex-shrink: 0;
+  }
+
+  .page-header-left {
+    font-size: calc(8.6px * var(--font-Scale));
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.1px;
+  }
+
+  .page-header-right {
+    font-size: calc(7.4px * var(--font-Scale));
+    font-weight: 700;
+    color: #1e3a8a;
+    background: #dbeafe;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 0.5px solid #93c5fd;
+  }
+
+  .grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.5px;
+    flex: 1;
+    align-content: start;
+  }
+
+  .col-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2px;
+  }
+
+  /* Compact Cards */
+  .box {
+    border: 0.8px solid #94a3b8;
+    border-radius: 3px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .box-hdr {
+    font-size: calc(7.6px * var(--font-Scale));
+    font-weight: 800;
+    padding: 1.5px 4px;
+    color: #ffffff;
+    background: #1e3a8a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: -0.1px;
+  }
+
+  .box-hdr.green { background: #065f46; }
+  .box-hdr.orange { background: #9a3412; }
+  .box-hdr.purple { background: #5b21b6; }
+  .box-hdr.red { background: #991b1b; }
+  .box-hdr.teal { background: #115e59; }
+  .box-hdr.dark { background: #0f172a; }
+
+  .box-hdr .tag {
+    font-size: calc(6.4px * var(--font-Scale));
+    background: rgba(255,255,255,0.22);
+    padding: 0 3.5px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .box-body {
+    padding: 2.5px 3.8px;
+    font-size: calc(6.85px * var(--font-Scale));
+    color: #0f172a;
+  }
+
+  .box-body p {
+    margin-bottom: 1.8px;
+  }
+
+  .box-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sub-hdr {
+    font-weight: 800;
+    color: #1e3a8a;
+    background: #eff6ff;
+    border-left: 2.2px solid #1e3a8a;
+    padding: 0.8px 3px;
+    margin: 2px 0 1.5px 0;
+    font-size: calc(7px * var(--font-Scale));
+  }
+
+  .sub-hdr.green { color: #065f46; background: #ecfdf5; border-left-color: #059669; }
+  .sub-hdr.orange { color: #9a3412; background: #fff7ed; border-left-color: #ea580c; }
+  .sub-hdr.purple { color: #5b21b6; background: #f5f3ff; border-left-color: #7c3aed; }
+  .sub-hdr.red { color: #991b1b; background: #fef2f2; border-left-color: #dc2626; }
+  .sub-hdr.teal { color: #115e59; background: #f0fdfa; border-left-color: #0d9488; }
+
+  ul.tight {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  ul.tight li {
+    position: relative;
+    padding-left: 6.5px;
+    margin-bottom: 1.4px;
+  }
+
+  ul.tight li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #2563eb;
+    font-weight: 900;
+  }
+
+  /* Compact Tables inside A4 */
+  table.tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5px 0;
+    font-size: calc(6.55px * var(--font-Scale));
+  }
+
+  table.tbl th, table.tbl td {
+    border: 0.6px solid #cbd5e1;
+    padding: 1.1px 2.5px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  table.tbl th {
+    background: #f1f5f9;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  table.tbl tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .hl-yellow {
+    background: #fef08a;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .hl-red {
+    color: #991b1b;
+    font-weight: 800;
+  }
+
+  .hl-green {
+    color: #065f46;
+    font-weight: 800;
+  }
+
+  .hl-blue {
+    color: #1e40af;
+    font-weight: 800;
+  }
+
+  .formula-bar {
+    background: #fefce8;
+    border: 0.7px solid #fde047;
+    border-radius: 2.5px;
+    padding: 1.5px 3.5px;
+    margin: 1.5px 0;
+    font-weight: 700;
+    color: #713f12;
+    font-size: calc(6.75px * var(--font-Scale));
+  }
+
+  /* Practice Exam Section (Screen Only by Default) */
+  .exam-guide-container {
+    width: 210mm;
+    margin: 28px auto 0 auto;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 24px 28px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  .exam-banner {
+    background: linear-gradient(135deg, #1e3a8a, #0f172a);
+    color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .exam-banner h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .exam-banner p {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    line-height: 1.45;
+  }
+
+  .section-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #0f172a;
+    border-left: 4px solid #2563eb;
+    padding-left: 10px;
+    margin: 22px 0 12px 0;
+  }
+
+  .word-bank-box {
+    background: #f8fafc;
+    border: 1.5px solid #94a3b8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+
+  .word-bank-title {
+    font-weight: 800;
+    font-size: 13.5px;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+  }
+
+  .word-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .word-pill {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .q-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    padding: 11px 14px;
+    margin-bottom: 10px;
+    background: #ffffff;
+  }
+
+  .q-card:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  .q-stem {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+    line-height: 1.45;
+  }
+
+  .q-options {
+    list-style: none;
+    padding-left: 4px;
+    margin-bottom: 7px;
+    font-size: 12.8px;
+    color: #334155;
+  }
+
+  .q-options li {
+    margin-bottom: 3px;
+  }
+
+  .q-options li.correct {
+    color: #065f46;
+    font-weight: 700;
+    background: #ecfdf5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border-left: 3px solid #059669;
+  }
+
+  .q-ans {
+    font-size: 12.3px;
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 6px 10px;
+    color: #14532d;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.4;
+  }
+
+  .topic-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: #dbeafe;
+    color: #1e40af;
+    margin-right: 6px;
+  }
+
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    body {
+      background: #ffffff;
+      padding: 0;
+      margin: 0;
+    }
+    .toolbar, .exam-guide-container {
+      display: none !important;
+    }
+    .sheets-wrapper {
+      gap: 0;
+      display: block;
+    }
+    .a4-page {
+      width: 210mm;
+      height: 297mm;
+      box-shadow: none;
+      margin: 0;
+      page-break-after: always;
+      break-after: page;
+    }
+    .a4-page:last-of-type {
+      page-break-after: auto;
+      break-after: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top Navigation & Control Toolbar -->
+<div class="toolbar">
+  <div class="toolbar-left">
+    <span class="badge-course">070315221 CLOUD SECURITY</span>
+    <span class="toolbar-title">สรุปจดเข้าห้องสอบ A4 2 หน้า (หน้า-หลัง) + แนวข้อสอบ 120 ข้อ (บทที่ 6–11)</span>
+  </div>
+  <div class="toolbar-right">
+    <a href="index.html" class="btn-tool">← กลับหน้าหลัก</a>
+    <a href="01_Cloud_Security_Textbook.html" class="btn-tool">📖 ตำราเต็ม</a>
+    <button class="btn-tool" onclick="adjustScale(-0.03)">A-</button>
+    <button class="btn-tool" onclick="autoFitPages()">⚡ Auto-Fit 2 หน้า</button>
+    <button class="btn-tool" onclick="adjustScale(0.03)">A+</button>
+    <button class="btn-tool active" id="btnToggleExam" onclick="toggleExamSection()">📝 แสดง/ซ่อน แนวข้อสอบ</button>
+    <button class="btn-tool btn-print" onclick="window.print()">🖨️ พิมพ์ A4 (2 หน้าเป๊ะ)</button>
+  </div>
+</div>
+
+<div class="sheets-wrapper">
+
+  <!-- ==================== A4 PAGE 1 (FRONT) : SESSIONS 6 & 7 ==================== -->
+  <section class="a4-page" id="page1">
+    <div class="page-header">
+      <div class="page-header-left">CLOUD SECURITY (070315221) — แผ่นจดเข้าห้องสอบ A4 [หน้าที่ 1/2 : บทที่ 6 Threat/Risk/KEV/NIST CSF &amp; บทที่ 7 Data Protection/Lifecycle/KMS/Secrets]</div>
+      <div class="page-header-right">ปรนัย 100 ข้อ + เติมคำ 20 ข้อ (เน้นประยุกต์ใช้ในองค์กร)</div>
+    </div>
+
+    <div class="grid-3col">
+      <!-- ==================== PAGE 1 : COLUMN 1 ==================== -->
+      <div class="col-stack">
+
+        <!-- BOX 1: S6.1 Foundations & KEV/CVE/CVSS -->
+        <div class="box">
+          <div class="box-hdr">
+            <span>1. S6: Threat, Vulnerability, Risk &amp; KEV/CVE/CVSS</span>
+            <span class="tag">ออกสอบเน้น!</span>
+          </div>
+          <div class="box-body">
+            <ul class="tight">
+              <li><b>Asset (สินทรัพย์):</b> สิ่งที่มีคุณค่าต่อองค์กร (Data, App, IAM Role, Cloud Account, ชื่อเสียง)</li>
+              <li><b>Threat (ภัยคุกคาม):</b> เหตุการณ์หรือผู้กระทำที่อาจสร้างความเสียหาย (Attacker, Bot, ภัยธรรมชาติ)</li>
+              <li><b>Vulnerability (ช่องโหว่):</b> จุดอ่อนที่ทำให้ Threat เจาะสำเร็จ แบ่งเป็น <b>3 เสาหลัก:</b> <code>Technical Flaw</code>, <code>Process Flaw</code>, <code>Human &amp; Identity Flaw</code> และ <b>4 ประเภท:</b> <code>Configuration</code>, <code>Software</code>, <code>Identity</code>, <code>Design</code></li>
+              <li><b>Attack Vector (ช่องทางโจมตี):</b> เส้นทางที่ผู้โจมตีใช้เข้าถึงเป้าหมาย (เช่น Public Bucket, Leaked Key, Phishing, API)</li>
+              <li><b>Risk (ความเสี่ยง):</b> โอกาสเกิดความเสียหายต่อธุรกิจเมื่อ <code>Threat</code> ใช้ <code>Vulnerability</code> โจมตี <code>Asset</code> จนเกิด <code>Impact</code></li>
+            </ul>
+            <div class="sub-hdr">เทียบชัด: CVE vs CVSS vs CISA KEV vs Contextual Risk</div>
+            <table class="tbl">
+              <thead>
+                <tr><th>คำศัพท์</th><th>ความหมายและการนำไปใช้ในองค์กร</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>CVE</b> / <b>CEV</b><br>(Common Vulnerabilities &amp; Exposures)</td><td><b>รหัสมาตรฐานสากลสำหรับระบุชื่อช่องโหว่</b> (เช่น <code>CVE-2024-XXXX</code>) ใช้คุยอ้างอิงให้ตรงกัน (ไม่ได้บอกคะแนนความเสี่ยง)</td></tr>
+                <tr><td><b>CVSS</b><br>(Common Vulnerability Scoring System)</td><td><b>คะแนนความรุนแรงทางเทคนิค (0.0–10.0)</b> วัดความยากง่ายในการเจาะและผลกระทบเชิงเทคนิค <i>แต่ยังไม่รวมบริบทธุรกิจ</i></td></tr>
+                <tr><td><span class="hl-yellow">CISA KEV</span><br>(Known Exploited Vulnerabilities)</td><td><b>บัญชีรายชื่อช่องโหว่ที่มีหลักฐานยืนยันว่าถูกโจมตีจริงแล้วในโลกจริง (Active Exploitation)</b> จัดทำโดย <b>CISA</b> → <b>ใช้เป็นตัวเร่ง (Accelerator) ที่ต้องรีบ Patch ด่วนที่สุด!</b></td></tr>
+                <tr><td><b>Contextual Risk</b> &amp; <b>ISAR / DBIR / ASPM</b></td><td>• <code>Contextual Risk = CVSS + Business Context</code> (Asset Criticality, Data Sensitivity, Compensating Controls)<br>• <b>ISAR / CISA / DBIR / BIS:</b> รายงานวิเคราะห์อุบัติการณ์และรูปแบบการเจาะระบบจริง</td></tr>
+              </tbody>
+            </table>
+            <div class="sub-hdr green">5 แหล่งข้อมูลหลักฐานภัยคุกคาม (5 Evidence Dashboards)</div>
+            <table class="tbl">
+              <thead>
+                <tr><th>แหล่งข้อมูล (Source)</th><th>คำถามหลัก / สิ่งที่บอก</th><th>การนำไปใช้ตัดสินใจในองค์กร (Action)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. CISA KEV Catalog</b></td><td>ช่องโหว่ใดถูกโจมตีจริงแล้ว? (Exploited in the wild)</td><td>ใช้จัดลำดับ <b>Patch Priority สูงสุด</b> (ไม่ต้องรอคิวปกติ)</td></tr>
+                <tr><td><b>2. Shadowserver</b></td><td>มีพอร์ต/บริการใดเปิดทิ้งไว้บนเน็ต? (Exposed Surface)</td><td>ค้นหา <b>External Attack Surface</b> แล้วสั่งปิดพอร์ต/ตั้ง Firewall</td></tr>
+                <tr><td><b>3. Cloudflare Radar</b></td><td>มี Traffic พุ่งผิดปกติ / DDoS / Bot หรือไม่?</td><td>ตรวจ <b>Availability/Spike</b> (ต้อง <b>Correlate กับ App Logs</b> ก่อนประกาศ Incident เพราะอาจเป็นแคมเปญการตลาด)</td></tr>
+                <tr><td><b>4. Verizon DBIR (&amp; BIS)</b></td><td>รูปแบบการเจาะระบบ (Breach Pattern) มาจากทางใด?</td><td>ใช้ประเมินโอกาสเกิด (<b>Likelihood</b>) พบว่าสาเหตุหลักคือ <b>Credential Abuse, Vuln Exploit (31%), Ransomware, Human Element</b></td></tr>
+                <tr><td><b>5. IBM Cost of a Data Breach</b></td><td>ความเสียหายทางธุรกิจมีมูลค่าเท่าไร? (Financial Impact)</td><td>ประเมิน <b>Business Impact</b> ขอ Budget; <b>Iceberg Model:</b> เหนือน้ำ = <code>IT Recovery</code> / ใต้น้ำ = <code>Detection &amp; Response</code>, <code>Lost Business</code>, <code>Regulatory Fines</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- BOX 2: 4 Cloud Threats & Vulnerability Lifecycle -->
+        <div class="box">
+          <div class="box-hdr orange">
+            <span>2. S6: 4 ภัยคุกคามหลักบนคลาวด์ (4 Cloud Threats) &amp; วงจรช่องโหว่</span>
+            <span class="tag">Case Study</span>
+          </div>
+          <div class="box-body">
+            <table class="tbl">
+              <thead>
+                <tr><th>ภัยคุกคาม (Threat)</th><th>จุดอ่อนหลัก / ลักษณะอาการ (Evidence)</th><th>CIA</th><th>Control แรกที่ต้องทำทันที</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>1. Misconfiguration</b><br>(ตั้งค่าผิดพลาด)</td>
+                  <td><b>3 มิติอันตราย:</b> <code>Public + Privileged + Unmonitored</code><br><b>4 จุดเสี่ยง:</b> Storage (Public S3), Network (<code>0.0.0.0/0</code>), Permissions (<code>IAM *</code>), Visibility (ไม่เปิด Log)</td>
+                  <td><b>C / I</b></td>
+                  <td><b>Close exposure:</b> เปิด <code>Block Public Access</code>, จำกัด Security Group, ใช้ Guardrails</td>
+                </tr>
+                <tr>
+                  <td><b>2. Credential Leakage</b><br>(ข้อมูลยืนยันตัวตนรั่ว)</td>
+                  <td><b>3 เฟส:</b> <code>Source</code> (เผลอฝัง Key ใน Git/Code/Log) → <code>Bypass</code> (ข้าม MFA เข้า API) → <code>Infiltration</code> (ใช้สิทธิ์ Role ยึดระบบ)</td>
+                  <td><b>C / I</b></td>
+                  <td><b>Revoke &amp; Rotate Key ทันที</b> + บังคับ MFA + ใช้ Short-lived Role + <b>ตรวจ Historical Logs ย้อนหลัง!</b></td>
+                </tr>
+                <tr>
+                  <td><b>3. Insecure APIs</b><br>(API ไม่ปลอดภัย)</td>
+                  <td>• <b>BOLA (Broken Object Level AuthZ):</b> แก้เลข ID ใน URL แล้วดูข้อมูลคนอื่นได้<br>• <b>Function-level flaw:</b> User ธรรมดาเรียกคำสั่ง Admin ได้<br>• ส่งคอลัมน์ข้อมูลกลับมามากเกินจำเป็น (Excessive Data)</td>
+                  <td><b>C</b></td>
+                  <td><b>Fix AuthZ 3 ระดับ</b> (Identity, Resource, App), ทำ <code>Rate Limit</code>, <code>Schema Validation</code>, ทดสอบ <b>Negative Case</b></td>
+                </tr>
+                <tr>
+                  <td><b>4. Data Exposure</b><br>(ข้อมูลรั่วไหล)</td>
+                  <td><b>4 ช่องทาง:</b> Storage เปิดสาธารณะ, แชร์ Backup/Snapshot ออกนอกองค์กร, KMS Policy หละหลวม, ยอด Bulk Download พุ่ง</td>
+                  <td><b>C</b></td>
+                  <td><b>Restrict Access:</b> ยกเลิก Public Link/Signed URL, ตั้งค่า DLP, เข้ารหัสและจำกัดสิทธิ์ KMS</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="formula-bar">
+              <b>Vulnerability Lifecycle (4 ขั้นตอน):</b> <code>1. Discover</code> (ค้นหาด้วย Scan/Inventory/Threat Intel) → <code>2. Triage</code> (คัดกรองความจริง + ประเมินความรุนแรงตามบริบท + ตั้ง Owner/Due Date) → <code>3. Remediate</code> (แก้ไข: Patch / Reconfigure / Isolate / Compensating Control) → <code>4. Verify</code> (สแกนซ้ำ Rescan &amp; ตรวจ Log ยืนยันว่าหายจริง)
+            </div>
+            <p>• <b>Attack Chain 5 ขั้นเมื่อ Key หลุด:</b> <code>1. Key leak</code> → <code>2. API access</code> → <code>3. Role abuse</code> → <code>4. Storage read</code> → <code>5. Data loss</code></p>
+            <p>• <b>Patch &amp; Dependency Pipeline (Change Mgmt):</b> <code>Commit</code> (ทำ Asset Inventory) → <code>Build</code> (สแกน Container/IaC/SCA ใน CI/CD) → <code>Stage</code> (กำหนด Patch SLA ตาม Severity/KEV, <b>ทดสอบใน Staging + มี Rollback Plan เสมอ</b>) → <code>Prod</code> (ทยอย Rollout)</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== PAGE 1 : COLUMN 2 ==================== -->
+      <div class="col-stack">
+
+        <!-- BOX 3: Control Level Impact, Risk Matrix & 4 Risk Decisions -->
+        <div class="box">
+          <div class="box-hdr red">
+            <span>3. S6: Control Level Impact, Risk Matrix &amp; การจัดการความเสี่ยง</span>
+            <span class="tag">หัวข้อเน้นสอบ!</span>
+          </div>
+          <div class="box-body">
+            <div class="formula-bar">
+              <b>สมการความเสี่ยง:</b> <code>Risk Score = Likelihood (โอกาสเกิด 1–5) × Impact (ผลกระทบ 1–5)</code> (คะแนนเต็ม 25)
+            </div>
+            <ul class="tight">
+              <li><b>Likelihood (1–5):</b> <code>1 = Rare</code>, <code>2 = Unlikely</code>, <code>3 = Possible</code>, <code>4 = Likely</code>, <code>5 = Almost Certain</code> (ดูจาก Exposure, Exploitability/KEV, Threat Activity, Control ที่มี)</li>
+              <li><b>Impact (1–5):</b> <code>1 = Negligible</code>, <code>2 = Minor</code>, <code>3 = Moderate</code>, <code>4 = Major</code>, <code>5 = Severe</code> (ดูจาก CIA Triad, มูลค่าข้อมูล PII, ระบบธุรกิจหยุดชะงัก, ค่าปรับกฎหมาย PDPA/GDPR)</li>
+            </ul>
+            <table class="tbl">
+              <thead>
+                <tr><th>คะแนน (L×I)</th><th>ระดับความเสี่ยง</th><th>แนวทางปฏิบัติในองค์กร (Organizational Action)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="hl-red">17 – 25</span></td><td><b>Critical (วิกฤต)</b></td><td><b>Escalate ผู้บริหารทันที</b> + เปิดกระบวนการ Incident Response / แก้ไขฉุกเฉินทันที</td></tr>
+                <tr><td><b>10 – 16</b></td><td><b>High (สูง)</b></td><td><b>Urgent Mitigation:</b> ลดความเสี่ยงอย่างเร่งด่วน กำหนดแผนแก้ไขและติดตามผลใกล้ชิด</td></tr>
+                <tr><td><b>5 – 9</b></td><td><b>Medium (ปานกลาง)</b></td><td>กำหนด <b>Owner (ผู้รับผิดชอบ)</b> และ <b>Due Date (กำหนดเสร็จ)</b> ชัดเจนในแผนงานปกติ</td></tr>
+                <tr><td><b>1 – 4</b></td><td><b>Low (ต่ำ)</b></td><td><b>Monitor:</b> เฝ้าระวังและแก้ไขตามรอบการบำรุงรักษาระบบตามปกติ</td></tr>
+              </tbody>
+            </table>
+            <p>• <b>ตัวเร่งลำดับความสำคัญ (Accelerators):</b> <code>1. Exploit Evidence (อยู่ใน CISA KEV)</code> และ <code>2. Regulatory Deadline (เส้นตายกฎหมาย)</code> | <b>ตัวตัดสินเมื่อคะแนนเท่ากัน (Tie-breakers):</b> ดู <code>Asset Criticality</code> หรือเลือกข้อที่เป็น <code>Quick Win</code> (ทำง่ายลดเสี่ยงได้ทันที)</p>
+
+            <div class="sub-hdr red">Control Level Impact (ผลของ Control ต่อการลด Likelihood vs ลด Impact)</div>
+            <table class="tbl">
+              <thead>
+                <tr><th>ประเภท Control</th><th>เป้าหมาย</th><th>ตัวอย่างการนำไปใช้ในองค์กร</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. Preventive Control</b><br>(ลดค่า <b>Likelihood - L</b>)</td><td>ลดโอกาสที่ผู้โจมตีจะเจาะเข้ามาสำเร็จ</td><td>การเปิด <code>MFA</code>, <code>Block Public Access</code>, <code>Key Rotation</code>, <code>Least Privilege IAM</code>, <code>Patching</code>, <code>WAF บล็อก SQLi</code></td></tr>
+                <tr><td><b>2. Containment / Recovery</b><br>(ลดค่า <b>Impact - I</b>)</td><td>จำกัดวงความเสียหาย (<b>ลด Blast Radius</b>) และกู้คืนไว</td><td>การทำ <code>Micro-segmentation</code>, <code>Immutable Backup (WORM)</code>, <code>Multi-AZ Failover</code>, <code>Encryption at Rest</code></td></tr>
+              </tbody>
+            </table>
+            <ul class="tight">
+              <li><b>Inherent Risk (ความเสี่ยงตั้งต้น):</b> ความเสี่ยงก่อนใส่ Control (เช่น Bucket เปิด Public + มี PII: <code>L4 × I5 = 20 [Critical]</code>)</li>
+              <li><b>Residual Risk (ความเสี่ยงหลงเหลือ):</b> ความเสี่ยงที่เหลืออยู่<b>หลังจากใส่ Control แล้ว</b> (เช่น ปิด Public + บังคับ MFA ทำให้โอกาสเกิดลดลงเหลือ L2: <code>L2 × I5 = 10 [High/Medium]</code>)</li>
+              <li><span class="hl-yellow">Compensating Control (การควบคุมชดเชย):</span> มาตรการทดแทนชั่วคราวเมื่อยังไม่สามารถแก้ที่ต้นเหตุ (Root Cause) ได้ทันที เช่น แอป Legacy ยัง Patch ช่องโหว่ไม่ได้ จึงตั้งกฎ <b>AWS WAF (Virtual Patching)</b> หรือจำกัด <b>IP Whitelist</b> กั้นหน้าไว้ก่อน</li>
+            </ul>
+
+            <div class="sub-hdr">4 กลยุทธ์การจัดการความเสี่ยง (4 Risk Management Decisions) — ออกสอบเน้น!</div>
+            <table class="tbl">
+              <thead>
+                <tr><th>กลยุทธ์</th><th>ความหมายและการประยุกต์ใช้ในองค์กร</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. Avoid</b><br>(หลีกเลี่ยง)</td><td><b>ยกเลิกกิจกรรม/ฟีเจอร์ หรือปิดระบบที่ก่อให้เกิดความเสี่ยงนั้นโดยสิ้นเชิง</b> เมื่อความเสี่ยงสูงเกินรับได้และไม่คุ้มค่าธุรกิจ (เช่น ปิด Public API ที่ไม่ใช้แล้ว, ยกเลิกการเก็บข้อมูลบัตรเครดิตลูกค้าเอง)</td></tr>
+                <tr><td><b>2. Mitigate</b><br>(ลดความเสี่ยง)</td><td><b>เพิ่มมาตรการควบคุม (Security Controls)</b> เพื่อลดโอกาสเกิด (<code>L</code>) หรือลดผลกระทบ (<code>I</code>) ให้อยู่ในระดับที่ยอมรับได้ (เช่น เปิด MFA, เข้ารหัส KMS, ตั้งค่า Auto Scaling + WAF)</td></tr>
+                <tr><td><b>3. Transfer</b><br>(โอนย้ายความเสี่ยง)</td><td><b>ถ่ายโอนภาระความเสียหายทางการเงินหรือการดำเนินงานให้บุคคลที่สาม (Third Party)</b> เช่น การทำ<b>ประกันภัยไซเบอร์ (Cyber Insurance)</b> หรือใช้บริการ Cloud Managed Service / SaaS ที่มี SLA ชัดเจน <i>(*หมายเหตุ: โอนความรับผิดชอบด้านกฎหมาย/ชื่อเสียงไม่ได้!)</i></td></tr>
+                <tr><td><b>4. Accept</b><br>(ยอมรับความเสี่ยง)</td><td><b>ยอมรับความเสี่ยงที่หลงเหลือ (Residual Risk)</b> เมื่ออยู่ในเกณฑ์ <code>Risk Appetite</code> หรือต้นทุนการแก้ไขแพงกว่าความเสียหาย <b>กฎเหล็ก: ต้องมีผู้บริหารลงนามอนุมัติ (Formal Sign-off), ระบุ Owner และวันทบทวน (Review Date)</b></td></tr>
+              </tbody>
+            </table>
+
+            <div class="sub-hdr purple">NIST CSF 1.1 (5 Functions) &amp; กฎเหล็กการวิเคราะห์สู่ Risk Register</div>
+            <p>• <b>5 ฟังก์ชัน NIST CSF 1.1:</b> <code>1. Identify</code> (Pre-incident: รู้ Asset, Owner, Sensitivity) → <code>2. Protect</code> (Pre-incident: ป้องกันที่ Root Cause แบบ Defense in Depth) → <code>3. Detect</code> (Visibility: <code>Event → Signal → Alert → Owner → Triage</code>; ระวัง <b>Detection Gap</b> ทำ Impact พุ่ง) → <code>4. Respond</code> (Post-incident: จำกัด Blast Radius, Revoke key; <b>ต้อง Preserve Evidence เก็บหลักฐานก่อนแก้ระบบเสมอ!</b>) → <code>5. Recover</code> (Post-incident: กู้คืนระบบ, ลบ Backdoor, อัปเดตบทเรียนเข้า Risk Register)</p>
+            <p>• <b>กฎแยกแยะหลักฐาน:</b> แยก <code>Observed Fact</code> (สิ่งที่เห็นจริง เช่น Key หลุดใน Git + มี API จากต่างแดน) ออกจาก <code>Hypothesis/Assumption</code> (สมมติฐานว่าข้อมูลรั่ว) แล้วทำ <code>Verification</code> (ตรวจ Log ว่าเข้าถึงถังเก็บ PII หรือไม่)</p>
+            <p>• <b>สมการ Risk Register:</b> <code>[Threat Analysis] + [CSF Control] + (L × I) = [Risk Register]</code> (ต้องระบุ <b>Owner, Due Date, Measure</b> เพื่อเปลี่ยนความเสี่ยงให้เป็น Action)</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== PAGE 1 : COLUMN 3 ==================== -->
+      <div class="col-stack">
+
+        <!-- BOX 4: S7 Data Classification, Data Protection (3 States) & Data Lifecycle -->
+        <div class="box">
+          <div class="box-hdr green">
+            <span>4. S7: Data Classification, Data Protection &amp; Data Lifecycle</span>
+            <span class="tag">หัวข้อเน้นสอบ!</span>
+          </div>
+          <div class="box-body">
+            <p><b>Cloud Security Blueprint (6 ชั้น):</b> <code>1. Data Classification</code> → <code>2. Storage Access</code> → <code>3. Envelope Encryption</code> → <code>4. KMS</code> → <code>5. Secrets Mgmt</code> → <code>6. Audit &amp; Compliance</code></p>
+            <p><b>3 ขั้นตอนจำแนกข้อมูล:</b> <code>1. กำหนดระดับอ่อนไหว (Sensitivity)</code> → <code>2. กำหนดเกณฑ์ประเมิน (Template/Metric)</code> → <code>3. ร่างนโยบายและติดป้ายกำกับ (Classification Label)</code></p>
+            <table class="tbl">
+              <thead>
+                <tr><th>ระดับ (4 / 5 Levels)</th><th>ความเสี่ยง / การเข้าถึง</th><th>ตัวอย่างข้อมูล &amp; Security Controls ที่ต้องใช้</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. Public</b><br>(Level 0: None)</td><td>ไม่มีความเสี่ยง / เปิดให้ทุกคนเข้าถึงได้</td><td>ข่าว PR, หน้าเว็บบริษัท → <b>ไม่ต้องเข้ารหัส (No encryption needed)</b> แต่ต้องรักษา <b>Integrity &amp; Availability</b></td></tr>
+                <tr><td><b>2. Internal</b><br>(Level 1: Low)</td><td>ความเสี่ยงต่ำ / เฉพาะพนักงานภายใน</td><td>ประกาศภายใน, ข้อมูลการตลาด/จัดซื้อทั่วไป → จำกัดสิทธิ์เฉพาะพนักงานองค์กร</td></tr>
+                <tr><td><b>3. Confidential</b> (L2)<br>&amp; <b>Highly Conf.</b> (L3)</td><td>ความเสี่ยงปานกลาง-สูง / เฉพาะผู้เกี่ยวข้อง (<b>Need-to-know</b>)</td><td>งบการเงิน, สัญญา NDA, ข้อมูลลูกค้า/พนักงาน → ต้องมี <b>IAM, Encryption at Rest, Logging</b></td></tr>
+                <tr><td><b>4. Restricted / Secret</b><br>(Level 4: Extreme)</td><td>ความเสี่ยงสูงสุด (กระทบกฎหมาย/ล้มละลาย) / เฉพาะ <b>Data Owner / ผู้บริหารระดับสูง</b></td><td><b>ข้อมูลส่วนบุคคลอ่อนไหว (PII/PDPA), บัตรเครดิต (PCI-DSS), ประวัติการแพทย์, รหัสผ่าน DB</b> → ต้องใช้ <b>Secret Vault, Rotation, Strict Access, Continuous Audit</b></td></tr>
+              </tbody>
+            </table>
+
+            <div class="sub-hdr green">การปกป้องข้อมูลใน 3 สถานะ (Securing the 3 States of Data)</div>
+            <table class="tbl">
+              <thead>
+                <tr><th>สถานะข้อมูล (State)</th><th>ความหมาย / ตัวอย่าง</th><th>มาตรการป้องกัน (Data Protection Controls)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. Data at Rest</b><br>(ข้อมูลที่จัดเก็บนิ่งๆ)</td><td>ไฟล์ใน Disk, S3, EBS, RDS, Backup, Archive</td><td>• <b>SSE-S3</b> (AWS จัดการคีย์ให้), <b>SSE-KMS</b> (ลูกค้าคุมคีย์+มี Audit Trail), <b>Client-Side Encryption</b> (เข้ารหัสก่อนส่งขึ้นคลาวด์)<br>• Full Disk / File / DB Encryption, DLP, CASB</td></tr>
+                <tr><td><b>2. Data in Transit</b><br>(Data in Motion)</td><td>ข้อมูลกำลังวิ่งผ่านเครือข่าย (API, Email, Download)</td><td>• <b>TLS 1.2+ / HTTPS</b>, <b>VPN / IPsec</b>, Email Encryption, Managed File Transfer</td></tr>
+                <tr><td><b>3. Data in Use</b><br>(ข้อมูลกำลังประมวลผล)</td><td>ข้อมูลถูกเปิดอ่าน/แก้ไขอยู่ใน <b>RAM / CPU</b></td><td>• <b>RBAC (Role-Based Access Control)</b>, Identity Mgmt, DRM, Confidential Computing</td></tr>
+              </tbody>
+            </table>
+
+            <div class="sub-hdr teal">วงจรชีวิตข้อมูล 6 ขั้นตอน (6-Stage Data Lifecycle Management)</div>
+            <div class="formula-bar">
+              <code>1. Create (สร้าง)</code> → <code>2. Store (จัดเก็บ)</code> → <code>3. Use (ใช้ประมวลผล)</code> → <code>4. Publish / Share (เผยแพร่/แลกเปลี่ยน)</code> → <code>5. Archive / Achieve (เก็บถาวรระยะยาว ไม่แก้ไข เช่น Glacier)</code> → <code>6. Destroy (ทำลายเมื่อหมดอายุการใช้งาน)</code>
+            </div>
+
+            <div class="sub-hdr">Cloud Storage Types &amp; กฎการประเมินสิทธิ์ (Access Control Priority)</div>
+            <ul class="tight">
+              <li><b>ประเภท Storage:</b> <code>Object</code> (S3: เก็บไฟล์+Metadata ทนทาน 11 Nines <code>99.999999999%</code>), <code>File</code> (EFS/FSx: แชร์ไฟล์ NFS/SMB), <code>Block</code> (EBS: ต่อเข้า EC2 ความเร็วสูง IOPS สูงสำหรับ DB), <code>Cold/Archive</code> (Glacier: เก็บระยะยาวราคาถูก), <code>AWS Storage Gateway</code> (เชื่อม On-prem 3 แบบ: <b>File, Volume, Tape Gateway</b> มี Local SSD Cache)</li>
+              <li><b>ลำดับการตัดสินสิทธิ์ (Policy Priority):</b> <span class="hl-red">1. EXPLICIT DENY (ชนะทุกสิ่ง!)</span> → <span class="hl-green">2. EXPLICIT ALLOW</span> → <b>3. IMPLICIT DENY</b> (ค่าเริ่มต้นคือบล็อกทั้งหมด Private by Default)</li>
+              <li><b>3 เสาหลักควบคุมสิทธิ์ S3:</b> <code>1. IAM Policy</code> (ใครทำอะไรได้) + <code>2. Bucket Policy &amp; Block Public Access</code> (เข้าถึงถังนี้จากไหนได้) + <code>3. KMS Key Policy</code> (ใครมีสิทธิ์ถอดรหัสคีย์)</li>
+              <li><b>การป้องกัน Ransomware &amp; Audit:</b> เปิด <code>Versioning + S3 Object Lock (WORM: Write Once, Read Many)</code> ห้ามลบ/แก้ไขภายในเวลาที่กำหนด + ใช้ <code>Amazon Macie</code> ค้นหาข้อมูล PII อัตโนมัติ + <code>CloudTrail</code> เก็บ Log API</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BOX 5: KMS, Envelope Encryption & Secrets Manager -->
+        <div class="box">
+          <div class="box-hdr purple">
+            <span>5. S7: AWS KMS, Envelope Encryption &amp; Secrets Manager</span>
+            <span class="tag">หัวข้อเน้นสอบ!</span>
+          </div>
+          <div class="box-body">
+            <table class="tbl">
+              <thead>
+                <tr><th>หัวข้อเปรียบเทียบ</th><th>AWS KMS = "Engine" (เครื่องยนต์เข้ารหัส)</th><th>Secrets Manager = "Fuel Tank" (ถังเก็บความลับ)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>สิ่งที่จัดเก็บ</b></td><td><b>Cryptographic Keys</b> (กุญแจเข้ารหัส CMK/DEK)</td><td><b>DB Passwords, API Keys, OAuth Tokens, SSH Keys</b></td></tr>
+                <tr><td><b>หน้าที่หลัก</b></td><td>เข้ารหัสและถอดรหัสข้อมูล (Scrambles/Unscrambles)</td><td>เก็บค่าความลับเพื่อให้แอปใช้ยืนยันตัวตน (Authentication)</td></tr>
+                <tr><td><b>รูปแบบการเข้าถึง</b></td><td>ส่งข้อมูลไปให้ KMS เข้ารหัส; <b>Master Key ไม่เคยออกจาก KMS</b></td><td>แอปดึงค่าความลับจริง (<code>GetSecretValue</code>) ไปใช้ตอน Runtime</td></tr>
+                <tr><td><b>การทำ Rotation</b></td><td>หมุนเวียน <b>Key Material</b> เบื้องหลัง</td><td>หมุนเวียนเปลี่ยน <b>รหัสผ่านจริงใน DB</b> อัตโนมัติผ่าน <b>AWS Lambda</b></td></tr>
+              </tbody>
+            </table>
+            <div class="formula-bar">
+              <b>Envelope Encryption (การเข้ารหัสซองจดหมาย 2 ชั้น):</b> ไม่ใช้ Master Key เข้ารหัสไฟล์ใหญ่ตรงๆ!<br>
+              1) <code>Plaintext Data + Data Key (DEK) = Ciphertext</code> (เข้ารหัสข้อมูลด้วย DEK ที่เร็วกว่า)<br>
+              2) <code>Data Key (DEK) + KMS Key (CMK) = Encrypted Data Key</code> (ห่อหุ้ม DEK ด้วย KMS Master Key)<br>
+              *เก็บ <code>Ciphertext</code> คู่กับ <code>Encrypted DEK</code> ไว้ใน Storage; ส่วน <code>KMS Key</code> อยู่ใน KMS เท่านั้น (หากต้องการ Dedicated HSM มาตรฐาน <b>FIPS 140-2/3</b> ให้ใช้ <b>CloudHSM</b>)
+            </div>
+            <ul class="tight">
+              <li><b>KMS Key Lifecycle (5 ขั้น):</b> <code>1. Creation</code> (CMK vs AWS-Managed) → <code>2. Usage</code> (IAM/Key Policy) → <code>3. Rotation</code> → <code>4. Disablement</code> (ระงับชั่วคราว) → <code>5. Deletion</code> (ตั้งเวลารอลบถาวร)</li>
+              <li><b>ปัญหาที่ Secrets Manager แก้:</b> <code>Hardcoded Secrets</code> ในโค้ด (#1 สาเหตุระบบรั่ว), <code>Secrets Sprawl</code> (คีย์กระจายใน Git/Slack/<code>.env</code>), <code>Static Secrets</code> (ไม่เคยเปลี่ยนรหัส), เปลี่ยนรหัสด้วยมือใน 100 Microservices แล้วทำระบบล่ม (<b>Downtime</b>)</li>
+              <li><b>Automated Secret Lifecycle (5 ขั้น):</b> <code>Create → Store → Use → Rotate → Revoke</code> | <b>ขั้นตอนดึงค่า (4 ขั้น):</b> <code>1. Request (GetSecretValue)</code> → <code>2. Authorize (IAM)</code> → <code>3. Decrypt (KMS)</code> → <code>4. Deliver (TLS)</code> (ใช้ <b>Client-Side Caching SDK</b> เพื่อลด Latency และประหยัดค่า API <code>$0.05/10,000 calls</code>; คิดค่าเก็บ <code>$0.40/secret/เดือน</code>)</li>
+              <li><b>5 Use Cases ของ Secrets Manager (จากเลคเชอร์):</b> <b>1) Generic Credentials</b> (รหัสผ่าน DB), <b>2) API Key</b> (ECS ดึงไปเรียก External API), <b>3) SSH Key / Private Key</b> (Lambda รัน <code>scp</code> ดึง Log เข้า S3), <b>4) Hybrid Workload</b> (แอป On-prem ขอคีย์ผ่าน <code>PKI + CA Cert + IAM Roles Anywhere</code> — ระวังสายใต้น้ำขาดต้องมี DR ข้าม Region), <b>5) Third-Party Access Token</b> (Lambda จัดการ Token)</li>
+              <li><b>Multi-Cloud Tools:</b> <code>HashiCorp Vault</code> (เด่นเรื่อง <b>Dynamic Secrets</b> สร้างคีย์ชั่วคราวอายุสั้น), <code>Doppler</code> (เน้น Dev/CI-CD), <code>Infisical</code> (Sync ข้ามคลาวด์)</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== A4 PAGE 2 (BACK) : SESSIONS 8, 9, 10, 11 & VOCAB BANK ==================== -->
+  <section class="a4-page" id="page2">
+    <div class="page-header">
+      <div class="page-header-left">CLOUD SECURITY (070315221) — แผ่นจดเข้าห้องสอบ A4 [หน้าที่ 2/2 : บทที่ 8 Well-Architected &amp; บทที่ 9 IaC/Terraform &amp; บทที่ 10 LB/Scale &amp; บทที่ 11 Zero Trust]</div>
+      <div class="page-header-right">ครบทุกหัวข้อเน้นสอบ + คลังคำศัพท์เติมคำในช่องว่าง 20 ข้อ</div>
+    </div>
+
+    <div class="grid-3col">
+      <!-- ==================== PAGE 2 : COLUMN 1 ==================== -->
+      <div class="col-stack">
+
+        <!-- BOX 6: S8 AWS Well-Architected, Reliability & Change Management -->
+        <div class="box">
+          <div class="box-hdr">
+            <span>6. S8: AWS Well-Architected (6 Pillars), Reliability &amp; Change Mgmt</span>
+            <span class="tag">หัวข้อเน้นสอบ!</span>
+          </div>
+          <div class="box-body">
+            <table class="tbl">
+              <thead>
+                <tr><th>6 เสาหลัก (6 Pillars)</th><th>หลักการสำคัญและการประยุกต์ใช้ในองค์กร</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. Operational Excellence</b></td><td>• <code>Perform operations as code</code> (จัดการทุกอย่างเป็นโค้ด)<br>• <b>Change Mgmt:</b> <code>Make frequent, small, reversible changes</code> (เปลี่ยนแปลงทีละน้อย บ่อยๆ และย้อนกลับ Rollback ได้ทันทีหากเกิดปัญหา)</td></tr>
+                <tr><td><b>2. Security Pillar</b></td><td>• <b>6-Step Flow:</b> <code>Protect → Control → Encrypt → Manage Secrets → Detect → Audit</code><br>• 7 หลักการ: Strong Identity (Least Privilege/MFA), Traceability (Log ทุกจุด), <b>Defense in Depth (ป้องกันทุกเลเยอร์)</b>, Automate Security, Protect Data (Rest/Transit), <b>Keep people away from data</b>, Prepare for incidents</td></tr>
+                <tr><td><span class="hl-yellow">3. Reliability Pillar</span><br>(ความน่าเชื่อถือ)</td><td>• <b>3 องค์ประกอบหลัก:</b> <code>1. High Availability Design</code> + <span class="hl-red">2. Change Management</span> + <code>3. Failure Management</code><br>• <b>5 Design Principles (ออกสอบเน้น!):</b><br>1) <code>Automatically recover from failure</code> (กู้คืนอัตโนมัติ)<br>2) <code>Test recovery procedures</code> (ซ้อมกู้คืนระบบจริง)<br>3) <span class="hl-blue">Scale horizontally to increase aggregate system availability</span> (<b>Reliability Scale:</b> ขยายแนวราบเพิ่มจำนวนเครื่องเล็กหลายเครื่องแทนการอัปสเปคเครื่องเดียว เพื่อตัด Single Point of Failure)<br>4) <code>Stop guessing capacity</code> (เลิกเดาความจุ ใช้ Auto Scaling)<br>5) <span class="hl-red">Manage change in automation</span> (จัดการการเปลี่ยนแปลงด้วยระบบอัตโนมัติ)</td></tr>
+                <tr><td><b>4. Performance Efficiency</b></td><td>เลือกใช้ทรัพยากรให้เหมาะกับงาน, ใช้ Serverless / Managed Services, กระจายระบบใกล้ผู้ใช้ (Global Reach / CDN)</td></tr>
+                <tr><td><b>5. Cost Optimization</b></td><td><b>5 แนวทางลดต้นทุน:</b> <code>1. Right Size</code> (ปรับขนาดพอดีงาน), <code>2. Increase Elasticity</code> (ปิดเครื่องนอกเวลางาน), <code>3. Right Pricing Model</code> (<b>On-Demand</b> ยืดหยุ่นสุด, <b>Reserved/Savings Plans</b> ผูกสัญญา 1–3 ปีลด 72%, <b>Spot Instances</b> ประมูลเครื่องว่างลด 90% สำหรับงานที่ทนต่อการถูกตัดได้), <code>4. Optimize Storage</code> (Lifecycle Policy/Compression/Deduplication/Tagging), <code>5. Measure &amp; Monitor</code></td></tr>
+                <tr><td><b>6. Sustainability</b></td><td>ลดพลังงานและคาร์บอนฟุตพริ้นท์ ใช้ทรัพยากรให้คุ้มค่าสูงสุด (High Utilization)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- BOX 7: S9 Secure IaC & Terraform Steps -->
+        <div class="box">
+          <div class="box-hdr orange">
+            <span>7. S9: Secure IaC, Terraform Steps &amp; ASPM Pipeline</span>
+            <span class="tag">หัวข้อเน้นสอบ!</span>
+          </div>
+          <div class="box-body">
+            <p>• <b>ปัญหาของการตั้งค่าด้วยมือ (Manual GUI):</b> ช้า, เกิด <code>Human Error</code>, สภาพแวดล้อม Dev/Stage/Prod ไม่ตรงกัน และเกิด <span class="hl-yellow">Configuration Drift</span> (ค่าจริงบนคลาวด์เพี้ยนไปจากมาตรฐานที่กำหนดไว้)</p>
+            <table class="tbl">
+              <thead>
+                <tr><th>แนวทาง IaC</th><th>Declarative (กำหนดผลลัพธ์ปลายทาง)</th><th>Imperative (กำหนดขั้นตอนทีละสเต็ป)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>แนวคิดหลัก</b></td><td>บอก <b>"What you want" (ต้องการสถานะอะไร)</b> ระบบคำนวณวิธีทำเอง</td><td>บอก <b>"How to do it" (ต้องทำขั้นตอนใดบ้าง 1-2-3)</b> แบบ Procedural</td></tr>
+                <tr><td><b>คุณสมบัติเด่น</b></td><td><span class="hl-green">Idempotent</span> (รันโค้ดเดิมซ้ำกี่ครั้งก็ได้สถานะผลลัพธ์เดิม ไม่สร้างซ้ำซ้อน)</td><td>ถ้าลำดับคำสั่งผิดหรือรันซ้ำอาจเพี้ยนและเกิด Configuration Drift ได้ง่าย</td></tr>
+                <tr><td><b>งานที่เหมาะ &amp; เครื่องมือ</b></td><td><b>Provisioning (สร้างโครงสร้างพื้นฐาน):</b> <code>Terraform</code>, <code>CloudFormation</code>, <code>Pulumi</code></td><td><b>Configuration Mgmt (ตั้งค่าในเครื่อง):</b> <code>Ansible</code>, <code>Chef</code>, <code>Puppet</code>, <code>SaltStack</code>, <code>Bash</code></td></tr>
+              </tbody>
+            </table>
+
+            <div class="sub-hdr orange">Terraform Steps (4 ขั้นตอนหลัก &amp; 7 ขั้นตอนเต็ม — ออกสอบเติมคำ/ปรนัย!)</div>
+            <div class="formula-bar">
+              <b>4 ขั้นตอนหลัก:</b> <code>1. Init</code> (<code>terraform init</code> เตรียมระบบ/โหลด Provider Plugins/ตั้ง Backend) → <code>2. Plan</code> (<code>terraform plan</code> เทียบ Desired State ในโค้ด กับ Current State ใน <code>.tfstate</code> เพื่อดู Preview/Dry-run ก่อนแก้จริง) → <code>3. Apply</code> (<code>terraform apply</code> สร้าง/อัปเดตทรัพยากรจริงบน Cloud) → <code>4. Destroy</code> (<code>terraform destroy</code> ลบทรัพยากรทั้งหมดเมื่อเลิกใช้ เช่น หลังรัน Load Test ด้วย <b>Apache JMeter</b> เสร็จเพื่อประหยัดงบ)<br>
+              <b>วงจรเต็ม 7 ขั้น:</b> <code>Write (.tf) → Init → Validate (ตรวจ Syntax) → Plan → Apply → Monitor (ตรวจ Drift) → Destroy</code>
+            </div>
+            <ul class="tight">
+              <li><b>ความเสี่ยงไฟล์ <code>terraform.tfstate</code>:</b> เก็บโครงสร้างระบบและ Secrets เป็น <b>Plaintext! ห้าม Commit ขึ้น Git เด็ดขาด</b> ต้องเก็บใน <b>Remote State Backend</b> (เช่น <code>S3</code> + เข้ารหัส <code>KMS</code> + ใช้ <code>DynamoDB</code> ทำ <b>State Locking</b> ป้องกันคนรันทับกันพร้อมกัน)</li>
+              <li><b>Configuration Blast Radius:</b> โค้ด IaC ที่ตั้งค่าผิดเพียงจุดเดียว จะถูกนำไปสร้างซ้ำในทุก Environment ทันที</li>
+            </ul>
+
+            <div class="sub-hdr">3-Pillar IaC Security Framework &amp; ASPM Ecosystem</div>
+            <ul class="tight">
+              <li><b>Pillar 1: Secure Code &amp; Governance:</b> บังคับทำ <code>Pull Request (PR) &amp; Peer Review</code>, ป้องกันการแอบแก้โค้ดตามกรอบ <code>SLSA Framework</code>, ใช้ <code>Least Privilege</code>, ห้าม Hardcode Secrets ใน <code>.tf</code></li>
+              <li><b>Pillar 2: Automated Pipeline Gates (Shift-Left):</b> ตรวจจับตั้งแต่ต้นทางใน CI/CD (<code>Commit → Validate/Lint → Plan → Policy as Code → Apply</code>) ใช้ <b>OPA (Open Policy Agent / Rego)</b>, <b>Checkov</b>, <b>tfsec</b> เป็น Guardrails อัตโนมัติ (เช่น บล็อก Public S3, บังคับ Encryption, บังคับติด Tag <code>owner/cost_center</code>)</li>
+              <li><b>Pillar 3: Continuous Posture Management:</b> ทำ <span class="hl-yellow">Drift Detection</span> (ตรวจจับเมื่อมีคนแอบแก้ค่าบน Console ด้วยมือแล้วแจ้งเตือน/บังคับแก้กลับตามโค้ด Git) + จัดลำดับความเสี่ยงตาม <b>4 ปัจจัย:</b> <code>1. Public exposure</code>, <code>2. Privilege escalation</code>, <code>3. Sensitive data</code>, <code>4. Exploitability</code> เพื่อลด <b>Alert Fatigue</b></li>
+              <li><b>ASPM (Application Security Posture Management) 4 ส่วน:</b> <code>1. SAST</code> (สแกนโค้ดแอป) + <code>2. SCA</code> (สแกน Library/Dependency ช่องโหว่) + <code>3. IaC Security</code> (สแกนไฟล์คลาวด์) + <code>4. DAST</code> (สแกนขณะ Runtime/API)</li>
+              <li><b>Release Strategies (Change Mgmt):</b> <code>Blue/Green</code> (สร้างระบบใหม่คู่ขนานแล้วสลับ Traffic ทันที), <code>Canary</code> (ปล่อยให้ผู้ใช้กลุ่มเล็ก 5% ทดสอบก่อน), <code>Rolling</code> (ทยอยอัปเดตทีละเครื่อง)</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== PAGE 2 : COLUMN 2 ==================== -->
+      <div class="col-stack">
+
+        <!-- BOX 8: S10 Scale, Load Balancing, Windows/NGINX Plus & QoS -->
+        <div class="box">
+          <div class="box-hdr teal">
+            <span>8. S10: Reliability Scale, Load Balancing, Windows/NGINX Plus &amp; QoS</span>
+            <span class="tag">หัวข้อเน้นสอบ!</span>
+          </div>
+          <div class="box-body">
+            <ul class="tight">
+              <li><b>Vertical Scaling (Scale Up/Down):</b> เพิ่ม CPU/RAM ในเครื่องเดียว (ติดเพดานฮาร์ดแวร์ และยังเป็น <b>Single Point of Failure - SPOF</b>)</li>
+              <li><b>Horizontal Scaling (Scale Out/In — Reliability Scale):</b> เพิ่มจำนวนเครื่องทำงานขนานกันใน <b>Auto Scaling Group (ASG)</b> ข้ามหลาย AZ (<b>Multi-AZ</b>) พร้อมทำ <b>Self-Healing</b> เปลี่ยนเครื่องที่พังอัตโนมัติ</li>
+              <li><b>Load Balancer Dual-Purpose:</b> <code>1. Availability</code> (กระจายโหลด/HA) + <code>2. Security ("The Intelligent Shield")</code> วาง LB ใน <b>Public Subnet (DMZ)</b> เป็น Choke Point จุดเดียวที่ออกเน็ต และซ่อน Backend ไว้ใน <b>Private Subnet</b></li>
+              <li><b>Security Group Chaining (คอกกั้นเป็นชั้น):</b> <code>Internet (0.0.0.0/0) → ALB SG → App EC2 SG (รับเฉพาะจาก ALB SG) → DB SG (รับเฉพาะจาก App SG เท่านั้น)</code></li>
+            </ul>
+
+            <div class="sub-hdr teal">เปรียบเทียบ Load Balancer (ALB vs NLB vs GWLB vs CLB vs GSLB &amp; Plus)</div>
+            <table class="tbl">
+              <thead>
+                <tr><th>ประเภท LB</th><th>OSI Layer / Protocol</th><th>จุดเด่น, ความเร็ว &amp; การนำไปใช้ในองค์กร</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>ALB</b><br>(Application LB)</td><td><b>Layer 7</b><br>(HTTP, HTTPS, gRPC, WebSocket)</td><td>• แยกทราฟฟิกตามเนื้อหาแอป (<b>Host, Path <code>/api</code>, Header, Method, Cookie</b>)<br>• ผูก <b>AWS WAF</b> และ <b>Cognito (OIDC)</b> ได้ทันที | Latency <code>~400 ms</code> | คิดเงินตาม <b>LCUs</b><br>• <span class="hl-green">Cross-Zone LB เปิดเป็นค่าเริ่มต้น (Default) และฟรี!</span></td></tr>
+                <tr><td><b>NLB</b><br>(Network LB)</td><td><b>Layer 4</b><br>(TCP, UDP, TLS)</td><td>• แยกตาม <b>IP + Port</b> | เร็วจัดระดับ <b>Ultra-low latency (<code>~100 µs</code>)</b> รองรับหลายล้าน req/s<br>• รองรับ <b>Static IP / Elastic IP</b> (สำหรับทำ Firewall Whitelist) และ <b>TLS Passthrough</b><br>• คิดเงินตาม <b>NLCUs</b> | <span class="hl-red">Cross-Zone LB ปิดเป็น Default (ถ้าเปิดจะมีค่า Data Transfer ข้าม AZ)</span></td></tr>
+                <tr><td><b>GWLB</b><br>(Gateway LB)</td><td><b>Layer 3 / 4</b><br>(IP / <b>GENEVE</b>)</td><td>• ใช้แทรกอุปกรณ์ความปลอดภัย <b>3rd-Party Virtual Firewall / IDS / IPS</b> แบบ Inline (<b>Deep Packet Inspection</b>) ก่อนเข้าถึงระบบหลัก | Latency <code>~200 µs</code></td></tr>
+                <tr><td><b>CLB</b> (Classic)</td><td>Layer 4 &amp; 7</td><td>รุ่นเก่า (Legacy workloads) ไม่แนะนำสำหรับสถาปัตยกรรมใหม่</td></tr>
+                <tr><td><b>GSLB</b><br>(Global Server LB)</td><td>DNS-based Routing</td><td>กระจายทราฟฟิกข้ามภูมิภาค/Data Center ตามพิกัดภูมิศาสตร์ (เช่น <b>Route 53</b>) สำหรับระบบ <b>Multi-Region &amp; Disaster Recovery (DR)</b></td></tr>
+                <tr><td><b>Hardware LB vs Software/Cloud LB</b><br>(<b>NGINX Plus / Windows NLB</b>)</td><td>L4 / L7</td><td>• <b>Hardware LB (F5/Citrix):</b> อุปกรณ์จริงประสิทธิภาพสูงใน Data Center ใหญ่แต่ขยายยาก<br>• <b>Software/Cloud LB (NGINX Plus / Windows Plus / HAProxy / ELB):</b> ยืดหยุ่นสูง ทำ Auto Scaling ได้; การทำ Cluster มีแบบ <b>Active-Passive</b> (โหนดรองรอ <code>Failover</code>) และ <b>Active-Active</b></td></tr>
+              </tbody>
+            </table>
+
+            <div class="sub-hdr">6 อัลกอริทึมกระจายโหลด (6 LB Algorithms) &amp; 3 กลยุทธ์ TLS</div>
+            <ul class="tight">
+              <li><b>1. Round Robin:</b> วนเรียงลำดับเท่าๆ กัน (1→2→3) เหมาะกับ Server ที่สเปคเท่ากัน</li>
+              <li><b>2. Sticky Round Robin (Session Stickiness):</b> ผูกผู้ใช้เดิมให้กลับไปเครื่องเดิมด้วย <b>Cookie</b> <i>(*Cloud Best Practice: ควรทำแอปเป็น <b>Stateless</b> โดยย้าย Session ไปเก็บที่ <b>Amazon ElastiCache (Redis)</b> หรือ <b>DynamoDB</b> แทน)</i></li>
+              <li><b>3. Weighted Round Robin:</b> กำหนดน้ำหนักตามความแรงของสเปคเครื่อง (เครื่องแรงรับโหลดมากกว่า)</li>
+              <li><b>4. IP / URL Hash (Source IP Affinity):</b> คำนวณ Hash จาก Client IP หรือ URL ให้วิ่งไปเครื่องเดิมเสมอ</li>
+              <li><b>5. Least Connections:</b> ส่งงานใหม่ไปเครื่องที่มี <b>Connection ค้างอยู่น้อยที่สุด</b> (เหมาะกับงานที่แต่ละ Request ใช้เวลาประมวลผลไม่เท่ากัน)</li>
+              <li><b>6. Least Time (Least Response Time):</b> ส่งไปเครื่องที่ตอบสนองเร็วที่สุด (Latency ต่ำสุด) และมีโหลดค้างน้อยสุด</li>
+            </ul>
+            <table class="tbl">
+              <thead>
+                <tr><th>กลยุทธ์ TLS (3 Strategies)</th><th>การทำงาน &amp; กรณีใช้งานในองค์กร</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>1. TLS Termination</b><br>(SSL Offloading)</td><td><b>LB ถอดรหัส SSL/TLS</b> แล้วส่ง HTTP ธรรมดาไปหา Backend ช่วย<b>ลดภาระ CPU ของ Backend</b> (ใช้เมื่อ Private Network ภายในปลอดภัยสูง)</td></tr>
+                <tr><td><b>2. TLS Re-encryption</b><br>(End-to-End TLS)</td><td>LB ถอดรหัสเพื่อตรวจเนื้อหา (เช่น ตรวจ WAF) แล้ว<b>เข้ารหัสใหม่ก่อนส่งไป Backend</b> บังคับใช้ในงานมาตรฐานสูง เช่น <b>PCI-DSS, HIPAA</b></td></tr>
+                <tr><td><b>3. TLS Passthrough</b></td><td>LB (เช่น NLB) <b>ปล่อยผ่านโดยไม่ถอดรหัส</b> ให้ Backend ถอดรหัสเอง (LB ไม่เห็นข้อมูลข้างใน)</td></tr>
+              </tbody>
+            </table>
+            <ul class="tight">
+              <li><b>Error <code>502 Bad Gateway</code>:</b> เกิดจาก Backend Target <b>ไม่ผ่าน Health Check</b> (เช่น ตั้ง Security Group บล็อกพอร์ต ALB, แอปล่มตอบ 5xx, หรือ Timeout สั้นเกิน)</li>
+              <li><b>การป้องกัน DDoS &amp; QoS:</b> วงนอกใช้ <b>AWS Shield</b> (ป้องกัน L3/L4 SYN Flood, UDP Reflection) + วงกลาง <b>AWS WAF</b> (ป้องกัน L7 SQLi, XSS, Bot) | <b>DRDoS:</b> โจมตีแบบสะท้อนกลับและขยายขนาด (<b>Amplification</b>) ด้วย IP Spoofing; ป้องกันระดับ Router ด้วย <span class="hl-yellow">RTBH (Remote Triggered Black Hole)</span> ทิ้งแพ็กเก็ตโจมตีลงหลุมดำ และ <b>Sinkhole Routing</b> เบี่ยงไปวิเคราะห์ | <b>QoS (Quality of Service):</b> จัด Priority รักษา Bandwidth ลด <b>Latency</b> และ <b>Jitter</b> ด้วยการตีตราแพ็กเก็ต <b>DSCP (Layer 3)</b> และ <b>802.1p (Layer 2)</b></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== PAGE 2 : COLUMN 3 ==================== -->
+      <div class="col-stack">
+
+        <!-- BOX 9: S11 Zero Trust Architecture -->
+        <div class="box">
+          <div class="box-hdr purple">
+            <span>9. S11: Zero Trust Architecture (ZTA) &amp; Multi-Cloud Security</span>
+            <span class="tag">บทที่ 11</span>
+          </div>
+          <div class="box-body">
+            <table class="tbl">
+              <thead>
+                <tr><th>Castle-and-Moat (แบบดั้งเดิม)</th><th>Zero Trust Architecture (ZTA)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>Implicit Trust Once Inside:</b> เชื่อใจทุกคนที่ผ่าน Firewall/VPN เข้ามาในวงแลนได้ → เสี่ยงถูก <b>Lateral Movement</b> (ยึดเครื่องหนึ่งแล้วลามทั้งวง)</td><td><span class="hl-yellow">"Never Trust, Always Verify"</span> (ไม่เชื่อใจสิ่งใดเลย ต้องยืนยันตัวตน/อุปกรณ์/สิทธิ์ทุกครั้งในทุกเลเยอร์ ตั้งสมมติฐานว่า <b>Assume Breach / Hostile Network</b>)</td></tr>
+              </tbody>
+            </table>
+            <ul class="tight">
+              <li><b>8 เสาหลัก Zero Trust (8 Pillars):</b> <b>Core (4):</b> <code>Data</code>, <code>Application</code>, <code>Network</code>, <code>Infrastructure</code> + <b>Actors (2):</b> <code>Identity</code>, <code>Device</code> + <b>Systems (2):</b> <code>Visibility &amp; Analytics (UBA/SIEM)</code>, <code>Orchestration &amp; Automation (SOAR)</code> <i>(*DoD มี 7 เสาหลัก; CISA มี 5 เสาหลัก + 3 Cross-cutting)</i></li>
+              <li><b>5 ขั้นตอนการวางระบบ Zero Trust (Kindervag's 5-Step Blueprint):</b>
+                <br>1) <b>Define Protection Surface</b> ด้วยกรอบ <span class="hl-yellow">DAAS</span> (<code>Data, Applications, Assets, Services</code> — แคบและเจาะจงกว่า Attack Surface)
+                <br>2) <b>Map Out Data Flows:</b> สำรวจเส้นทางการไหลของข้อมูลเชื่อมโยงกันอย่างไร
+                <br>3) <b>Design ZTA:</b> สร้าง <span class="hl-blue">Micro-segmentation (Micro-perimeters)</span> ล้อมรอบแต่ละเวิร์กโหลดเพื่อ<b>สกัดกั้น Lateral Movement</b>
+                <br>4) <b>Create Policies / Preventative Measures:</b> บังคับใช้ <code>MFA</code> + <code>Identity Segmentation</code> + <code>Least Privilege Access</code>
+                <br>5) <b>Monitor &amp; Maintain</b> ด้วยคำถาม <span class="hl-yellow">Kipling Method</span> (<code>Who, What, When, Where, Why, How</code>)
+              </li>
+              <li><b>5 ตัวชี้วัดความสำเร็จ (Success Metrics):</b> <code>MTTD</code> (เวลาเฉลี่ยในการตรวจพบ), <code>MTTR</code> (เวลาเฉลี่ยในการตอบสนอง/แก้ไข), <code>Failed Auth</code>, <code>Latency</code>, <code>Auth Success Rate</code> | การเชื่อมระบบเก่า (Legacy) ให้ใช้ <b>Reverse Proxy / API Gateway</b> กั้นหน้า</li>
+              <li><b>กลไกควบคุม:</b> <b>PDP (Policy Decision Point)</b> ประเมินกฎ (เช่น OPA) ร่วมกับ <b>PEP (Policy Enforcement Point)</b> และ <b>IAP (Identity-Aware Proxy)</b> | <b>AWS ZTAG-I Stack:</b> <code>Okta</code> (Identity), <code>CrowdStrike</code> (Device ZTA Score), <code>Zscaler</code> (PEP/Micro-segmentation), <code>XQ Message</code> (Data DRM/DLP), <code>Splunk</code> (SIEM/UBA/SOAR)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BOX 10: Fill-in-the-Blanks Vocabulary Bank (20 Questions Target) -->
+        <div class="box">
+          <div class="box-hdr dark">
+            <span>10. โพยคำศัพท์เติมคำในช่องว่าง 20 ข้อ (Context Clues → คำตอบ)</span>
+            <span class="tag">เติมคำ 20 ข้อ!</span>
+          </div>
+          <div class="box-body">
+            <table class="tbl">
+              <thead>
+                <tr><th>บริบทในโจทย์ (เมื่อโจทย์กล่าวถึง...)</th><th>คำศัพท์ที่ต้องนำไปเติม (Keyword)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>บัญชีรายชื่อช่องโหว่ที่มีหลักฐานว่า<b>ถูกโจมตีจริงในโลกจริง</b> ใช้เร่งลำดับการ Patch</td><td><code>CISA KEV</code> (Known Exploited Vulnerabilities)</td></tr>
+                <tr><td>รหัสมาตรฐานสากลสำหรับ<b>ระบุชื่อช่องโหว่</b> / คะแนนความรุนแรงทางเทคนิค 0–10</td><td><code>CVE</code> / <code>CVSS</code></td></tr>
+                <tr><td>ช่องโหว่ API ที่ผู้ใช้<b>เปลี่ยนเลข ID ใน URL</b> แล้วแอบดูข้อมูลของคนอื่นได้</td><td><code>BOLA</code> (Broken Object Level Authorization)</td></tr>
+                <tr><td>ความเสี่ยงตั้งต้น<b>ก่อน</b>มี Control / ความเสี่ยงที่<b>หลงเหลือหลัง</b>ใส่ Control แล้ว</td><td><code>Inherent Risk</code> / <code>Residual Risk</code></td></tr>
+                <tr><td>มาตรการควบคุม<b>ทดแทนชั่วคราว</b>เมื่อยัง Patch หรือแก้ที่ต้นเหตุทันทีไม่ได้ (เช่น WAF)</td><td><code>Compensating Control</code></td></tr>
+                <tr><td>กลยุทธ์โอนภาระความเสียหายให้บุคคลที่ 3 เช่น <b>ทำประกันภัยไซเบอร์ (Cyber Insurance)</b></td><td><code>Risk Transfer</code> (การโอนย้ายความเสี่ยง)</td></tr>
+                <tr><td>กลยุทธ์ลดโอกาสเกิด (L) หรือลดผลกระทบ (I) ด้วยการ<b>เพิ่มมาตรการควบคุม</b></td><td><code>Risk Mitigation</code> (การลดความเสี่ยง)</td></tr>
+                <tr><td>การ<b>ยกเลิกฟีเจอร์</b>ที่เสี่ยงเกินรับได้ / การ<b>ยอมรับความเสี่ยง</b>โดยผู้บริหารลงนามอนุมัติ</td><td><code>Risk Avoidance</code> / <code>Risk Acceptance</code></td></tr>
+                <tr><td>ข้อมูลความลับสูงสุด (PII, บัตรเครดิต, รหัสผ่าน DB) ที่เข้าถึงได้เฉพาะ Data Owner</td><td><code>Restricted</code> (ลับที่สุด - Level 4)</td></tr>
+                <tr><td>ข้อมูลที่จัดเก็บนิ่งๆ / ข้อมูลกำลังวิ่งในสาย / ข้อมูลกำลังประมวลผลใน RAM</td><td><code>Data at Rest</code> / <code>Data in Transit</code> / <code>Data in Use</code></td></tr>
+                <tr><td>6 ขั้นตอนวงจรชีวิตข้อมูลตั้งแต่เกิดจนทำลายทิ้ง</td><td><code>Create, Store, Use, Publish, Archive, Destroy</code></td></tr>
+                <tr><td>การเข้ารหัสซองจดหมาย 2 ชั้น โดยใช้ <b>Data Key (DEK)</b> เข้ารหัสข้อมูล แล้วใช้ <b>KMS Key (CMK)</b> ห่อหุ้ม DEK อีกชั้น</td><td><code>Envelope Encryption</code></td></tr>
+                <tr><td>บริการเก็บกุญแจเข้ารหัส (เปรียบเป็น <b>Engine</b>) / บริการเก็บและหมุนเวียนรหัสผ่าน DB อัตโนมัติผ่าน Lambda (เปรียบเป็น <b>Fuel Tank</b>)</td><td><code>AWS KMS</code> / <code>AWS Secrets Manager</code></td></tr>
+                <tr><td>การเขียนโค้ด IaC แบบ<b>กำหนดผลลัพธ์ปลายทาง</b> รันซ้ำกี่ครั้งก็ได้ผลเดิม (<b>Idempotent</b>)</td><td><code>Declarative</code> (เช่น Terraform)</td></tr>
+                <tr><td>4 คำสั่งหลักตามลำดับในการทำงานของ <b>Terraform Workflow</b></td><td><code>Init → Plan → Apply → Destroy</code></td></tr>
+                <tr><td>ไฟล์เก็บสถานะจริงของ Terraform ที่มีข้อมูลความลับแบบ Plaintext ห้ามขึ้น Git</td><td><code>terraform.tfstate</code> (ต้องเก็บใน <code>Remote State</code>)</td></tr>
+                <tr><td>เหตุการณ์ที่มีคนแอบแก้ค่าบน Cloud Console ด้วยมือจนไม่ตรงกับโค้ด IaC ต้นฉบับ</td><td><code>Configuration Drift</code> (ตรวจจับด้วย <code>Drift Detection</code>)</td></tr>
+                <tr><td>การตรวจสอบความปลอดภัยโค้ดตั้งแต่ขั้นตอน Commit/PR ก่อน Deploy จริง</td><td><code>Shift-Left</code> / <code>Policy as Code (OPA)</code></td></tr>
+                <tr><td>การขยายระบบ<b>แนวราบ</b> (เพิ่มจำนวนเครื่อง) เพื่อเพิ่ม Availability ตามเสา <b>Reliability</b></td><td><code>Horizontal Scaling (Scale Out)</code></td></tr>
+                <tr><td>Load Balancer ระดับ <b>Layer 7</b> (HTTP/Path/WAF) / ระดับ <b>Layer 4</b> (TCP/Static IP/เร็วสูง) / ระดับ <b>L3-4</b> สำหรับแทรก Firewall (GENEVE)</td><td><code>ALB</code> / <code>NLB</code> / <code>GWLB</code></td></tr>
+                <tr><td>การที่ Load Balancer ถอดรหัส SSL แทน Backend เพื่อลดภาระ CPU / การถอดรหัสแล้วเข้ารหัสใหม่เพื่อมาตรฐาน PCI-DSS</td><td><code>TLS Termination (Offloading)</code> / <code>TLS Re-encryption</code></td></tr>
+                <tr><td>การแบ่งส่วนเครือข่ายย่อยระดับเวิร์กโหลดใน Zero Trust เพื่อ<b>ป้องกัน Lateral Movement</b></td><td><code>Micro-segmentation</code></td></tr>
+                <tr><td>4 องค์ประกอบของ <b>Protection Surface</b> ใน Zero Trust / 6 คำถามสร้าง Policy</td><td><code>DAAS</code> (Data, Apps, Assets, Services) / <code>Kipling Method</code></td></tr>
+                <tr><td>การสั่งเราเตอร์ทิ้งทราฟฟิกโจมตี DDoS ลง<b>หลุมดำ</b> / การตีตราแพ็กเก็ตจัดลำดับความสำคัญรักษา Bandwidth ลด Latency &amp; Jitter</td><td><code>RTBH (Black Hole)</code> / <code>QoS (DSCP / 802.1p)</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== INTERACTIVE EXAM PRACTICE SECTION (HIDDEN ON PRINT) ==================== -->
+<div class="exam-guide-container" id="examSection">
+  <div class="exam-banner">
+    <h2>🎯 เจาะลึกแนวข้อสอบ Cloud Security (บทที่ 6–11) — ปรนัยประยุกต์ใช้ในองค์กร &amp; เติมคำในช่องว่างตามบริบท</h2>
+    <p>ส่วนนี้จัดทำขึ้นเพื่อใช้ฝึกทำข้อสอบและทบทวนความเข้าใจก่อนเข้าห้องสอบ (เมื่อกดปุ่ม <b>"🖨️ พิมพ์ A4 (2 หน้าเป๊ะ)"</b> ด้านบน ระบบจะซ่อนส่วนนี้อัตโนมัติและพิมพ์เฉพาะกระดาษ A4 2 หน้าด้านบนเท่านั้น)</p>
+  </div>
+
+  <!-- PART 1: FILL IN THE BLANKS (20+ QUESTIONS) -->
+  <div class="section-title">ส่วนที่ 1: แนวข้อสอบเติมคำในช่องว่างตามบริบทการใช้งาน (Fill in the Blanks — คัดเน้นๆ 25 ข้อ)</div>
+  <div class="word-bank-box">
+    <div class="word-bank-title">📦 คลังคำศัพท์สำหรับนำไปเติมในช่องว่าง (Word Bank):</div>
+    <div class="word-pills">
+      <span class="word-pill">CISA KEV</span>
+      <span class="word-pill">CVE</span>
+      <span class="word-pill">CVSS</span>
+      <span class="word-pill">BOLA</span>
+      <span class="word-pill">Inherent Risk</span>
+      <span class="word-pill">Residual Risk</span>
+      <span class="word-pill">Compensating Control</span>
+      <span class="word-pill">Risk Transfer</span>
+      <span class="word-pill">Risk Mitigation</span>
+      <span class="word-pill">Risk Avoidance</span>
+      <span class="word-pill">Risk Acceptance</span>
+      <span class="word-pill">Restricted</span>
+      <span class="word-pill">Archive</span>
+      <span class="word-pill">Destroy</span>
+      <span class="word-pill">Envelope Encryption</span>
+      <span class="word-pill">AWS KMS</span>
+      <span class="word-pill">AWS Secrets Manager</span>
+      <span class="word-pill">Explicit Deny</span>
+      <span class="word-pill">Declarative</span>
+      <span class="word-pill">Idempotent</span>
+      <span class="word-pill">terraform plan</span>
+      <span class="word-pill">terraform.tfstate</span>
+      <span class="word-pill">Configuration Drift</span>
+      <span class="word-pill">Horizontal Scaling</span>
+      <span class="word-pill">ALB (Layer 7)</span>
+      <span class="word-pill">NLB (Layer 4)</span>
+      <span class="word-pill">TLS Re-encryption</span>
+      <span class="word-pill">Micro-segmentation</span>
+      <span class="word-pill">DAAS</span>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">KEV / CVE / CVSS</span> 1. ทีม Security พบช่องโหว่บน Web Server ที่มีคะแนน <code>__________ (ก)</code> เท่ากับ 7.5 แต่เมื่อตรวจสอบในฐานข้อมูลของรัฐบาลสหรัฐฯ พบว่ารหัส <code>__________ (ข)</code> นี้อยู่ในบัญชีรายชื่อ <code>__________ (ค)</code> ซึ่งแปลว่ามีหลักฐานยืนยันว่ากำลังถูกแฮกเกอร์ใช้โจมตีจริงในโลกไซเบอร์ องค์กรจึงต้องใช้เป็นตัวเร่ง (Accelerator) ในการอัปเดตแพตช์ทันทีโดยไม่ต้องรอรอบปกติ</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>CVSS</code> | (ข) <code>CVE</code> | (ค) <code>CISA KEV (Known Exploited Vulnerabilities)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Control Level Impact</span> 2. ก่อนติดตั้งระบบป้องกัน ถังเก็บข้อมูลลูกค้ามีค่าความเสี่ยงตั้งต้นหรือ <code>__________ (ก)</code> อยู่ที่ระดับ 20 (L4 × I5) หลังจากทีมวิศวกรดำเนินการเพิ่มมาตรการควบคุมหรือ <code>__________ (ข)</code> ด้วยการปิด Public Access และบังคับใช้ MFA ทำให้โอกาสเกิดลดลงเหลือ L2 ส่งผลให้ความเสี่ยงที่หลงเหลืออยู่หรือ <code>__________ (ค)</code> ลดลงเหลือเท่ากับ 10</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Inherent Risk</code> | (ข) <code>Risk Mitigation</code> | (ค) <code>Residual Risk</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Compensating Control</span> 3. ระบบบัญชีรุ่นเก่า (Legacy System) ของบริษัทพบช่องโหว่ SQL Injection แต่ยังไม่สามารถอัปเดตแพตช์ที่ตัวซอฟต์แวร์ได้ทันทีเพราะต้องรอผู้ผลิตส่งแพตช์มาให้ในอีก 2 สัปดาห์ ทีม SecOps จึงตัดสินใจตั้งกฎบน AWS WAF เพื่อบล็อกคำสั่ง SQL ที่ผิดปกติเป็นการชั่วคราว มาตรการควบคุมทดแทนชั่วคราวนี้เรียกว่า <code>____________________</code></div>
+    <div class="q-ans"><b>เฉลย:</b> <code>Compensating Control</code> (การควบคุมชดเชย)</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Risk Transfer / Accept</span> 4. คณะกรรมการบริหารตัดสินใจทำประกันภัยไซเบอร์ (Cyber Insurance) เพื่อรองรับความเสียหายทางการเงินหากเกิดเหตุการณ์แรนซัมแวร์ กลยุทธ์นี้เรียกว่า <code>__________ (ก)</code> ส่วนความเสี่ยงระดับต่ำ (Low Risk คะแนน 3) ที่ค่าใช้จ่ายในการแก้ไขสูงกว่ามูลค่าความเสียหาย ผู้บริหารได้ลงนามอนุมัติยอมรับความเสี่ยงอย่างเป็นทางการพร้อมกำหนดวันทบทวน ซึ่งเรียกว่า <code>__________ (ข)</code></div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Risk Transfer</code> (การโอนย้ายความเสี่ยง) | (ข) <code>Risk Acceptance</code> (การยอมรับความเสี่ยง)</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Insecure API</span> 5. ผู้ใช้งานที่ล็อกอินเข้าสู่ระบบธนาคารออนไลน์สำเร็จ ได้ทดลองเปลี่ยนหมายเลขบัญชีใน URL จาก <code>/api/account?id=1001</code> เป็น <code>/api/account?id=1002</code> แล้วสามารถมองเห็นข้อมูลธุรกรรมของลูกค้ารายอื่นได้ทันที ช่องโหว่การตรวจสอบสิทธิ์ระดับออบเจกต์ที่บกพร่องนี้มีชื่อย่อว่า <code>____________________</code></div>
+    <div class="q-ans"><b>เฉลย:</b> <code>BOLA (Broken Object Level Authorization)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Data Classification</span> 6. ตามกรอบการจำแนกประเภทข้อมูล (Data Classification) ข้อมูลเลขบัตรเครดิตของลูกค้า เวชระเบียนผู้ป่วย และรหัสผ่านฐานข้อมูล จัดอยู่ในระดับความลับสูงสุดที่เรียกว่า <code>__________ (ก)</code> ซึ่งอนุญาตให้เข้าถึงได้เฉพาะ Data Owner และต้องเก็บใน Secret Vault ส่วนเอกสารข่าวประชาสัมพันธ์บนหน้าเว็บไซต์จัดอยู่ในระดับ <code>__________ (ข)</code> ซึ่งไม่จำเป็นต้องเข้ารหัสแต่ต้องรักษาความถูกต้องครบถ้วน (Integrity)</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Restricted</code> (ลับที่สุด / Level 4 Extreme) | (ข) <code>Public</code> (เปิดเผยได้ / Level 0 None)</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Data Protection &amp; Lifecycle</span> 7. การบังคับใช้โปรโตคอล TLS 1.2+ และ VPN เป็นการปกป้องข้อมูลในสถานะ <code>__________ (ก)</code> ส่วนในวงจรชีวิตข้อมูล 6 ขั้นตอน (Data Lifecycle) ขั้นตอนการคัดลอกข้อมูลเก่าที่ไม่ได้แก้ไขแล้วไปเก็บรักษาระยะยาวใน Amazon Glacier เรียกว่า <code>__________ (ข)</code> และเมื่อข้อมูลหมดอายุตามกฎหมายต้องนำไปผ่านขั้นตอนสุดท้ายคือ <code>__________ (ค)</code></div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Data in Transit (หรือ Data in Motion)</code> | (ข) <code>Archive (หรือ Achieve บนสไลด์)</code> | (ค) <code>Destroy</code> (การทำลายข้อมูล)</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Storage Access Control</span> 8. ในการประเมินสิทธิ์การเข้าถึง Amazon S3 หาก IAM Policy ของผู้ใช้งานระบุอนุญาต (Allow) ให้เข้าถึงไฟล์ได้ แต่ใน Bucket Policy มีกฎระบุปฏิเสธอย่างชัดเจนหรือ <code>____________________</code> ผลลัพธ์สุดท้ายคือผู้ใช้งานรายนั้นจะถูกบล็อกไม่ให้เข้าถึงข้อมูลเสมอ</div>
+    <div class="q-ans"><b>เฉลย:</b> <code>Explicit Deny</code> (กฎการปฏิเสธอย่างชัดแจ้ง ชนะ Explicit Allow เสมอ)</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">KMS &amp; Envelope Encryption</span> 9. กระบวนการที่ระบบคลาวด์ไม่ใช้ Master Key เข้ารหัสไฟล์ขนาดใหญ่โดยตรง แต่สร้าง Data Key (DEK) มาเข้ารหัสข้อมูลให้เป็น Ciphertext แล้วนำ KMS Key (CMK) มาเข้ารหัสห่อหุ้มตัว Data Key อีกชั้นหนึ่ง เรียกว่า <code>__________ (ก)</code> โดยบริการที่ทำหน้าที่เปรียบเสมือน "เครื่องยนต์ (Engine)" จัดการกุญแจเข้ารหัสโดยกุญแจไม่เคยออกจากระบบคือ <code>__________ (ข)</code></div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Envelope Encryption</code> | (ข) <code>AWS KMS (Key Management Service)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Secrets Manager</span> 10. เพื่อแก้ปัญหาการฝังรหัสผ่านฐานข้อมูลไว้ในซอร์สโค้ด (Hardcoded Secrets) และการเปลี่ยนรหัสผ่านด้วยมือที่มักทำให้ระบบล่ม (Downtime) องค์กรควรนำบริการ <code>____________________</code> ซึ่งเปรียบเสมือน "ถังน้ำมัน (Fuel Tank)" มาใช้จัดเก็บและสั่งหมุนเวียนรหัสผ่านอัตโนมัติ (Automated Rotation) ผ่าน AWS Lambda</div>
+    <div class="q-ans"><b>เฉลย:</b> <code>AWS Secrets Manager</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">IaC &amp; Terraform Steps</span> 11. เครื่องมือ Terraform ใช้แนวทางการเขียนโค้ดแบบ <code>__________ (ก)</code> คือระบุเฉพาะผลลัพธ์ปลายทางที่ต้องการ (What you want) โดยมีคุณสมบัติสำคัญคือ <code>__________ (ข)</code> ที่รันซ้ำกี่ครั้งก็ได้สถานะระบบเหมือนเดิมเสมอ และก่อนจะสั่งรันคำสั่ง <code>terraform apply</code> วิศวกรต้องรันคำสั่ง <code>__________ (ค)</code> เพื่อตรวจสอบผลกระทบเปรียบเทียบกับไฟล์สถานะ <code>__________ (ง)</code> ก่อนทุกครั้ง</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Declarative</code> | (ข) <code>Idempotent</code> | (ค) <code>terraform plan</code> | (ง) <code>terraform.tfstate</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Change Management &amp; Drift</span> 12. เมื่อผู้ดูแลระบบแอบล็อกอินเข้าหน้าเว็บ AWS Console ไปเปิดพอร์ต Security Group ด้วยมือโดยไม่ผ่านระบบ CI/CD Pipeline จะทำให้สถานะจริงบนคลาวด์เพี้ยนไปจากโค้ดต้นฉบับใน Git ซึ่งปรากฏการณ์นี้เรียกว่า <code>____________________</code></div>
+    <div class="q-ans"><b>เฉลย:</b> <code>Configuration Drift</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Reliability Scale &amp; Load Balancing</span> 13. ตามหลักการออกแบบเสาหลัก Reliability ของ AWS การเพิ่มจำนวนเซิร์ฟเวอร์ขนาดเล็กหลายๆ เครื่องให้ทำงานขนานกันเพื่อหลีกเลี่ยง Single Point of Failure เรียกว่า <code>__________ (ก)</code> โดยหากต้องการกระจายทราฟฟิกเว็บตาม URL Path (เช่น <code>/api</code>) และเชื่อมต่อกับ AWS WAF ต้องเลือกใช้ <code>__________ (ข)</code> แต่หากต้องการความหน่วงต่ำระดับไมโครวินาที (<code>~100 µs</code>) รองรับ TCP/UDP และใช้ Static IP ต้องเลือกใช้ <code>__________ (ค)</code></div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Horizontal Scaling (หรือ Scale Out)</code> | (ข) <code>ALB (Application Load Balancer - Layer 7)</code> | (ค) <code>NLB (Network Load Balancer - Layer 4)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">TLS Strategy</span> 14. ระบบชำระเงินที่ต้องผ่านมาตรฐาน PCI-DSS กำหนดให้ทราฟฟิกต้องถูกเข้ารหัสตลอดเส้นทาง แต่ยังต้องให้ Load Balancer ถอดรหัสเพื่อตรวจสอบคำสั่งโจมตีด้วย WAF ก่อน แล้วจึงเข้ารหัสใหม่ส่งต่อไปยัง Backend Server กลยุทธ์นี้เรียกว่า <code>____________________</code></div>
+    <div class="q-ans"><b>เฉลย:</b> <code>TLS Re-encryption (End-to-End TLS)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Zero Trust Architecture</span> 15. ในการวางระบบ Zero Trust ขั้นตอนที่ 1 คือการกำหนดพื้นที่คุ้มครอง (Protection Surface) ซึ่งประกอบด้วย 4 องค์ประกอบตามตัวย่อ <code>__________ (ก)</code> และในขั้นตอนที่ 3 คือการสร้างขอบเขตระดับไมโครล้อมรอบแต่ละเวิร์กโหลดที่เรียกว่า <code>__________ (ข)</code> เพื่อป้องกันไม่ให้แฮกเกอร์เคลื่อนที่ข้ามเครือข่ายภายใน (Lateral Movement)</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>DAAS (Data, Applications, Assets, Services)</code> | (ข) <code>Micro-segmentation</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">ASPM Ecosystem</span> 16. ระบบจัดการสถานะความปลอดภัยของแอปพลิเคชันแบบองค์รวมหรือ <code>__________ (ก)</code> ผสานเครื่องมือสแกน 4 ส่วนเข้าด้วยกัน ได้แก่ <code>__________ (ข)</code> สำหรับสแกนซอร์สโค้ด, <code>__________ (ค)</code> สำหรับสแกนไลบรารีและ Dependencies, <code>IaC Security</code> สำหรับตรวจไฟล์ตั้งค่าคลาวด์ และ <code>__________ (ง)</code> สำหรับทดสอบเจาะระบบขณะรันไทม์ (Runtime APIs)</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>ASPM (Application Security Posture Management)</code> | (ข) <code>SAST</code> | (ค) <code>SCA</code> | (ง) <code>DAST</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Load Balancing Algorithms</span> 17. หากเซิร์ฟเวอร์ในระบบมีสเปคความแรงของ CPU/RAM ไม่เท่ากัน ผู้ดูแลระบบควรเลือกใช้อัลกอริทึมกระจายโหลดแบบ <code>__________ (ก)</code> เพื่อถ่วงน้ำหนักให้เครื่องที่สเปคแรงกว่าได้รับงานมากกว่า แต่หากแต่ละคำขอใช้เวลาประมวลผลยาวนานไม่เท่ากัน ควรเลือกใช้อัลกอริทึมแบบ <code>__________ (ข)</code> เพื่อส่งงานใหม่ไปยังเครื่องที่มีการเชื่อมต่อค้างอยู่น้อยที่สุด</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Weighted Round Robin</code> | (ข) <code>Least Connections</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">DDoS &amp; QoS</span> 18. เมื่อเกิดการโจมตีแบบสะท้อนกลับและขยายขนาดทราฟฟิกหรือ <code>__________ (ก)</code> ผู้ให้บริการเครือข่ายสามารถสั่งให้เราเตอร์ทิ้งแพ็กเก็ตโจมตีลงหลุมดำด้วยเทคนิค <code>__________ (ข)</code> และใช้การตั้งค่า <code>__________ (ค)</code> ตีตราความสำคัญที่แพ็กเก็ตระดับ Layer 3 (<code>DSCP</code>) เพื่อรักษาแบนด์วิดท์และลดค่าความแปรปรวนของความหน่วง (<code>Jitter</code>) สำหรับระบบการเงินและเสียง</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>DRDoS (Distributed Reflection DoS / Amplification)</code> | (ข) <code>RTBH (Remote Triggered Black Hole)</code> | (ค) <code>QoS (Quality of Service)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Zero Trust Policy &amp; Metrics</span> 19. ในขั้นตอนที่ 5 ของการวางระบบ Zero Trust การเขียนนโยบายควบคุมสิทธิ์แบบละเอียดจะใช้หลักการตั้งคำถาม 6 ข้อ (Who, What, When, Where, Why, How) ที่เรียกว่า <code>__________ (ก)</code> โดยมีกลไกตัดสินใจและบังคับใช้นโยบายผ่านจุด <code>__________ (ข)</code> และวัดผลความเร็วในการตรวจพบและตอบสนองต่อภัยคุกคามด้วยตัวชี้วัด <code>__________ (ค)</code> และ <code>MTTR</code></div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>Kipling Method</code> | (ข) <code>PDP &amp; PEP (Policy Decision Point &amp; Policy Enforcement Point)</code> | (ค) <code>MTTD (Mean Time to Detect)</code></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Ransomware &amp; Storage Security</span> 20. เพื่อป้องกันไม่ให้แรนซัมแวร์หรือผู้ไม่หวังดีเข้ามาลบหรือแก้ไขไฟล์สำรองข้อมูลสำคัญในถังเก็บข้อมูล Amazon S3 องค์กรควรเปิดใช้งานฟีเจอร์ Versioning ร่วมกับ <code>__________ (ก)</code> ซึ่งทำงานตามหลักการเขียนครั้งเดียวอ่านได้หลายครั้งหรือ <code>__________ (ข)</code> และใช้บริการ <code>__________ (ค)</code> ในการสแกนค้นหาข้อมูลส่วนบุคคล (PII) ที่อาจหลงเหลืออยู่ในถังเก็บข้อมูลโดยอัตโนมัติ</div>
+    <div class="q-ans"><b>เฉลย:</b> (ก) <code>S3 Object Lock</code> | (ข) <code>WORM (Write Once, Read Many)</code> | (ค) <code>Amazon Macie</code></div>
+  </div>
+
+  <!-- PART 2: MULTIPLE CHOICE QUESTIONS -->
+  <div class="section-title">ส่วนที่ 2: แนวข้อสอบปรนัยเน้นความเข้าใจและการประยุกต์ใช้ในองค์กร (Multiple Choice — เก็งตรงจุดเน้น)</div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">KEV / CVSS Prioritization</span> ข้อที่ 1: ทีมความมั่นคงปลอดภัยตรวจพบช่องโหว่ 2 รายการในระบบขององค์กร ได้แก่ ช่องโหว่ A (CVSS 9.8 แต่อยู่บนเซิร์ฟเวอร์ทดสอบภายในที่ตัดขาดจากอินเทอร์เน็ตและไม่มีข้อมูลสำคัญ) และ ช่องโหว่ B (CVSS 7.2 อยู่บนระบบ API หน้าบ้าน และเพิ่งถูกประกาศอยู่ในบัญชี CISA KEV เมื่อเช้านี้) ทีมควรตัดสินใจดำเนินการอย่างไรตามหลัก Contextual Risk?</div>
+    <ul class="q-options">
+      <li>ก. แก้ไขช่องโหว่ A ก่อนเสมอ เพราะคะแนน CVSS สูงถึงระดับ Critical (9.8)</li>
+      <li class="correct">ข. แก้ไขช่องโหว่ B เป็นอันดับแรก เพราะอยู่ในบัญชี CISA KEV ซึ่งมีหลักฐานการถูกโจมตีจริง (Exploit Evidence Accelerator) และอยู่บนระบบที่เปิดรับอินเทอร์เน็ต</li>
+      <li>ค. โอนย้ายความเสี่ยงของช่องโหว่ B ด้วยการซื้อประกันภัยไซเบอร์แทนการอัปเดตแพตช์</li>
+      <li>ง. ปิดระบบทั้งหมดของบริษัททันทีจนกว่าจะอัปเดตแพตช์ครบทั้งสองรายการ</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ตามหลัก Contextual Risk คะแนน CVSS เพียงอย่างเดียวไม่เพียงพอ ต้องดูบริบทธุรกิจ (Exposure, Asset Criticality, Compensating Controls) และช่องโหว่ที่อยู่ใน <b>CISA KEV (Known Exploited Vulnerabilities)</b> ถือเป็น <b>Accelerator (ตัวเร่งความสำคัญสูงสุด)</b> เพราะถูกแฮกเกอร์ใช้โจมตีจริงแล้ว</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Evidence Correlation</span> ข้อที่ 2: นักวิเคราะห์ SOC สังเกตเห็นกราฟทราฟฟิกพุ่งสูงขึ้นอย่างผิดปกติ (Traffic Spike) บนแดชบอร์ด Cloudflare Radar มายังเว็บไซต์อีคอมเมิร์ซของบริษัท สิ่งที่นักวิเคราะห์ควรทำเป็นอันดับแรกตามแนวทางปฏิบัติที่ดีที่สุดคือข้อใด?</div>
+    <ul class="q-options">
+      <li>ก. สั่งบล็อก IP ทั้งหมดจากต่างประเทศทันทีและประกาศภาวะวิกฤต (Incident)</li>
+      <li>ข. สั่งรันคำสั่ง <code>terraform destroy</code> เพื่อปิดระบบหนีการโจมตี</li>
+      <li class="correct">ค. นำข้อมูลไปตรวจสอบเทียบเคียง (Correlate) กับ Application Logs และสอบถามทีมการตลาดก่อนประกาศ Incident เพราะอาจเกิดจากแคมเปญโปรโมชันของบริษัทเอง</li>
+      <li>ง. บันทึกลงใน Risk Register ว่าข้อมูลรั่วไหลแล้ว (Data Breach) ทันที</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> กฎเหล็กในสไลด์ Session 6 Part 1 &amp; 2 คือ <i>"Evidence ไม่ใช่ Risk โดยอัตโนมัติ"</i> และสำหรับ Cloudflare Radar ต้อง <b>Correlate กับ Application Logs เสมอ</b> ก่อนประกาศ Incident เพราะกราฟพุ่งอาจเกิดจากแคมเปญการตลาด ไม่ใช่การโจมตี DDoS เสมอไป</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Control Level Impact</span> ข้อที่ 3: ข้อใดอธิบายความแตกต่างของผลกระทบจากการใช้มาตรการควบคุม (Control Effectiveness) ต่อค่าโอกาสเกิด (Likelihood) และค่าผลกระทบ (Impact) ได้ถูกต้องที่สุด?</div>
+    <ul class="q-options">
+      <li>ก. การทำ Backup ข้อมูลแบบ Immutable ช่วยลดค่า Likelihood ของการถูกโจมตีด้วยฟิชชิง</li>
+      <li class="correct">ข. การบังคับใช้ MFA และการหมุนเวียนคีย์ (Key Rotation) ช่วยลดค่า Likelihood ส่วนการทำ Network Micro-segmentation และระบบสำรองข้อมูลช่วยลดค่า Impact (จำกัด Blast Radius)</li>
+      <li>ค. การเข้ารหัสข้อมูล (Encryption at Rest) ทำให้คะแนน Inherent Risk ลดลงเป็นศูนย์</li>
+      <li>ง. มาตรการในฟังก์ชัน Protect ของ NIST CSF จะทำงานหลังจากเกิดเหตุการณ์โจมตีสำเร็จแล้วเท่านั้น</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> มาตรการป้องกันก่อนเกิดเหตุ เช่น MFA, Key Rotation, Block Public Access จะช่วย<b>ลดโอกาสเกิด (ลด Likelihood - L)</b> ส่วนมาตรการกักกันและสำรองข้อมูล เช่น Micro-segmentation และ Backup/Recovery จะช่วย<b>ลดความรุนแรงและจำกัดวงความเสียหาย (ลด Impact - I / ลด Blast Radius)</b></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">NIST CSF &amp; Incident Response</span> ข้อที่ 4: เมื่อตรวจพบว่า Access Key ของนักพัฒนาหลุดไปอยู่ใน Public GitHub Repository และมีการเรียกใช้งาน API จากต่างประเทศ ข้อใดคือข้อควรระวังที่สำคัญที่สุดในขั้นตอน Respond และ Recover?</div>
+    <ul class="q-options">
+      <li>ก. ลบโพสต์ใน GitHub ทิ้งก็เพียงพอแล้ว ไม่จำเป็นต้องยกเลิกคีย์เดิมเพราะจะทำให้ระบบสะดุด</li>
+      <li>ข. รีบลบ Log และฟอร์แมตเซิร์ฟเวอร์ทั้งหมดทันทีเพื่อไม่ให้แฮกเกอร์ทิ้งร่องรอยไว้</li>
+      <li class="correct">ค. ต้องเก็บรักษาหลักฐาน (Preserve Evidence / Logs) ก่อนแก้ไขระบบ, สั่ง Revoke/Rotate คีย์ทันที และต้องตรวจสอบย้อนหลัง (Historical Check) เสมอว่าคีย์นั้นถูกนำไปสร้าง Backdoor หรือดึงข้อมูลใดไปแล้วบ้าง</li>
+      <li>ง. เปลี่ยนจากการใช้ IAM Role กลับไปใช้ Long-lived Access Key เหมือนเดิม</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ในสไลด์ Session 6 Part 2 ระบุชัดเจนว่า ในขั้น Respond ต้อง <b>Preserve evidence เสมอก่อนแก้ไขระบบ</b> และกรณี Credential Leakage การลบคีย์ทิ้งเฉยๆ ไม่เพียงพอ ต้องทำ <b>Historical check (ตรวจประวัติย้อนหลัง)</b> และเช็กว่าไม่มี Backdoor หรือ Policy อันตรายหลงเหลืออยู่ในขั้น Recover</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">KMS vs Secrets Manager</span> ข้อที่ 5: สถาปนิกซอฟต์แวร์ต้องการออกแบบระบบให้ Microservices จำนวน 80 ตัว เชื่อมต่อกับฐานข้อมูล Amazon RDS โดยห้ามฝังรหัสผ่านไว้ในโค้ด และต้องเปลี่ยนรหัสผ่านฐานข้อมูลอัตโนมัติทุกๆ 30 วันโดยที่ระบบไม่ล่ม (Zero Downtime) ควรเลือกใช้บริการใดและทำงานอย่างไร?</div>
+    <ul class="q-options">
+      <li>ก. ใช้ AWS KMS เพียงอย่างเดียว เพราะ KMS สามารถล็อกอินเข้า RDS ไปเปลี่ยนรหัสผ่านผู้ใช้ได้โดยตรง</li>
+      <li class="correct">ข. ใช้ AWS Secrets Manager จัดเก็บรหัสผ่านและตั้งค่า Automated Rotation ผ่าน AWS Lambda โดยมี AWS KMS ทำหน้าที่เข้ารหัสข้อมูลความลับอยู่เบื้องหลัง</li>
+      <li>ค. เก็บรหัสผ่านไว้ในไฟล์ <code>terraform.tfstate</code> แล้วแชร์ไฟล์ไว้บน Public S3 Bucket เพื่อให้ทุกบริการดึงไปใช้ได้ง่าย</li>
+      <li>ง. ใช้ AWS Shield Advanced เพื่อหมุนเวียนรหัสผ่านฐานข้อมูลทุกเดือน</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> <b>AWS Secrets Manager ("Fuel Tank")</b> ออกแบบมาเพื่อเก็บ Credentials (รหัสผ่าน DB, API Key) และรองรับ <b>Automated Rotation ผ่าน AWS Lambda</b> โดยไม่เกิด Downtime ส่วน <b>AWS KMS ("Engine")</b> ทำหน้าที่จัดการกุญแจ Cryptographic Key เพื่อเข้ารหัสตัว Secret อีกชั้นหนึ่ง</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Secrets Manager Hybrid Use Case</span> ข้อที่ 6: จากกรณีศึกษาการใช้งาน AWS Secrets Manager ทั้ง 5 รูปแบบ หากองค์กรมีแอปพลิเคชันและฐานข้อมูลรันอยู่บนเซิร์ฟเวอร์ภายในองค์กรเอง (On-Premises) แต่ต้องการดึงคีย์ความลับจาก AWS Secrets Manager บนคลาวด์มาใช้งานแบบรวมศูนย์ ต้องใช้กลไกใดควบคู่กัน และมีข้อควรระวังใดที่สำคัญที่สุด?</div>
+    <ul class="q-options">
+      <li>ก. ใช้ S3 Object Lock ร่วมกับ NLB โดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต</li>
+      <li class="correct">ข. ใช้ PKI + CA Certificate ผูกกับ IAM Roles Anywhere เพื่อยืนยันตัวตนขอคีย์ และต้องระวังความเสี่ยงเรื่องเครือข่ายอินเทอร์เน็ตหรือสายเคเบิลใต้น้ำขาด จึงควรวางแผนสำรองข้าม Region ไว้ด้วย</li>
+      <li>ค. ส่งคีย์ผ่านทางอีเมลธรรมดาทุกเช้าเพื่อให้แอดมินนำไปใส่ในเครื่อง On-Premises</li>
+      <li>ง. ใช้เฉพาะ AWS WAF ติดตั้งไว้ในห้องเซิร์ฟเวอร์ของบริษัท</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ในเลคเชอร์ Session 7 (Use Case ที่ 4: Enable Hybrid Workload) อธิบายการใช้ <b>PKI + CA Certificate + Trust Policy ร่วมกับ IAM Roles Anywhere</b> เพื่อให้ระบบ On-Premises ดึงคีย์จาก AWS Secrets Manager ได้ และอาจารย์เน้นย้ำข้อควรระวังเรื่องสายอินเทอร์เน็ตใต้น้ำขาด (เช่น สิงคโปร์) ซึ่งต้องมีแผนสำรองข้าม Region</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Terraform Steps &amp; State Security</span> ข้อที่ 7: ข้อใดกล่าวถึงขั้นตอนการทำงานของ Terraform (Terraform Workflow) และการจัดการความปลอดภัยของไฟล์ State ได้ถูกต้องตามหลักปฏิบัติสำหรับองค์กร?</div>
+    <ul class="q-options">
+      <li>ก. ลำดับการทำงานคือ <code>Apply → Plan → Init → Destroy</code> และควรอัปโหลดไฟล์ <code>terraform.tfstate</code> ขึ้น GitHub สาธารณะเพื่อให้ทีมงานช่วยกันตรวจทาน</li>
+      <li class="correct">ข. ลำดับหลักคือ <code>Init → Plan → Apply → Destroy</code> โดยห้ามนำไฟล์ <code>terraform.tfstate</code> ขึ้น Git เด็ดขาดเพราะเก็บข้อมูลความลับเป็น Plaintext แต่ต้องเก็บใน Remote Backend (เช่น S3 ที่เข้ารหัสด้วย KMS และทำ State Locking ด้วย DynamoDB)</li>
+      <li>ค. คำสั่ง <code>terraform plan</code> จะทำการลบฐานข้อมูลจริงบนคลาวด์ทันทีโดยไม่ถามยืนยัน</li>
+      <li>ง. Terraform เป็นเครื่องมือแบบ Imperative ที่ไม่สามารถตรวจจับ Configuration Drift ได้</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> วงจร 4 ขั้นตอนหลักของ Terraform คือ <b>Init → Plan → Apply → Destroy</b> และไฟล์ <b><code>terraform.tfstate</code></b> มีข้อมูลโครงสร้างและ Secrets แบบ Plaintext จึงห้าม Commit ลง Git เด็ดขาด ต้องเก็บใน <b>Remote State</b> ที่มีการเข้ารหัสและจำกัดสิทธิ์</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">IaC Security &amp; Change Management</span> ข้อที่ 8: องค์กรต้องการป้องกันไม่ให้นักพัฒนาเผลอเขียนโค้ด Terraform สร้างถังเก็บข้อมูล S3 ที่เปิดเป็นสาธารณะ (Public Bucket) หรือลืมเปิดการเข้ารหัส ตั้งแต่ก่อนที่จะถูกนำไปรันสร้างทรัพยากรจริงบนคลาวด์ องค์กรควรใช้มาตรการใดในไปป์ไลน์ CI/CD?</div>
+    <ul class="q-options">
+      <li>ก. รอให้สร้างระบบเสร็จก่อน แล้วค่อยจ้างบริษัทภายนอกมาทำ Penetration Test ปีละครั้ง</li>
+      <li class="correct">ข. ใช้แนวทาง Shift-Left โดยติดตั้ง Automated Pipeline Gates ที่ตรวจสอบ Policy as Code (เช่น Open Policy Agent - OPA / Rego, Checkov, tfsec) ในขั้นตอน Pull Request และหลังคำสั่ง <code>terraform plan</code> เพื่อบล็อกโค้ดที่ไม่ผ่านเกณฑ์ทันที</li>
+      <li>ค. ให้แอดมินเข้าไปแก้ไขค่าบนหน้าจอ AWS Console ด้วยมือทุกครั้งหลัง Deploy เสร็จ</li>
+      <li>ง. เปลี่ยนไปใช้ Classic Load Balancer แทนการใช้ Terraform</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ตามกรอบ <b>3-Pillar IaC Security Framework (Pillar 2: Automated Pipeline Gates)</b> การทำ <b>Shift-Left</b> ด้วยการฝัง <b>Policy as Code (OPA/Rego, Checkov, tfsec)</b> ใน CI/CD จะช่วยบล็อกการตั้งค่าที่ผิดพลาด (เช่น Public Storage, ไม่เข้ารหัส, ไม่ติด Tag) ตั้งแต่ก่อน Apply จริง</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Load Balancing &amp; Cross-Zone</span> ข้อที่ 9: บริษัทมีเซิร์ฟเวอร์ EC2 กระจายอยู่ใน 2 Availability Zones โดย AZ ที่ 1 มี 4 เครื่อง และ AZ ที่ 2 มี 1 เครื่อง (รวม 5 เครื่อง) หากบริษัทต้องการให้เซิร์ฟเวอร์ทั้ง 5 เครื่องรับภาระทราฟฟิกเท่าๆ กันที่เครื่องละ 20% และต้องการประหยัดค่าใช้จ่าย Data Transfer ข้าม AZ ข้อใดกล่าวถูกต้อง?</div>
+    <ul class="q-options">
+      <li>ก. หากใช้ NLB ระบบจะเปิด Cross-Zone Load Balancing ให้เป็นค่าเริ่มต้นและไม่คิดค่าส่งข้อมูลข้าม AZ</li>
+      <li class="correct">ข. ต้องเปิดใช้งาน Cross-Zone Load Balancing ซึ่งใน Application Load Balancer (ALB) จะเปิดใช้งานให้เป็นค่าเริ่มต้น (Enabled by Default) และไม่มีค่าใช้จ่าย Data Transfer ข้าม AZ เพิ่มเติม</li>
+      <li>ค. หากปิด Cross-Zone Load Balancing เครื่องใน AZ ที่ 2 จะรับทราฟฟิกเพียง 10% เท่านั้น</li>
+      <li>ง. ต้องเปลี่ยนไปใช้อัลกอริทึมแบบ Sticky Round Robin เท่านั้นจึงจะแบ่งโหลดข้าม AZ ได้</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> เมื่อ<b>ปิด Cross-Zone LB</b> โหลดจะถูกแบ่งให้แต่ละ AZ เท่ากันที่ 50:50 ทำให้เครื่องเดียวใน AZ ที่ 2 ต้องรับศึกหนัก 50% คนเดียว! แต่เมื่อ<b>เปิด Cross-Zone LB</b> โหลดจะถูกกระจายให้ทุกเครื่องเท่ากัน (เครื่องละ 20%) โดยใน <b>ALB จะเปิดเป็น Default และฟรี</b> ส่วน <b>NLB/GWLB จะปิดเป็น Default และถ้าเปิดจะมีค่า Inter-AZ Data Transfer</b></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Zero Trust Architecture</span> ข้อที่ 10: ข้อใดเปรียบเทียบแนวคิดของสถาปัตยกรรม Zero Trust กับระบบความปลอดภัยแบบดั้งเดิม (Castle-and-Moat) และขั้นตอนการนำไปใช้งานได้ถูกต้องที่สุด?</div>
+    <ul class="q-options">
+      <li>ก. Zero Trust เชื่อใจอุปกรณ์ทุกเครื่องที่เชื่อมต่อผ่าน VPN ของบริษัทโดยไม่ต้องตรวจสอบซ้ำ</li>
+      <li>ข. ขั้นตอนแรกของ Zero Trust คือการซื้อฮาร์ดแวร์ไฟร์วอลล์ตัวใหญ่ที่สุดมาวางไว้ที่หน้าทางออกอินเทอร์เน็ตเพียงจุดเดียว</li>
+      <li class="correct">ค. Zero Trust ยึดหลัก "Never Trust, Always Verify" โดยเริ่มจากกำหนด Protection Surface (DAAS) แล้วสำรวจ Data Flows จากนั้นทำ Micro-segmentation เพื่อป้องกัน Lateral Movement และสร้างนโยบายด้วย Kipling Method (Who, What, When, Where, Why, How)</li>
+      <li>ง. ระบบเก่า (Legacy Systems) ไม่สามารถนำมาเชื่อมต่อในสภาพแวดล้อม Zero Trust ได้เลย ต้องทุบทิ้งสถานเดียว</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> Zero Trust ยกเลิกการเชื่อใจโดยปริยาย (Implicit Trust) ของ Castle-and-Moat เปลี่ยนเป็น <b>"Never Trust, Always Verify"</b> ตามขั้นตอน 5-Step Blueprint: <code>1. Define Protection Surface (DAAS) → 2. Map Data Flows → 3. Design ZTA (Micro-segmentation กัน Lateral Movement) → 4. Create Policies (MFA/Least Privilege) → 5. Monitor &amp; Kipling Method</code> (ส่วนระบบ Legacy สามารถใช้ <b>Reverse Proxy / API Gateway</b> กั้นหน้าได้)</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Data Lifecycle &amp; Classification</span> ข้อที่ 11: โรงพยาบาลแห่งหนึ่งต้องการจัดเก็บประวัติการรักษาผู้ป่วย (Medical Records) ตามวงจรชีวิตข้อมูล (Data Lifecycle) โดยกำหนดว่าข้อมูลที่ผ่านไปเกิน 5 ปีจะไม่ถูกแก้ไขอีกแต่ต้องเก็บไว้เผื่อตรวจสอบตามกฎหมายอีก 5 ปี จากนั้นเมื่อครบ 10 ปีต้องทำลายทิ้งอย่างถาวร ข้อใดระบุระดับ Data Classification และขั้นตอน Data Lifecycle ได้ถูกต้อง?</div>
+    <ul class="q-options">
+      <li>ก. จัดเป็นระดับ Internal และเมื่อครบ 5 ปีให้เข้าสู่ขั้นตอน Publish บนเว็บไซต์สาธารณะ</li>
+      <li class="correct">ข. จัดเป็นระดับ Restricted (Level 4 Extreme) เมื่อครบ 5 ปีให้นำเข้าสู่ขั้นตอน Archive (เก็บถาวรใน Cold Storage เช่น Glacier พร้อมเข้ารหัส) และเมื่อครบ 10 ปีให้นำเข้าสู่ขั้นตอน Destroy เพื่อทำลายไม่ให้กู้คืนได้</li>
+      <li>ค. จัดเป็นระดับ Public ซึ่งไม่จำเป็นต้องเข้ารหัสข้อมูลแต่อย่างใด</li>
+      <li>ง. จัดเป็นระดับ Confidential และให้ข้ามขั้นตอน Store ไปสู่ขั้นตอน Destroy ทันทีที่สร้างข้อมูลเสร็จ</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ข้อมูลทางการแพทย์และข้อมูลส่วนบุคคลอ่อนไหวจัดอยู่ในระดับสูงสุดคือ <b>Restricted (Level 4 Extreme)</b> และในวงจรชีวิตข้อมูล 6 ขั้นตอน (<code>Create → Store → Use → Publish → Archive → Destroy</code>) ข้อมูลที่เก็บสำเนาไว้ระยะยาวโดยไม่แก้ไขอีกคือขั้น <b>Archive</b> และเมื่อหมดอายุใช้งานต้องเข้าสู่ขั้น <b>Destroy</b></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Envelope Encryption (KMS)</span> ข้อที่ 12: เหตุใดระบบคลาวด์จึงเลือกใช้กระบวนการ Envelope Encryption แทนการนำ KMS Master Key (CMK) ไปเข้ารหัสไฟล์ข้อมูลขนาดหลายเทราไบต์โดยตรง และการจัดเก็บคีย์ที่ถูกต้องเป็นอย่างไร?</div>
+    <ul class="q-options">
+      <li>ก. เพราะ KMS Master Key สามารถส่งออกไปเก็บไว้ในเครื่องโน้ตบุ๊กของพนักงานทุกคนได้อย่างอิสระ</li>
+      <li class="correct">ข. เพื่อประสิทธิภาพความเร็วและความปลอดภัยสูงสุด โดยระบบจะใช้ Data Key (DEK) เข้ารหัสไฟล์ข้อมูลให้เป็น Ciphertext แล้วใช้ KMS Key เข้ารหัสห่อหุ้ม Data Key อีกชั้น ทั้งนี้จะเก็บ Ciphertext คู่กับ Encrypted Data Key ไว้ใน Storage ส่วน KMS Key จะถูกเก็บรักษาไว้ใน KMS เท่านั้นและไม่เคยออกจาก KMS</li>
+      <li>ค. เพราะการเข้ารหัสด้วย Data Key ไม่จำเป็นต้องมีการถอดรหัสเมื่อนำข้อมูลกลับมาใช้</li>
+      <li>ง. เพื่อลดความทนทานของ S3 จาก 11 Nines ให้เหลือ 3 Nines</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> หลักการ <b>Envelope Encryption</b> ในสไลด์ Session 7 คือ <code>1) Plaintext Data + Data Key = Ciphertext</code> และ <code>2) Data Key + KMS Key = Encrypted Data Key</code> โดยเก็บ Ciphertext คู่กับ Encrypted Data Key ไว้ใน Storage ส่วนตัว <b>KMS Key (Master Key) จะอยู่ในตู้เซฟ KMS ตลอดเวลา ไม่เคยถูกส่งออกนอก KMS</b></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Well-Architected &amp; Change Management</span> ข้อที่ 13: ตามกรอบแนวคิด AWS Well-Architected Framework ข้อใดจับคู่หลักการออกแบบของเสาหลัก Reliability (ความน่าเชื่อถือ) และ Operational Excellence เกี่ยวกับการจัดการความเปลี่ยนแปลง (Change Management) ได้ถูกต้องที่สุด?</div>
+    <ul class="q-options">
+      <li>ก. เสาหลัก Reliability แนะนำให้ขยายระบบแบบ Vertical Scaling เท่านั้น และทำการเปลี่ยนแปลงระบบปีละ 1 ครั้งด้วยมือ</li>
+      <li class="correct">ข. เสาหลัก Reliability เน้นการขยายระบบแนวราบ (Scale horizontally to increase aggregate system availability) และจัดการการเปลี่ยนแปลงด้วยระบบอัตโนมัติ (Manage change in automation) ส่วนเสาหลัก Operational Excellence เน้นทำการเปลี่ยนแปลงขนาดเล็ก บ่อยครั้ง และย้อนกลับได้ (Make frequent, small, reversible changes)</li>
+      <li>ค. การทำ Change Management อยู่ในเสาหลัก Sustainability เพียงเสาเดียว</li>
+      <li>ง. การคาดเดาความจุเซิร์ฟเวอร์ล่วงหน้า 10 ปี (Guessing capacity) คือหลักการสำคัญของเสาหลัก Reliability</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ในเสาหลัก <b>Reliability</b> มี 3 แกนหลักคือ <code>High Availability Design</code>, <b><code>Change Management</code></b>, <code>Failure Management</code> และมีหลักการสำคัญ 5 ข้อ ได้แก่ <code>Automatically recover</code>, <code>Test recovery</code>, <b><code>Scale horizontally</code></b>, <code>Stop guessing capacity</code>, และ <b><code>Manage change in automation</code></b> ควบคู่กับเสา <b>Operational Excellence</b> ที่เน้น <b><code>Make frequent, small, reversible changes</code></b></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">Load Balancer Selection &amp; Security</span> ข้อที่ 14: องค์กรการเงินต้องการนำอุปกรณ์ Virtual Firewall และ IDS/IPS จากผู้ผลิตภายนอก (3rd-Party Security Appliances) มาแทรกขวางทราฟฟิกแบบ Inline เพื่อทำ Deep Packet Inspection ทุกแพ็กเก็ตก่อนเข้าถึงเซิร์ฟเวอร์ภายใน ควรเลือกใช้บริการ Load Balancer ชนิดใด และใช้โปรโตคอลใด?</div>
+    <ul class="q-options">
+      <li>ก. Classic Load Balancer (CLB) ร่วมกับโปรโตคอล FTP</li>
+      <li>ข. Application Load Balancer (ALB) ร่วมกับโปรโตคอล POP3</li>
+      <li class="correct">ค. Gateway Load Balancer (GWLB) ซึ่งทำงานที่ระดับ Layer 3/4 และใช้โปรโตคอล GENEVE ในการส่งผ่านแพ็กเก็ตไปยัง Virtual Security Appliances แบบ Transparent</li>
+      <li>ง. Global Server Load Balancer (GSLB) ซึ่งทำงานบนโปรโตคอล SMTP</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> แผนผังการเลือก AWS Load Balancer ในสไลด์ Session 10 ระบุชัดเจนว่า: <b>Web traffic → ALB (L7)</b>, <b>TCP/UDP/Extreme performance → NLB (L4)</b>, <b>Firewall deployment / Deep Packet Inspection → GWLB (L3/4 ด้วยโปรโตคอล GENEVE)</b>, และ <b>Legacy → CLB</b></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-stem"><span class="topic-tag">AWS ZTAG-I &amp; Multi-Cloud ZTA</span> ข้อที่ 15: ในสถาปัตยกรรมอ้างอิง AWS Zero Trust Accelerator for Government (ZTAG-I) ข้อใดจับคู่บทบาทของเทคโนโลยีพาร์ตเนอร์แต่ละรายในระบบนิเวศ Zero Trust ได้ถูกต้องทั้งหมด?</div>
+    <ul class="q-options">
+      <li>ก. Okta ทำหน้าที่สแกนไวรัสในฮาร์ดดิสก์ และ Splunk ทำหน้าที่เป็นฐานข้อมูลเก็บไฟล์รูปภาพ</li>
+      <li class="correct">ข. Okta ดูแลด้าน Identity (IdP/MFA), CrowdStrike ดูแลด้าน Device Posture &amp; ZTA Scores, Zscaler ทำหน้าที่เป็น Least-privilege PEP &amp; Micro-segmentation, XQ Message ดูแลด้าน Data (DRM/DLP) และ Splunk ดูแลด้าน Visibility/SIEM/UBA &amp; SOAR</li>
+      <li>ค. Zscaler ทำหน้าที่เขียนโค้ด Terraform และ CrowdStrike ทำหน้าที่เป็น DNS Server</li>
+      <li>ง. ทุกบริการข้างต้นทำงานเฉพาะที่ระดับ Layer 1 (Physical Layer) เท่านั้น</li>
+    </ul>
+    <div class="q-ans"><b>เหตุผล:</b> ในสไลด์ Session 11 (ZTAG-I Partner Stack): <b>Okta</b> = Identity/IdP, <b>CrowdStrike</b> = Device Signal &amp; ZTA Scores, <b>Zscaler</b> = Network/App PEP &amp; Micro-segmentation, <b>XQ Message</b> = Data DRM/DLP/Encryption, และ <b>Splunk</b> = Visibility &amp; Analytics (SIEM/UBA) + Automation &amp; Orchestration (SOAR)</div>
+  </div>
+
+</div>
+
+<script>
+  let currentScale = 1.0;
+
+  function applyScale(scale) {
+    currentScale = Math.max(0.75, Math.min(1.25, scale));
+    document.documentElement.style.setProperty('--font-Scale', currentScale.toFixed(3));
+  }
+
+  function adjustScale(delta) {
+    applyScale(currentScale + delta);
+  }
+
+  function autoFitPages() {
+    let scale = 1.08;
+    applyScale(scale);
+    const pages = document.querySelectorAll('.a4-page');
+    for (let iter = 0; iter < 35; iter++) {
+      let overflow = false;
+      pages.forEach(p => {
+        if (p.scrollHeight > p.clientHeight + 1) {
+          overflow = true;
+        }
+      });
+      if (!overflow) break;
+      scale -= 0.015;
+      applyScale(scale);
+    }
+  }
+
+  function toggleExamSection() {
+    const sec = document.getElementById('examSection');
+    const btn = document.getElementById('btnToggleExam');
+    if (sec.style.display === 'none') {
+      sec.style.display = 'block';
+      btn.classList.add('active');
+    } else {
+      sec.style.display = 'none';
+      btn.classList.remove('active');
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(autoFitPages, 150);
+  });
+</script>
+</body>
+</html>
